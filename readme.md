@@ -1,32 +1,57 @@
+What is this?
+----
+An opinionated c++11 game engine. Evolved from the internal game engine used by Ironclad Games (Sins of a Solar Empire, Sins of a Dark Age)
+
+Used by
+---
+- https://github.com/jseward/solar_tools
+- https://github.com/jseward/peon
+- secret project(s)
+
+features
+---
+- consistent archiving system that supports reading/writing to binary/json/packets/etc.
+- platform abstraction of everything (ex. file io, mouse input, keyboard input)
+- directory change watching. all data files support being reloaded on the fly.
+- flexible setting system for user settings
+- text localization.
+- scalable fonts.
+- rendering meshes with shaders.
+- window ui layer with support for common controls: buttons, text entry, etc. 
+
+internals
+----
+- no global variables and no singletons.
+- uses c++11.
+- uses stl containers mostly, but provides some custom containers useful for games.
+	- fixed_vector (std::vector with a fixed size)
+	- linked_list (custom list class where memory allocation is controlled much easier)
+- minimal dependencies (see below)
+
+platforms
+---
+- Direct3D9
+- Win32
+- more to come
+
 coding style
 ------------
-- picked to conform to std library
-- all types and variables lowercase with underscores
-- macros and enum values all uppercase with underscores
-- template parameters are mixed case
-- open brackets start on same line
-
-naming conventions
-------------------
-- prefer begin/end verbs to start/stop or others
-- prefer try_xxx to attempt_xxx (returns bool)
-- use nullptr instead of NULL
-- prefer references to pointers at all times. minimize need for clients to check for nullptr.
-
-data
-----
-- all data filenames must be all lowercase with only underscores. no exceptions.
-
-global systems
---------------
-utility/assert.h
-	void set_assert_failed_handler(assert_failed_handler handler);
-utility/trace.h
-    void set_trace_handler(trace_handler handler);
+- picked to conform to std library and c++ in general
+	- all types and variables lowercase with underscores
+	- macros and enum values all uppercase with underscores
+	- template parameters are mixed case
+	- open brackets start on same line
+	
+dependencies
+---
+- https://github.com/cppformat/cppformat
+- https://github.com/miloyip/rapidjson
+- directx9 sdk
+- bm_font
 
 string formatting
 -----------------
-- use cppformat internally
+- use https://github.com/cppformat/cppformat internally
 - python format syntax
     https://docs.python.org/2/library/string.html#formatstrings
 
@@ -37,6 +62,7 @@ tips and tricks
 
 preprocessor macros
 --------------------
-SOLAR__JSON_ARCHIVE_READER_NO_ALERT_UNUSED_VALUES
-- disables alerts that json values read from the file are being unused by the code. this is potentially expensive due to all the string tracking.
+	SOLAR__JSON_ARCHIVE_READER_NO_ALERT_UNUSED_VALUES
+	disables alerts that json values read from the file are being unused by the code. this is potentially expensive due to all the string tracking.
+
 
