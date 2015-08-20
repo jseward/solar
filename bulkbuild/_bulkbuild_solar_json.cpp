@@ -1,0 +1,5 @@
+#include "solar/json/json_writer.cpp"
+#include "solar/json/json_document.cpp"
+#include "solar/json/json_object.cpp"
+#include "solar/json/json_array.cpp"
+#include "solar/json/internal/rapidjson_stream.cpp"

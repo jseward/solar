@@ -1,0 +1,6 @@
+#include "solar/resources/resource_system.cpp"
+#include "solar/resources/resource_address.cpp"
+#include "solar/resources/resource_provider.cpp"
+#include "solar/resources/resource_mapped_memory.cpp"
+#include "solar/resources/resource_id_manifest.cpp"
+#include "solar/resources/resource_change_watcher.cpp"

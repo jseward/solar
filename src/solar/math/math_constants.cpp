@@ -1,0 +1,13 @@
+#include "math_constants.h"
+
+namespace solar {
+
+	const float PI = 3.14159265358979323846f;
+	const float TWO_PI = 6.28318530717958647692f;
+	const float HALF_PI = 1.57079632679489661923f;
+	const float QUARTER_PI = 0.78539816339744830961f;
+	const float SQUARE_ROOT_TWO = 1.4142135623730950488016887242097f;
+	const float SQUARE_ROOT_THREE = 1.73205080756887729352f;
+	const float E = 2.71828182845904523536f;
+
+}

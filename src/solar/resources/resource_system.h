@@ -1,0 +1,64 @@
+#pragma once
+
+#include <vector>
+#include "solar/io/stream.h"
+#include "resource_address.h"
+#include "resource_provider.h"
+#include "resource_mapped_memory.h"
+#include "resource_change_watcher.h"
+#include "resource_change_handler.h"
+#include "resource_system_params.h"
+
+namespace solar {
+
+	class archivable;
+	class file_system;
+	enum class file_mode;
+
+	class resource_system {
+
+	private:
+		file_system& _file_system;
+		std::vector<resource_provider> _providers;
+		std::vector<stream*> _open_file_system_streams;
+		resource_change_watcher _resource_change_watcher;
+
+	public:
+		resource_system(file_system& file_system, directory_change_watcher& directory_change_watcher);
+		~resource_system();
+
+		void setup(const resource_system_params& params);
+		void teardown();
+
+		resource_address resolve_address(
+			const char* resource_type_name, 
+			const char* folder, 
+			const char* extensions, 
+			const char* id, 
+			const char* id_source_description);
+
+		stream* open_stream_to_read(const resource_address& address);
+		stream* open_stream_to_write(const resource_address& address);
+		void close_stream(stream* stream);
+
+		bool read_to_mapped_memory(resource_mapped_memory& mapped_memory, const resource_address& address);
+
+		bool read_object_as_json(archivable& object, const resource_address& address);
+		void write_object_as_json(const archivable& object, const resource_address& address);
+
+		void try_handle_any_watcher_change();
+		void begin_watching_resource(resource_change_handler* handler, const resource_address& address);
+		void end_watching_resource(resource_change_handler* handler);
+
+	private:
+		resource_address resolve_address_with_provider(const resource_provider& provider, const char* folder, const char* extensions, const char* id);
+		resource_address resolve_address_with_file_system(const std::string& root_path, const char* folder, const char* extensions, const char* id);
+
+		bool does_id_have_bad_chars(const char* id) const;
+
+		std::string build_newline_seperated_providers_description() const;
+
+		stream* open_stream(const resource_address& address, file_mode file_mode);
+	};
+
+}

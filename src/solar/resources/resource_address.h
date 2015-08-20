@@ -1,0 +1,30 @@
+#pragma once
+
+#include <string>
+#include "resource_provider_type.h"
+
+namespace solar {
+
+	class resource_address {
+	private:
+		resource_provider_type _provider_type;
+		std::string _file_path;
+
+	public:
+		resource_address();
+
+		bool operator==(const resource_address& rhs) const;
+		bool operator!=(const resource_address& rhs) const;
+
+		bool empty() const;
+		resource_provider_type get_provider_type() const;
+		const std::string& get_file_path() const;
+		std::string get_file_extension() const;
+		std::string to_string() const;
+
+	public:
+		friend resource_address make_resource_address_with_file_system_provider(const std::string& file_path);
+		friend std::ostream& operator<<(std::ostream& os, const resource_address& that);
+	};
+
+}
