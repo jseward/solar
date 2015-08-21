@@ -49,9 +49,6 @@
     <Filter Include="src\solar\io">
       <UniqueIdentifier>{9357f771-5ad4-4658-a662-1b7506675ef7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\solar\engines">
-      <UniqueIdentifier>{3fb2e31a-4048-4ce7-9aa1-ed77a90cb6be}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\solar\settings">
       <UniqueIdentifier>{595c7564-f19f-4661-95a7-433cf836243c}</UniqueIdentifier>
     </Filter>
@@ -135,6 +132,9 @@
     </Filter>
     <Filter Include="src\solar\containers">
       <UniqueIdentifier>{02780d29-f1e7-4cca-9b01-27e1301fd7e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\solar_engines">
+      <UniqueIdentifier>{67201a15-f2c9-4735-a109-aba9618ffedd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -468,9 +468,6 @@
     <ClInclude Include="..\..\src\solar\input\keyboard_key.h">
       <Filter>src\solar\input</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\engines\win32_d3d9_engine.h">
-      <Filter>src\solar\engines</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\time\real_time.h">
       <Filter>src\solar\time</Filter>
     </ClInclude>
@@ -515,9 +512,6 @@
     </ClInclude>
     <ClInclude Include="..\..\src\solar\settings\enum_setting.h">
       <Filter>src\solar\settings</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\engines\win32_d3d9_engine_settings.h">
-      <Filter>src\solar\engines</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar\windows\window.h">
       <Filter>src\solar\windows</Filter>
@@ -674,9 +668,6 @@
     </ClInclude>
     <ClInclude Include="..\..\src\solar\utility\unit_convert.h">
       <Filter>src\solar\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\engines\win32_cli_engine.h">
-      <Filter>src\solar\engines</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar\io\file_stream_ptr.h">
       <Filter>src\solar\io</Filter>
@@ -1203,6 +1194,15 @@
     <ClInclude Include="..\..\src\solar\utility\memory_pool.h">
       <Filter>src\solar\utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar_engines\win32_d3d9_engine.h">
+      <Filter>src\solar_engines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_engines\win32_d3d9_engine_settings.h">
+      <Filter>src\solar_engines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_engines\win32_cli_engine.h">
+      <Filter>src\solar_engines</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1268,9 +1268,6 @@
     <ClCompile Include="..\..\src\solar\input\keyboard_key.cpp">
       <Filter>src\solar\input</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar\engines\win32_d3d9_engine.cpp">
-      <Filter>src\solar\engines</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar\time\real_time.cpp">
       <Filter>src\solar\time</Filter>
     </ClCompile>
@@ -1306,9 +1303,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\settings\int_setting.cpp">
       <Filter>src\solar\settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\engines\win32_d3d9_engine_settings.cpp">
-      <Filter>src\solar\engines</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar\windows\window.cpp">
       <Filter>src\solar\windows</Filter>
@@ -1366,9 +1360,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\utility\unit_convert.cpp">
       <Filter>src\solar\utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\engines\win32_cli_engine.cpp">
-      <Filter>src\solar\engines</Filter>
     </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_win32_cli_engine.cpp">
       <Filter>bulkbuild</Filter>
@@ -1774,6 +1765,15 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\utility\memory_pool.cpp">
       <Filter>src\solar\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_engines\win32_d3d9_engine_settings.cpp">
+      <Filter>src\solar_engines</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_engines\win32_cli_engine.cpp">
+      <Filter>src\solar_engines</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_engines\win32_d3d9_engine.cpp">
+      <Filter>src\solar_engines</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
