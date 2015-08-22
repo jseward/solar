@@ -10,9 +10,9 @@
 namespace solar {
 
 	struct win32_file_system_setup_params {
-		PROPERTY_BY_REF(win32_file_system_setup_params, win32_user_file_location, user_file_location, win32_user_file_location::USER_APPDATA);
-		PROPERTY_BY_REF(win32_file_system_setup_params, std::string, user_root_path_company_name, "");
-		PROPERTY_BY_REF(win32_file_system_setup_params, std::string, user_root_path_app_name, "");
+		MAKE_PROPERTY(win32_file_system_setup_params, win32_user_file_location, user_file_location, win32_user_file_location::USER_APPDATA);
+		MAKE_PROPERTY(win32_file_system_setup_params, std::string, user_root_path_company_name, "");
+		MAKE_PROPERTY(win32_file_system_setup_params, std::string, user_root_path_app_name, "");
 	};
 
 	class win32_file_system : public file_system {

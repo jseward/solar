@@ -22,17 +22,8 @@
 namespace solar {
 
 	struct win32_d3d9_engine_setup_params {
-		PROPERTY_BY_COPY(win32_d3d9_engine_setup_params, HINSTANCE, hinstance, nullptr);
-		PROPERTY_BY_COPY(win32_d3d9_engine_setup_params, const WCHAR*, window_class_name, nullptr);
-		PROPERTY_BY_COPY(win32_d3d9_engine_setup_params, const WCHAR*, window_caption, nullptr);
-		PROPERTY_BY_COPY(win32_d3d9_engine_setup_params, size, min_window_size, size(200, 200));
-		PROPERTY_BY_COPY(win32_d3d9_engine_setup_params, int, small_icon_id, 0);
-		PROPERTY_BY_COPY(win32_d3d9_engine_setup_params, int, large_icon_id, 0);
-		PROPERTY_BY_REF(win32_d3d9_engine_setup_params, win32_windowed_app_idle_proc, idle_proc, nullptr);
-		PROPERTY_BY_REF(win32_d3d9_engine_setup_params, win32_error_dialog_resources, error_dialog_resources, win32_error_dialog_resources());
-		PROPERTY_BY_REF(win32_d3d9_engine_setup_params, std::string, user_root_path_company_name, "");
-		PROPERTY_BY_REF(win32_d3d9_engine_setup_params, std::string, user_root_path_app_name, "");
-		PROPERTY_BY_COPY(win32_d3d9_engine_setup_params, std::function<void(setting_registry&)>, add_to_setting_registry_func, nullptr);
+		MAKE_PROPERTY(win32_d3d9_engine_setup_params, win32_windowed_app_setup_params, windowed_app_setup_params, win32_windowed_app_setup_params());
+		MAKE_PROPERTY(win32_d3d9_engine_setup_params, win32_file_system_setup_params, file_system_setup_params, win32_file_system_setup_params());
 	};
 
 	class win32_d3d9_engine {
@@ -42,7 +33,7 @@ namespace solar {
 		win32_windowed_app _win32_windowed_app;
 		win32_mouse_device _win32_mouse_device;
 		win32_keyboard_device _win32_keyboard_device;
-		resource_system _resource_system;
+		resource_system _resource_system; //needed by many d3d9 components
 		d3d9_context _d3d9_context;
 		d3d9_render_device _d3d9_render_device;
 		d3d9_cursor _d3d9_cursor;

@@ -10,6 +10,7 @@
 #include "d3d9_mesh_material.h"
 #include "d3d9_mesh_vertex_declaration.h"
 #include "d3d9_verify.h"
+#include "d3d9_context.h"
 
 namespace solar {
 

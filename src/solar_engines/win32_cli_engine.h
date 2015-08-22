@@ -9,7 +9,7 @@
 namespace solar {
 
 	struct win32_cli_engine_setup_params {
-		PROPERTY_BY_REF(win32_cli_engine_setup_params, win32_cli_app_setup_params, app_params, win32_cli_app_setup_params());
+		MAKE_PROPERTY(win32_cli_engine_setup_params, win32_cli_app_setup_params, app_params, win32_cli_app_setup_params());
 	};
 
 	class win32_cli_engine {

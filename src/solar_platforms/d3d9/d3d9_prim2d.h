@@ -14,7 +14,7 @@
 namespace solar {
 
 	struct d3d9_prim2d_setup_params {
-		PROPERTY_BY_COPY(d3d9_prim2d_setup_params, unsigned int, max_buffered_rect_count, 600);
+		MAKE_PROPERTY(d3d9_prim2d_setup_params, unsigned int, max_buffered_rect_count, 600);
 	};
 
 	class d3d9_prim2d 

@@ -34,31 +34,18 @@ namespace solar {
 
 	bool win32_d3d9_engine::setup(const win32_d3d9_engine_setup_params& params) {
 
-		std::vector<solar::win32_windowed_app_wnd_proc_handler> wnd_proc_handlers;
-		wnd_proc_handlers.push_back([&](HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) { return _d3d9_context.handle_wnd_proc(hwnd, message, wparam, lparam); });
-		wnd_proc_handlers.push_back([&](HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) { return _win32_mouse_device.handle_wnd_proc(hwnd, message, wparam, lparam); });
-		wnd_proc_handlers.push_back([&](HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) { return _win32_keyboard_device.handle_wnd_proc(hwnd, message, wparam, lparam); });
+		win32_windowed_app_setup_params adjusted_wasp = params.get_windowed_app_setup_params();
+		adjusted_wasp.get_wnd_proc_handlers().push_back([&](HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) { return _d3d9_context.handle_wnd_proc(hwnd, message, wparam, lparam); });
+		adjusted_wasp.get_wnd_proc_handlers().push_back([&](HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) { return _win32_mouse_device.handle_wnd_proc(hwnd, message, wparam, lparam); });
+		adjusted_wasp.get_wnd_proc_handlers().push_back([&](HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) { return _win32_keyboard_device.handle_wnd_proc(hwnd, message, wparam, lparam); });
+		adjusted_wasp.set_is_visible_by_default(false); //d3d9_context controls visibility
 
-		if (!_win32_windowed_app.setup(solar::win32_windowed_app_setup_params()
-			.set_hinstance(params.get_hinstance())
-			.set_idle_proc(params.get_idle_proc())
-			.set_wnd_proc_handlers(wnd_proc_handlers)
-			.set_window_class_name(params.get_window_class_name())
-			.set_window_caption(params.get_window_caption())
-			.set_small_icon_id(params.get_small_icon_id())
-			.set_large_icon_id(params.get_large_icon_id())
-			.set_error_dialog_resources(params.get_error_dialog_resources())
-			.set_is_visible_by_default(false) //d3d9_context controls visibility
-			)) {
-
+		if (!_win32_windowed_app.setup(adjusted_wasp)) {
 			return false;
 		}
 
-		_win32_mouse_device.setup(_win32_windowed_app.get_hwnd());
-		
-		_win32_file_system.setup(solar::win32_file_system_setup_params()
-			.set_user_root_path_company_name(params.get_user_root_path_company_name())
-			.set_user_root_path_app_name(params.get_user_root_path_app_name()));
+		_win32_mouse_device.setup(_win32_windowed_app.get_hwnd());		
+		_win32_file_system.setup(params.get_file_system_setup_params());
 
 		_win32_windowed_app.open_log_file(
 			_win32_file_system.make_user_file_path(
@@ -108,10 +95,8 @@ namespace solar {
 	}
 
 	void win32_d3d9_engine::add_and_load_all_settings(const win32_d3d9_engine_setup_params& params) {
+		UNUSED_PARAMETER(params);
 		_engine_settings.add_to_setting_registry(_setting_registry);
-		if (params.get_add_to_setting_registry_func() != nullptr) {
-			params.get_add_to_setting_registry_func()(_setting_registry);
-		}
 		_setting_registry.load_all_settings();
 	}
 

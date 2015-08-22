@@ -8,8 +8,8 @@
 namespace solar{
 
 	struct win32_cli_app_setup_params {
-		PROPERTY_BY_COPY(win32_cli_app_setup_params, win32_cli_app_error_behavoir, assert_behavoir, win32_cli_app_error_behavoir::THROW);
-		PROPERTY_BY_COPY(win32_cli_app_setup_params, win32_cli_app_error_behavoir, alert_behavoir, win32_cli_app_error_behavoir::THROW);
+		MAKE_PROPERTY(win32_cli_app_setup_params, win32_cli_app_error_behavoir, assert_behavoir, win32_cli_app_error_behavoir::THROW);
+		MAKE_PROPERTY(win32_cli_app_setup_params, win32_cli_app_error_behavoir, alert_behavoir, win32_cli_app_error_behavoir::THROW);
 	};
 
 	class win32_cli_app {

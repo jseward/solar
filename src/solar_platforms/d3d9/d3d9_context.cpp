@@ -145,8 +145,8 @@ namespace solar {
 			if (get_window_client_size() != _device_params.get_backbuffer_size()) {
 				d3d9_device_params adjusted_device_params = _device_params;
 				adjusted_device_params.set_window_top_left(get_window_top_left());
-				adjusted_device_params.get_present_parameters_for_change().BackBufferWidth = get_window_client_size().get_width();
-				adjusted_device_params.get_present_parameters_for_change().BackBufferHeight = get_window_client_size().get_height();
+				adjusted_device_params.get_present_parameters().BackBufferWidth = get_window_client_size().get_width();
+				adjusted_device_params.get_present_parameters().BackBufferHeight = get_window_client_size().get_height();
 				change_device(adjusted_device_params);
 			}
 		}
@@ -210,8 +210,8 @@ namespace solar {
 		if (_device_params.get_window_type() == d3d9_window_type::VIRTUAL_FULLSCREEN) {
 			auto new_params = _device_params;
 			new_params.set_window_type(d3d9_window_type::RESIZABLE_WINDOW);
-			new_params.get_present_parameters_for_change().BackBufferWidth = _toggle_from_fullscreen_backbuffer_size.get_width();
-			new_params.get_present_parameters_for_change().BackBufferHeight = _toggle_from_fullscreen_backbuffer_size.get_height();
+			new_params.get_present_parameters().BackBufferWidth = _toggle_from_fullscreen_backbuffer_size.get_width();
+			new_params.get_present_parameters().BackBufferHeight = _toggle_from_fullscreen_backbuffer_size.get_height();
 			change_device(new_params);
 		}
 		else if (_device_params.get_window_type() == d3d9_window_type::RESIZABLE_WINDOW) {
@@ -271,7 +271,7 @@ namespace solar {
 	}
 
 	void d3d9_context::adjust_device_params_back_buffer(d3d9_device_params& device_params) const {
-		auto& pp = device_params.get_present_parameters_for_change();
+		auto& pp = device_params.get_present_parameters();
 
 		if (device_params.get_window_type() == d3d9_window_type::VIRTUAL_FULLSCREEN) {
 			pp.BackBufferWidth = get_desktop_size().get_width();
@@ -301,7 +301,7 @@ namespace solar {
 		d3d9_device_params old_device_params = _device_params;
 
 		_device_params = params;
-		_device_params.get_present_parameters_for_change().hDeviceWindow = _hwnd;
+		_device_params.get_present_parameters().hDeviceWindow = _hwnd;
 
 		bool success = false;
 		if (process_hwnd_before_device_change(old_device_params)) {
@@ -426,8 +426,8 @@ namespace solar {
 
 						d3d9_device_params adjusted_device_params = _device_params;
 						adjusted_device_params.set_window_top_left(new_window_rect.get_top_left());
-						adjusted_device_params.get_present_parameters_for_change().BackBufferWidth = get_window_client_size().get_width();
-						adjusted_device_params.get_present_parameters_for_change().BackBufferHeight = get_window_client_size().get_height();
+						adjusted_device_params.get_present_parameters().BackBufferWidth = get_window_client_size().get_width();
+						adjusted_device_params.get_present_parameters().BackBufferHeight = get_window_client_size().get_height();
 
 						success = change_device(adjusted_device_params);
 					}
@@ -491,7 +491,7 @@ namespace solar {
 			_device_params.get_device_type(),
 			_hwnd,
 			_device_params.get_behavior_flags(),
-			&_device_params.get_present_parameters_for_change(),
+			&_device_params.get_present_parameters(),
 			&_IDirect3DDevice9);
 		if (hr == D3DERR_DEVICELOST) {
 			_is_device_lost = true;
@@ -529,7 +529,7 @@ namespace solar {
 		TRACE("d3d9 reset_device : begin");
 
 		handle_device_lost();
-		HRESULT hr = _IDirect3DDevice9->Reset(&_device_params.get_present_parameters_for_change());
+		HRESULT hr = _IDirect3DDevice9->Reset(&_device_params.get_present_parameters());
 		if (SUCCEEDED(hr)) {
 			sync_backbuffer_desc_to_device();
 			handle_device_reset();

@@ -15,16 +15,16 @@ namespace solar{
 	typedef std::function<void()> win32_windowed_app_idle_proc;
 
 	struct win32_windowed_app_setup_params {
-		PROPERTY_BY_COPY(win32_windowed_app_setup_params, HINSTANCE, hinstance, nullptr);
-		PROPERTY_BY_COPY(win32_windowed_app_setup_params, const WCHAR*, window_class_name, nullptr);
-		PROPERTY_BY_COPY(win32_windowed_app_setup_params, const WCHAR*, window_caption, nullptr);
-		PROPERTY_BY_COPY(win32_windowed_app_setup_params, size, min_window_size, size(200, 200));
-		PROPERTY_BY_COPY(win32_windowed_app_setup_params, int, small_icon_id, 0);
-		PROPERTY_BY_COPY(win32_windowed_app_setup_params, int, large_icon_id, 0);
-		PROPERTY_BY_COPY(win32_windowed_app_setup_params, bool, is_visible_by_default, true);
-		PROPERTY_BY_REF(win32_windowed_app_setup_params, std::vector<win32_windowed_app_wnd_proc_handler>, wnd_proc_handlers, std::vector<win32_windowed_app_wnd_proc_handler>());
-		PROPERTY_BY_REF(win32_windowed_app_setup_params, win32_windowed_app_idle_proc, idle_proc, nullptr);
-		PROPERTY_BY_REF(win32_windowed_app_setup_params, win32_error_dialog_resources, error_dialog_resources, win32_error_dialog_resources());
+		MAKE_PROPERTY(win32_windowed_app_setup_params, HINSTANCE, hinstance, nullptr);
+		MAKE_PROPERTY(win32_windowed_app_setup_params, std::wstring, window_class_name, L"");
+		MAKE_PROPERTY(win32_windowed_app_setup_params, std::wstring, window_caption, L"");
+		MAKE_PROPERTY(win32_windowed_app_setup_params, size, min_window_size, size(200, 200));
+		MAKE_PROPERTY(win32_windowed_app_setup_params, int, small_icon_id, 0);
+		MAKE_PROPERTY(win32_windowed_app_setup_params, int, large_icon_id, 0);
+		MAKE_PROPERTY(win32_windowed_app_setup_params, bool, is_visible_by_default, true);
+		MAKE_PROPERTY(win32_windowed_app_setup_params, std::vector<win32_windowed_app_wnd_proc_handler>, wnd_proc_handlers, std::vector<win32_windowed_app_wnd_proc_handler>());
+		MAKE_PROPERTY(win32_windowed_app_setup_params, win32_windowed_app_idle_proc, idle_proc, nullptr);
+		MAKE_PROPERTY(win32_windowed_app_setup_params, win32_error_dialog_resources, error_dialog_resources, win32_error_dialog_resources());
 
 		void trace_dump() const;
 	};

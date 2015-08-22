@@ -53,8 +53,8 @@ namespace solar {
 		s_wnd_proc_context = this;
 
 		ASSERT(params.get_hinstance() != nullptr);
-		ASSERT(params.get_window_class_name() != nullptr);
-		ASSERT(params.get_window_caption() != nullptr);
+		ASSERT(!params.get_window_class_name().empty());
+		ASSERT(!params.get_window_caption().empty());
 		ASSERT(params.get_idle_proc() != nullptr);
 		
 		_setup_params = params;
@@ -71,8 +71,8 @@ namespace solar {
 		}
 
 		_hwnd = ::CreateWindow(
-			params.get_window_class_name(),
-			params.get_window_caption(),
+			params.get_window_class_name().c_str(),
+			params.get_window_caption().c_str(),
 			style,
 			0, 0, 0, 0,
 			nullptr,
@@ -100,7 +100,7 @@ namespace solar {
 		wc.style = CS_DBLCLKS;
 		wc.lpfnWndProc = wnd_proc;
 		wc.hInstance = params.get_hinstance();
-		wc.lpszClassName = params.get_window_class_name();
+		wc.lpszClassName = params.get_window_class_name().c_str();
 		wc.hIcon = ::LoadIcon(params.get_hinstance(), MAKEINTRESOURCE(params.get_large_icon_id()));
 		wc.hIconSm = ::LoadIcon(params.get_hinstance(), MAKEINTRESOURCE(params.get_small_icon_id()));
 

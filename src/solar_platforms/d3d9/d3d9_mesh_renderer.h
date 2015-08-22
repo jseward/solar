@@ -1,10 +1,12 @@
 #pragma once
 
 #include "solar/rendering/meshes/mesh_renderer.h"
-#include "d3d9_context.h"
+#include "d3d9_device_event_handler.h"
 
 namespace solar {
 	
+	class d3d9_context;
+
 	class d3d9_mesh_renderer 
 		: public mesh_renderer 
 		, public d3d9_device_event_handler {
