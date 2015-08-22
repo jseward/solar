@@ -35,8 +35,7 @@ namespace solar {
 	}
 
 	window_style_factory::window_style_factory(resource_system& resource_system) 
-		: _resource_system(resource_system)
-		, _window_style_caching_context(0) {
+		: _resource_system(resource_system) {
 	}
 
 	window_style_factory::~window_style_factory() {
@@ -49,10 +48,11 @@ namespace solar {
 				_resource_system.read_object_as_json(*info.second.get(), address);
 			}
 		}
+		_caching_context.increment();
 	}
 
-	int window_style_factory::get_window_style_caching_context() const {
-		return _window_style_caching_context;
+	const resource_factory_caching_context& window_style_factory::get_caching_context() const {
+		return _caching_context;
 	}
 
 }

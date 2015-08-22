@@ -12,8 +12,7 @@ namespace solar {
 	d3d9_mesh_factory::d3d9_mesh_factory(d3d9_context& context, resource_system& resource_system)
 		: _context(context)
 		, _resource_system(resource_system)
-		, _is_setup(false)
-		, _mesh_caching_context(0) {
+		, _is_setup(false) {
 	}
 
 	d3d9_mesh_factory::~d3d9_mesh_factory() {
@@ -38,7 +37,7 @@ namespace solar {
 			iter.second->on_device_released(_context.get_device());
 		}
 		_meshs.clear();
-		_mesh_caching_context++;
+		_caching_context.increment();
 	}
 
 	mesh* d3d9_mesh_factory::get_mesh(const mesh_texture_params& texture_params, const std::string& id, const std::string& id_source_description) {
@@ -59,8 +58,8 @@ namespace solar {
 		return new_mesh;
 	}
 
-	int d3d9_mesh_factory::get_mesh_caching_context() const {
-		return _mesh_caching_context;
+	const resource_factory_caching_context& d3d9_mesh_factory::get_caching_context() const {
+		return _caching_context;
 	}
 
 	d3d9_context& d3d9_mesh_factory::get_d3d9_context() {

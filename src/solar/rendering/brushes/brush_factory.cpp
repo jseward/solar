@@ -9,8 +9,7 @@
 namespace solar {
 
 	brush_factory::brush_factory(resource_system& resource_system) 
-		: _resource_system(resource_system)
-		, _brush_caching_context(0) {
+		: _resource_system(resource_system) {
 	}
 
 	void brush_factory::setup() {
@@ -28,14 +27,14 @@ namespace solar {
 			brush_set->load(_resource_system);
 		}
 
-		_brush_caching_context++;
+		_caching_context.increment();
 	}
 
 	void brush_factory::teardown() {
 	}
 
-	int brush_factory::get_brush_caching_context() const {
-		return _brush_caching_context;
+	const resource_factory_caching_context& brush_factory::get_caching_context() const {
+		return _caching_context;
 	}
 
 	brush* brush_factory::get_brush(const std::string& id, const std::string& id_source_description) {

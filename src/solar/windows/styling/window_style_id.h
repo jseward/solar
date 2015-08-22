@@ -18,8 +18,8 @@ namespace solar {
 		}
 
 	private:
-		virtual int get_current_resource_caching_context(const window_style_factory& factory) const override {
-			return factory.get_window_style_caching_context();
+		virtual const resource_factory_caching_context& get_factory_caching_context(const window_style_factory& factory) const override {
+			return factory.get_caching_context();
 		}
 
 		virtual StyleT* get_uncached_resource(window_style_factory& factory, const std::string& id, const std::string& id_source_description) const override{

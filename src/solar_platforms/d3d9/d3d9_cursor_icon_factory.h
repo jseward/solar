@@ -25,7 +25,7 @@ namespace solar {
 		std::unique_ptr<resource_mapped_memory> _resource_mapped_memory;
 		std::unordered_map<std::string, std::unique_ptr<d3d9_cursor_icon>> _icons;
 		std::unique_ptr<d3d9_cursor_icon> _empty_icon;
-		int _caching_context;
+		resource_factory_caching_context _caching_context;
 
 	public:
 		d3d9_cursor_icon_factory(d3d9_context& context, d3d9_cursor& cursor, resource_system& resource_system);
@@ -35,7 +35,7 @@ namespace solar {
 		void teardown();
 
 		virtual cursor_icon* get_cursor_icon(const std::string& id, const std::string& id_source_description) override;
-		virtual int get_cursor_icon_caching_context() const override;
+		virtual const resource_factory_caching_context& get_caching_context() const override;
 
 		d3d9_cursor& get_cursor();
 		resource_system& get_resource_system();

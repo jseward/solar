@@ -28,7 +28,7 @@ namespace solar {
 		_resource_system.end_watching_resource(this);
 		_language = "";
 		_text_map.clear();
-		_caching_context++;
+		_caching_context.increment();
 	}
 
 	void text_factory::load_from_address(const resource_address& address) {
@@ -37,10 +37,10 @@ namespace solar {
 			_text_map.load_from_stream(*stream);
 			_resource_system.close_stream(stream);
 		}
-		_caching_context++;
+		_caching_context.increment();
 	}
 
-	int text_factory::get_text_caching_context() const {
+	const resource_factory_caching_context& text_factory::get_caching_context() const {
 		return _caching_context;
 	}
 

@@ -1203,6 +1203,12 @@
     <ClInclude Include="..\..\src\solar_engines\win32_cli_engine.h">
       <Filter>src\solar_engines</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\resources\resource_factory_caching_context.h">
+      <Filter>src\solar\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\resources\resource_id_caching_context.h">
+      <Filter>src\solar\resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1347,9 +1353,6 @@
       <Filter>src\solar\resources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar\resources\resource_address.cpp">
-      <Filter>src\solar\resources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\resources\resource_id.cpp">
       <Filter>src\solar\resources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar\resources\resource_provider.cpp">

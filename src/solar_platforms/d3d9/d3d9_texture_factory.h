@@ -21,7 +21,7 @@ namespace solar {
 		d3d9_context& _context;
 		resource_system& _resource_system;
 		bool _is_setup;
-		int _texture_caching_context;
+		resource_factory_caching_context _caching_context;
 		std::unordered_map<std::string, std::unique_ptr<d3d9_texture>> _textures;
 		std::unordered_map<std::string, std::unique_ptr<d3d9_texture_pool>> _texture_pools;
 		std::unique_ptr<d3d9_texture_pool> _null_texture_pool;
@@ -36,7 +36,7 @@ namespace solar {
 
 		virtual void add_texture_pool(const char* texture_pool_name, unsigned int max_size_in_bytes, bool should_create_mip_maps) override;
 		virtual texture* get_texture(const char* texture_pool_name, const std::string& id, const std::string& id_source_description) override;
-		virtual int get_texture_caching_context() const override;
+		virtual const resource_factory_caching_context& get_caching_context() const override;
 
 		d3d9_context& get_d3d9_context();
 		resource_system& get_resource_system();

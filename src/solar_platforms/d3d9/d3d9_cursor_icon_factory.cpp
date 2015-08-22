@@ -14,8 +14,7 @@ namespace solar {
 	d3d9_cursor_icon_factory::d3d9_cursor_icon_factory(d3d9_context& context, d3d9_cursor& cursor, resource_system& resource_system)
 		: _context(context)
 		, _cursor(cursor)
-		, _resource_system(resource_system)
-		, _caching_context(0) {
+		, _resource_system(resource_system) {
 
 		_resource_mapped_memory = std::make_unique<resource_mapped_memory>();
 	}
@@ -38,7 +37,7 @@ namespace solar {
 		}
 
 		_context.add_device_event_handler(this);
-		_caching_context++;
+		_caching_context.increment();
 	}
 
 	void d3d9_cursor_icon_factory::teardown() {
@@ -46,7 +45,7 @@ namespace solar {
 		_cursor.remove_icon();
 		_icons.clear();
 		_empty_icon.release();
-		_caching_context++;
+		_caching_context.increment();
 	}
 
 	cursor_icon* d3d9_cursor_icon_factory::get_cursor_icon(const std::string& id, const std::string& id_source_description) {
@@ -63,7 +62,7 @@ namespace solar {
 
 	}
 
-	int d3d9_cursor_icon_factory::get_cursor_icon_caching_context() const {
+	const resource_factory_caching_context& d3d9_cursor_icon_factory::get_caching_context() const {
 		return _caching_context;
 	}
 

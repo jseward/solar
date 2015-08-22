@@ -5,8 +5,7 @@
 namespace solar {
 
 	font_factory::font_factory(resource_system& resource_system)
-		: _resource_system(resource_system)
-		, _font_caching_context(0) {
+		: _resource_system(resource_system) {
 	}
 
 	void font_factory::setup(const char* texture_pool_name) {
@@ -24,7 +23,7 @@ namespace solar {
 			font.second->load(_resource_system, texture_pool_name);
 		}
 
-		_font_caching_context++;
+		_caching_context.increment();
 	}
 
 	void font_factory::teardown() {
@@ -43,8 +42,8 @@ namespace solar {
 		return _empty_font.get();
 	}
 
-	int font_factory::get_font_caching_context() const {
-		return _font_caching_context;
+	const resource_factory_caching_context& font_factory::get_caching_context() const {
+		return _caching_context;
 	}
 
 }

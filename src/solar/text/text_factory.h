@@ -1,9 +1,10 @@
 #pragma once
 
 #include <memory>
+#include "solar/resources/resource_change_handler.h"
+#include "solar/resources/resource_factory_caching_context.h"
 #include "text.h"
 #include "text_map.h"
-#include "solar/resources/resource_change_handler.h"
 
 namespace solar {
 
@@ -13,7 +14,7 @@ namespace solar {
 	private:
 		resource_system& _resource_system;
 
-		int _caching_context;
+		resource_factory_caching_context _caching_context;
 		std::string _language;
 		resource_address _language_address;
 		text_map _text_map;
@@ -25,7 +26,7 @@ namespace solar {
 		void setup(const char* language);
 		void teardown();
 
-		int get_text_caching_context() const;
+		const resource_factory_caching_context& get_caching_context() const;
 		text* get_text(const std::string& id, const std::string& id_source_description);
 
 	private:

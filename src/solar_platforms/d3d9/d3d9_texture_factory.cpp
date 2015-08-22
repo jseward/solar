@@ -12,8 +12,7 @@ namespace solar {
 	d3d9_texture_factory::d3d9_texture_factory(d3d9_context& context, resource_system& resource_system)
 		: _context(context)
 		, _resource_system(resource_system)
-		, _is_setup(false)
-		, _texture_caching_context(0) {
+		, _is_setup(false) {
 
 		_resource_mapped_memory = std::make_unique<resource_mapped_memory>();
 		_resource_mapped_memory->set_fixed_buffer_size_in_mb(1.f);
@@ -50,7 +49,7 @@ namespace solar {
 			iter.second->on_device_released(_context.get_device());
 		}
 		_textures.clear();
-		_texture_caching_context++;
+		_caching_context.increment();
 	}
 
 	texture* d3d9_texture_factory::get_texture(const char* texture_pool_name, const std::string& id, const std::string& id_source_description) {
@@ -81,8 +80,8 @@ namespace solar {
 		return new_texture;
 	}
 
-	int d3d9_texture_factory::get_texture_caching_context() const {
-		return _texture_caching_context;
+	const resource_factory_caching_context& d3d9_texture_factory::get_caching_context() const {
+		return _caching_context;
 	}
 
 	void d3d9_texture_factory::on_device_created(IDirect3DDevice9* device) {

@@ -134,6 +134,8 @@
     <ClInclude Include="..\..\src\solar\rendering\textures\texture_id.h" />
     <ClInclude Include="..\..\src\solar\rendering\viewport.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_address.h" />
+    <ClInclude Include="..\..\src\solar\resources\resource_id_caching_context.h" />
+    <ClInclude Include="..\..\src\solar\resources\resource_factory_caching_context.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_change_handler.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_id.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_id_manifest.h" />
@@ -523,7 +525,6 @@
     <ClCompile Include="..\..\src\solar\rendering\textures\texture_id.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\viewport.cpp" />
     <ClCompile Include="..\..\src\solar\resources\resource_address.cpp" />
-    <ClCompile Include="..\..\src\solar\resources\resource_id.cpp" />
     <ClCompile Include="..\..\src\solar\resources\resource_id_manifest.cpp" />
     <ClCompile Include="..\..\src\solar\resources\resource_mapped_memory.cpp" />
     <ClCompile Include="..\..\src\solar\resources\resource_provider.cpp" />

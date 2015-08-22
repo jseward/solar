@@ -12,7 +12,7 @@ namespace solar {
 	private:
 		resource_system& _resource_system;
 
-		int _font_caching_context;
+		resource_factory_caching_context _caching_context;
 		std::unordered_map<std::string, std::unique_ptr<font>> _fonts;
 		std::unique_ptr<font> _empty_font;
 
@@ -22,8 +22,8 @@ namespace solar {
 		void setup(const char* texture_pool_name);
 		void teardown();
 
+		const resource_factory_caching_context& get_caching_context() const;
 		font* get_font(const std::string& id, const std::string& id_source_description);
-		int get_font_caching_context() const;
 	};
 
 }

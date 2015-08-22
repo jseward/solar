@@ -75,7 +75,6 @@ namespace solar {
 		: _context(context)
 		, _resource_system(resource_system)
 		, _is_setup(false)
-		, _shader_caching_context(0)
 		, _is_debug_shaders_enabled(false)
 		, _ID3DXEffectPool(nullptr) {
 
@@ -130,7 +129,7 @@ namespace solar {
 			iter.second->on_device_released(_context.get_device());
 		}
 		_shaders.clear();
-		_shader_caching_context++;
+		_caching_context.increment();
 	}
 
 	shader* d3d9_shader_factory::get_shader(const std::string& id, const std::string& id_source_description) {
@@ -157,8 +156,8 @@ namespace solar {
 		return new_shader;
 	}
 
-	int d3d9_shader_factory::get_shader_caching_context() const {
-		return _shader_caching_context;
+	const resource_factory_caching_context& d3d9_shader_factory::get_caching_context() const {
+		return _caching_context;
 	}
 
 	void d3d9_shader_factory::on_device_created(IDirect3DDevice9* device) {
