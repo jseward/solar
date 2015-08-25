@@ -20,7 +20,9 @@ namespace solar {
 
 		for (auto id : manifest.get_ids()) {
 			auto address = _resource_system.resolve_address("brush", "brushes", ".brush", id.c_str(), manifest.get_address().to_string().c_str());
-			_brush_sets.push_back(std::make_unique<brush_set>(address));
+			if (!address.empty()) {
+				_brush_sets.push_back(std::make_unique<brush_set>(address));
+			}
 		}
 
 		for (auto& brush_set : _brush_sets) {
