@@ -42,4 +42,10 @@ namespace solar {
 			lhs._y - rhs._y);
 	}
 
+	point abs(const point& in) {
+		return point(
+			std::abs(in._x),
+			std::abs(in._y));
+	}
+
 }

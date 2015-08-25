@@ -22,6 +22,7 @@ namespace solar {
 		friend std::ostream& operator<<(std::ostream& os, const point& p);
 		friend point operator+(const point& lhs, const point& rhs);
 		friend point operator-(const point& lhs, const point& rhs);
+		friend point abs(const point& in);
 	};
 
 }

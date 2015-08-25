@@ -54,8 +54,12 @@ namespace solar {
 	public:
 		using coord_iterator = fixed_grid_coord_iterator<Width, Height>;
 		using coords = fixed_grid_coords<Width, Height>;
+		using reference = ValueT&;
+		using const_reference = const ValueT&;
+		using iterator = ValueT*;
+		using const_iterator = const ValueT*;
 
-	private:
+	public:
 		enum { VALUE_COUNT = Width * Height };
 
 	private:
@@ -79,18 +83,48 @@ namespace solar {
 			return coords();
 		}
 
-		ValueT& at_index(int index) {
+		reference at_index(int index) {
 			ASSERT(index >= 0);
 			ASSERT(index < VALUE_COUNT);
 			return _values[index];
 		}
 
-		ValueT& at(int x, int y) {
+		reference at(int x, int y) {
 			return at_index(coord_to_index(x, y));
 		}
 
-		ValueT& at(const point& coord) {
+		reference at(const point& coord) {
 			return at_index(coord_to_index(coord._x, coord._y));
+		}
+
+		const_reference at_index(int index) const {
+			ASSERT(index >= 0);
+			ASSERT(index < VALUE_COUNT);
+			return _values[index];
+		}
+
+		const_reference at(int x, int y) const {
+			return at_index(coord_to_index(x, y));
+		}
+
+		const_reference at(const point& coord) const {
+			return at_index(coord_to_index(coord._x, coord._y));
+		}
+
+		iterator begin() {
+			return _values;
+		}
+
+		iterator end() {
+			return _values + VALUE_COUNT;
+		}
+
+		const_iterator begin() const {
+			return _values;
+		}
+
+		const_iterator end() const {
+			return _values + VALUE_COUNT;
 		}
 
 	public:

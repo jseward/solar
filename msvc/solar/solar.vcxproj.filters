@@ -1215,6 +1215,9 @@
     <ClInclude Include="..\..\src\solar\containers\fixed_grid.h">
       <Filter>src\solar\containers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\math\random_stream.h">
+      <Filter>src\solar\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1786,6 +1789,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\windows\layout\window_grid_layout.cpp">
       <Filter>src\solar\windows\layout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\math\random_stream.cpp">
+      <Filter>src\solar\math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

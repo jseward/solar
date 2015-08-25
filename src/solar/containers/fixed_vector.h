@@ -85,6 +85,24 @@ namespace solar {
 		void clear() {
 			_size = 0;
 		}
+
+		iterator erase(const iterator& position) {
+			ASSERT(_size > 0);
+			//shift all the elements down on top of the element we want to erase.
+			for (iterator i = position; i != (_values + (_size - 1)); ++i) {
+				*i = *(i + 1);
+			}
+			_size--;
+			return position;
+		}
+
+		iterator fast_erase_order_not_preserved(const iterator& position) {
+			ASSERT(_size > 0);
+			//copy last element on top of element we want to erase
+			*position = *(_values + (_size - 1));
+			_size--;
+			return position;
+		}
 	};
 
 }

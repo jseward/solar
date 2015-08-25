@@ -344,7 +344,7 @@ namespace solar {
 
 		int desired_bits = get_color_channel_bit_count(desired_format);
 		int actual_bits = get_color_channel_bit_count(actual_format);
-		int bits_diff = abs(desired_bits - actual_bits);
+		int bits_diff = std::abs(desired_bits - actual_bits);
 		return max_weight * std::max(0.f, (0.9f - ((float)bits_diff / (float)desired_bits)));
 	}
 

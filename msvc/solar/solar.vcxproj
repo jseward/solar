@@ -71,6 +71,7 @@
     <ClInclude Include="..\..\src\solar\math\mat44.h" />
     <ClInclude Include="..\..\src\solar\math\math_constants.h" />
     <ClInclude Include="..\..\src\solar\math\math_helpers.h" />
+    <ClInclude Include="..\..\src\solar\math\random_stream.h" />
     <ClInclude Include="..\..\src\solar\math\rectf.h" />
     <ClInclude Include="..\..\src\solar\math\point.h" />
     <ClInclude Include="..\..\src\solar\math\pointf.h" />
@@ -483,6 +484,7 @@
     <ClCompile Include="..\..\src\solar\math\mat44.cpp" />
     <ClCompile Include="..\..\src\solar\math\math_constants.cpp" />
     <ClCompile Include="..\..\src\solar\math\math_helpers.cpp" />
+    <ClCompile Include="..\..\src\solar\math\random_stream.cpp" />
     <ClCompile Include="..\..\src\solar\math\rectf.cpp" />
     <ClCompile Include="..\..\src\solar\math\point.cpp" />
     <ClCompile Include="..\..\src\solar\math\pointf.cpp" />

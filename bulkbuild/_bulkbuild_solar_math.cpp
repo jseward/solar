@@ -11,3 +11,4 @@
 #include "solar/math/math_constants.cpp"
 #include "solar/math/math_helpers.cpp"
 #include "solar/math/basis.cpp"
+#include "solar/math/random_stream.cpp"
