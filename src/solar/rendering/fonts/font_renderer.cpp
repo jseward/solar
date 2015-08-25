@@ -39,7 +39,7 @@ namespace solar {
 	}
 
 	void font_renderer::begin_rendering(const rect& viewport_area) {
-		_prim2d.begin_rendering(viewport_area, _def._normal_shader_id);
+		_prim2d.begin_rendering(viewport_area, _def._normal_shader_id.get());
 	}
 
 	void font_renderer::end_rendering() {
@@ -121,14 +121,14 @@ namespace solar {
 		_def._dropshadow_shader_id->set_float(font_renderer_impl::shader_param_names::DROPSHADOW_MAX_DISTANCE, params._dropshadow_def._max_distance);
 		_def._dropshadow_shader_id->commit_param_changes();
 
-		_prim2d.set_shader(_def._dropshadow_shader_id);
+		_prim2d.set_shader(_def._dropshadow_shader_id.get());
 	}
 
 	void font_renderer::set_normal_shader(const font_render_params& params) {
 		_def._normal_shader_id->set_float(font_renderer_impl::shader_param_names::FONT_SCALE, params._font.get_scale(params._font_size));
 		_def._normal_shader_id->commit_param_changes();
 
-		_prim2d.set_shader(_def._normal_shader_id);
+		_prim2d.set_shader(_def._normal_shader_id.get());
 	}
 
 }

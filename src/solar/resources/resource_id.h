@@ -24,14 +24,14 @@ namespace solar {
 
 	public:
 		resource_id();
+		resource_id(const char* id, const char* id_source_description);
 		virtual ~resource_id();
 		
 		resource_id& set_id(const std::string& id, const std::string& id_source_description);
 
 		bool is_id_empty() const;
 		ResourceT& get() const;
-		operator ResourceT&();
-		ResourceT* operator->();
+		ResourceT* operator->() const;
 
 		bool operator==(const resource_id& rhs) const;
 
@@ -51,6 +51,14 @@ namespace solar {
 	template<typename ResourceT, typename FactoryT>
 	resource_id<ResourceT, FactoryT>::resource_id() 
 		: _cached_resource(nullptr)
+		, _caching_context() {
+	}
+
+	template<typename ResourceT, typename FactoryT>
+	resource_id<ResourceT, FactoryT>::resource_id(const char* id, const char* id_source_description)
+		: _id(id)
+		, _id_source_description(id_source_description)
+		, _cached_resource(nullptr)
 		, _caching_context() {
 	}
 
@@ -85,12 +93,7 @@ namespace solar {
 	}
 
 	template<typename ResourceT, typename FactoryT>
-	resource_id<ResourceT, FactoryT>::operator ResourceT&() {
-		return get();
-	}
-
-	template<typename ResourceT, typename FactoryT>
-	ResourceT* resource_id<ResourceT, FactoryT>::operator->() {
+	ResourceT* resource_id<ResourceT, FactoryT>::operator->() const {
 		return &get();
 	}
 

@@ -68,8 +68,8 @@ namespace solar {
 		ASSERT(sub_mesh_index >= 0);
 		ASSERT(sub_mesh_index < static_cast<int>(mesh._attribute_table_size));
 		auto material_index = mesh._attribute_table[sub_mesh_index].AttribId;
-		VERIFY(_shader->set_texture(shader_param_names::DIFFUSE_MAP, mesh._materials.at(material_index)->_diffuse_map));
-		VERIFY(_shader->set_texture(shader_param_names::NORMAL_MAP, mesh._materials.at(material_index)->_normal_map));
+		VERIFY(_shader->set_texture(shader_param_names::DIFFUSE_MAP, mesh._materials.at(material_index)->_diffuse_map.get()));
+		VERIFY(_shader->set_texture(shader_param_names::NORMAL_MAP, mesh._materials.at(material_index)->_normal_map.get()));
 
 		VERIFY(_shader->set_mat44(shader_param_names::WORLD_TRANSFORM, world_transform));
 		VERIFY(_shader->set_mat44(shader_param_names::WORLD_VIEW_PROJECTION_TRANSFORM, _camera->build_world_view_projection_transform(world_transform)));
