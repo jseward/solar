@@ -149,8 +149,8 @@ namespace solar {
 			{
 				case WM_GETMINMAXINFO: {
 					MINMAXINFO* minMaxInfo = (MINMAXINFO*)lparam;
-					minMaxInfo->ptMinTrackSize.x = s_wnd_proc_context->_setup_params.get_min_window_size().get_width();
-					minMaxInfo->ptMinTrackSize.y = s_wnd_proc_context->_setup_params.get_min_window_size().get_height();
+					minMaxInfo->ptMinTrackSize.x = s_wnd_proc_context->_setup_params.get_min_window_size()._width;
+					minMaxInfo->ptMinTrackSize.y = s_wnd_proc_context->_setup_params.get_min_window_size()._height;
 					handled = true;
 					break;
 				}

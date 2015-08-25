@@ -3,7 +3,7 @@
 namespace solar {
 
 	class vec3 {
-	private:
+	public:
 		float _x;
 		float _y;
 		float _z;
@@ -14,10 +14,6 @@ namespace solar {
 
 		bool operator==(const vec3& rhs) const;
 		bool operator!=(const vec3& rhs) const;
-
-		float x() const { return _x; }
-		float y() const { return _y; }
-		float z() const { return _z; }
 
 		float get_length() const;
 		float get_length_squared() const;

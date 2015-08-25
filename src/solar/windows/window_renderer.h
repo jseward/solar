@@ -37,6 +37,7 @@ namespace solar {
 		void end_brush_rendering();
 		void render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode);
 		void render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode, const window_layout& layout);
+		void render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode, const rect& render_area);
 
 		void begin_font_rendering();
 		void end_font_rendering();

@@ -21,15 +21,15 @@ namespace solar {
 		}
 		else if (_anchors.has_left()) {
 			left = parent_area.get_left() + scaled_margins.get_left();
-			right = left + scaled_size.get_width();
+			right = left + scaled_size._width;
 		}
 		else if (_anchors.has_right()) {
 			right = parent_area.get_right() - scaled_margins.get_right();
-			left = right - scaled_size.get_width();
+			left = right - scaled_size._width;
 		}
 		else {
-			left = parent_area.get_center().get_x() - (scaled_size.get_width() / 2);
-			right = left + scaled_size.get_width();
+			left = parent_area.get_center()._x - (scaled_size._width / 2);
+			right = left + scaled_size._width;
 		}
 
 		int top = 0;
@@ -40,15 +40,15 @@ namespace solar {
 		}
 		else if (_anchors.has_top()) {
 			top = parent_area.get_top() + scaled_margins.get_top();
-			bottom = top + scaled_size.get_height();
+			bottom = top + scaled_size._height;
 		}
 		else if (_anchors.has_bottom()) {
 			bottom = parent_area.get_bottom() - scaled_margins.get_bottom();
-			top = bottom - scaled_size.get_height();
+			top = bottom - scaled_size._height;
 		}
 		else {
-			top = parent_area.get_center().get_y() - (scaled_size.get_height() / 2);
-			bottom = top + scaled_size.get_height();
+			top = parent_area.get_center()._y - (scaled_size._height / 2);
+			bottom = top + scaled_size._height;
 		}
 
 		return rect(point(left, top), point(right, bottom));

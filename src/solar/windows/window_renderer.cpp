@@ -59,6 +59,17 @@ namespace solar {
 		}
 	}
 
+	void window_renderer::render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode, const rect& render_area) {
+		if (!brush_id.is_id_empty()) {
+			_brush_renderer.render_brush(
+				brush_id.get(),
+				render_mode,
+				render_area,
+				window.get_area_scale(),
+				get_default_brush_color(window));
+		}
+	}
+
 	color window_renderer::get_default_brush_color(const window& window) const {
 		return color(1.f, 1.f, 1.f, window.get_alpha());
 	}

@@ -25,9 +25,9 @@ namespace solar {
 
 	vec3 mat33::transform_vec3(const vec3& in) const {
 		return vec3(
-			(in.x() * _v00) + (in.y() * _v10) + (in.z() * _v20),
-			(in.x() * _v01) + (in.y() * _v11) + (in.z() * _v21),
-			(in.x() * _v02) + (in.y() * _v12) + (in.z() * _v22));
+			(in._x * _v00) + (in._y * _v10) + (in._z * _v20),
+			(in._x * _v01) + (in._y * _v11) + (in._z * _v21),
+			(in._x * _v02) + (in._y * _v12) + (in._z * _v22));
 	}
 
 	mat33 make_mat33_identity() {
@@ -71,7 +71,7 @@ namespace solar {
 		out_up = normalize(up);
 		if (are_collinear(out_forward, out_up)) {
 			vec3 bad_up = out_up;
-			out_up = vec3(-bad_up.y(), bad_up.x(), bad_up.z());
+			out_up = vec3(-bad_up._y, bad_up._x, bad_up._z);
 		}
 		out_cross = normalize(cross(out_up, out_forward));
 		out_up = cross(out_forward, out_cross);

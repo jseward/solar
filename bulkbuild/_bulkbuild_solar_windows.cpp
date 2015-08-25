@@ -10,6 +10,7 @@
 #include "solar/windows/layout/window_layout.cpp"
 #include "solar/windows/layout/window_layout_anchors.cpp"
 #include "solar/windows/layout/window_layout_margins.cpp"
+#include "solar/windows/layout/window_grid_layout.cpp"
 #include "solar/windows/registry/window_registry.cpp"
 #include "solar/windows/registry/window_registry_window_collection.cpp"
 #include "solar/windows/styling/window_style.cpp"

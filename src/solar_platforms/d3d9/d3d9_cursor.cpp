@@ -38,8 +38,8 @@ namespace solar {
 		if (device != nullptr) {
 			if (_active_icon != nullptr && _active_icon->get_device_surface() != nullptr) {
 				D3D9_VERIFY(device->SetCursorProperties(
-					_active_icon->get_hotspot_offset().get_x(),
-					_active_icon->get_hotspot_offset().get_y(),
+					_active_icon->get_hotspot_offset()._x,
+					_active_icon->get_hotspot_offset()._y,
 					_active_icon->get_device_surface()));
 			}
 		}

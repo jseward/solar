@@ -14,22 +14,6 @@ namespace solar {
 		, _height(h) {
 	}
 
-	int size::get_width() const {
-		return _width;
-	}
-
-	void size::set_width(int w) {
-		_width = w;
-	}
-
-	int size::get_height() const {
-		return _height;
-	}
-
-	void size::set_height(int h) {
-		_height = h;
-	}
-
 	bool size::operator==(const size& rhs) const {
 		return (_width == rhs._width && _height == rhs._height);
 	}

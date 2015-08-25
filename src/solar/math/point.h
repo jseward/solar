@@ -5,7 +5,7 @@
 namespace solar {
 
 	class point {
-	private:
+	public:
 		int _x;
 		int _y;
 
@@ -13,16 +13,15 @@ namespace solar {
 		point();
 		point(int x, int y);
 
-		int get_x() const;
-		void set_x(int x);
-
-		int get_y() const;
-		void set_y(int y);
+		bool operator==(const point& rhs) const;
+		bool operator!=(const point& rhs) const;
 
 		point& operator+=(const point& rhs);
 
 	public:
 		friend std::ostream& operator<<(std::ostream& os, const point& p);
+		friend point operator+(const point& lhs, const point& rhs);
+		friend point operator-(const point& lhs, const point& rhs);
 	};
 
 }

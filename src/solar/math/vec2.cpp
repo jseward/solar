@@ -12,12 +12,4 @@ namespace solar {
 		, _y(y) {
 	}
 
-	float vec2::get_x() const {
-		return _x;
-	}
-
-	float vec2::get_y() const {
-		return _y;
-	}
-
 }

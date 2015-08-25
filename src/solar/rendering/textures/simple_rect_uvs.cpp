@@ -1,6 +1,7 @@
 #include "simple_rect_uvs.h"
 #include "solar/math/size.h"
 #include "solar/math/rect.h"
+#include "solar/utility/type_convert.h"
 
 namespace solar {
 
@@ -17,11 +18,11 @@ namespace solar {
 		, _right_u(1.f)
 		, _bottom_v(1.f) {
 
-		if (texture_size.get_width() > 0 && texture_size.get_height() > 0) {
-			_left_u = static_cast<float>(texel_box.get_left()) / static_cast<float>(texture_size.get_width());
-			_top_v = static_cast<float>(texel_box.get_top()) / static_cast<float>(texture_size.get_height());
-			_right_u = static_cast<float>(texel_box.get_right()) / static_cast<float>(texture_size.get_width());
-			_bottom_v = static_cast<float>(texel_box.get_bottom()) / static_cast<float>(texture_size.get_height());
+		if (texture_size._width > 0 && texture_size._height > 0) {
+			_left_u = int_to_float(texel_box.get_left()) / int_to_float(texture_size._width);
+			_top_v = int_to_float(texel_box.get_top()) / int_to_float(texture_size._height);
+			_right_u = int_to_float(texel_box.get_right()) / int_to_float(texture_size._width);
+			_bottom_v = int_to_float(texel_box.get_bottom()) / int_to_float(texture_size._height);
 		}
 	}
 

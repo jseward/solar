@@ -20,8 +20,8 @@ namespace solar {
 
 		int get_display_mode_difference_score(const d3d9_user_settings& user_settings, const D3DDISPLAYMODE& display_mode) {
 			return
-				std::abs(static_cast<int>(display_mode.Width) - user_settings.get_backbuffer_size().get_width()) +
-				std::abs(static_cast<int>(display_mode.Height) - user_settings.get_backbuffer_size().get_height()) +
+				std::abs(static_cast<int>(display_mode.Width) - user_settings.get_backbuffer_size()._width) +
+				std::abs(static_cast<int>(display_mode.Height) - user_settings.get_backbuffer_size()._height) +
 				std::abs(static_cast<int>(display_mode.RefreshRate) - static_cast<int>(user_settings.get_fullscreen_refresh_rate()));
 		}
 
@@ -366,8 +366,8 @@ namespace solar {
 		pp.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;
 		if (device_combo._is_windowed)
 		{
-			pp.BackBufferWidth = user_settings.get_backbuffer_size().get_width();
-			pp.BackBufferHeight = user_settings.get_backbuffer_size().get_height();
+			pp.BackBufferWidth = user_settings.get_backbuffer_size()._width;
+			pp.BackBufferHeight = user_settings.get_backbuffer_size()._height;
 		}
 		else
 		{

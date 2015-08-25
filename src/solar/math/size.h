@@ -8,19 +8,13 @@ namespace solar {
 	class archive_writer;
 
 	class size {
-	private:
+	public:
 		int _width;
 		int _height;
 
 	public:
 		size();
 		size(int w, int h);
-
-		int get_width() const;
-		void set_width(int x);
-
-		int get_height() const;
-		void set_height(int y);
 
 		bool operator==(const size& rhs) const;
 		bool operator!=(const size& rhs) const;

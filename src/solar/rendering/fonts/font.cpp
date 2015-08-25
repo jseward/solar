@@ -102,10 +102,10 @@ namespace solar {
 
 
 	void font::update_page_texture_pixel_size() {
-		IF_VERIFY(_page_size.get_width() > 0 && _page_size.get_height() > 0) {
+		IF_VERIFY(_page_size._width > 0 && _page_size._height > 0) {
 			_page_texture_pixel_size = sizef(
-				1.f / int_to_float(_page_size.get_width()),
-				1.f / int_to_float(_page_size.get_height()));
+				1.f / int_to_float(_page_size._width),
+				1.f / int_to_float(_page_size._height));
 		}
 	}
 

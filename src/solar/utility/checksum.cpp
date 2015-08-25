@@ -43,9 +43,9 @@ namespace solar {
 	}
 
 	checksum& checksum::add_vec3(const vec3& v) {
-		add_checksum_at_index(0, calculate_fletcher_checksum_of_type<float>(v.x()));
-		add_checksum_at_index(1, calculate_fletcher_checksum_of_type<float>(v.y()));
-		add_checksum_at_index(2, calculate_fletcher_checksum_of_type<float>(v.z()));
+		add_checksum_at_index(0, calculate_fletcher_checksum_of_type<float>(v._x));
+		add_checksum_at_index(1, calculate_fletcher_checksum_of_type<float>(v._y));
+		add_checksum_at_index(2, calculate_fletcher_checksum_of_type<float>(v._z));
 		return *this;
 	}
 

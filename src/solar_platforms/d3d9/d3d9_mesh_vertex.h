@@ -29,17 +29,17 @@ namespace solar {
 
 	public:
 		d3d9_mesh_vertex& operator=(const mesh_vertex& rhs) {
-			_px = rhs._position.x();
-			_py = rhs._position.y();
-			_pz = rhs._position.z();
-			_nx = rhs._normal.x();
-			_ny = rhs._normal.y();
-			_nz = rhs._normal.z();
+			_px = rhs._position._x;
+			_py = rhs._position._y;
+			_pz = rhs._position._z;
+			_nx = rhs._normal._x;
+			_ny = rhs._normal._y;
+			_nz = rhs._normal._z;
 			_u_0 = rhs._uv.u();
 			_v_0 = rhs._uv.v();
-			_tx = rhs._tangent.x();
-			_ty = rhs._tangent.y();
-			_tz = rhs._tangent.z();
+			_tx = rhs._tangent._x;
+			_ty = rhs._tangent._y;
+			_tz = rhs._tangent._z;
 			_binormal_sign = rhs._binormal_sign;
 
 			copy_bone_weight(rhs, 0, _bone_index_0, _bone_weight_0);

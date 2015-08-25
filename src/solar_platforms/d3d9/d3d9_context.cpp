@@ -145,8 +145,8 @@ namespace solar {
 			if (get_window_client_size() != _device_params.get_backbuffer_size()) {
 				d3d9_device_params adjusted_device_params = _device_params;
 				adjusted_device_params.set_window_top_left(get_window_top_left());
-				adjusted_device_params.get_present_parameters().BackBufferWidth = get_window_client_size().get_width();
-				adjusted_device_params.get_present_parameters().BackBufferHeight = get_window_client_size().get_height();
+				adjusted_device_params.get_present_parameters().BackBufferWidth = get_window_client_size()._width;
+				adjusted_device_params.get_present_parameters().BackBufferHeight = get_window_client_size()._height;
 				change_device(adjusted_device_params);
 			}
 		}
@@ -210,8 +210,8 @@ namespace solar {
 		if (_device_params.get_window_type() == d3d9_window_type::VIRTUAL_FULLSCREEN) {
 			auto new_params = _device_params;
 			new_params.set_window_type(d3d9_window_type::RESIZABLE_WINDOW);
-			new_params.get_present_parameters().BackBufferWidth = _toggle_from_fullscreen_backbuffer_size.get_width();
-			new_params.get_present_parameters().BackBufferHeight = _toggle_from_fullscreen_backbuffer_size.get_height();
+			new_params.get_present_parameters().BackBufferWidth = _toggle_from_fullscreen_backbuffer_size._width;
+			new_params.get_present_parameters().BackBufferHeight = _toggle_from_fullscreen_backbuffer_size._height;
 			change_device(new_params);
 		}
 		else if (_device_params.get_window_type() == d3d9_window_type::RESIZABLE_WINDOW) {
@@ -274,13 +274,13 @@ namespace solar {
 		auto& pp = device_params.get_present_parameters();
 
 		if (device_params.get_window_type() == d3d9_window_type::VIRTUAL_FULLSCREEN) {
-			pp.BackBufferWidth = get_desktop_size().get_width();
-			pp.BackBufferHeight = get_desktop_size().get_height();
+			pp.BackBufferWidth = get_desktop_size()._width;
+			pp.BackBufferHeight = get_desktop_size()._height;
 		}
 		else if (device_params.get_window_type() == d3d9_window_type::RESIZABLE_WINDOW) {
 			if (is_window_maximized()) {
-				pp.BackBufferWidth = get_window_client_size().get_width();
-				pp.BackBufferHeight = get_window_client_size().get_height();
+				pp.BackBufferWidth = get_window_client_size()._width;
+				pp.BackBufferHeight = get_window_client_size()._height;
 			}
 		}
 	}
@@ -394,8 +394,8 @@ namespace solar {
 				if (!is_window_maximized()) {
 
 					RECT new_window_size = { 0 };
-					new_window_size.right = _device_params.get_backbuffer_size().get_width();
-					new_window_size.bottom = _device_params.get_backbuffer_size().get_height();
+					new_window_size.right = _device_params.get_backbuffer_size()._width;
+					new_window_size.bottom = _device_params.get_backbuffer_size()._height;
 					VERIFY(::AdjustWindowRect(&new_window_size, GetWindowLong(_hwnd, GWL_STYLE), FALSE) == TRUE);
 
 					point new_window_top_left = point(0, 0);
@@ -426,8 +426,8 @@ namespace solar {
 
 						d3d9_device_params adjusted_device_params = _device_params;
 						adjusted_device_params.set_window_top_left(new_window_rect.get_top_left());
-						adjusted_device_params.get_present_parameters().BackBufferWidth = get_window_client_size().get_width();
-						adjusted_device_params.get_present_parameters().BackBufferHeight = get_window_client_size().get_height();
+						adjusted_device_params.get_present_parameters().BackBufferWidth = get_window_client_size()._width;
+						adjusted_device_params.get_present_parameters().BackBufferHeight = get_window_client_size()._height;
 
 						success = change_device(adjusted_device_params);
 					}

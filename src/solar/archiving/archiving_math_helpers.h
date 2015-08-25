@@ -29,7 +29,7 @@ namespace solar {
 	}
 
 	inline void write_point(archive_writer& writer, const char* name, const point& value) {
-		write_ints(writer, name, value.get_x(), value.get_y());
+		write_ints(writer, name, value._x, value._y);
 	}
 
 	inline void read_size(archive_reader& reader, const char* name, size& value) {
@@ -40,7 +40,7 @@ namespace solar {
 	}
 
 	inline void write_size(archive_writer& writer, const char* name, const size& value) {
-		write_ints(writer, name, value.get_width(), value.get_height());
+		write_ints(writer, name, value._width, value._height);
 	}
 
 	inline void read_pointf(archive_reader& reader, const char* name, pointf& value) {
@@ -51,7 +51,7 @@ namespace solar {
 	}
 
 	inline void write_pointf(archive_writer& writer, const char* name, const pointf& value) {
-		write_floats(writer, name, value.get_x(), value.get_y());
+		write_floats(writer, name, value._x, value._y);
 	}
 
 	inline void read_vec3(archive_reader& reader, const char* name, vec3& value) {
@@ -63,7 +63,7 @@ namespace solar {
 	}
 
 	inline void write_vec3(archive_writer& writer, const char* name, const vec3& value) {
-		write_floats(writer, name, value.x(), value.y(), value.z());
+		write_floats(writer, name, value._x, value._y, value._z);
 	}
 
 }

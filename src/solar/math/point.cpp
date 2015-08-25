@@ -12,20 +12,12 @@ namespace solar {
 		, _y(y) {
 	}
 
-	int point::get_x() const {
-		return _x;
+	bool point::operator==(const point& rhs) const {
+		return _x == rhs._x && _y == rhs._y;
 	}
 
-	void point::set_x(int x) {
-		_x = x;
-	}
-
-	int point::get_y() const {
-		return _y;
-	}
-
-	void point::set_y(int y) {
-		_y = y;
+	bool point::operator!=(const point& rhs) const {
+		return !(*this == rhs);
 	}
 
 	point& point::operator+=(const point& rhs) {
@@ -37,4 +29,17 @@ namespace solar {
 	std::ostream& operator<<(std::ostream& os, const point& p) {
 		return os << "{ " << p._x << ", " << p._y << " }";
 	}
+
+	point operator+(const point& lhs, const point& rhs) {
+		return point(
+			lhs._x + rhs._x,
+			lhs._y + rhs._y);
+	}
+
+	point operator-(const point& lhs, const point& rhs) {
+		return point(
+			lhs._x - rhs._x,
+			lhs._y - rhs._y);
+	}
+
 }

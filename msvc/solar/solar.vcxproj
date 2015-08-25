@@ -28,6 +28,7 @@
     <ClInclude Include="..\..\src\solar\containers\container_helpers.h" />
     <ClInclude Include="..\..\src\solar\containers\enum_array.h" />
     <ClInclude Include="..\..\src\solar\containers\enum_vector.h" />
+    <ClInclude Include="..\..\src\solar\containers\fixed_grid.h" />
     <ClInclude Include="..\..\src\solar\containers\fixed_vector.h" />
     <ClInclude Include="..\..\src\solar\containers\linked_list.h" />
     <ClInclude Include="..\..\src\solar\containers\pooled_linked_list_node_factory.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="..\..\src\solar\windows\components\button.h" />
     <ClInclude Include="..\..\src\solar\windows\components\label.h" />
     <ClInclude Include="..\..\src\solar\windows\components\label_style.h" />
+    <ClInclude Include="..\..\src\solar\windows\layout\window_grid_layout.h" />
     <ClInclude Include="..\..\src\solar\windows\layout\window_layout.h" />
     <ClInclude Include="..\..\src\solar\windows\layout\window_layout_anchors.h" />
     <ClInclude Include="..\..\src\solar\windows\layout\window_layout_margins.h" />
@@ -559,6 +561,7 @@
     <ClCompile Include="..\..\src\solar\windows\components\button_style.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\label.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\label_style.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\layout\window_grid_layout.cpp" />
     <ClCompile Include="..\..\src\solar\windows\layout\window_layout.cpp" />
     <ClCompile Include="..\..\src\solar\windows\layout\window_layout_anchors.cpp" />
     <ClCompile Include="..\..\src\solar\windows\layout\window_layout_margins.cpp" />
