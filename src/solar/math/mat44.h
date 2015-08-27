@@ -1,6 +1,8 @@
 #pragma once
 
 #include "vec2.h"
+#include "vec3.h"
+#include "vec4.h"
 #include "mat33.h"
 
 namespace solar {
@@ -34,6 +36,9 @@ namespace solar {
 	public:
 		friend mat44& operator*=(mat44& lhs, const mat44& rhs);
 		friend mat44 operator*(const mat44& lhs, const mat44& rhs);
+		friend vec2 operator*(const vec2& vec, const mat44& mat);
+		friend vec3 operator*(const vec3& vec, const mat44& mat);
+		friend vec4 operator*(const vec4& vec, const mat44& mat);
 
 	public:
 		friend mat44 make_mat44_identity();

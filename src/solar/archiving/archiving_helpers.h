@@ -154,29 +154,37 @@ namespace solar {
 		}
 	}
 
-	template<typename VectorT> void read_object_vector(archive_reader& reader, const char* name, VectorT& values) {
+	template<typename VectorT> void read_vector(archive_reader& reader, const char* name, VectorT& values, std::function<typename VectorT::value_type(archive_reader&)> read_value_func) {
 		values.clear();
 		reader.read_objects(
 			name,
-			[&](int size) { 
-				values.reserve(size); 
-			},
-			[&](archive_reader& reader, unsigned int) { 
-				VectorT::value_type value;
-				value.read_from_archive(reader);
-				values.push_back(value);
-			});
+			[&](int size) { values.reserve(size); },
+			[&](archive_reader& reader, unsigned int) { values.push_back(read_value_func(reader)); });
 	}
 
-	template<typename VectorT> void write_object_vector(archive_writer& writer, const char* name, const VectorT& values) {
+	template<typename VectorT> void read_object_vector(archive_reader& reader, const char* name, VectorT& values) {
+		read_vector(reader, name, values, [](archive_reader& reader) {
+			VectorT::value_type value;
+			value.read_from_archive(reader);
+			return value;
+		});
+	}
+
+	template<typename VectorT> void write_vector(archive_writer& writer, const char* name, const VectorT& values, std::function<void(archive_writer&, typename const VectorT::value_type&)> write_value_func) {
 		auto iter = values.begin();
 		writer.write_objects(
 			name,
 			values.size(),
 			[&](archive_writer& writer, unsigned int) {
-				iter->write_to_archive(writer);
+				write_value_func(writer, *iter);
 				iter++;
 			});
+	}
+
+	template<typename VectorT> void write_object_vector(archive_writer& writer, const char* name, const VectorT& values) {
+		write_vector(writer, name, values, [](archive_writer& writer, typename const VectorT::value_type& value) {
+			value.write_to_archive(writer);
+		});
 	}
 
 	template<typename FixedVectorT> void read_object_fixed_vector(archive_reader& reader, const char* name, FixedVectorT& values) {

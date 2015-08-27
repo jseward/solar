@@ -81,6 +81,7 @@
     <ClInclude Include="..\..\src\solar\math\sizef.h" />
     <ClInclude Include="..\..\src\solar\math\vec2.h" />
     <ClInclude Include="..\..\src\solar\math\vec3.h" />
+    <ClInclude Include="..\..\src\solar\math\vec4.h" />
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush.h" />
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush_factory.h" />
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush_id.h" />
@@ -123,6 +124,7 @@
     <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_vertex.h" />
     <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_vertex_bone_weight.h" />
     <ClInclude Include="..\..\src\solar\rendering\primatives\prim2d.h" />
+    <ClInclude Include="..\..\src\solar\rendering\primatives\prim2d_lines.h" />
     <ClInclude Include="..\..\src\solar\rendering\render_scene_functor.h" />
     <ClInclude Include="..\..\src\solar\rendering\render_device.h" />
     <ClInclude Include="..\..\src\solar\rendering\render_device_event_handler.h" />
@@ -337,6 +339,7 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_mesh_vertex.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_mesh_vertex_declaration.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d.h" />
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_lines.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_rect.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_vertex.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_release_com_object.h" />
@@ -493,6 +496,7 @@
     <ClCompile Include="..\..\src\solar\math\sizef.cpp" />
     <ClCompile Include="..\..\src\solar\math\vec2.cpp" />
     <ClCompile Include="..\..\src\solar\math\vec3.cpp" />
+    <ClCompile Include="..\..\src\solar\math\vec4.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush_factory.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush_id.cpp" />
@@ -523,6 +527,7 @@
     <ClCompile Include="..\..\src\solar\rendering\meshes\mesh_vertex.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\meshes\mesh_vertex_bone_weight.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\primatives\prim2d.cpp" />
+    <ClCompile Include="..\..\src\solar\rendering\primatives\prim2d_lines.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\shaders\shader_id.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\textures\simple_rect_uvs.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\textures\uv.cpp" />
@@ -597,6 +602,7 @@
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_mesh_factory.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_mesh_renderer.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_lines.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_rect.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_vertex.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_render_device.cpp" />

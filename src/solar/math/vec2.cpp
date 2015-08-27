@@ -12,4 +12,12 @@ namespace solar {
 		, _y(y) {
 	}
 
+	vec2 operator+(const vec2& lhs, const vec2& rhs) {
+		return vec2(lhs._x + rhs._x, lhs._y + rhs._y);
+	}
+
+	vec2 operator*(const vec2& lhs, float rhs) {
+		return vec2(lhs._x * rhs, lhs._y * rhs);
+	}
+
 }

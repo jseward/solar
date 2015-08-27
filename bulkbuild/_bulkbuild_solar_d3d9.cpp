@@ -9,6 +9,7 @@
 #include "solar_platforms/d3d9/d3d9_prim2d.cpp"
 #include "solar_platforms/d3d9/d3d9_prim2d_rect.cpp"
 #include "solar_platforms/d3d9/d3d9_prim2d_vertex.cpp"
+#include "solar_platforms/d3d9/d3d9_prim2d_lines.cpp"
 #include "solar_platforms/d3d9/d3d9_texture_factory.cpp"
 #include "solar_platforms/d3d9/d3d9_texture.cpp"
 #include "solar_platforms/d3d9/d3d9_texture_pool.cpp"

@@ -32,6 +32,7 @@ namespace solar {
 
 		camera& set_projection_type(camera_projection_type type);
 		camera& set_aspect_ratio(float aspect_ratio);
+		camera& set_ortho_width_height(float width, float height);
 		camera& set_near_far_planes(float near_plane, float far_plane);
 		camera& set_basis(const basis& basis);
 

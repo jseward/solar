@@ -1218,6 +1218,15 @@
     <ClInclude Include="..\..\src\solar\math\random_stream.h">
       <Filter>src\solar\math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\rendering\primatives\prim2d_lines.h">
+      <Filter>src\solar\rendering\primatives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_lines.h">
+      <Filter>src\solar_platforms\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\math\vec4.h">
+      <Filter>src\solar\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1791,6 +1800,15 @@
       <Filter>src\solar\windows\layout</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar\math\random_stream.cpp">
+      <Filter>src\solar\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\rendering\primatives\prim2d_lines.cpp">
+      <Filter>src\solar\rendering\primatives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_lines.cpp">
+      <Filter>src\solar_platforms\d3d9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\math\vec4.cpp">
       <Filter>src\solar\math</Filter>
     </ClCompile>
   </ItemGroup>

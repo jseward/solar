@@ -12,6 +12,7 @@ namespace solar {
 		, _d3d9_render_device(_d3d9_context)
 		, _d3d9_cursor(_d3d9_context)
 		, _d3d9_prim2d(_d3d9_context)
+		, _d3d9_prim2d_lines(_d3d9_context)
 		, _d3d9_texture_factory(_d3d9_context, _resource_system)
 		, _d3d9_shader_factory(_d3d9_context, _resource_system)
 		, _d3d9_mesh_factory(_d3d9_context, _resource_system)
@@ -74,11 +75,13 @@ namespace solar {
 		_d3d9_mesh_renderer.setup();
 		_d3d9_cursor_icon_factory.setup();
 		_d3d9_prim2d.setup(solar::d3d9_prim2d_setup_params());
+		_d3d9_prim2d_lines.setup();
 
 		return true;
 	}
 
 	void win32_d3d9_engine::teardown() {
+		_d3d9_prim2d_lines.teardown();
 		_d3d9_prim2d.teardown();
 		_d3d9_cursor_icon_factory.teardown();
 		_d3d9_mesh_renderer.teardown();

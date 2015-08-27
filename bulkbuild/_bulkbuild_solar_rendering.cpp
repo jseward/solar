@@ -3,6 +3,7 @@
 #include "solar/rendering/viewport.cpp"
 
 #include "solar/rendering/primatives/prim2d.cpp"
+#include "solar/rendering/primatives/prim2d_lines.cpp"
 
 #include "solar/rendering/textures/uv.cpp"
 #include "solar/rendering/textures/simple_rect_uvs.cpp"

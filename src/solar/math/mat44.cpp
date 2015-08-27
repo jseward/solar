@@ -55,6 +55,27 @@ namespace solar {
 		return (out *= rhs);
 	}
 
+	vec2 operator*(const vec2& vec, const mat44& mat) {
+		return vec2(
+			(vec._x * mat._v00) + (vec._y * mat._v10) + mat._v30,
+			(vec._x * mat._v01) + (vec._y * mat._v11) + mat._v31);
+	}
+
+	vec3 operator*(const vec3& vec, const mat44& mat) {
+		return vec3(
+			(vec._x * mat._v00) + (vec._y * mat._v10) + (vec._z * mat._v20) + mat._v30,
+			(vec._x * mat._v01) + (vec._y * mat._v11) + (vec._z * mat._v21) + mat._v31,
+			(vec._x * mat._v02) + (vec._y * mat._v12) + (vec._z * mat._v22) + mat._v32);
+	}
+
+	vec4 operator*(const vec4& vec, const mat44& mat) {
+		return vec4(
+			(vec._x * mat._v00) + (vec._y * mat._v10) + (vec._z * mat._v20) + (vec._w * mat._v30),
+			(vec._x * mat._v01) + (vec._y * mat._v11) + (vec._z * mat._v21) + (vec._w * mat._v31),
+			(vec._x * mat._v02) + (vec._y * mat._v12) + (vec._z * mat._v22) + (vec._w * mat._v32),
+			(vec._x * mat._v03) + (vec._y * mat._v13) + (vec._z * mat._v23) + (vec._w * mat._v33));
+	}
+
 	mat44 make_mat44_identity() {
 		return mat44();
 	}

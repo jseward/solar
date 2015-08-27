@@ -3,6 +3,7 @@
 #include "solar/math/rect.h"
 #include "solar/math/point.h"
 #include "solar/math/pointf.h"
+#include "solar/math/vec2.h"
 #include "solar/math/vec3.h"
 #include "archiving_helpers.h"
 
@@ -52,6 +53,53 @@ namespace solar {
 
 	inline void write_pointf(archive_writer& writer, const char* name, const pointf& value) {
 		write_floats(writer, name, value._x, value._y);
+	}
+
+	inline void read_vec2(archive_reader& reader, const char* name, vec2& value) {
+		float x = 0;
+		float y = 0;
+		read_floats(reader, name, x, y);
+		value = vec2(x, y);
+	}
+
+	inline void write_vec2(archive_writer& writer, const char* name, const vec2& value) {
+		write_floats(writer, name, value._x, value._y);
+	}
+
+	namespace archiving_vec2_impl {
+		class archivable_vec2 : public vec2, public archivable {
+		public:
+			archivable_vec2() {}
+			archivable_vec2(const vec2& copy) : vec2(copy) {}
+
+			virtual void read_from_archive(archive_reader& reader) override {
+				read_float(reader, "x", _x);
+				read_float(reader, "y", _y);
+			}
+
+			virtual void write_to_archive(archive_writer& writer) const override {
+				write_float(writer, "x", _x);
+				write_float(writer, "y", _y);
+			}
+		};
+	}
+
+	template<typename T> void read_vec2_vector(archive_reader& reader, const char* name, T& values) {
+		//NOTE: this is a bit clumsy because archive_readers don't support array of arrays. it would severly
+		//bloat the archive_reader interface.
+		read_vector(reader, name, values, [](archive_reader& reader) {
+			archiving_vec2_impl::archivable_vec2 v;
+			v.read_from_archive(reader);
+			return static_cast<vec2>(v);
+		});
+	}
+
+	template<typename T> void write_vec2_vector(archive_writer& writer, const char* name, const T& values) {
+		//NOTE: this is a bit clumsy because archive_readers don't support array of arrays. it would severly
+		//bloat the archive_reader interface.
+		write_vector(writer, name, values, [](archive_writer& writer, const vec2& value) {
+			archiving_vec2_impl::archivable_vec2(value).write_to_archive(writer);
+		});
 	}
 
 	inline void read_vec3(archive_reader& reader, const char* name, vec3& value) {

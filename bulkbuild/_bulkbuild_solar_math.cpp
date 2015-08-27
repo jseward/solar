@@ -6,6 +6,7 @@
 #include "solar/math/rectf.cpp"
 #include "solar/math/vec2.cpp"
 #include "solar/math/vec3.cpp"
+#include "solar/math/vec4.cpp"
 #include "solar/math/mat33.cpp"
 #include "solar/math/mat44.cpp"
 #include "solar/math/math_constants.cpp"

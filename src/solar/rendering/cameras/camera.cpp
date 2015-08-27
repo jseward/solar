@@ -33,6 +33,16 @@ namespace solar {
 		return *this;
 	}
 
+	camera& camera::set_ortho_width_height(float width, float height) {
+		ASSERT(_projection_type == camera_projection_type::ORTHOGRAPHIC);
+		ASSERT(width > 0.f);
+		ASSERT(height > 0.f);
+		_ortho_width = width;
+		_ortho_height = height;
+		invalidate_cache();
+		return *this;
+	}
+
 	camera& camera::set_near_far_planes(float near_plane, float far_plane) {
 		ASSERT(near_plane < far_plane);
 		ASSERT(far_plane > 0.f);

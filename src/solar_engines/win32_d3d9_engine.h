@@ -12,6 +12,7 @@
 #include "solar_platforms/d3d9/d3d9_render_device.h"
 #include "solar_platforms/d3d9/d3d9_cursor.h"
 #include "solar_platforms/d3d9/d3d9_prim2d.h"
+#include "solar_platforms/d3d9/d3d9_prim2d_lines.h"
 #include "solar_platforms/d3d9/d3d9_texture_factory.h"
 #include "solar_platforms/d3d9/d3d9_shader_factory.h"
 #include "solar_platforms/d3d9/d3d9_mesh_factory.h"
@@ -38,6 +39,7 @@ namespace solar {
 		d3d9_render_device _d3d9_render_device;
 		d3d9_cursor _d3d9_cursor;
 		d3d9_prim2d _d3d9_prim2d;
+		d3d9_prim2d_lines _d3d9_prim2d_lines;
 		d3d9_texture_factory _d3d9_texture_factory;
 		d3d9_shader_factory _d3d9_shader_factory;
 		d3d9_mesh_factory _d3d9_mesh_factory;

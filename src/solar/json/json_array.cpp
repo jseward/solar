@@ -122,7 +122,7 @@ namespace solar {
 		}
 
 		auto& v = _value[index];
-		if (!v.IsDouble()) {
+		if (!v.IsNumber()) {
 			return false;
 		}
 
