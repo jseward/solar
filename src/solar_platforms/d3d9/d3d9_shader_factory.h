@@ -29,6 +29,7 @@ namespace solar {
 		bool _is_debug_shaders_enabled;
 		std::unique_ptr<d3d9_shader> _default_states_shader;
 		std::unordered_map<std::string, std::unique_ptr<d3d9_shader>> _shaders;
+		std::vector<d3d9_shader*> _embeded_code_shaders;
 		ID3DXEffectPool* _ID3DXEffectPool;
 		std::unique_ptr<resource_mapped_memory> _resource_mapped_memory;
 
@@ -42,6 +43,9 @@ namespace solar {
 		virtual void set_render_states_to_defaults() override;
 		virtual shader* get_shader(const std::string& id, const std::string& id_source_description) override;
 		virtual const resource_factory_caching_context& get_caching_context() const override;
+
+		d3d9_shader* create_embeded_code_shader(const char* embedded_code);
+		void release_embeded_code_shader(d3d9_shader* shader);
 
 		ID3DXEffectPool* get_ID3DXEffectPool();
 		DWORD get_d3dxcreateeffect_flags() const;

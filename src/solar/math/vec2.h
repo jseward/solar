@@ -11,9 +11,16 @@ namespace solar {
 		vec2();
 		vec2(float x, float y);
 
+		float get_length() const;
+		float get_length_squared() const;
+
 	public:
 		friend vec2 operator+(const vec2& lhs, const vec2& rhs);
+		friend vec2 operator-(const vec2& lhs, const vec2& rhs);
 		friend vec2 operator*(const vec2& lhs, float rhs);
+
+	public:
+		friend float get_distance(const vec2& v0, const vec2& v1);
 	};
 
 }

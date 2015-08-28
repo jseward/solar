@@ -2,6 +2,7 @@
 #include "solar/utility/assert.h"
 #include "solar/utility/alert.h"
 #include "solar/resources/resource_system.h"
+#include "solar/containers/container_helpers.h"
 #include "d3d9_verify.h"
 #include "d3d9_release_com_object.h"
 #include "d3d9_string_convert.h"
@@ -85,6 +86,7 @@ namespace solar {
 	d3d9_shader_factory::~d3d9_shader_factory() {
 		ASSERT(!_is_setup);
 		ASSERT(_shaders.empty());
+		ASSERT(_embeded_code_shaders.empty());
 		ASSERT(_ID3DXEffectPool == nullptr);
 	}
 
@@ -103,6 +105,21 @@ namespace solar {
 		d3d9_release_com_object(_ID3DXEffectPool);
 		_context.remove_device_event_handler(this);
 		_is_setup = false;
+	}
+
+	d3d9_shader* d3d9_shader_factory::create_embeded_code_shader(const char* embeded_code) {
+		auto new_shader = new d3d9_shader(*this, embeded_code);
+		new_shader->on_device_created(_context.get_device());
+		new_shader->on_device_reset(_context.get_device());
+		_embeded_code_shaders.push_back(new_shader);
+		return new_shader;
+	}
+
+	void d3d9_shader_factory::release_embeded_code_shader(d3d9_shader* shader) {
+		shader->on_device_lost(_context.get_device());
+		shader->on_device_released(_context.get_device());
+		find_and_erase(_embeded_code_shaders, shader);
+		delete shader;
 	}
 
 	void d3d9_shader_factory::create_default_states_shader() {
@@ -168,6 +185,10 @@ namespace solar {
 		for (auto& iter : _shaders) {
 			iter.second->on_device_created(device);
 		}
+
+		for (auto& shader : _embeded_code_shaders) {
+			shader->on_device_created(device);
+		}
 	}
 
 	void d3d9_shader_factory::on_device_released(IDirect3DDevice9* device) {
@@ -177,6 +198,10 @@ namespace solar {
 
 		for (auto& iter : _shaders) {
 			iter.second->on_device_released(device);
+		}
+
+		for (auto& shader : _embeded_code_shaders) {
+			shader->on_device_released(device);
 		}
 	}
 
@@ -188,6 +213,10 @@ namespace solar {
 		for (auto& iter : _shaders) {
 			iter.second->on_device_reset(device);
 		}
+
+		for (auto& shader : _embeded_code_shaders) {
+			shader->on_device_reset(device);
+		}
 	}
 
 	void d3d9_shader_factory::on_device_lost(IDirect3DDevice9* device) {
@@ -197,6 +226,10 @@ namespace solar {
 
 		for (auto& iter : _shaders) {
 			iter.second->on_device_lost(device);
+		}
+
+		for (auto& shader : _embeded_code_shaders) {
+			shader->on_device_lost(device);
 		}
 	}
 

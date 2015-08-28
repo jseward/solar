@@ -1227,6 +1227,9 @@
     <ClInclude Include="..\..\src\solar\math\vec4.h">
       <Filter>src\solar\math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_tri.h">
+      <Filter>src\solar_platforms\d3d9</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1555,9 +1558,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_error_dialog.cpp">
       <Filter>src\solar_platforms\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_rect.cpp">
-      <Filter>src\solar_platforms\d3d9</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_vertex.cpp">
       <Filter>src\solar_platforms\d3d9</Filter>

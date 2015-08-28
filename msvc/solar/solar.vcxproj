@@ -341,6 +341,7 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_lines.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_rect.h" />
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_tri.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_vertex.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_release_com_object.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_render_device.h" />
@@ -603,7 +604,6 @@
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_mesh_renderer.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_lines.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_rect.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_vertex.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_render_device.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_shader.cpp" />

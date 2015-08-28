@@ -17,6 +17,7 @@ namespace solar {
 	public:
 		viewport();
 
+		rect get_area() const;
 		float get_aspect_ratio() const;
 
 		viewport& set_area(const rect& area);

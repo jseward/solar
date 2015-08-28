@@ -11,13 +11,13 @@ namespace solar {
 		, _resource_system(_win32_file_system, _win32_directory_change_watcher)
 		, _d3d9_render_device(_d3d9_context)
 		, _d3d9_cursor(_d3d9_context)
-		, _d3d9_prim2d(_d3d9_context)
-		, _d3d9_prim2d_lines(_d3d9_context)
 		, _d3d9_texture_factory(_d3d9_context, _resource_system)
 		, _d3d9_shader_factory(_d3d9_context, _resource_system)
 		, _d3d9_mesh_factory(_d3d9_context, _resource_system)
 		, _d3d9_mesh_renderer(_d3d9_context)
 		, _d3d9_cursor_icon_factory(_d3d9_context, _d3d9_cursor, _resource_system)
+		, _d3d9_prim2d(_d3d9_context, _d3d9_shader_factory)
+		, _d3d9_prim2d_lines(_d3d9_context)
 		, _setting_registry(_win32_file_system) {
 
 		shader_id::set_factory(&_d3d9_shader_factory);

@@ -38,13 +38,13 @@ namespace solar {
 		d3d9_context _d3d9_context;
 		d3d9_render_device _d3d9_render_device;
 		d3d9_cursor _d3d9_cursor;
-		d3d9_prim2d _d3d9_prim2d;
-		d3d9_prim2d_lines _d3d9_prim2d_lines;
 		d3d9_texture_factory _d3d9_texture_factory;
 		d3d9_shader_factory _d3d9_shader_factory;
 		d3d9_mesh_factory _d3d9_mesh_factory;
 		d3d9_mesh_renderer _d3d9_mesh_renderer;
 		d3d9_cursor_icon_factory _d3d9_cursor_icon_factory;
+		d3d9_prim2d _d3d9_prim2d;
+		d3d9_prim2d_lines _d3d9_prim2d_lines;
 		win32_d3d9_engine_settings _engine_settings;
 		setting_registry _setting_registry;
 

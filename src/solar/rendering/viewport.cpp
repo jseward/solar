@@ -14,6 +14,10 @@ namespace solar {
 		, _max_z(1.f) {
 	}
 
+	rect viewport::get_area() const {
+		return rect(point(_x, _y), size(_width, _height));
+	}
+
 	float viewport::get_aspect_ratio() const {
 		if (_height > 0) {
 			return uint_to_float(_width) / uint_to_float(_height);
