@@ -2,6 +2,8 @@
 
 #include "solar/math/point_helpers.h"
 #include "solar/math/math_helpers.h"
+#include "solar/rendering/viewport.h"
+#include "solar/rendering/cameras/camera.h"
 
 namespace solar {
 
@@ -29,14 +31,14 @@ namespace solar {
 		render_circle(center, radius, color, 16);
 	}
 
-	void prim2d::render_circle(const vec2& center, float radius, const color& color, int segment_count) {
+	void prim2d::render_circle(const vec2& center, float radius, const color& color, unsigned int segment_count) {
 		const deg deg_inc = deg(360.f / segment_count);
 		const float sin_inc = sin(deg_inc);
 		const float cos_inc = cos(deg_inc);
 
 		vec2 r = vec2(1.f, 0.f);
 		vec2 prev_segment_point = center + (r * radius);
-		for (int i = 0; i < segment_count; ++i) {
+		for (unsigned int i = 0; i < segment_count; ++i) {
 			r = vec2(
 				(r._x * cos_inc) - (r._y * sin_inc),
 				(r._x * sin_inc) + (r._y * cos_inc));
@@ -58,4 +60,40 @@ namespace solar {
 		}
 	}
 
+	void prim2d::render_world_polygon(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count, const color& color) {
+		if (try_project_points_to_points_buffer(viewport, camera, points, point_count)) {
+			render_polygon(_points_buffer.data(), _points_buffer.size(), color);
+		}
+	}
+
+	void prim2d::render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color) {
+		render_world_circle(viewport, camera, center, radius, color, DEFAULT_CIRCLE_SEGMENT_COUNT);
+	}
+
+	void prim2d::render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, unsigned int segment_count) {
+		vec3 radius_marker = center + (camera.get_basis().get_rotation().get_up() * radius);
+
+		vec2 screen_center;
+		vec2 screen_radius_marker;
+		if (
+			viewport.try_project(screen_center, camera.get_view_projection_transform(), center) &&
+			viewport.try_project(screen_radius_marker, camera.get_view_projection_transform(), radius_marker)) {
+
+			const float screen_radius = get_distance(screen_center, screen_radius_marker);
+			render_circle(screen_center, screen_radius, color, segment_count);
+		}
+	}
+
+	bool prim2d::try_project_points_to_points_buffer(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count) {
+		_points_buffer.clear();
+		_points_buffer.reserve(point_count);
+		for (unsigned int i = 0; i < point_count; ++i) {
+			vec2 screen_point;
+			if (!viewport.try_project(screen_point, camera.get_view_projection_transform(), points[i])) {
+				return false;
+			}
+			_points_buffer.push_back(screen_point);
+		}
+		return true;
+	}
 }

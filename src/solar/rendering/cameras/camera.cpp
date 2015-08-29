@@ -58,6 +58,10 @@ namespace solar {
 		return *this;
 	}
 
+	const basis& camera::get_basis() const {
+		return _basis;
+	}
+
 	const mat44& camera::get_view_transform() const {
 		if (!_view_transform.is_cached(_cache_context)) {
 			_view_transform.set(_cache_context, make_mat44_camera_view(_basis.get_position(), _basis.get_rotation()));

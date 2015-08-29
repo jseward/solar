@@ -19,7 +19,9 @@ namespace solar {
 		float get_length_squared() const;
 
 	public:
-		friend vec3 operator/(const vec3& lhs, float rhs);
+		friend vec3 operator*(const vec3& v, float k);
+		friend vec3 operator/(const vec3& v, float k);
+		friend vec3 operator+(const vec3& lhs, const vec3& rhs);
 		friend vec3 operator-(const vec3& lhs, const vec3& rhs);
 
 	public:

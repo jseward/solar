@@ -1,5 +1,6 @@
 #include "vec3.h"
 
+#include "solar/utility/assert.h"
 #include "solar/math/math_helpers.h"
 
 namespace solar {
@@ -35,8 +36,17 @@ namespace solar {
 		return (_x * _x) + (_y * _y) + (_z * _z);
 	}
 
-	vec3 operator/(const vec3& lhs, float rhs) {
-		return vec3(lhs._x / rhs, lhs._y / rhs, lhs._z / rhs);
+	vec3 operator*(const vec3& v, float k) {
+		return vec3(v._x * k, v._y * k, v._z * k);
+	}
+
+	vec3 operator/(const vec3& v, float k) {
+		ASSERT(!is_approx(k, 0.f, 0.001f));
+		return vec3(v._x / k, v._y / k, v._z / k);
+	}
+
+	vec3 operator+(const vec3& lhs, const vec3& rhs) {
+		return vec3(lhs._x + rhs._x, lhs._y + rhs._y, lhs._z + rhs._z);
 	}
 
 	vec3 operator-(const vec3& lhs, const vec3& rhs) {

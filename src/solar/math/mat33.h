@@ -37,6 +37,9 @@ namespace solar {
 		float at(int row, int column) const;
 		const vec3& get_row(int row) const;
 		vec3& get_row(int row);
+		const vec3& get_forward() const;
+		const vec3& get_up() const;
+		const vec3& get_cross() const;
 
 	public:
 		friend mat33 make_mat33_identity();
@@ -60,6 +63,18 @@ namespace solar {
 
 	inline vec3& mat33::get_row(int row) {
 		return reinterpret_cast<vec3&>(_values[row][0]);
+	}
+
+	inline const vec3& mat33::get_forward() const {
+		return get_row(FORWARD_ROW_INDEX);
+	}
+
+	inline const vec3& mat33::get_up() const {
+		return get_row(UP_ROW_INDEX);
+	}
+
+	inline const vec3& mat33::get_cross() const {
+		return get_row(CROSS_ROW_INDEX);
 	}
 
 }

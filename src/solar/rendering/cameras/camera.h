@@ -36,6 +36,7 @@ namespace solar {
 		camera& set_near_far_planes(float near_plane, float far_plane);
 		camera& set_basis(const basis& basis);
 
+		const basis& get_basis() const;
 		const mat44& get_view_transform() const;
 		const mat44& get_projection_transform() const;
 		const mat44& get_view_projection_transform() const;
