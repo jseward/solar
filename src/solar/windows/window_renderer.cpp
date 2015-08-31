@@ -10,8 +10,10 @@
 
 namespace solar {
 
-	window_renderer::window_renderer(resource_system& resource_system, font_renderer& font_renderer, brush_renderer& brush_renderer)
+	window_renderer::window_renderer(resource_system& resource_system, prim2d& prim2d, prim2d_lines& prim2d_lines, font_renderer& font_renderer, brush_renderer& brush_renderer)
 		: _resource_system(resource_system)
+		, _prim2d(prim2d)
+		, _prim2d_lines(prim2d_lines)
 		, _font_renderer(font_renderer)
 		, _brush_renderer(brush_renderer) {
 	}
@@ -27,6 +29,14 @@ namespace solar {
 	}
 
 	void window_renderer::teardown() {
+	}
+
+	prim2d& window_renderer::get_prim2d() {
+		return _prim2d;
+	}
+
+	prim2d_lines& window_renderer::get_prim2d_lines() {
+		return _prim2d_lines;
 	}
 
 	void window_renderer::begin_brush_rendering(window_render_state state) {
