@@ -25,7 +25,7 @@ namespace solar {
 	}
 
 	void root_window::render_all(const window_render_params& params) {
-		_window_under_cursor_while_rendering = get_window_under_cursor_recursive(params.get_cursor_pos(), *this);
+		_window_under_cursor_while_rendering = get_window_under_cursor_recursive(params._cursor_pos, *this);
 		render_recursive(params, *this, *this);
 		_window_under_cursor_while_rendering = nullptr;
 	}
@@ -92,9 +92,9 @@ namespace solar {
 			}
 			else {
 				auto safe_viewport_area = make_rect_constrained_within(root_window.get_area(), current_window.get_area());
-				auto old_viewport = params.get_render_device().set_viewport(viewport().set_area(safe_viewport_area));
+				auto old_viewport = params._render_device.set_viewport(viewport().set_area(safe_viewport_area));
 				render_recursive_within_viewport(params, root_window, current_window);
-				params.get_render_device().set_viewport(old_viewport);
+				params._render_device.set_viewport(old_viewport);
 			}
 		}
 	}

@@ -17,7 +17,7 @@ namespace solar {
 		else if (is_pressed) {
 			state = window_render_state::PRESSED;
 		}
-		else if (window.get_area().is_point_within(params.get_cursor_pos())) {
+		else if (window.get_area().is_point_within(params._cursor_pos)) {
 			state = window_render_state::CURSOROVER;
 		}
 		else if (window.is_focused()) {

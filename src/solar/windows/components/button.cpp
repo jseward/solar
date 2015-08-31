@@ -29,7 +29,7 @@ namespace solar {
 	}
 
 	void button::render(const window_render_params& params) {
-		auto& renderer = params.get_window_renderer();
+		auto& renderer = params._window_renderer;
 		
 		auto state = get_best_window_render_state(*this, params);
 		renderer.begin_brush_rendering(state);
