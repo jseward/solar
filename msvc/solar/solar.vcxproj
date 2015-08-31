@@ -44,6 +44,8 @@
     <ClInclude Include="..\..\src\solar\input\mouse_device_event_handler.h" />
     <ClInclude Include="..\..\src\solar\io\directory_change.h" />
     <ClInclude Include="..\..\src\solar\io\directory_change_type.h" />
+    <ClInclude Include="..\..\src\solar\io\file_change_handler.h" />
+    <ClInclude Include="..\..\src\solar\io\file_change_watcher.h" />
     <ClInclude Include="..\..\src\solar\io\file_mode.h" />
     <ClInclude Include="..\..\src\solar\io\file_path_helpers.h" />
     <ClInclude Include="..\..\src\solar\io\file_stream.h" />
@@ -140,14 +142,12 @@
     <ClInclude Include="..\..\src\solar\resources\resource_address.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_id_caching_context.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_factory_caching_context.h" />
-    <ClInclude Include="..\..\src\solar\resources\resource_change_handler.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_id.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_id_manifest.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_mapped_memory.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_provider.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_provider_type.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_system.h" />
-    <ClInclude Include="..\..\src\solar\resources\resource_change_watcher.h" />
     <ClInclude Include="..\..\src\solar\resources\resource_system_params.h" />
     <ClInclude Include="..\..\src\solar\settings\bool_setting.h" />
     <ClInclude Include="..\..\src\solar\settings\enum_setting.h" />
@@ -371,6 +371,7 @@
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_headers.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_keyboard_device.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_mouse_device.h" />
+    <ClInclude Include="..\..\src\solar_platforms\win32\win32_single_directory_change_watcher.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_skip_error_registry.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_unique_handle.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_user_file_location.h" />
@@ -393,7 +394,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies.cpp">
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies_all.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies_format.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -474,6 +479,7 @@
     <ClCompile Include="..\..\src\solar\input\keyboard_key.cpp" />
     <ClCompile Include="..\..\src\solar\input\mouse_button.cpp" />
     <ClCompile Include="..\..\src\solar\io\directory_change_type.cpp" />
+    <ClCompile Include="..\..\src\solar\io\file_change_watcher.cpp" />
     <ClCompile Include="..\..\src\solar\io\file_mode.cpp" />
     <ClCompile Include="..\..\src\solar\io\file_path_helpers.cpp" />
     <ClCompile Include="..\..\src\solar\io\text_reader.cpp" />
@@ -539,7 +545,6 @@
     <ClCompile Include="..\..\src\solar\resources\resource_mapped_memory.cpp" />
     <ClCompile Include="..\..\src\solar\resources\resource_provider.cpp" />
     <ClCompile Include="..\..\src\solar\resources\resource_system.cpp" />
-    <ClCompile Include="..\..\src\solar\resources\resource_change_watcher.cpp" />
     <ClCompile Include="..\..\src\solar\settings\bool_setting.cpp" />
     <ClCompile Include="..\..\src\solar\settings\int_setting.cpp" />
     <ClCompile Include="..\..\src\solar\settings\setting.cpp" />
@@ -628,6 +633,7 @@
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_keyboard_device.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_mouse_device.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_real_time.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\win32\win32_single_directory_change_watcher.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_skip_error_registry.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_string_marshal.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_thread_helpers.cpp" />

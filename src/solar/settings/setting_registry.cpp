@@ -1,4 +1,6 @@
 #include "setting_registry.h"
+
+#include "solar/io/file_system.h"
 #include "solar/containers/container_helpers.h"
 
 namespace solar {
@@ -9,6 +11,10 @@ namespace solar {
 	}
 
 	setting_registry::~setting_registry() {
+	}
+
+	std::string setting_registry::get_root_dir_path() const {
+		return _file_system.make_user_file_dir_path(setting_group::USER_FILE_FOLDER_NAME);
 	}
 
 	void setting_registry::add_setting(std::shared_ptr<setting> setting) {

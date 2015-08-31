@@ -1050,12 +1050,6 @@
     <ClInclude Include="..\..\src\solar\text\text_map.h">
       <Filter>src\solar\text</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\resources\resource_change_watcher.h">
-      <Filter>src\solar\resources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\resources\resource_change_handler.h">
-      <Filter>src\solar\resources</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\resources\resource_system_params.h">
       <Filter>src\solar\resources</Filter>
     </ClInclude>
@@ -1229,6 +1223,15 @@
     </ClInclude>
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_tri.h">
       <Filter>src\solar_platforms\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\io\file_change_watcher.h">
+      <Filter>src\solar\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\io\file_change_handler.h">
+      <Filter>src\solar\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\win32\win32_single_directory_change_watcher.h">
+      <Filter>src\solar_platforms\win32</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1664,9 +1667,6 @@
     <ClCompile Include="..\..\src\solar\text\text_map.cpp">
       <Filter>src\solar\text</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar\resources\resource_change_watcher.cpp">
-      <Filter>src\solar\resources</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_thread_helpers.cpp">
       <Filter>src\solar_platforms\win32</Filter>
     </ClCompile>
@@ -1775,9 +1775,6 @@
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_archiving.cpp">
       <Filter>bulkbuild</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies.cpp">
-      <Filter>bulkbuild</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_input.cpp">
       <Filter>bulkbuild</Filter>
     </ClCompile>
@@ -1810,6 +1807,18 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\math\vec4.cpp">
       <Filter>src\solar\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies_all.cpp">
+      <Filter>bulkbuild</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies_format.cpp">
+      <Filter>bulkbuild</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\io\file_change_watcher.cpp">
+      <Filter>src\solar\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\win32\win32_single_directory_change_watcher.cpp">
+      <Filter>src\solar_platforms\win32</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

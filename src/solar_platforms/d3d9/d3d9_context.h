@@ -73,7 +73,6 @@ namespace solar {
 		point get_window_top_left() const;
 		void attempt_clip_cursor();
 		bool attempt_set_cursor();
-		void set_is_minimized(bool is_minimized);
 		void check_if_window_size_changed();
 		void adjust_device_params_back_buffer(d3d9_device_params& device_params) const;
 	};

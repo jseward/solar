@@ -1,4 +1,6 @@
 #include "win32_d3d9_engine.h"
+
+#include "solar/containers/container_helpers.h"
 #include "solar/rendering/shaders/shader_id.h"
 #include "solar/rendering/textures/texture_id.h"
 #include "solar/rendering/meshes/mesh_id.h"
@@ -8,7 +10,8 @@ namespace solar {
 
 	win32_d3d9_engine::win32_d3d9_engine() 
 		: _win32_windowed_app(_win32_file_system)
-		, _resource_system(_win32_file_system, _win32_directory_change_watcher)
+		, _file_change_watcher(_win32_directory_change_watcher)
+		, _resource_system(_win32_file_system, _file_change_watcher)
 		, _d3d9_render_device(_d3d9_context)
 		, _d3d9_cursor(_d3d9_context)
 		, _d3d9_texture_factory(_d3d9_context, _resource_system)
@@ -59,10 +62,17 @@ namespace solar {
 			.set_is_watching_enabled(true)
 			.add_provider(resource_provider().build_as_file_system(_win32_file_system, "..\\")));
 			
+		if (_engine_settings._file_watcher_enabled->get_current_value()) {
+			std::vector<std::string> watched_dir_paths;
+			watched_dir_paths.push_back(_setting_registry.get_root_dir_path());
+			push_back_range(watched_dir_paths, _resource_system.get_all_file_system_provider_dir_paths());
+			_file_change_watcher.setup(watched_dir_paths);
+		}
+
 		if (!_d3d9_context.setup(
 			_win32_windowed_app.get_hwnd(),
 			solar::d3d9_user_settings()
-				.set_window_type(_engine_settings.get_window_type())
+				.set_window_type(_engine_settings._window_type->get_current_value())
 			)) {
 
 			return false;
@@ -90,6 +100,7 @@ namespace solar {
 		_d3d9_shader_factory.teardown();
 		_d3d9_render_device.teardown();
 		_d3d9_context.teardown();
+		_file_change_watcher.teardown();
 		_resource_system.teardown();
 	}
 
@@ -100,6 +111,9 @@ namespace solar {
 	void win32_d3d9_engine::add_and_load_all_settings(const win32_d3d9_engine_setup_params& params) {
 		UNUSED_PARAMETER(params);
 		_engine_settings.add_to_setting_registry(_setting_registry);
+		if (params.get_add_settings_func() != nullptr) {
+			params.get_add_settings_func()(_setting_registry);
+		}
 		_setting_registry.load_all_settings();
 	}
 

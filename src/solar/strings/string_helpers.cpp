@@ -72,4 +72,21 @@ namespace solar {
 		return results;
 	}
 
+	bool does_string_start_with(const char* s, const char* start_with) {
+		unsigned int s_len = get_string_length(s);
+		unsigned int start_with_len = get_string_length(start_with);
+
+		if (start_with_len > s_len ) {
+			return false;
+		}
+
+		for (unsigned int i = 0; i < start_with_len; ++i) {
+			if (s[i] != start_with[i]) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }

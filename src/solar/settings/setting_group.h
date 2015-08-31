@@ -10,6 +10,8 @@ namespace solar {
 	class file_system;
 
 	class setting_group : archivable {
+	public:
+		static const char* USER_FILE_FOLDER_NAME;
 
 	private:
 		std::string _group_name;

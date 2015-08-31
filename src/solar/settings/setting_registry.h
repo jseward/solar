@@ -15,11 +15,15 @@ namespace solar {
 		file_system& _file_system;
 
 		bool _can_add_settings;
-		std::vector< std::unique_ptr<setting_group> > _setting_groups;
+		std::vector<std::unique_ptr<setting_group>> _setting_groups;
 
 	public:
 		setting_registry(file_system& file_system);
+		setting_registry(const setting_registry&) = delete;
+		setting_registry& operator=(const setting_registry&) = delete;
 		~setting_registry();
+
+		std::string get_root_dir_path() const;
 
 		void add_setting(std::shared_ptr<setting> setting);
 

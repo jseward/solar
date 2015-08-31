@@ -2,6 +2,7 @@
 
 #include "solar/utility/property.h"
 #include "solar/settings/setting_registry.h"
+#include "solar/io/file_change_watcher.h"
 #include "solar/resources/resource_system.h"
 #include "solar_platforms/win32/win32_windowed_app.h"
 #include "solar_platforms/win32/win32_file_system.h"
@@ -25,6 +26,7 @@ namespace solar {
 	struct win32_d3d9_engine_setup_params {
 		MAKE_PROPERTY(win32_d3d9_engine_setup_params, win32_windowed_app_setup_params, windowed_app_setup_params, win32_windowed_app_setup_params());
 		MAKE_PROPERTY(win32_d3d9_engine_setup_params, win32_file_system_setup_params, file_system_setup_params, win32_file_system_setup_params());
+		MAKE_PROPERTY(win32_d3d9_engine_setup_params, std::function<void(setting_registry&)>, add_settings_func, nullptr);
 	};
 
 	class win32_d3d9_engine {
@@ -34,6 +36,7 @@ namespace solar {
 		win32_windowed_app _win32_windowed_app;
 		win32_mouse_device _win32_mouse_device;
 		win32_keyboard_device _win32_keyboard_device;
+		file_change_watcher _file_change_watcher;
 		resource_system _resource_system; //needed by many d3d9 components
 		d3d9_context _d3d9_context;
 		d3d9_render_device _d3d9_render_device;

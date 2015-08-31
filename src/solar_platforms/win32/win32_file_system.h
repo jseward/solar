@@ -34,6 +34,7 @@ namespace solar {
 		virtual bool does_file_exist(const std::string& file_path) const override;
 		virtual bool does_directory_exist(const std::string& dir_path) const override;
 		virtual void create_directory(const std::string& dir_path) override;
+		virtual std::string make_user_file_dir_path(const std::string& folder) override;
 		virtual std::string make_user_file_path(const std::string& folder, const std::string& file_name) override;
 		virtual std::string resolve_file_path(const std::string relative_path) override;
 		virtual std::vector<std::string> find_file_names(const std::string& dir_path, const find_file_names_options& options) override;

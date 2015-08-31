@@ -24,7 +24,7 @@ namespace solar {
 		: setting(value_type, group_name, name)
 		, _default_value(default_value)
 		, _current_value(default_value) {
-	};
+	}
 
 	template<typename T>
 	inline const T& setting_template<T>::get_default_value() const {

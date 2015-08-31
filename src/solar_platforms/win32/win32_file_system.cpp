@@ -138,10 +138,15 @@ namespace solar {
 		TRACE("file_system user_root_path set to '{}'", _user_root_path);
 	}
 
-	std::string win32_file_system::make_user_file_path(const std::string& folder, const std::string& file_name) {
+	std::string win32_file_system::make_user_file_dir_path(const std::string& folder) {
 		ASSERT(!_user_root_path.empty()); //setup_user_root_path() not called?
 		auto dir = make_file_path(_user_root_path, folder);
 		create_directories_if_needed(dir);
+		return dir;
+	}
+
+	std::string win32_file_system::make_user_file_path(const std::string& folder, const std::string& file_name) {
+		auto dir = make_user_file_dir_path(folder);;
 		return make_file_path(dir, file_name);
 	}
 

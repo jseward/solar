@@ -14,6 +14,7 @@
 #include "solar_platforms/win32/win32_real_time.cpp"
 #include "solar_platforms/win32/win32_exe_runner.cpp"
 #include "solar_platforms/win32/win32_directory_change_watcher.cpp"
+#include "solar_platforms/win32/win32_single_directory_change_watcher.cpp"
 #include "solar_platforms/win32/win32_unique_handle.cpp"
 #include "solar_platforms/win32/win32_thread_helpers.cpp"
 

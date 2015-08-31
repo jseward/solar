@@ -16,6 +16,7 @@ namespace solar {
 	int get_string_hash_code(const std::string& s);
 
 	bool are_strings_equal(const char* s0, const char* s1);
+	bool does_string_start_with(const char* s, const char* start_with);
 
 	std::vector<std::string> split_string(const char* s, const char* delimiters);
 

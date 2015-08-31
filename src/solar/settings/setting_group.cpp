@@ -7,6 +7,8 @@
 
 namespace solar {
 
+	const char* setting_group::USER_FILE_FOLDER_NAME = "settings";
+
 	setting_group::setting_group(const std::string& group_name) 
 		: _group_name(group_name)
 		, _has_changes(false) {
@@ -36,7 +38,7 @@ namespace solar {
 	}
 
 	std::string setting_group::get_file_path(file_system& file_system) const {
-		return file_system.make_user_file_path("settings", _group_name + ".setting");
+		return file_system.make_user_file_path(USER_FILE_FOLDER_NAME, _group_name + ".setting");
 	}
 
 	int setting_group::get_archive_version() const {
