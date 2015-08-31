@@ -57,7 +57,8 @@ namespace solar {
 		return _empty_text.get();
 	}
 
-	void text_factory::on_file_changed(const std::string& path) {
+	void text_factory::on_file_changed(const std::string& path, void* data) {
+		ASSERT(data == nullptr);
 		ASSERT(path == _language_address.get_file_path());
 		load_from_address(_language_address);
 	}

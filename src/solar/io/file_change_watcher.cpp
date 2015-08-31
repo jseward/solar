@@ -12,12 +12,14 @@ namespace solar {
 
 	file_change_watcher::watched_file_info::watched_file_info()
 		: _handler(nullptr) 
-		, _path() {
+		, _path() 
+		, _data(nullptr) {
 	}
 
-	file_change_watcher::watched_file_info::watched_file_info(file_change_handler* handler, const std::string& path)
+	file_change_watcher::watched_file_info::watched_file_info(file_change_handler* handler, const std::string& path, void* data)
 		: _handler(handler)
-		, _path(path) {
+		, _path(path) 
+		, _data(data) {
 	}
 
 	file_change_watcher::file_change_watcher(directory_change_watcher& directory_change_watcher)
@@ -41,6 +43,8 @@ namespace solar {
 	}
 
 	void file_change_watcher::teardown() {
+		ASSERT(_watched_file_infos.empty());
+
 		if (_is_setup) {
 			for (const auto& dir_path : _watched_dir_paths) {
 				_directory_change_watcher.end_watching_directory(dir_path);
@@ -50,17 +54,17 @@ namespace solar {
 		}
 	}
 
-	void file_change_watcher::begin_watching_file(file_change_handler* handler, const std::string& path) {
+	void file_change_watcher::begin_watching_file(file_change_handler* handler, const std::string& path, void* data) {
 		if (_is_setup) {
 			ASSERT(!any_if(_watched_file_infos, [&](const watched_file_info& info) { return info._handler == handler && info._path == path; })); //double registered?
 			if (!any_if(_watched_dir_paths, [&](const std::string& dir_path) { return does_string_start_with(path.c_str(), dir_path.c_str()); })) {
 				ALERT("Attempt to watch file located in an unwatched directory.\n\npath : '{}'", path);
 			}
-			_watched_file_infos.emplace_back(handler, path);
+			_watched_file_infos.emplace_back(handler, path, data);
 		}
 	}
 
-	void file_change_watcher::end_watching_file(file_change_handler* handler) {
+	void file_change_watcher::end_watching_files(file_change_handler* handler) {
 		remove_and_erase_if(_watched_file_infos, [&](const watched_file_info& info) { return info._handler == handler; });
 	}
 
@@ -74,7 +78,10 @@ namespace solar {
 					auto iter = find_if(_watched_file_infos, [&](const watched_file_info& info) { return info._path == dc.get_path(); });
 					if (iter != _watched_file_infos.end()) {
 						TRACE("file change detected : {}", iter->_path);
-						iter->_handler->on_file_changed(iter->_path);
+						iter->_handler->on_file_changed(iter->_path, iter->_data);
+					}
+					else {
+						TRACE("directory change ignored : {}", dc);
 					}
 				}
 			}

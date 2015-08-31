@@ -69,5 +69,5 @@ Preprocessor macros
 	SOLAR__JSON_ARCHIVE_READER_NO_ALERT_UNUSED_VALUES
 	disables alerts that json values read from the file are being unused by the code. this is potentially expensive due to all the string tracking.
 
-	SOLAR__FILE_WATCHER_DISABLED_BY_DEFAULT
+	SOLAR__NO_FILE_CHANGE_WATCHER
 	disables file watching, should be #defined on release builds as file watching is mainly for dev convienence

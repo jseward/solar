@@ -49,6 +49,7 @@ namespace solar {
 		void write_object_as_json(const archivable& object, const resource_address& address);
 
 		void begin_watching_resource(file_change_handler* handler, const resource_address& address);
+		void begin_watching_resource(file_change_handler* handler, const resource_address& address, void* data);
 		void end_watching_resource(file_change_handler* handler);
 
 	private:

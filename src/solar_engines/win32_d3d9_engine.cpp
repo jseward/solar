@@ -21,7 +21,7 @@ namespace solar {
 		, _d3d9_cursor_icon_factory(_d3d9_context, _d3d9_cursor, _resource_system)
 		, _d3d9_prim2d(_d3d9_context, _d3d9_shader_factory)
 		, _d3d9_prim2d_lines(_d3d9_context)
-		, _setting_registry(_win32_file_system) {
+		, _setting_registry(_win32_file_system, _file_change_watcher) {
 
 		shader_id::set_factory(&_d3d9_shader_factory);
 		texture_id::set_factory(&_d3d9_texture_factory);
@@ -56,18 +56,22 @@ namespace solar {
 				"logs", 
 				build_string("log_{}.txt", _win32_windowed_app.get_processs_uid())));
 
+		auto bin_root_path = _win32_file_system.resolve_file_path("..\\");
+
+		//NOTE: file change watcher must come before settings and other systems are setup as they have files to watch.
+		#ifndef SOLAR__NO_FILE_CHANGE_WATCHER
+		{
+			_file_change_watcher.setup({ 
+				bin_root_path, 
+				_setting_registry.get_root_dir_path() });
+		}
+		#endif
+
 		add_and_load_all_settings(params);
 
 		_resource_system.setup(resource_system_params()
 			.set_is_watching_enabled(true)
-			.add_provider(resource_provider().build_as_file_system(_win32_file_system, "..\\")));
-			
-		if (_engine_settings._file_watcher_enabled->get_current_value()) {
-			std::vector<std::string> watched_dir_paths;
-			watched_dir_paths.push_back(_setting_registry.get_root_dir_path());
-			push_back_range(watched_dir_paths, _resource_system.get_all_file_system_provider_dir_paths());
-			_file_change_watcher.setup(watched_dir_paths);
-		}
+			.add_provider(resource_provider().build_as_file_system(_win32_file_system, bin_root_path)));
 
 		if (!_d3d9_context.setup(
 			_win32_windowed_app.get_hwnd(),
@@ -100,6 +104,7 @@ namespace solar {
 		_d3d9_shader_factory.teardown();
 		_d3d9_render_device.teardown();
 		_d3d9_context.teardown();
+		_setting_registry.teardown();
 		_file_change_watcher.teardown();
 		_resource_system.teardown();
 	}

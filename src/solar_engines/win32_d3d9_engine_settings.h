@@ -12,7 +12,6 @@ namespace solar {
 
 	class win32_d3d9_engine_settings {
 	public:
-		std::shared_ptr<bool_setting> _file_watcher_enabled;
 		std::shared_ptr<enum_setting<d3d9_window_type_details>> _window_type;
 
 	public:

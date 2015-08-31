@@ -14,10 +14,11 @@ namespace solar {
 		public:
 			file_change_handler* _handler;
 			std::string _path;
+			void* _data;
 
 		public:
 			watched_file_info();
-			watched_file_info(file_change_handler* handler, const std::string& path);
+			watched_file_info(file_change_handler* handler, const std::string& path, void* data);
 		};
 
 	private:
@@ -37,8 +38,8 @@ namespace solar {
 		void setup(const std::vector<std::string>& dir_paths);
 		void teardown();
 		
-		void begin_watching_file(file_change_handler* handler, const std::string& path);
-		void end_watching_file(file_change_handler* handler);
+		void begin_watching_file(file_change_handler* handler, const std::string& path, void* data);
+		void end_watching_files(file_change_handler* handler);
 
 		void try_handle_any_change();
 	};

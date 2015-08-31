@@ -31,7 +31,7 @@ namespace solar {
 		text* get_text(const std::string& id, const std::string& id_source_description);
 
 	private:
-		virtual void on_file_changed(const std::string& path) override;
+		virtual void on_file_changed(const std::string& path, void* data) override;
 
 	private:
 		void load_from_address(const resource_address& address);

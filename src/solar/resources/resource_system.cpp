@@ -197,13 +197,17 @@ namespace solar {
 	}
 
 	void resource_system::begin_watching_resource(file_change_handler* handler, const resource_address& address) {
+		begin_watching_resource(handler, address, nullptr);
+	}
+
+	void resource_system::begin_watching_resource(file_change_handler* handler, const resource_address& address, void* data) {
 		if (address.get_provider_type() == resource_provider_type::FILE_SYSTEM) {
-			_file_change_watcher.begin_watching_file(handler, address.get_file_path());
+			_file_change_watcher.begin_watching_file(handler, address.get_file_path(), data);
 		}
 	}
 
 	void resource_system::end_watching_resource(file_change_handler* handler) {
-		_file_change_watcher.end_watching_file(handler);
+		_file_change_watcher.end_watching_files(handler);
 	}
 
 }
