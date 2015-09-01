@@ -6,6 +6,7 @@
 #include "solar/windows/window_renderer.cpp"
 #include "solar/windows/window_renderer_def.cpp"
 #include "solar/windows/window_font_def.cpp"
+#include "solar/windows/window_dragging_state.cpp"
 #include "solar/windows/root_window.cpp"
 #include "solar/windows/layout/window_layout.cpp"
 #include "solar/windows/layout/window_layout_anchors.cpp"
@@ -21,4 +22,3 @@
 #include "solar/windows/components/stack_panel.cpp"
 #include "solar/windows/components/grid_panel.cpp"
 #include "solar/windows/components/grid_panel_position.cpp"
-#include "solar/windows/components/grid_splitter.cpp"

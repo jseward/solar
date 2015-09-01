@@ -8,8 +8,7 @@
 
 namespace solar {
 
-	grid_panel::row_column::row_column()
-		: _split_distance(0) {
+	grid_panel::row_column::row_column() {
 	}
 
 	void grid_panel::row_column::read_from_archive(archive_reader& reader) {
@@ -108,7 +107,8 @@ namespace solar {
 
 		int current_offset = 0;
 		for (unsigned int rc_index = 0; rc_index < row_columns.size(); rc_index++) {
-			int rc_size = row_columns.at(rc_index)._size.get_value_or(no_size_size);
+			const auto& rc = row_columns.at(rc_index);
+			int rc_size = rc._size.get_value_or(no_size_size);
 			int rc_size_scaled = float_to_int(rc_size * get_area_scale());
 			int available_size = total_size - current_offset;
 			int rc_size_final = std::min(rc_size_scaled, available_size);

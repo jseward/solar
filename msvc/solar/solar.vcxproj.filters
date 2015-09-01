@@ -1239,8 +1239,8 @@
     <ClInclude Include="..\..\src\solar\windows\components\grid_panel_position.h">
       <Filter>src\solar\windows\components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\windows\components\grid_splitter.h">
-      <Filter>src\solar\windows\components</Filter>
+    <ClInclude Include="..\..\src\solar\windows\window_dragging_state.h">
+      <Filter>src\solar\windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1832,11 +1832,11 @@
     <ClCompile Include="..\..\src\solar\windows\components\grid_panel.cpp">
       <Filter>src\solar\windows\components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar\windows\components\grid_splitter.cpp">
-      <Filter>src\solar\windows\components</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar\windows\components\grid_panel_position.cpp">
       <Filter>src\solar\windows\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\window_dragging_state.cpp">
+      <Filter>src\solar\windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

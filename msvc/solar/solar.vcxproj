@@ -197,7 +197,6 @@
     <ClInclude Include="..\..\src\solar\windows\components\button.h" />
     <ClInclude Include="..\..\src\solar\windows\components\grid_panel.h" />
     <ClInclude Include="..\..\src\solar\windows\components\grid_panel_position.h" />
-    <ClInclude Include="..\..\src\solar\windows\components\grid_splitter.h" />
     <ClInclude Include="..\..\src\solar\windows\components\label.h" />
     <ClInclude Include="..\..\src\solar\windows\components\label_style.h" />
     <ClInclude Include="..\..\src\solar\windows\components\stack_panel.h" />
@@ -212,6 +211,7 @@
     <ClInclude Include="..\..\src\solar\windows\styling\window_style_id.h" />
     <ClInclude Include="..\..\src\solar\windows\window.h" />
     <ClInclude Include="..\..\src\solar\windows\window_component.h" />
+    <ClInclude Include="..\..\src\solar\windows\window_dragging_state.h" />
     <ClInclude Include="..\..\src\solar\windows\window_font_def.h" />
     <ClInclude Include="..\..\src\solar\windows\window_helpers.h" />
     <ClInclude Include="..\..\src\solar\windows\window_mouse_button_event_params.h" />
@@ -577,7 +577,6 @@
     <ClCompile Include="..\..\src\solar\windows\components\button_style.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\grid_panel.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\grid_panel_position.cpp" />
-    <ClCompile Include="..\..\src\solar\windows\components\grid_splitter.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\label.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\label_style.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\stack_panel.cpp" />
@@ -591,6 +590,7 @@
     <ClCompile Include="..\..\src\solar\windows\styling\window_style_factory.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_component.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\window_dragging_state.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_font_def.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_helpers.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_renderer.cpp" />

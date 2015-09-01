@@ -9,7 +9,6 @@ namespace solar {
 		class row_column : public archivable {
 		public:
 			optional<int> _size;
-			int _split_distance;
 			rect _area;
 
 		public:
