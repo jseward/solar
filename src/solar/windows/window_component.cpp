@@ -25,11 +25,16 @@ namespace solar {
 	}
 
 	void window_component::set_has_grid_position(bool has_grid_position) {
-		_has_layout = false;
-		_has_grid_position = has_grid_position;
+		if (has_grid_position) {
+			_has_layout = false;
+			_has_grid_position = true;
+		}
+		else {
+			ASSERT(false); //not expected?
+		}
 	}
 
-	const point& window_component::get_grid_position() const {
+	const grid_panel_position& window_component::get_grid_position() const {
 		ASSERT(_has_grid_position);
 		return _grid_position;
 	}
@@ -62,7 +67,7 @@ namespace solar {
 			read_object(reader, "layout", _layout);
 		}
 		if (_has_grid_position) {
-			read_point(reader, "grid_position", _grid_position);
+			read_object(reader, "grid_position", _grid_position);
 		}
 	}
 

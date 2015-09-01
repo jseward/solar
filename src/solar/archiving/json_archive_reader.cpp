@@ -93,6 +93,16 @@ namespace solar {
 		}
 	}
 
+	void json_archive_reader::read_optional_int(const char* name, optional<int>& value) {
+		int read_value = 0;
+		if (_current_object->try_get_int(read_value, name)) {
+			value = read_value;
+		}
+		else {
+			value.clear();
+		}
+	}
+
 	void json_archive_reader::read_ints(const char* name, int* begin, unsigned int count) {
 		json_array a;
 		if (try_get_array_of_size(a, name, count)) {

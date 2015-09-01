@@ -1203,9 +1203,6 @@
     <ClInclude Include="..\..\src\solar\resources\resource_id_caching_context.h">
       <Filter>src\solar\resources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\windows\layout\window_grid_layout.h">
-      <Filter>src\solar\windows\layout</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\containers\fixed_grid.h">
       <Filter>src\solar\containers</Filter>
     </ClInclude>
@@ -1237,6 +1234,12 @@
       <Filter>src\solar\windows\components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar\windows\components\grid_panel.h">
+      <Filter>src\solar\windows\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\components\grid_panel_position.h">
+      <Filter>src\solar\windows\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\components\grid_splitter.h">
       <Filter>src\solar\windows\components</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1799,9 +1802,6 @@
     <ClCompile Include="..\..\src\solar_engines\win32_d3d9_engine.cpp">
       <Filter>src\solar_engines</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar\windows\layout\window_grid_layout.cpp">
-      <Filter>src\solar\windows\layout</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar\math\random_stream.cpp">
       <Filter>src\solar\math</Filter>
     </ClCompile>
@@ -1830,6 +1830,12 @@
       <Filter>src\solar\windows\components</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar\windows\components\grid_panel.cpp">
+      <Filter>src\solar\windows\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\components\grid_splitter.cpp">
+      <Filter>src\solar\windows\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\components\grid_panel_position.cpp">
       <Filter>src\solar\windows\components</Filter>
     </ClCompile>
   </ItemGroup>

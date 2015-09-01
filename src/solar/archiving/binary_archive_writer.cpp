@@ -54,6 +54,14 @@ namespace solar {
 		write_atomic_value<int>(value);
 	}
 
+	void binary_archive_writer::write_optional_int(const char* name, const optional<int>& value) {
+		UNUSED_PARAMETER(name);
+		write_atomic_value<bool>(value.has_value());
+		if (value.has_value()) {
+			write_atomic_value<int>(value.get_value());
+		}
+	}
+
 	void binary_archive_writer::write_ints(const char* name, const int* begin, unsigned int count) {
 		UNUSED_PARAMETER(name);
 		for (unsigned int i = 0; i < count; ++i) {

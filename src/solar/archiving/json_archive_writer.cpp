@@ -71,6 +71,13 @@ namespace solar {
 		_writer.write_int(name, value);
 	}
 
+	void json_archive_writer::write_optional_int(const char* name, const optional<int>& value) {
+		ASSERT(_is_writing);
+		if (value.has_value()) {
+			_writer.write_int(name, value.get_value());
+		}
+	}
+
 	void json_archive_writer::write_ints(const char* name, const int* begin, unsigned int count) {
 		ASSERT(_is_writing);
 		_writer.begin_array(name);

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <numeric>
 #include "solar/utility/verify.h"
 
 namespace solar {
@@ -50,6 +51,14 @@ namespace solar {
 
 	template<typename Con, typename Pr> bool any_if(const Con& in, Pr predicate) {
 		return (std::find_if(in.begin(), in.end(), predicate) != in.end());
+	}
+
+	template<typename Con, typename Pr> int count_if(const Con& in, Pr predicate) {
+		return std::count_if(in.begin(), in.end(), predicate);
+	}
+
+	template<typename Con, typename BinaryOp> int accumulate(const Con& in, int init, BinaryOp binary_op) {
+		return std::accumulate(in.begin(), in.end(), init, binary_op);
 	}
 
 	template<typename Con, typename Pr> typename Con::iterator find_if(Con& in, Pr predicate) {

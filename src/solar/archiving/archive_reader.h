@@ -3,6 +3,7 @@
 #include <string>
 #include <array>
 #include <functional>
+#include "solar/utility/optional.h"
 
 namespace solar {
 
@@ -23,6 +24,7 @@ namespace solar {
 		virtual void read_ushort(const char* name, unsigned short& value) = 0;		
 		virtual void read_ushorts(const char* name, unsigned short* begin, unsigned int count) = 0;
 		virtual void read_int(const char* name, int& value) = 0;
+		virtual void read_optional_int(const char* name, optional<int>& value) = 0;
 		virtual void read_ints(const char* name, int* begin, unsigned int count) = 0;
 		virtual void read_uint(const char* name, unsigned int& value) = 0;
 		virtual void read_float(const char* name, float& value) = 0;

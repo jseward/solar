@@ -4,34 +4,25 @@
 
 namespace solar {
 
-	class grid_panel_row : public archivable {
-	public:
-		int _height;
-
-		mutable rect _current_area;
-
-	public:
-		grid_panel_row();
-		virtual void read_from_archive(archive_reader& reader) override;
-		virtual void write_to_archive(archive_writer& writer) const override;
-	};
-
-	class grid_panel_column : public archivable {
-	public:
-		int _width;
-
-		mutable rect _current_area;
-
-	public:
-		grid_panel_column();
-		virtual void read_from_archive(archive_reader& reader) override;
-		virtual void write_to_archive(archive_writer& writer) const override;
-	};
-
 	class grid_panel : public window_component {
 	private:
-		std::vector<grid_panel_row> _rows;
-		std::vector<grid_panel_column> _columns;
+		class row_column : public archivable {
+		public:
+			optional<int> _size;
+			int _split_distance;
+			rect _area;
+
+		public:
+			row_column();
+			virtual void read_from_archive(archive_reader& reader) override;
+			virtual void write_to_archive(archive_writer& writer) const override;
+		};
+
+		using row_column_vector = std::vector<row_column>;
+
+	private:
+		row_column_vector _rows;
+		row_column_vector _columns;
 
 	public:
 		grid_panel(const char* id);
@@ -42,6 +33,10 @@ namespace solar {
 		virtual void on_area_changed() override;
 		virtual void read_from_archive(archive_reader& reader) override;
 		virtual void write_to_archive(archive_writer& writer) const override;
+
+	private:
+		void update_row_column_areas(row_column_vector& row_columns, int total_size, std::function<void(row_column& rc, int offset, int size)> update_rc_func);
+		bool check_child_grid_position(window& child) const;
 	};
 
 }

@@ -3,35 +3,24 @@
 #include "solar/utility/assert.h"
 #include "solar/utility/verify.h"
 #include "solar/utility/type_convert.h"
+#include "solar/containers/container_helpers.h"
 #include "solar/archiving/archiving_helpers.h"
 
 namespace solar {
 
-	grid_panel_row::grid_panel_row()
-		: _height(0) {
+	grid_panel::row_column::row_column()
+		: _split_distance(0) {
 	}
 
-	void grid_panel_row::read_from_archive(archive_reader& reader) {
-		read_int(reader, "height", _height);
+	void grid_panel::row_column::read_from_archive(archive_reader& reader) {
+		read_optional_int(reader, "size", _size);
 	}
 
-	void grid_panel_row::write_to_archive(archive_writer& writer) const {
-		write_int(writer, "height", _height);
+	void grid_panel::row_column::write_to_archive(archive_writer& writer) const {
+		write_optional_int(writer, "size", _size);
 	}
 
-	grid_panel_column::grid_panel_column()
-		: _width(0) {
-	}
-
-	void grid_panel_column::read_from_archive(archive_reader& reader) {
-		read_int(reader, "width", _width);
-	}
-
-	void grid_panel_column::write_to_archive(archive_writer& writer) const {
-		write_int(writer, "width", _width);
-	}
-
-	grid_panel::grid_panel(const char* id) 
+	grid_panel::grid_panel(const char* id)
 		: window_component(id) {
 	}
 
@@ -44,39 +33,88 @@ namespace solar {
 	}
 
 	void grid_panel::on_area_changed() {
-		int current_top = get_area().get_top();
-		for (unsigned int row_index = 0; row_index < _rows.size(); ++row_index) {
-			auto& row = _rows.at(row_index);
-			int scaled_height = float_to_int(row._height * get_area_scale());
-			if (row_index == _rows.size() - 1) {
-				scaled_height = (get_area().get_bottom() - current_top);
-			}
-			row._current_area = rect(point(get_area().get_left(), current_top), size(get_area().get_width(), scaled_height));
-			current_top += scaled_height;
-			current_top = std::min(current_top, get_area().get_bottom());
-		}
+		auto update_row_area_func = [&](row_column& rc, int rc_offset, int rc_size) {
+			rc._area = rect(get_area().get_top_left() + point(0, rc_offset), size(get_area().get_width(), rc_size));
+		};
+		update_row_column_areas(_rows, get_area().get_height(), update_row_area_func);
 
-		int current_left = get_area().get_left();
-		for (unsigned int column_index = 0; column_index < _columns.size(); ++column_index) {
-			auto& column = _columns.at(column_index);
-			int scaled_width = float_to_int(column._width * get_area_scale());
-			if (column_index == _columns.size() - 1) {
-				scaled_width = (get_area().get_right() - current_left);
-			}
-			column._current_area = rect(point(current_left, get_area().get_top()), size(scaled_width, get_area().get_height()));
-			current_left += scaled_width;
-			current_left = std::min(current_left, get_area().get_right());
-		}
+		auto update_column_area_func = [&](row_column& rc, int rc_offset, int rc_size) {
+			rc._area = rect(get_area().get_top_left() + point(rc_offset, 0), size(rc_size, get_area().get_height()));
+		};
+		update_row_column_areas(_columns, get_area().get_width(), update_column_area_func);
 
 		for (auto& child : get_children()) {
-			const point& grid_position = child->as_component()->get_grid_position();
-			IF_VERIFY(grid_position._x < static_cast<int>(_rows.size()) && grid_position._y < static_cast<int>(_columns.size())) {
-				const auto& row = _rows.at(grid_position._x);
-				const auto& column = _columns.at(grid_position._y);
-				child->set_area(rect(
-					point(column._current_area.get_left(), row._current_area.get_top()),
-					point(column._current_area.get_right(), row._current_area.get_bottom())));
+			if (check_child_grid_position(*child)) {
+				const auto& grid_position = child->as_component()->get_grid_position();
+
+				int top = get_area().get_top();
+				int bottom = get_area().get_bottom();
+				if (grid_position._row.has_value()) {
+					top = _rows.at(grid_position._row.get_value())._area.get_top();
+					bottom = _rows.at(grid_position._row.get_value())._area.get_bottom();
+				}
+
+				int left = get_area().get_left();
+				int right = get_area().get_right();
+				if (grid_position._column.has_value()) {
+					left = _columns.at(grid_position._column.get_value())._area.get_left();
+					right = _columns.at(grid_position._column.get_value())._area.get_right();
+				}
+
+				child->set_area(rect(point(left, top), point(right, bottom)));
 			}
+		}
+	}
+
+	bool grid_panel::check_child_grid_position(window& child) const {
+		bool is_valid = true;
+
+		const auto& grid_position = child.as_component()->get_grid_position();
+
+		if (grid_position._row.has_value()) {
+			if (grid_position._row.get_value() < 0 || grid_position._row.get_value() >= static_cast<int>(_rows.size())) {
+				is_valid = false;
+			}
+		}
+
+		if (grid_position._column.has_value()) {
+			if (grid_position._column.get_value() < 0 || grid_position._column.get_value() >= static_cast<int>(_columns.size())) {
+				is_valid = false;
+			}
+		}
+			
+		if (!is_valid) {
+			ALERT("child grid position is out of grid range\n\nchild : {}\ngrid_size : {} x {}\ngrid_position : {} x {}",
+				child.get_id(),
+				_columns.size(), _rows.size(),
+				grid_position._column.get_value_or(-1),
+				grid_position._row.get_value_or(-1));
+		}
+
+		return is_valid;
+	}
+
+	void grid_panel::update_row_column_areas(row_column_vector& row_columns, int total_size, std::function<void(row_column& rc, int offset, int size)> update_rc_func) {
+		int no_size_size = 0;
+		int no_size_count = count_if(row_columns, [](const row_column& rc) { return !rc._size.has_value(); });
+		if (no_size_count > 0) {
+			int used_size = accumulate(row_columns, 0, [](int s, const row_column& rc) { return s + rc._size.get_value_or(0); });
+			int total_size_unscaled = float_to_int(total_size / get_area_scale()); //will be scaled again next loop
+			int available_size = total_size_unscaled - used_size;
+			if (available_size > 0) {
+				no_size_size = available_size / no_size_count;
+			}
+		}
+
+		int current_offset = 0;
+		for (unsigned int rc_index = 0; rc_index < row_columns.size(); rc_index++) {
+			int rc_size = row_columns.at(rc_index)._size.get_value_or(no_size_size);
+			int rc_size_scaled = float_to_int(rc_size * get_area_scale());
+			int available_size = total_size - current_offset;
+			int rc_size_final = std::min(rc_size_scaled, available_size);
+
+			update_rc_func(row_columns.at(rc_index), current_offset, rc_size_final);
+			current_offset += rc_size_final;
 		}
 	}
 

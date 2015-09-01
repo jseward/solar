@@ -73,7 +73,7 @@ namespace solar {
 				}
 			}
 
-			_lines.emplace_back(begin.value_or(0), len, pointf(x, y));
+			_lines.emplace_back(begin.get_value_or(0), len, pointf(x, y));
 		}
 	}
 

@@ -26,6 +26,7 @@ namespace solar {
 		virtual void read_ushort(const char* name, unsigned short& value) override;
 		virtual void read_ushorts(const char* name, unsigned short* begin, unsigned int count) override;
 		virtual void read_int(const char* name, int& value) override;
+		virtual void read_optional_int(const char* name, optional<int>& value) override;
 		virtual void read_ints(const char* name, int* begin, unsigned int count) override;
 		virtual void read_uint(const char* name, unsigned int& value) override;
 		virtual void read_float(const char* name, float& value) override;

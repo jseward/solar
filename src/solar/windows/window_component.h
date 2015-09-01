@@ -2,6 +2,7 @@
 
 #include "window.h"
 #include "solar/windows/layout/window_layout.h"
+#include "solar/windows/components/grid_panel_position.h"
 
 namespace solar {
 
@@ -13,17 +14,18 @@ namespace solar {
 		bool _has_layout;
 		window_layout _layout;
 		bool _has_grid_position;
-		point _grid_position;
+		grid_panel_position _grid_position;
 
 	public:
 		window_component(const char* id);
 		virtual ~window_component();
 
-		const window_layout& get_layout() const;
 		bool get_has_layout() const;
 		void set_has_layout(bool has_layout);
+		const window_layout& get_layout() const;
+
 		void set_has_grid_position(bool has_grid_position);
-		const point& get_grid_position() const;
+		const grid_panel_position& get_grid_position() const;
 
 	protected:
 		virtual void on_loaded() override;

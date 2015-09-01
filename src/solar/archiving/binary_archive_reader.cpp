@@ -61,6 +61,19 @@ namespace solar {
 		read_atomic_value<int>(value);
 	}
 
+	void binary_archive_reader::read_optional_int(const char* name, optional<int>& value) {
+		UNUSED_PARAMETER(name);
+		value.clear();
+
+		bool has_int = false;
+		read_atomic_value<bool>(has_int);
+		if (has_int) {
+			int read_value = 0;
+			read_atomic_value<int>(read_value);
+			value = read_value;
+		}
+	}
+
 	void binary_archive_reader::read_ints(const char* name, int* begin, unsigned int count) {
 		UNUSED_PARAMETER(name);
 		for (unsigned int i = 0; i < count; ++i) {
