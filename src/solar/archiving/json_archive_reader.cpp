@@ -9,7 +9,8 @@ namespace solar {
 	json_archive_reader::json_archive_reader(stream& stream)
 		: _stream(stream)
 		, _document(stream, [this](const std::string& msg) { raise_error(msg); })
-		, _current_object(new json_object(convert_json_document_to_json_object(_document))) {
+		, _current_object(new json_object(convert_json_document_to_json_object(_document))) 
+		, _current_object_name(nullptr) {
 
 		#ifndef SOLAR__JSON_ARCHIVE_READER_NO_ALERT_UNUSED_VALUES
 		_current_object->set_should_track_used_values();
@@ -35,7 +36,7 @@ namespace solar {
 	}
 
 	void json_archive_reader::raise_error(const std::string& error_message) {
-		ALERT("json_archive_reader error : {}\nstream : {}", error_message, _stream.get_description());
+		ALERT("json_archive_reader error : {}\nstream : {}\nobject : {}", error_message, _stream.get_description(), _current_object_name != nullptr ? _current_object_name : "root");
 	}
 
 	void json_archive_reader::read_object(const char* name, archivable& value) {
@@ -157,9 +158,11 @@ namespace solar {
 		: _reader(reader)
 		, _name(name)
 		, _old_object(reader->_current_object)
+		, _old_object_name(reader->_current_object_name)
 		, _new_object(new_object) {
 		
 		reader->_current_object = _new_object;
+		reader->_current_object_name = name;
 
 		#ifndef SOLAR__JSON_ARCHIVE_READER_NO_ALERT_UNUSED_VALUES
 		_new_object->set_should_track_used_values();
@@ -169,6 +172,7 @@ namespace solar {
 
 	json_archive_reader::temp_swap_current_object::~temp_swap_current_object() {
 		_reader->_current_object = _old_object;
+		_reader->_current_object_name = _old_object_name;
 
 		#ifndef SOLAR__JSON_ARCHIVE_READER_NO_ALERT_UNUSED_VALUES
 		_new_object->raise_error_for_unused_values(_name);

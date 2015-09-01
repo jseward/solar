@@ -11,6 +11,7 @@ namespace solar {
 		stream& _stream;
 		json_document _document;
 		json_object* _current_object; //not using std::unique_ptr due to internal trickery when reading object/objects
+		const char* _current_object_name;
 
 	public:
 		explicit json_archive_reader(stream& stream);
@@ -42,6 +43,7 @@ namespace solar {
 			json_archive_reader* _reader;
 			const char* _name;
 			json_object* _old_object;
+			const char* _old_object_name;
 			json_object* _new_object;
 
 		public:
