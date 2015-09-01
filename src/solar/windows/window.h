@@ -9,6 +9,8 @@
 
 namespace solar {
 
+	class window_component;
+
 	class window : public archivable {
 	private:
 		const char* _id;
@@ -63,9 +65,12 @@ namespace solar {
 	public: //NOTE: should be protected but they can't be used in lamba expressions (ex. root_window::root_on_mouse_button_down)
 		virtual void on_loaded();
 		virtual void on_parent_area_changed();
+		virtual void on_area_changed();
+		virtual void on_child_added(window* child);
 		virtual bool on_mouse_button_down(const window_mouse_button_event_params& params);
 		virtual bool on_mouse_button_up(const window_mouse_button_event_params& params);
 		virtual bool on_mouse_button_up_anywhere(const window_mouse_button_event_params& params);
+		virtual window_component* as_component(); //cheap replacement for dynamic cast. needed so on_child_added() can useful actions like querying layout information.
 
 	protected:
 		virtual void read_from_archive(archive_reader& reader) override;

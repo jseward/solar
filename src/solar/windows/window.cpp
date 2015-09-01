@@ -45,6 +45,7 @@ namespace solar {
 		ASSERT(child->_parent == nullptr);
 		child->_parent = this;
 
+		on_child_added(child);
 		child->on_parent_area_changed();
 	}
 
@@ -76,6 +77,7 @@ namespace solar {
 
 	void window::set_area(const rect& new_area) {
 		_area = new_area;
+		on_area_changed();
 
 		for (auto child : _children) {
 			child->on_parent_area_changed();
@@ -126,10 +128,21 @@ namespace solar {
 		UNUSED_PARAMETER(params);
 	}
 
+	window_component* window::as_component() {
+		return nullptr;
+	}
+
 	void window::on_loaded() {
 	}
 
 	void window::on_parent_area_changed() {
+	}
+
+	void window::on_area_changed() {
+	}
+	
+	void window::on_child_added(window* child) {
+		UNUSED_PARAMETER(child);
 	}
 
 	bool window::on_mouse_button_down(const window_mouse_button_event_params& params) {

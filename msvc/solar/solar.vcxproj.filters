@@ -1233,6 +1233,12 @@
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_single_directory_change_watcher.h">
       <Filter>src\solar_platforms\win32</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\components\stack_panel.h">
+      <Filter>src\solar\windows\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\components\grid_panel.h">
+      <Filter>src\solar\windows\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1819,6 +1825,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_single_directory_change_watcher.cpp">
       <Filter>src\solar_platforms\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\components\stack_panel.cpp">
+      <Filter>src\solar\windows\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\components\grid_panel.cpp">
+      <Filter>src\solar\windows\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

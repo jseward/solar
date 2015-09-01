@@ -19,3 +19,5 @@
 #include "solar/windows/components/button_style.cpp"
 #include "solar/windows/components/label.cpp"
 #include "solar/windows/components/label_style.cpp"
+#include "solar/windows/components/stack_panel.cpp"
+#include "solar/windows/components/grid_panel.cpp"

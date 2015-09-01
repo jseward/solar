@@ -195,8 +195,10 @@
     <ClInclude Include="..\..\src\solar\windows\components\button_press_params.h" />
     <ClInclude Include="..\..\src\solar\windows\components\button_style.h" />
     <ClInclude Include="..\..\src\solar\windows\components\button.h" />
+    <ClInclude Include="..\..\src\solar\windows\components\grid_panel.h" />
     <ClInclude Include="..\..\src\solar\windows\components\label.h" />
     <ClInclude Include="..\..\src\solar\windows\components\label_style.h" />
+    <ClInclude Include="..\..\src\solar\windows\components\stack_panel.h" />
     <ClInclude Include="..\..\src\solar\windows\layout\window_grid_layout.h" />
     <ClInclude Include="..\..\src\solar\windows\layout\window_layout.h" />
     <ClInclude Include="..\..\src\solar\windows\layout\window_layout_anchors.h" />
@@ -572,8 +574,10 @@
     <ClCompile Include="..\..\src\solar\utility\unit_convert.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\button.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\button_style.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\components\grid_panel.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\label.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\label_style.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\components\stack_panel.cpp" />
     <ClCompile Include="..\..\src\solar\windows\layout\window_grid_layout.cpp" />
     <ClCompile Include="..\..\src\solar\windows\layout\window_layout.cpp" />
     <ClCompile Include="..\..\src\solar\windows\layout\window_layout_anchors.cpp" />

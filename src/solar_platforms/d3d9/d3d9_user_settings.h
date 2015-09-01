@@ -17,7 +17,7 @@ namespace solar {
 		MAKE_PROPERTY(d3d9_user_settings, D3DFORMAT, adapter_format, D3DFMT_X8R8G8B8);
 		MAKE_PROPERTY(d3d9_user_settings, D3DFORMAT, depth_stencil_format, D3DFMT_D24S8);
 		MAKE_PROPERTY(d3d9_user_settings, D3DFORMAT, backbuffer_format, D3DFMT_A8R8G8B8);
-		MAKE_PROPERTY(d3d9_user_settings, size, backbuffer_size, size(640, 480));
+		MAKE_PROPERTY(d3d9_user_settings, size, backbuffer_size, size(800, 600));
 		MAKE_PROPERTY(d3d9_user_settings, unsigned int, fullscreen_refresh_rate, 60);
 
 		void trace_dump() const;

@@ -51,6 +51,7 @@ namespace solar {
 	}
 
 	bool button::on_mouse_button_up(const window_mouse_button_event_params& params) {
+		ASSERT(_pressed_callback != nullptr);
 		if (is_enabled()) {
 			if (_is_mouse_button_down.at(params._mouse_button)) {
 				_is_mouse_button_down.at(params._mouse_button) = false;
