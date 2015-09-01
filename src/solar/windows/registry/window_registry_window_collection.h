@@ -10,12 +10,11 @@ namespace solar {
 
 	class window_registry_window_collection {
 	private:
-		resource_system& _resource_system;
 		std::string _id;
 		std::vector<window*> _windows;
 
 	public:
-		window_registry_window_collection(resource_system& resource_system, window* window);
+		window_registry_window_collection(window* window);
 		~window_registry_window_collection();
 		window_registry_window_collection(const window_registry_window_collection&) = delete;
 		window_registry_window_collection& operator=(const window_registry_window_collection&) = delete;
@@ -26,8 +25,7 @@ namespace solar {
 		void add_window(window* window);
 		void remove_window(window* window);
 
-		void load();
-		void save();
+		void load(resource_system& resource_system, const resource_address& address);
 
 	private:
 		static void handle_loaded_recursive(window& window);

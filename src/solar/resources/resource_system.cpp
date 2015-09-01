@@ -206,7 +206,11 @@ namespace solar {
 		}
 	}
 
-	void resource_system::end_watching_resource(file_change_handler* handler) {
+	void resource_system::end_watching_resource(file_change_handler* handler, void* data) {
+		_file_change_watcher.end_watching_file(handler, data);
+	}
+
+	void resource_system::end_watching_resources(file_change_handler* handler) {
 		_file_change_watcher.end_watching_files(handler);
 	}
 

@@ -25,7 +25,7 @@ namespace solar {
 	}
 
 	void text_factory::teardown() {
-		_resource_system.end_watching_resource(this);
+		_resource_system.end_watching_resources(this);
 		_language = "";
 		_text_map.clear();
 		_caching_context.increment();

@@ -50,7 +50,8 @@ namespace solar {
 
 		void begin_watching_resource(file_change_handler* handler, const resource_address& address);
 		void begin_watching_resource(file_change_handler* handler, const resource_address& address, void* data);
-		void end_watching_resource(file_change_handler* handler);
+		void end_watching_resource(file_change_handler* handler, void* data);
+		void end_watching_resources(file_change_handler* handler);
 
 	private:
 		resource_address resolve_address_with_provider(const resource_provider& provider, const char* folder, const char* extensions, const char* id);

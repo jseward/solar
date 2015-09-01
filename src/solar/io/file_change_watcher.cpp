@@ -64,6 +64,10 @@ namespace solar {
 		}
 	}
 
+	void file_change_watcher::end_watching_file(file_change_handler* handler, void* data) {
+		remove_and_erase_if(_watched_file_infos, [&](const watched_file_info& info) { return info._handler == handler && info._data == data; });
+	}
+
 	void file_change_watcher::end_watching_files(file_change_handler* handler) {
 		remove_and_erase_if(_watched_file_infos, [&](const watched_file_info& info) { return info._handler == handler; });
 	}

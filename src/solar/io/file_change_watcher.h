@@ -39,6 +39,7 @@ namespace solar {
 		void teardown();
 		
 		void begin_watching_file(file_change_handler* handler, const std::string& path, void* data);
+		void end_watching_file(file_change_handler* handler, void* data);
 		void end_watching_files(file_change_handler* handler);
 
 		void try_handle_any_change();
