@@ -18,7 +18,13 @@ namespace solar {
 	button::~button() {
 	}
 
-	button& button::set_pressed_callback(std::function<void(button_press_params)> callback) {
+	button& button::set_is_toggled_callback(is_toggled_callback_function callback) {
+		ASSERT(_is_toggled_callback == nullptr);
+		_is_toggled_callback = callback;
+		return *this;
+	}
+
+	button& button::set_pressed_callback(pressed_callback_function callback) {
 		ASSERT(_pressed_callback == nullptr);
 		_pressed_callback = callback;
 		return *this;
@@ -33,7 +39,14 @@ namespace solar {
 		
 		auto state = get_best_window_render_state(*this, params);
 		renderer.begin_brush_rendering(state);
-		renderer.render_brush(*this, _style.get()._underlay, brush_render_mode::STRETCHED);
+		bool is_toggled = false;
+		if (_is_toggled_callback != nullptr) {
+			is_toggled = _is_toggled_callback();
+		}
+		const brush_id& underlay = is_toggled ?
+			_style.get()._toggled_underlay :
+			_style.get()._underlay;
+		renderer.render_brush(*this, underlay, brush_render_mode::STRETCHED);
 		renderer.render_brush(*this, _icon, brush_render_mode::STRETCHED, _style.get()._icon_layout);
 		renderer.end_brush_rendering();
 

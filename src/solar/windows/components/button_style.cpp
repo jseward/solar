@@ -17,12 +17,14 @@ namespace solar {
 	void button_style::read_from_archive(archive_reader& reader) {
 		read_object(reader, "icon_layout", _icon_layout);
 		read_object(reader, "underlay", _underlay);
+		read_object(reader, "toggled_underlay", _toggled_underlay);
 		read_object(reader, "font_def", _font_def);
 	}
 
 	void button_style::write_to_archive(archive_writer& writer) const {
 		write_object(writer, "icon_layout", _icon_layout);
 		write_object(writer, "underlay", _underlay);
+		write_object(writer, "toggled_underlay", _toggled_underlay);
 		write_object(writer, "font_def", _font_def);
 	}
 

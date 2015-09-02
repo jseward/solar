@@ -17,6 +17,7 @@ namespace solar {
 	public:
 		window_layout _icon_layout;
 		brush_id _underlay;
+		brush_id _toggled_underlay;
 		window_font_def _font_def;
 
 	public:

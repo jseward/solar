@@ -12,18 +12,24 @@
 namespace solar {
 
 	class button : public window_component {
+	public:
+		using is_toggled_callback_function = std::function<bool()>;
+		using pressed_callback_function = std::function<void(const button_press_params&)>;
+
 	private:
 		button_style_id _style;
 		brush_id _icon;
 		text_id _text;
-		std::function<void(button_press_params)> _pressed_callback;
+		is_toggled_callback_function _is_toggled_callback;
+		pressed_callback_function _pressed_callback;
 		enum_array<bool, mouse_button> _is_mouse_button_down;
 
 	public:
 		button(const char* id);
 		virtual ~button();
 
-		button& set_pressed_callback(std::function<void(button_press_params)> callback);
+		button& set_is_toggled_callback(is_toggled_callback_function callback);
+		button& set_pressed_callback(pressed_callback_function callback);
 
 		const wchar_t* get_text() const;
 
