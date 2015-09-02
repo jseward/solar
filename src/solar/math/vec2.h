@@ -17,7 +17,8 @@ namespace solar {
 	public:
 		friend vec2 operator+(const vec2& lhs, const vec2& rhs);
 		friend vec2 operator-(const vec2& lhs, const vec2& rhs);
-		friend vec2 operator*(const vec2& lhs, float rhs);
+		friend vec2 operator*(const vec2& lhs, float k);
+		friend vec2 operator/(const vec2& lhs, float k);
 
 	public:
 		friend float get_distance(const vec2& v0, const vec2& v1);

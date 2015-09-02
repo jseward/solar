@@ -39,12 +39,14 @@ namespace solar {
 		friend vec2 operator*(const vec2& vec, const mat44& mat);
 		friend vec3 operator*(const vec3& vec, const mat44& mat);
 		friend vec4 operator*(const vec4& vec, const mat44& mat);
+		friend mat44& operator/=(mat44& mat, float k);
 
 	public:
 		friend mat44 make_mat44_identity();
 		friend mat44 make_mat44_camera_view(const vec3& position, const mat33& rotation);
 		friend mat44 make_mat44_perspective_fov(deg fov_y, float aspect_ratio, float near_plane, float far_plane);
 		friend mat44 make_mat44_orthographic(float width, float height, float near_plane, float far_plane);
+		friend mat44 make_mat44_inverted(const mat44& in);
 	};
 
 	inline float& mat44::at(int row, int column) {

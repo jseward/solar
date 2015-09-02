@@ -76,6 +76,15 @@ namespace solar {
 			(vec._x * mat._v03) + (vec._y * mat._v13) + (vec._z * mat._v23) + (vec._w * mat._v33));
 	}
 
+	mat44& operator/=(mat44& mat, float k) {
+		ASSERT(k != 0.f);
+		mat._v00 /= k; mat._v01 /= k; mat._v02 /= k; mat._v03 /= k;
+		mat._v10 /= k; mat._v11 /= k; mat._v12 /= k; mat._v13 /= k;
+		mat._v20 /= k; mat._v21 /= k; mat._v22 /= k; mat._v23 /= k;
+		mat._v30 /= k; mat._v31 /= k; mat._v32 /= k; mat._v33 /= k;
+		return mat;
+	}
+
 	mat44 make_mat44_identity() {
 		return mat44();
 	}
@@ -134,6 +143,57 @@ namespace solar {
 		}
 		m.at(3, 3) = 1.f;
 		return m;
+	}
+
+	mat44 make_mat44_inverted(const mat44& in) {
+		//http://www.gamedev.net/community/forums/topic.asp?topic_id=376432
+		const float a = in._v00;
+		const float b = in._v01;
+		const float c = in._v02;
+		const float d = in._v03;
+		const float e = in._v10;
+		const float f = in._v11;
+		const float g = in._v12;
+		const float h = in._v13;
+		const float i = in._v20;
+		const float j = in._v21;
+		const float k = in._v22;
+		const float l = in._v23;
+		const float m = in._v30;
+		const float n = in._v31;
+		const float o = in._v32;
+		const float p = in._v33;
+
+		mat44 out = mat44(
+			(-h * k * n) + (g * l * n) + (h * j * o) - (f * l * o) - (g * j * p) + (f * k * p),
+			(d * k * n) - (c * l * n) - (d * j * o) + (b * l * o) + (c * j * p) - (b * k * p),
+			(-d * g * n) + (c * h * n) + (d * f * o) - (b * h * o) - (c * f * p) + (b * g * p),
+			(d * g * j) - (c * h * j) - (d * f * k) + (b * h * k) + (c * f * l) - (b * g * l),
+
+			(h * k * m) - (g * l * m) - (h * i * o) + (e * l * o) + (g * i * p) - (e * k * p),
+			(-d * k * m) + (c * l * m) + (d * i * o) - (a * l * o) - (c * i * p) + (a * k * p),
+			(d * g * m) - (c * h * m) - (d * e * o) + (a * h * o) + (c * e * p) - (a * g * p),
+			(-d * g * i) + (c * h * i) + (d * e * k) - (a * h * k) - (c * e * l) + (a * g * l),
+
+			(-h * j * m) + (f * l * m) + (h * i * n) - (e * l * n) - (f * i * p) + (e * j * p),
+			(d * j * m) - (b * l * m) - (d * i * n) + (a * l * n) + (b * i * p) - (a * j * p),
+			(-d * f * m) + (b * h * m) + (d * e * n) - (a * h * n) - (b * e * p) + (a * f * p),
+			(d * f * i) - (b * h * i) - (d * e * j) + (a * h * j) + (b * e * l) - (a * f * l),
+
+			(g * j * m) - (f * k * m) - (g * i * n) + (e * k * n) + (f * i * o) - (e * j * o),
+			(-c * j * m) + (b * k * m) + (c * i * n) - (a * k * n) - (b * i * o) + (a * j * o),
+			(c * f * m) - (b * g * m) - (c * e * n) + (a * g * n) + (b * e * o) - (a * f * o),
+			(-c * f * i) + (b * g * i) + (c * e * j) - (a * g * j) - (b * e * k) + (a * f * k));
+
+		const float det =
+			(b * h * k * m) - (b * g * l * m) - (a * h * k * n) + (a * g * l * n) - (b * h * i * o) + (a * h * j * o) + (b * e * l * o) - (a * f * l * o) +
+			(d * ((g * j * m) - (f * k * m) - (g * i * n) + (e * k * n) + (f * i * o) - (e * j * o))) +
+			(p * ((b * g * i) - (a * g * j) - (b * e * k) + (a * f * k))) +
+			(c * ((-h * j * m) + (f * l * m) + (h * i * n) - (e * l * n) - (f * i * p) + (e * j * p)));
+		ASSERT(det != 0.f);
+		out /= det;
+
+		return out;
 	}
 
 }

@@ -30,8 +30,13 @@ namespace solar {
 		return vec2(lhs._x - rhs._x, lhs._y - rhs._y);
 	}
 
-	vec2 operator*(const vec2& lhs, float rhs) {
-		return vec2(lhs._x * rhs, lhs._y * rhs);
+	vec2 operator*(const vec2& lhs, float k) {
+		return vec2(lhs._x * k, lhs._y * k);
+	}
+
+	vec2 operator/(const vec2& lhs, float k) {
+		ASSERT(k != 0.f);
+		return vec2(lhs._x / k, lhs._y / k);
 	}
 
 	float get_distance(const vec2& v0, const vec2& v1) {

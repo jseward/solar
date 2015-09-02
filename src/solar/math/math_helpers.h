@@ -1,6 +1,7 @@
 #pragma once
 
 #include "deg.h"
+#include "vec2.h"
 
 namespace solar {
 
@@ -13,4 +14,10 @@ namespace solar {
 
 	extern bool is_approx(float x, float y, float tolerance);
 	extern float constrain(float lower_bound, float upper_bound, float x);
+
+	//bounds:0-9 and x:11 -> 2
+	//bounds:0-9 and x:-4 -> 6
+	extern int int_wrap(int lower, int upper, int x);
+
+	extern vec2 calculate_catmull_rom(const vec2& c0, const vec2& c1, const vec2& c2, const vec2& c3, float t);
 }

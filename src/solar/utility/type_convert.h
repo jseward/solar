@@ -27,6 +27,11 @@ namespace solar {
 		return static_cast<unsigned short>(v);
 	}
 
+	inline int uint_to_int(unsigned int v) {
+		ASSERT(v <= static_cast<unsigned int>(std::numeric_limits<int>::max()));
+		return static_cast<int>(v);
+	}
+
 	inline unsigned short uint_to_ushort(unsigned int v) {
 		ASSERT(v >= 0);
 		ASSERT(v <= std::numeric_limits<unsigned short>::max());
