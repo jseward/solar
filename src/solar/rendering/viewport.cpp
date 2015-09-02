@@ -77,4 +77,28 @@ namespace solar {
 		return true;
 	}
 
+	bool viewport::try_unproject(vec3& world_position, const mat44& view_projection_transform, const point& screen_position) const {
+		if (_width == 0 || _height == 0) {
+			return false;
+		}
+
+		vec4 in;
+		in._x = ((uint_to_float(screen_position._x - _x) / uint_to_float(_width)) * 2.f) - 1.f;
+		in._y = ((uint_to_float(screen_position._y - _y) / uint_to_float(_height)) * 2.f) - 1.f;
+		in._y *= -1.f;
+		in._z = 0.f; //0 = near plane, 1 = far plane
+		in._w = 1.f;
+
+		vec4 out = in * make_mat44_inverted(view_projection_transform);
+
+		if (is_approx(out._w, 0.f, 0.0001f)) {
+			return false;
+		}
+
+		world_position._x = out._x / out._w;
+		world_position._y = out._y / out._w;
+		world_position._z = out._z / out._w;
+		return true;
+	}
+
 }

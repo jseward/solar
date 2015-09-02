@@ -26,6 +26,8 @@ namespace solar {
 		bool try_project(vec2& screen_position, const mat44& view_projection_transform, const vec2& world_position) const;
 		bool try_project(vec2& screen_position, const mat44& view_projection_transform, const vec3& world_position) const;
 		bool try_project(vec3& screen_position, const mat44& view_projection_transform, const vec3& world_position) const;
+
+		bool try_unproject(vec3& world_position, const mat44& view_projection_transform, const point& screen_position) const;
 	};
 
 }
