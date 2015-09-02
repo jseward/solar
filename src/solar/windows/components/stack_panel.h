@@ -28,5 +28,4 @@ namespace solar {
 		void update_child_areas_vertical();
 	};
 
-
 }

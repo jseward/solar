@@ -9,12 +9,12 @@ namespace solar {
 	//window class was getting a bit heavyweight. adding another layer of hierarchy for things that all window components (buttons, etc) will require. but not essential for base window class.
 
 	class window_component : public window {
-	
 	private:
 		bool _has_layout;
 		window_layout _layout;
 		bool _has_grid_position;
 		grid_panel_position _grid_position;
+		bool _will_self_update_area;
 
 	public:
 		window_component(const char* id);
@@ -26,6 +26,10 @@ namespace solar {
 
 		void set_has_grid_position(bool has_grid_position);
 		const grid_panel_position& get_grid_position() const;
+
+		void set_will_self_update_area(bool will_self_update_area);
+
+		void update_area(const rect& parent_area);
 
 	protected:
 		virtual void on_loaded() override;

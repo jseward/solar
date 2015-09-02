@@ -27,8 +27,11 @@ namespace solar {
 	}
 
 	void grid_panel::on_child_added(window* child) {
-		ASSERT(child->as_component() != nullptr);
-		child->as_component()->set_has_grid_position(true);
+		auto child_component = child->as_component();
+		IF_VERIFY(child_component != nullptr) {
+			child_component->set_will_self_update_area(false);
+			child_component->set_has_grid_position(true);
+		}
 	}
 
 	void grid_panel::on_area_changed() {
@@ -60,7 +63,7 @@ namespace solar {
 					right = _columns.at(grid_position._column.get_value())._area.get_right();
 				}
 
-				child->set_area(rect(point(left, top), point(right, bottom)));
+				child->as_component()->update_area(rect(point(left, top), point(right, bottom)));
 			}
 		}
 	}
