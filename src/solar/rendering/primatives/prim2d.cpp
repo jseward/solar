@@ -61,8 +61,9 @@ namespace solar {
 	}
 
 	void prim2d::render_world_polygon(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count, const color& color) {
-		if (try_project_points_to_points_buffer(viewport, camera, points, point_count)) {
-			render_polygon(_points_buffer.data(), _points_buffer.size(), color);
+		auto screen_points = _world_projection_buffer.project_points(viewport, camera, points, point_count);
+		if (!screen_points.empty()) {
+			render_polygon(screen_points.data(), screen_points.size(), color);
 		}
 	}
 
@@ -84,16 +85,4 @@ namespace solar {
 		}
 	}
 
-	bool prim2d::try_project_points_to_points_buffer(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count) {
-		_points_buffer.clear();
-		_points_buffer.reserve(point_count);
-		for (unsigned int i = 0; i < point_count; ++i) {
-			vec2 screen_point;
-			if (!viewport.try_project(screen_point, camera.get_view_projection_transform(), points[i])) {
-				return false;
-			}
-			_points_buffer.push_back(screen_point);
-		}
-		return true;
-	}
 }

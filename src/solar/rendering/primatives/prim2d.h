@@ -5,6 +5,7 @@
 #include "solar/math/vec2.h"
 #include "solar/rendering/color.h"
 #include "solar/rendering/textures/simple_rect_uvs.h"
+#include "prim2d_world_projection_buffer.h"
 
 namespace solar {
 
@@ -18,7 +19,7 @@ namespace solar {
 		const unsigned int DEFAULT_CIRCLE_SEGMENT_COUNT = 16;
 
 	private:
-		std::vector<vec2> _points_buffer; //used internally to build up projected points
+		prim2d_world_projection_buffer _world_projection_buffer;
 
 	public:
 		virtual void begin_rendering(const rect& viewport_area) = 0;
@@ -39,9 +40,6 @@ namespace solar {
 		void render_world_polygon(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count, const color& color);
 		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color);
 		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, unsigned int segment_count);
-
-	private:
-		bool try_project_points_to_points_buffer(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count);
 	};
 
 }

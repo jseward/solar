@@ -14,7 +14,7 @@ namespace solar {
 	}
 
 	void prim2d_lines::render_segments_looped(const vec2* points, unsigned int point_count, const color& color) {
-		IF_VERIFY(point_count > 1) {
+		if (point_count > 1) {
 			render_segments(points, point_count, color);
 			render_segment(points[point_count - 1], points[0], color);
 		}
@@ -27,8 +27,8 @@ namespace solar {
 	void prim2d_lines::render_circle(const vec2& center, float radius, const color& color, unsigned int segment_count) {
 		ASSERT(segment_count > 0);
 
-		_points_buffer.clear();
-		_points_buffer.reserve(segment_count + 1);
+		_render_buffer.clear();
+		_render_buffer.reserve(segment_count + 1);
 
 		const deg deg_inc = deg(360.f / segment_count);
 		const float sin_inc = sin(deg_inc);
@@ -37,14 +37,14 @@ namespace solar {
 		vec2 r = vec2(1.f, 0.f);
 		for (unsigned int i = 0; i < segment_count; ++i) {
 			vec2 segment_point = center + (r * radius);
-			_points_buffer.push_back(segment_point);
+			_render_buffer.push_back(segment_point);
 			r = vec2(
 				(r._x * cos_inc) - (r._y * sin_inc),
 				(r._x * sin_inc) + (r._y * cos_inc));
 		}
-		_points_buffer.push_back(_points_buffer[0]);
+		_render_buffer.push_back(_render_buffer[0]);
 
-		render_segments(_points_buffer.data(), _points_buffer.size(), color);
+		render_segments(_render_buffer.data(), _render_buffer.size(), color);
 	}
 
 	void prim2d_lines::render_world_segment(const viewport& viewport, const camera& camera, const vec3& p0, const vec3& p1, const color& color) {
@@ -57,14 +57,23 @@ namespace solar {
 	}
 
 	void prim2d_lines::render_world_segments(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count, const color& color) {
-		if (try_project_points_to_points_buffer(viewport, camera, points, point_count)) {
-			render_segments(_points_buffer.data(), _points_buffer.size(), color);
+		auto screen_points = _world_projection_buffer.project_points(viewport, camera, points, point_count);
+		if (!screen_points.empty()) {
+			render_segments(screen_points.data(), screen_points.size(), color);
+		}
+	}
+
+	void prim2d_lines::render_world_segments_looped(const viewport& viewport, const camera& camera, const vec2* points, unsigned int point_count, const color& color) {
+		auto screen_points = _world_projection_buffer.project_points(viewport, camera, points, point_count);
+		if (!screen_points.empty()) {
+			render_segments_looped(screen_points.data(), screen_points.size(), color);
 		}
 	}
 
 	void prim2d_lines::render_world_segments_looped(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count, const color& color) {
-		if (try_project_points_to_points_buffer(viewport, camera, points, point_count)) {
-			render_segments_looped(_points_buffer.data(), _points_buffer.size(), color);
+		auto screen_points = _world_projection_buffer.project_points(viewport, camera, points, point_count);
+		if (!screen_points.empty()) {
+			render_segments_looped(screen_points.data(), screen_points.size(), color);
 		}
 	}
 
@@ -84,19 +93,6 @@ namespace solar {
 			const float screen_radius = get_distance(screen_center, screen_radius_marker);
 			render_circle(screen_center, screen_radius, color, segment_count);
 		}
-	}
-
-	bool prim2d_lines::try_project_points_to_points_buffer(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count) {
-		_points_buffer.clear();
-		_points_buffer.reserve(point_count);
-		for (unsigned int i = 0; i < point_count; ++i) {
-			vec2 screen_point;
-			if (!viewport.try_project(screen_point, camera.get_view_projection_transform(), points[i])) {
-				return false;
-			}
-			_points_buffer.push_back(screen_point);
-		}
-		return true;
 	}
 
 }

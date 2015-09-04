@@ -4,6 +4,7 @@
 
 #include "solar/rendering/primatives/prim2d.cpp"
 #include "solar/rendering/primatives/prim2d_lines.cpp"
+#include "solar/rendering/primatives/prim2d_world_projection_buffer.cpp"
 
 #include "solar/rendering/textures/uv.cpp"
 #include "solar/rendering/textures/simple_rect_uvs.cpp"

@@ -127,6 +127,7 @@
     <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_vertex_bone_weight.h" />
     <ClInclude Include="..\..\src\solar\rendering\primatives\prim2d.h" />
     <ClInclude Include="..\..\src\solar\rendering\primatives\prim2d_lines.h" />
+    <ClInclude Include="..\..\src\solar\rendering\primatives\prim2d_world_projection_buffer.h" />
     <ClInclude Include="..\..\src\solar\rendering\render_scene_functor.h" />
     <ClInclude Include="..\..\src\solar\rendering\render_device.h" />
     <ClInclude Include="..\..\src\solar\rendering\render_device_event_handler.h" />
@@ -538,6 +539,7 @@
     <ClCompile Include="..\..\src\solar\rendering\meshes\mesh_vertex_bone_weight.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\primatives\prim2d.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\primatives\prim2d_lines.cpp" />
+    <ClCompile Include="..\..\src\solar\rendering\primatives\prim2d_world_projection_buffer.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\shaders\shader_id.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\textures\simple_rect_uvs.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\textures\uv.cpp" />
