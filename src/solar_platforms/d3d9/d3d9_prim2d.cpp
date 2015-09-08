@@ -106,21 +106,25 @@ namespace solar {
 		_is_rendering = true;
 		_shader = &shader;
 		_shader->set_platform_texture(shader_param_names::TEXTURE, _white_texture.get());
+		_shader->start("render");
 	}
 
 	void d3d9_prim2d::end_rendering() {
 		flush_all();
 
-		ASSERT(_is_rendering);
-		_is_rendering = false;
+		_shader->stop();
 		_shader = nullptr;
 		_texture = nullptr;
+
+		ASSERT(_is_rendering);
+		_is_rendering = false;
 	}
 
 	void d3d9_prim2d::set_shader(shader& shader) {
 		ASSERT(_is_rendering);
 		if (_shader != &shader) {
 			flush_all();
+			_shader->stop();
 			_shader = &shader;
 			if (_texture != nullptr) {
 				_shader->set_texture(shader_param_names::TEXTURE, *_texture);
@@ -128,6 +132,7 @@ namespace solar {
 			else {
 				_shader->set_platform_texture(shader_param_names::TEXTURE, _white_texture.get());
 			}
+			_shader->start("render");
 		}
 	}
 
@@ -136,6 +141,7 @@ namespace solar {
 		if (_texture != &texture) {
 			flush_all();
 			_shader->set_texture(shader_param_names::TEXTURE, texture);
+			_shader->commit_param_changes();
 			_texture = &texture;
 		}
 	}
@@ -156,6 +162,20 @@ namespace solar {
 		_buffered_tris.emplace_back(v0, v1, v2, color);
 	}
 
+	void d3d9_prim2d::render_indexed_tris(const vec2* vertices, unsigned int vertex_count, unsigned short* indices, unsigned int index_count, const color& color) {
+		auto lr = lock_buffers_and_render_if_needed(vertex_count, index_count);
+
+		for (unsigned int i_vertex = 0; i_vertex < vertex_count; ++i_vertex) {
+			lr._vertices[i_vertex].set(vertices[i_vertex], color, uv());
+		}
+
+		for (unsigned int i_index = 0; i_index < index_count; ++i_index) {
+			lr._indices[i_index] = indices[i_index];
+		}
+
+		unlock_buffers_and_render();
+	}
+
 	void d3d9_prim2d::flush_all() {
 		flush_rects();
 		flush_tris();
@@ -163,106 +183,90 @@ namespace solar {
 
 	void d3d9_prim2d::flush_rects() {
 		if (!_buffered_rects.empty()) {
-			_shader->start("render");
+			const int vertices_required = _buffered_rects.size() * d3d9_prim2d_rect::VERTEX_COUNT;
+			const int indices_required = _buffered_rects.size() * d3d9_prim2d_rect::INDEX_COUNT;
 
-			int vertices_required = _buffered_rects.size() * d3d9_prim2d_rect::VERTEX_COUNT;
-			int indices_required = _buffered_rects.size() * d3d9_prim2d_rect::INDEX_COUNT;
+			auto lr = lock_buffers_and_render_if_needed(vertices_required, indices_required);
 
-			if (
-				vertices_required > _vertex_buffer.get_vertices_available() ||
-				indices_required > _index_buffer.get_indices_available()) {
-
-				_vertex_buffer.render_indexed_tris(_context.get_device(), _index_buffer);
-				_vertex_buffer.discard_contents();
-				_index_buffer.discard_contents();
-			}
-
-			int vertices_begin = _vertex_buffer.get_vertices_used();
 			int vertex_offset = 0;
 			int index_offset = 0;
-			d3d9_prim2d_vertex* vertices = _vertex_buffer.lock(vertices_required);
-			WORD* indices = _index_buffer.lock(indices_required);
 			for (const auto& rect : _buffered_rects) {
-				vertices[0 + vertex_offset].set(rect._top_left, rect._color, rect._uvs.get_top_left());
-				vertices[1 + vertex_offset].set(rect._top_right, rect._color, rect._uvs.get_top_right());
-				vertices[2 + vertex_offset].set(rect._bottom_right, rect._color, rect._uvs.get_bottom_right());
-				vertices[3 + vertex_offset].set(rect._bottom_left, rect._color, rect._uvs.get_bottom_left());
+				lr._vertices[0 + vertex_offset].set(rect._top_left, rect._color, rect._uvs.get_top_left());
+				lr._vertices[1 + vertex_offset].set(rect._top_right, rect._color, rect._uvs.get_top_right());
+				lr._vertices[2 + vertex_offset].set(rect._bottom_right, rect._color, rect._uvs.get_bottom_right());
+				lr._vertices[3 + vertex_offset].set(rect._bottom_left, rect._color, rect._uvs.get_bottom_left());
 
-				WORD index_value_offset = (WORD)(vertices_begin + vertex_offset);
-				indices[0 + index_offset] = (0 + index_value_offset);
-				indices[1 + index_offset] = (1 + index_value_offset);
-				indices[2 + index_offset] = (2 + index_value_offset);
-				indices[3 + index_offset] = (2 + index_value_offset);
-				indices[4 + index_offset] = (3 + index_value_offset);
-				indices[5 + index_offset] = (0 + index_value_offset);
+				WORD index_value_offset = static_cast<WORD>(lr._vertices_begin + vertex_offset);
+				lr._indices[0 + index_offset] = (0 + index_value_offset);
+				lr._indices[1 + index_offset] = (1 + index_value_offset);
+				lr._indices[2 + index_offset] = (2 + index_value_offset);
+				lr._indices[3 + index_offset] = (2 + index_value_offset);
+				lr._indices[4 + index_offset] = (3 + index_value_offset);
+				lr._indices[5 + index_offset] = (0 + index_value_offset);
 
 				vertex_offset += d3d9_prim2d_rect::VERTEX_COUNT;
 				index_offset += d3d9_prim2d_rect::INDEX_COUNT;
 			}
-			_vertex_buffer.unlock();
-			_index_buffer.unlock();
 
-			_vertex_buffer.render_indexed_tris(_context.get_device(), _index_buffer);
-			_vertex_buffer.move_past_contents();
-			_index_buffer.move_past_contents();
+			unlock_buffers_and_render();
 
 			_buffered_rects.clear();
-
-			_shader->stop();
-		}
-		else {
-			_shader->forget_param_changes();
 		}
 	}
 
 	void d3d9_prim2d::flush_tris() {
 		if (!_buffered_tris.empty()) {
-			_shader->start("render");
+			const int vertices_required = _buffered_tris.size() * d3d9_prim2d_tri::VERTEX_COUNT;
+			const int indices_required = _buffered_tris.size() * d3d9_prim2d_tri::INDEX_COUNT;
 
-			int vertices_required = _buffered_tris.size() * d3d9_prim2d_tri::VERTEX_COUNT;
-			int indices_required = _buffered_tris.size() * d3d9_prim2d_tri::INDEX_COUNT;
+			auto lr = lock_buffers_and_render_if_needed(vertices_required, indices_required);
 
-			if (
-				vertices_required > _vertex_buffer.get_vertices_available() ||
-				indices_required > _index_buffer.get_indices_available()) {
-
-				_vertex_buffer.render_indexed_tris(_context.get_device(), _index_buffer);
-				_vertex_buffer.discard_contents();
-				_index_buffer.discard_contents();
-			}
-
-			int vertices_begin = _vertex_buffer.get_vertices_used();
 			int vertex_offset = 0;
 			int index_offset = 0;
-			d3d9_prim2d_vertex* vertices = _vertex_buffer.lock(vertices_required);
-			WORD* indices = _index_buffer.lock(indices_required);
 			for (const auto& tri : _buffered_tris) {
-				vertices[0 + vertex_offset].set(tri._p0, tri._color, uv());
-				vertices[1 + vertex_offset].set(tri._p1, tri._color, uv());
-				vertices[2 + vertex_offset].set(tri._p2, tri._color, uv());
+				lr._vertices[0 + vertex_offset].set(tri._p0, tri._color, uv());
+				lr._vertices[1 + vertex_offset].set(tri._p1, tri._color, uv());
+				lr._vertices[2 + vertex_offset].set(tri._p2, tri._color, uv());
 
-				WORD index_value_offset = (WORD)(vertices_begin + vertex_offset);
-				indices[0 + index_offset] = (0 + index_value_offset);
-				indices[1 + index_offset] = (1 + index_value_offset);
-				indices[2 + index_offset] = (2 + index_value_offset);
+				WORD index_value_offset = static_cast<WORD>(lr._vertices_begin + vertex_offset);
+				lr._indices[0 + index_offset] = (0 + index_value_offset);
+				lr._indices[1 + index_offset] = (1 + index_value_offset);
+				lr._indices[2 + index_offset] = (2 + index_value_offset);
 
 				vertex_offset += d3d9_prim2d_tri::VERTEX_COUNT;
 				index_offset += d3d9_prim2d_tri::INDEX_COUNT;
 			}
-			_vertex_buffer.unlock();
-			_index_buffer.unlock();
 
-			_vertex_buffer.render_indexed_tris(_context.get_device(), _index_buffer);
-			_vertex_buffer.move_past_contents();
-			_index_buffer.move_past_contents();
+			unlock_buffers_and_render();
 
 			_buffered_tris.clear();
+		}
+	}
 
-			_shader->stop();
+	d3d9_prim2d::lock_buffers_result d3d9_prim2d::lock_buffers_and_render_if_needed(int vertices_required, int indices_required) {
+		if (
+			vertices_required > _vertex_buffer.get_vertices_available() ||
+			indices_required > _index_buffer.get_indices_available()) {
+
+			_vertex_buffer.render_indexed_tris(_context.get_device(), _index_buffer);
+			_vertex_buffer.discard_contents();
+			_index_buffer.discard_contents();
 		}
-		else {
-			_shader->forget_param_changes();
-		}
+
+		int vertices_begin = _vertex_buffer.get_vertices_used();
+		d3d9_prim2d_vertex* vertices = _vertex_buffer.lock(vertices_required);
+		WORD* indices = _index_buffer.lock(indices_required);
+
+		return lock_buffers_result(vertices, indices, vertices_begin);
+	}
+
+	void d3d9_prim2d::unlock_buffers_and_render() {
+		_vertex_buffer.unlock();
+		_index_buffer.unlock();
+
+		_vertex_buffer.render_indexed_tris(_context.get_device(), _index_buffer);
+		_vertex_buffer.move_past_contents();
+		_index_buffer.move_past_contents();
 	}
 
 	void d3d9_prim2d::on_device_created(IDirect3DDevice9* device) {

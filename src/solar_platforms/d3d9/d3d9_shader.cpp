@@ -38,7 +38,6 @@ namespace solar {
 		ASSERT(_ID3DXEffect == nullptr);
 		ASSERT(!_is_started);
 		ASSERT(!_is_within_pass);
-		ASSERT(!_has_changes_to_commit);
 	}
 
 	const resource_address& d3d9_shader::get_resource_address() const {

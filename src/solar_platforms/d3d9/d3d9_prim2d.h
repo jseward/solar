@@ -62,11 +62,28 @@ namespace solar {
 		virtual void set_texture(texture& texture) override;
 		virtual void render_rect(const vec2& top_left, const vec2& top_right, const vec2& bottom_right, const vec2& bottom_left, const color& color, const simple_rect_uvs& uvs) override;
 		virtual void render_tri(const vec2& v0, const vec2& v1, const vec2& v2, const color& color) override;
+		virtual void render_indexed_tris(const vec2* vertices, unsigned int vertex_count, unsigned short* indices, unsigned int index_count, const color& color) override;
 
 	private:
 		void flush_all();
 		void flush_rects();
 		void flush_tris();
+
+		struct lock_buffers_result {
+			d3d9_prim2d_vertex* _vertices;
+			WORD* _indices;
+			int _vertices_begin;
+
+		public:
+			lock_buffers_result(d3d9_prim2d_vertex* vertices, WORD* indices, int vertices_begin)
+				: _vertices(vertices)
+				, _indices(indices)
+				, _vertices_begin(vertices_begin) {
+			}
+		};
+
+		lock_buffers_result lock_buffers_and_render_if_needed(int vertices_required, int indices_required);
+		void unlock_buffers_and_render();
 
 	private:
 		virtual void on_device_created(IDirect3DDevice9* device) override;
