@@ -42,10 +42,17 @@ namespace solar {
 		write_atomic_value<unsigned short>(value);
 	}
 
-	void binary_archive_writer::write_ushorts(const char* name, const unsigned short* begin, unsigned int count) {
+	void binary_archive_writer::write_ushorts(const char* name, unsigned int size, std::function<unsigned short(unsigned int)> get_value_at_func) {
 		UNUSED_PARAMETER(name);
-		for (unsigned int i = 0; i < count; ++i) {
-			write_atomic_value<unsigned short>(begin[i]);
+		for (unsigned int i = 0; i < size; ++i) {
+			write_atomic_value<unsigned short>(get_value_at_func(i));
+		}
+	}
+
+	void binary_archive_writer::write_ushorts(const char* name, unsigned int size, const unsigned short* values_begin) {
+		UNUSED_PARAMETER(name);
+		for (unsigned int i = 0; i < size; ++i) {
+			write_atomic_value<unsigned short>(values_begin[i]);
 		}
 	}
 
@@ -54,18 +61,25 @@ namespace solar {
 		write_atomic_value<int>(value);
 	}
 
+	void binary_archive_writer::write_ints(const char* name, unsigned int size, std::function<int(unsigned int)> get_value_at_func) {
+		UNUSED_PARAMETER(name);
+		for (unsigned int i = 0; i < size; ++i) {
+			write_atomic_value<int>(get_value_at_func(i));
+		}
+	}
+
+	void binary_archive_writer::write_ints(const char* name, unsigned int size, const int* values_begin) {
+		UNUSED_PARAMETER(name);
+		for (unsigned int i = 0; i < size; ++i) {
+			write_atomic_value<int>(values_begin[i]);
+		}
+	}
+
 	void binary_archive_writer::write_optional_int(const char* name, const optional<int>& value) {
 		UNUSED_PARAMETER(name);
 		write_atomic_value<bool>(value.has_value());
 		if (value.has_value()) {
 			write_atomic_value<int>(value.get_value());
-		}
-	}
-
-	void binary_archive_writer::write_ints(const char* name, const int* begin, unsigned int count) {
-		UNUSED_PARAMETER(name);
-		for (unsigned int i = 0; i < count; ++i) {
-			write_atomic_value<int>(begin[i]);
 		}
 	}
 
@@ -79,10 +93,17 @@ namespace solar {
 		write_atomic_value<float>(value);
 	}
 
-	void binary_archive_writer::write_floats(const char* name, const float* begin, unsigned int count) {
+	void binary_archive_writer::write_floats(const char* name, unsigned int size, std::function<float(unsigned int)> get_value_at_func) {
 		UNUSED_PARAMETER(name);
-		for (unsigned int i = 0; i < count; ++i) {
-			write_atomic_value<float>(begin[i]);
+		for (unsigned int i = 0; i < size; ++i) {
+			write_atomic_value<float>(get_value_at_func(i));
+		}
+	}
+
+	void binary_archive_writer::write_floats(const char* name, unsigned int size, const float* values_begin) {
+		UNUSED_PARAMETER(name);
+		for (unsigned int i = 0; i < size; ++i) {
+			write_atomic_value<float>(values_begin[i]);
 		}
 	}
 

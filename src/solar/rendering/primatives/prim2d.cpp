@@ -85,4 +85,11 @@ namespace solar {
 		}
 	}
 
+	void prim2d::render_world_indexed_tris(const viewport& viewport, const camera& camera, const vec3* vertices, unsigned int vertex_count, const unsigned short* indices, unsigned int index_count, const color& color) {
+		auto screen_points = _world_projection_buffer.project_points(viewport, camera, vertices, vertex_count);
+		if (!screen_points.empty()) {
+			render_indexed_tris(screen_points.data(), screen_points.size(), indices, index_count, color);
+		}
+	}
+
 }

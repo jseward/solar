@@ -66,6 +66,8 @@ namespace solar {
 		write_floats(writer, name, value._x, value._y);
 	}
 
+	//NOTE: archiving vec2 arrays is a bit clumsy because reader/writers don't support array of arrays. it would severly
+	//bloat the interface.
 	namespace archiving_vec2_impl {
 		class archivable_vec2 : public vec2, public archivable {
 		public:
@@ -85,8 +87,6 @@ namespace solar {
 	}
 
 	template<typename T> void read_vec2_vector(archive_reader& reader, const char* name, T& values) {
-		//NOTE: this is a bit clumsy because archive_readers don't support array of arrays. it would severly
-		//bloat the archive_reader interface.
 		read_vector(reader, name, values, [](archive_reader& reader) {
 			archiving_vec2_impl::archivable_vec2 v;
 			v.read_from_archive(reader);
@@ -95,10 +95,23 @@ namespace solar {
 	}
 
 	template<typename T> void write_vec2_vector(archive_writer& writer, const char* name, const T& values) {
-		//NOTE: this is a bit clumsy because archive_readers don't support array of arrays. it would severly
-		//bloat the archive_reader interface.
 		write_vector(writer, name, values, [](archive_writer& writer, const vec2& value) {
 			archiving_vec2_impl::archivable_vec2(value).write_to_archive(writer);
+		});
+	}
+
+	template<typename T> void read_vec3_no_z_vector(archive_reader& reader, const char* name, T& values) {
+		read_vector(reader, name, values, [](archive_reader& reader) {
+			archiving_vec2_impl::archivable_vec2 v;
+			v.read_from_archive(reader);
+			return vec3(v._x, v._y, 0.f);
+		});
+	}
+
+	template<typename T> void write_vec3_no_z_vector(archive_writer& writer, const char* name, const T& values) {
+		write_vector(writer, name, values, [](archive_writer& writer, const vec3& value) {
+			ASSERT(value._z == 0.f);
+			archiving_vec2_impl::archivable_vec2(vec2(value._x, value._y)).write_to_archive(writer);
 		});
 	}
 

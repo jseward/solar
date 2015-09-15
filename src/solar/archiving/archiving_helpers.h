@@ -29,7 +29,7 @@ namespace solar {
 
 	inline void read_ushorts(archive_reader& reader, const char* name, unsigned short& v0, unsigned short& v1, unsigned short& v2) {
 		unsigned short values[3] = {};
-		reader.read_ushorts(name, values, 3);
+		reader.read_ushorts(name, 3, values);
 		v0 = values[0];
 		v1 = values[1];
 		v2 = values[2];
@@ -37,7 +37,7 @@ namespace solar {
 
 	inline void write_ushorts(archive_writer& writer, const char* name, unsigned short v0, unsigned short v1, unsigned short v2) {
 		const unsigned short values[3] = { v0, v1, v2 };
-		writer.write_ushorts(name, values, 3);
+		writer.write_ushorts(name, 3, values);
 	}
 
 	inline void read_int(archive_reader& reader, const char* name, int& value) {
@@ -58,19 +58,19 @@ namespace solar {
 
 	inline void read_ints(archive_reader& reader, const char* name, int& v0, int& v1) {
 		int values[2] = {};
-		reader.read_ints(name, values, 2);
+		reader.read_ints(name, 2, values);
 		v0 = values[0];
 		v1 = values[1];
 	}
 
 	inline void write_ints(archive_writer& writer, const char* name, int v0, int v1) {
 		const int values[2] = { v0, v1 };
-		writer.write_ints(name, values, 2);
+		writer.write_ints(name, 2, values);
 	}
 
 	inline void read_ints(archive_reader& reader, const char* name, int& v0, int& v1, int& v2, int& v3) {
 		int values[4] = {};
-		reader.read_ints(name, values, 4);
+		reader.read_ints(name, 4, values);
 		v0 = values[0];
 		v1 = values[1];
 		v2 = values[2];
@@ -79,7 +79,7 @@ namespace solar {
 
 	inline void write_ints(archive_writer& writer, const char* name, int v0, int v1, int v2, int v3) {
 		const int values[4] = { v0, v1, v2, v3 };
-		writer.write_ints(name, values, 4);
+		writer.write_ints(name, 4, values);
 	}
 
 	inline void read_uint(archive_reader& reader, const char* name, unsigned int& value) {
@@ -100,19 +100,19 @@ namespace solar {
 
 	inline void read_floats(archive_reader& reader, const char* name, float& v0, float& v1) {
 		float values[2] = {};
-		reader.read_floats(name, values, 2);
+		reader.read_floats(name, 2, values);
 		v0 = values[0];
 		v1 = values[1];
 	}
 
 	inline void write_floats(archive_writer& writer, const char* name, float v0, float v1) {
 		const float values[2] = { v0, v1 };
-		writer.write_floats(name, values, 2);
+		writer.write_floats(name, 2, values);
 	}
 
 	inline void read_floats(archive_reader& reader, const char* name, float& v0, float& v1, float& v2) {
 		float values[3] = {};
-		reader.read_floats(name, values, 3);
+		reader.read_floats(name, 3, values);
 		v0 = values[0];
 		v1 = values[1];
 		v2 = values[2];
@@ -120,7 +120,7 @@ namespace solar {
 
 	inline void write_floats(archive_writer& writer, const char* name, float v0, float v1, float v2) {
 		const float values[3] = { v0, v1, v2 };
-		writer.write_floats(name, values, 3);
+		writer.write_floats(name, 3, values);
 	}
 
 	inline void read_string(archive_reader& reader, const char* name, std::string& value) {

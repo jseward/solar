@@ -40,6 +40,8 @@ namespace solar {
 		virtual std::vector<std::string> find_file_names(const std::string& dir_path, const find_file_names_options& options) override;
 		virtual bool is_directory(const std::string& path) override;
 		virtual bool try_get_last_write_time(date_time& last_write_time, const std::string& path) override;
+		virtual std::string browse_open_file_dialog(const file_dialog_params& params) override;
+		virtual std::string browse_save_file_dialog(const file_dialog_params& params) override;
 
 	private:
 		void setup_user_root_path(win32_user_file_location location, const std::string& company_folder_name, const std::string& app_folder_name);
@@ -48,6 +50,7 @@ namespace solar {
 		bool is_find_data_directory(const WIN32_FIND_DATAW& find_data) const;
 		bool check_file_name_with_find_file_names_options(const std::string& file_name, const find_file_names_options& options) const;
 		date_time convert_FILETIME_to_date_time(const FILETIME& ft) const;
+		std::wstring make_file_dialog_filter_string(const file_dialog_params& params) const;
 	};
 
 }

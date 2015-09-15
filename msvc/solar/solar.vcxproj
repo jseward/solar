@@ -46,6 +46,8 @@
     <ClInclude Include="..\..\src\solar\io\directory_change_type.h" />
     <ClInclude Include="..\..\src\solar\io\file_change_handler.h" />
     <ClInclude Include="..\..\src\solar\io\file_change_watcher.h" />
+    <ClInclude Include="..\..\src\solar\io\file_dialog_filter.h" />
+    <ClInclude Include="..\..\src\solar\io\file_dialog_params.h" />
     <ClInclude Include="..\..\src\solar\io\file_mode.h" />
     <ClInclude Include="..\..\src\solar\io\file_path_helpers.h" />
     <ClInclude Include="..\..\src\solar\io\file_stream.h" />
@@ -152,6 +154,7 @@
     <ClInclude Include="..\..\src\solar\resources\resource_system_params.h" />
     <ClInclude Include="..\..\src\solar\settings\bool_setting.h" />
     <ClInclude Include="..\..\src\solar\settings\enum_setting.h" />
+    <ClInclude Include="..\..\src\solar\settings\float_setting.h" />
     <ClInclude Include="..\..\src\solar\settings\int_setting.h" />
     <ClInclude Include="..\..\src\solar\settings\setting.h" />
     <ClInclude Include="..\..\src\solar\settings\setting_group.h" />
@@ -551,6 +554,7 @@
     <ClCompile Include="..\..\src\solar\resources\resource_provider.cpp" />
     <ClCompile Include="..\..\src\solar\resources\resource_system.cpp" />
     <ClCompile Include="..\..\src\solar\settings\bool_setting.cpp" />
+    <ClCompile Include="..\..\src\solar\settings\float_setting.cpp" />
     <ClCompile Include="..\..\src\solar\settings\int_setting.cpp" />
     <ClCompile Include="..\..\src\solar\settings\setting.cpp" />
     <ClCompile Include="..\..\src\solar\settings\setting_group.cpp" />

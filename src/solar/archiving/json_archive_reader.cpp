@@ -79,11 +79,25 @@ namespace solar {
 		}
 	}
 
-	void json_archive_reader::read_ushorts(const char* name, unsigned short* begin, unsigned int count) {
+	void json_archive_reader::read_ushorts(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, unsigned short)> handle_value_func) {
 		json_array a;
-		if (try_get_array_of_size(a, name, count)) {
-			for (unsigned int i = 0; i < count; ++i) {
-				begin[i] = a.get_ushort(i);
+		if (!_current_object->try_get_array(a, name)) {
+			raise_error(build_string("array not found : '{}'", name));
+		}
+		else {
+			handle_size_func(a.size());
+			for (unsigned int i = 0; i < a.size(); ++i) {
+				auto v = a.get_ushort(i);
+				handle_value_func(i, v);
+			}
+		}
+	}
+
+	void json_archive_reader::read_ushorts(const char* name, unsigned int size, unsigned short* values_begin) {
+		json_array a;
+		if (try_get_array_of_size(a, name, size)) {
+			for (unsigned int i = 0; i < size; ++i) {
+				values_begin[i] = a.get_ushort(i);
 			}
 		}
 	}
@@ -94,6 +108,29 @@ namespace solar {
 		}
 	}
 
+	void json_archive_reader::read_ints(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, int)> handle_value_func) {
+		json_array a;
+		if (!_current_object->try_get_array(a, name)) {
+			raise_error(build_string("array not found : '{}'", name));
+		}
+		else {
+			handle_size_func(a.size());
+			for (unsigned int i = 0; i < a.size(); ++i) {
+				auto v = a.get_int(i);
+				handle_value_func(i, v);
+			}
+		}
+	}
+
+	void json_archive_reader::read_ints(const char* name, unsigned int size, int* values_begin) {
+		json_array a;
+		if (try_get_array_of_size(a, name, size)) {
+			for (unsigned int i = 0; i < size; ++i) {
+				values_begin[i] = a.get_int(i);
+			}
+		}
+	}
+
 	void json_archive_reader::read_optional_int(const char* name, optional<int>& value) {
 		int read_value = 0;
 		if (_current_object->try_get_int(read_value, name)) {
@@ -101,15 +138,6 @@ namespace solar {
 		}
 		else {
 			value.clear();
-		}
-	}
-
-	void json_archive_reader::read_ints(const char* name, int* begin, unsigned int count) {
-		json_array a;
-		if (try_get_array_of_size(a, name, count)) {
-			for (unsigned int i = 0; i < count; ++i) {
-				begin[i] = a.get_int(i);
-			}
 		}
 	}
 
@@ -125,11 +153,25 @@ namespace solar {
 		}
 	}
 
-	void json_archive_reader::read_floats(const char* name, float* begin, unsigned int count) {
+	void json_archive_reader::read_floats(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) {
 		json_array a;
-		if (try_get_array_of_size(a, name, count)) {
-			for (unsigned int i = 0; i < count; ++i) {
-				begin[i] = a.get_float(i);
+		if (!_current_object->try_get_array(a, name)) {
+			raise_error(build_string("array not found : '{}'", name));
+		}
+		else {
+			handle_size_func(a.size());
+			for (unsigned int i = 0; i < a.size(); ++i) {
+				auto v = a.get_float(i);
+				handle_value_func(i, v);
+			}
+		}
+	}
+
+	void json_archive_reader::read_floats(const char* name, unsigned int size, float* values_begin) {
+		json_array a;
+		if (try_get_array_of_size(a, name, size)) {
+			for (unsigned int i = 0; i < size; ++i) {
+				values_begin[i] = a.get_float(i);
 			}
 		}
 	}

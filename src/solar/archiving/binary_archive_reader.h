@@ -22,13 +22,16 @@ namespace solar {
 		virtual void read_objects(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(archive_reader&, unsigned int)> read_object_func) override;
 		virtual void read_bool(const char* name, bool& value) override;
 		virtual void read_ushort(const char* name, unsigned short& value) override;
-		virtual void read_ushorts(const char* name, unsigned short* begin, unsigned int count) override;
+		virtual void read_ushorts(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, unsigned short)> handle_value_func) override;
+		virtual void read_ushorts(const char* name, unsigned int size, unsigned short* values_begin) override;
 		virtual void read_int(const char* name, int& value) override;
+		virtual void read_ints(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, int)> handle_value_func) override;
+		virtual void read_ints(const char* name, unsigned int size, int* values_begin) override;
 		virtual void read_optional_int(const char* name, optional<int>& value) override;
-		virtual void read_ints(const char* name, int* begin, unsigned int count) override;
 		virtual void read_uint(const char* name, unsigned int& value) override;
 		virtual void read_float(const char* name, float& value) override;
-		virtual void read_floats(const char* name, float* begin, unsigned int count) override;
+		virtual void read_floats(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) override;
+		virtual void read_floats(const char* name, unsigned int size, float* values_begin) override;
 		virtual void read_string(const char* name, std::string& value) override;
 
 	private:

@@ -62,7 +62,7 @@ namespace solar {
 		virtual void set_texture(texture& texture) override;
 		virtual void render_rect(const vec2& top_left, const vec2& top_right, const vec2& bottom_right, const vec2& bottom_left, const color& color, const simple_rect_uvs& uvs) override;
 		virtual void render_tri(const vec2& v0, const vec2& v1, const vec2& v2, const color& color) override;
-		virtual void render_indexed_tris(const vec2* vertices, unsigned int vertex_count, unsigned short* indices, unsigned int index_count, const color& color) override;
+		virtual void render_indexed_tris(const vec2* vertices, unsigned int vertex_count, const unsigned short* indices, unsigned int index_count, const color& color) override;
 
 	private:
 		void flush_all();

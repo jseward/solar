@@ -1245,6 +1245,15 @@
     <ClInclude Include="..\..\src\solar\rendering\primatives\prim2d_world_projection_buffer.h">
       <Filter>src\solar\rendering\primatives</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\settings\float_setting.h">
+      <Filter>src\solar\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\io\file_dialog_params.h">
+      <Filter>src\solar\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\io\file_dialog_filter.h">
+      <Filter>src\solar\io</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1843,6 +1852,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\rendering\primatives\prim2d_world_projection_buffer.cpp">
       <Filter>src\solar\rendering\primatives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\settings\float_setting.cpp">
+      <Filter>src\solar\settings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

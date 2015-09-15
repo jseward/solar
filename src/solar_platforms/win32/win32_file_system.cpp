@@ -225,6 +225,57 @@ namespace solar {
 		return false;
 	}
 
+	std::string win32_file_system::browse_open_file_dialog(const file_dialog_params& params) {
+		std::string file_name;
+
+		OPENFILENAMEW ofn = { 0 };
+		wchar_t ofn_buffer[260] = { 0 };
+
+		std::wstring filter = make_file_dialog_filter_string(params);
+		std::wstring initial_dir = utf8_to_utf16(params._initial_directory);
+
+		ofn.lStructSize = sizeof(ofn);
+		ofn.hwndOwner = ::GetActiveWindow();
+		ofn.hInstance = ::GetModuleHandle(NULL);
+		ofn.lpstrFile = ofn_buffer;
+		ofn.lpstrFilter = filter.data();
+		ofn.nMaxFile = 256;
+		ofn.lpstrInitialDir = initial_dir.data();
+		ofn.Flags = OFN_NOCHANGEDIR | OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+		if(::GetOpenFileNameW(&ofn)) {
+			file_name = utf16_to_utf8(ofn.lpstrFile);
+		}
+
+		return file_name;
+	}
+
+	std::string win32_file_system::browse_save_file_dialog(const file_dialog_params& params) {
+		ASSERT(false);
+		return "";
+	}
+
+	std::wstring win32_file_system::make_file_dialog_filter_string(const file_dialog_params& params) const {
+		std::wstring filter_string;
+
+		//NOTE: this is a bit tricky due to how OPENFILENAME expects null seperated strings. Can't do normal string copy
+		//operations because they treat the null character as the end of the string.
+		
+		for(const auto& filter : params._filters) {
+			filter_string += utf8_to_utf16(build_string("{}|{}|", filter._description, filter._pattern));
+		}
+		filter_string += L"All Files (*.*)|*.*|";
+
+		for (unsigned int i = 0; i < filter_string.length(); ++i) {
+			wchar_t* b = &filter_string[i];
+			if (*b == L'|') {
+				*b = L'\0';
+			}
+		}
+
+		return filter_string;
+	}
+
 	date_time win32_file_system::convert_FILETIME_to_date_time(const FILETIME& ft) const {
 		//http://www.gamedev.net/topic/565693-converting-filetime-to-time_t-on-windows/
 		ULARGE_INTEGER ull;

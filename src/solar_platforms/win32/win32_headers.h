@@ -10,3 +10,4 @@
 #include <shlobj.h> //SHGetFolderPathW
 #include <shlwapi.h> //PathAppend
 #include <mmsystem.h> //timeGetTime
+#include <commdlg.h> //OPENFILENAMEW

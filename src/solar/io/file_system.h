@@ -7,6 +7,7 @@
 #include "file_stream.h"
 #include "file_mode.h"
 #include "find_file_names_options.h"
+#include "file_dialog_params.h"
 
 namespace solar {
 
@@ -26,6 +27,8 @@ namespace solar {
 		virtual std::vector<std::string> find_file_names(const std::string& dir_path, const find_file_names_options& options) = 0;
 		virtual bool is_directory(const std::string& path) = 0;
 		virtual bool try_get_last_write_time(date_time& last_write_time, const std::string& path) = 0;
+		virtual std::string browse_open_file_dialog(const file_dialog_params& params) = 0;
+		virtual std::string browse_save_file_dialog(const file_dialog_params& params) = 0;
 	};
 
 }
