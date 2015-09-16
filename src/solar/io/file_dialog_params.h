@@ -17,6 +17,11 @@ namespace solar {
 			return *this;
 		}
 
+		file_dialog_params& add_filter(const char* description, const char* pattern) {
+			_filters.emplace_back(description, pattern);
+			return *this;
+		}
+
 		file_dialog_params& set_initial_directory(const std::string& initial_directory) {
 			_initial_directory = initial_directory;
 			return *this;

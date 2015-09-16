@@ -4,6 +4,11 @@
 
 namespace solar {
 
+	//example filter:
+	//
+	//description : "Text Files (*.txt)"
+	//pattern : "*.txt"
+
 	class file_dialog_filter {
 	public:
 		std::string _description;
@@ -15,6 +20,5 @@ namespace solar {
 			, _pattern(pattern) {
 		}
 	};
-
 
 }

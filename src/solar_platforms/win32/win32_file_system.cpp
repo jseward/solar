@@ -251,8 +251,30 @@ namespace solar {
 	}
 
 	std::string win32_file_system::browse_save_file_dialog(const file_dialog_params& params) {
-		ASSERT(false);
-		return "";
+		std::string file_name;
+
+		OPENFILENAMEW ofn = { 0 };
+		wchar_t ofn_buffer[260] = { 0 };
+
+		std::wstring filter = make_file_dialog_filter_string(params);
+
+		ofn.lStructSize = sizeof(ofn);
+		ofn.hwndOwner = ::GetActiveWindow();
+		ofn.hInstance = ::GetModuleHandle(NULL);
+		ofn.lpstrFile = ofn_buffer;
+		ofn.lpstrFilter = filter.data();
+		ofn.nMaxFile = 256;
+		ofn.lpstrInitialDir = NULL;
+		ofn.Flags = OFN_NOCHANGEDIR | OFN_PATHMUSTEXIST | OFN_NOREADONLYRETURN | OFN_OVERWRITEPROMPT;
+
+		if (::GetSaveFileNameW(&ofn)) {
+			file_name = utf16_to_utf8(ofn.lpstrFile);
+			if (get_file_extension(file_name).empty()) {
+				file_name = make_file_path(file_name, params._auto_append_extension);
+			}
+		}
+
+		return file_name;
 	}
 
 	std::wstring win32_file_system::make_file_dialog_filter_string(const file_dialog_params& params) const {
