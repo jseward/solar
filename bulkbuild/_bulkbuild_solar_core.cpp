@@ -9,4 +9,4 @@
 #include "_bulkbuild_solar_threading.cpp"
 #include "_bulkbuild_solar_time.cpp"
 #include "_bulkbuild_solar_utility.cpp"
-#include "_bulkbuild_solar_dependencies.cpp"
+#include "_bulkbuild_solar_dependencies_all.cpp"
