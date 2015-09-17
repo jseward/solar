@@ -40,6 +40,19 @@ namespace solar {
 		writer.write_ushorts(name, 3, values);
 	}
 
+	template<typename VectorT> void read_ushort_vector(archive_reader& reader, const char* name, VectorT& v) {
+		v.clear();
+		reader.read_ushorts(
+			name,
+			[&v](unsigned int size) { v.reserve(size); },
+			[&v](unsigned int, unsigned short value) { v.push_back(value); });
+	}
+
+	template<typename VectorT> 
+	void write_ushort_vector(archive_writer& writer, const char* name, const VectorT& v) {
+		writer.write_ushorts(name, v.size(), [&v](unsigned int i) { return v[i]; });
+	}
+
 	inline void read_int(archive_reader& reader, const char* name, int& value) {
 		reader.read_int(name, value);
 	}
