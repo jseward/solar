@@ -14,6 +14,8 @@ namespace solar {
 		static const color LIGHT_GREY;
 		static const color LIGHT_BLUE;
 		static const color ORANGE;
+		static const color YELLOW;
+		static const color YELLOW_GREEN;
 	};
 
 }

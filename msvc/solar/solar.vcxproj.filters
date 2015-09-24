@@ -1254,6 +1254,12 @@
     <ClInclude Include="..\..\src\solar\io\file_dialog_filter.h">
       <Filter>src\solar\io</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\math\tri2.h">
+      <Filter>src\solar\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\math\ray2.h">
+      <Filter>src\solar\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1855,6 +1861,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\settings\float_setting.cpp">
       <Filter>src\solar\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\math\tri2.cpp">
+      <Filter>src\solar\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\math\ray2.cpp">
+      <Filter>src\solar\math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

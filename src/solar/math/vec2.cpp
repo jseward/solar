@@ -43,4 +43,8 @@ namespace solar {
 		return (v0 - v1).get_length();
 	}
 
+	float get_distance_squared(const vec2& v0, const vec2& v1) {
+		return (v0 - v1).get_length_squared();
+	}
+
 }

@@ -22,6 +22,7 @@ namespace solar {
 
 	public:
 		friend float get_distance(const vec2& v0, const vec2& v1);
+		friend float get_distance_squared(const vec2& v0, const vec2& v1);
 	};
 
 }
