@@ -62,4 +62,13 @@ namespace solar {
 		const vec2 v3 = c3 * (t3 - t2);
 		return ((v0 + v1 + v2 + v3) / 2.f);
 	}
+
+	bool is_within_inclusive(float lower_bound, float upper_bound, float x) {
+		return (x >= lower_bound && x <= upper_bound);
+	}
+
+	bool is_within_exclusive(float lower_bound, float upper_bound, float x) {
+		return (x > lower_bound && x < upper_bound);
+	}
+
 }

@@ -2,6 +2,8 @@
 
 namespace solar {
 
+	class vec2; //for make_vec3_no_z()
+
 	class vec3 {
 	public:
 		float _x;
@@ -29,6 +31,7 @@ namespace solar {
 		friend float dot(const vec3& u, const vec3& v);
 		friend vec3 cross(const vec3& u, const vec3& v);
 		friend bool are_collinear(const vec3& u, const vec3& v);
+		friend vec3 make_vec3_no_z(const vec2& v2);
 	};
 
 }

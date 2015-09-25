@@ -14,6 +14,8 @@ namespace solar {
 
 	extern bool is_approx(float x, float y, float tolerance);
 	extern float constrain(float lower_bound, float upper_bound, float x);
+	extern bool is_within_inclusive(float lower_bound, float upper_bound, float x);
+	extern bool is_within_exclusive(float lower_bound, float upper_bound, float x);
 
 	//bounds:0-9 and x:11 -> 2
 	//bounds:0-9 and x:-4 -> 6

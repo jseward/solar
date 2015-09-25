@@ -17,6 +17,9 @@ namespace solar {
 		float get_closest_t_unconstrained(const vec2& p) const;
 		float get_closest_t_constrained(const vec2& p) const;
 
+		float get_distance_to_unconstrained(const vec2& p) const;
+		float get_distance_to_constrained(const vec2& p) const;
+
 	public:
 		friend ray2 make_ray2_begin_end(const vec2& begin, const vec2& end);
 	};

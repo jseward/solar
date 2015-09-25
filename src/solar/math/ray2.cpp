@@ -33,4 +33,12 @@ namespace solar {
 		return constrain(0.f, 1.f, get_closest_t_unconstrained(p));
 	}
 
+	float ray2::get_distance_to_unconstrained(const vec2& p) const {
+		return get_distance(p, get_position_on_ray(get_closest_t_unconstrained(p)));
+	}
+
+	float ray2::get_distance_to_constrained(const vec2& p) const {
+		return get_distance(p, get_position_on_ray(get_closest_t_constrained(p)));
+	}
+
 }

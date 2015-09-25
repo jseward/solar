@@ -21,6 +21,8 @@ namespace solar {
 		friend vec2 operator/(const vec2& lhs, float k);
 
 	public:
+		friend vec2 make_perpendicular(const vec2& in, float dir); //dir must be 1.f or -1.f
+		friend vec2 normalize(const vec2& in);
 		friend float get_distance(const vec2& v0, const vec2& v1);
 		friend float get_distance_squared(const vec2& v0, const vec2& v1);
 	};

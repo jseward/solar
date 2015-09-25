@@ -77,4 +77,8 @@ namespace solar {
 		return is_approx(d, 1.f, 0.001f);
 	}
 
+	vec3 make_vec3_no_z(const vec2& v2) {
+		return vec3(v2._x, v2._y, 0.f);
+	}
+
 }
