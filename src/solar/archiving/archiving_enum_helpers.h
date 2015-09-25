@@ -9,6 +9,21 @@
 
 namespace solar {
 
+	template<typename T> void read_enum(archive_reader& reader, const char* name, typename T& value) {
+		int value_as_int = 0;
+		reader.read_int(name, value_as_int);
+		if (value_as_int < 0 || value_as_int >= static_cast<int>(T::count)) {
+			reader.raise_error(build_string("Enum is out of range : \"{}\"", value_as_int));
+			value = T::invalid;
+		}
+		value = static_cast<T>(value_as_int);
+	}
+
+	template<typename T> void write_enum(archive_writer& writer, const char* name, typename const T& value) {
+		const int value_as_int = static_cast<int>(value);
+		writer.write_int(name, value_as_int);
+	}
+
 	template<typename T> void read_enum_as_string(archive_reader& reader, const char* name, typename T::enum_type& value) {
 		std::string value_as_string;
 		reader.read_string(name, value_as_string);
