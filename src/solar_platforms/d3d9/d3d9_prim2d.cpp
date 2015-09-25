@@ -67,6 +67,7 @@ namespace solar {
 	}
 
 	d3d9_prim2d::~d3d9_prim2d() {
+		ASSERT(!_is_rendering);
 		ASSERT(_buffered_rects.empty());
 		ASSERT(_buffered_tris.empty());
 		ASSERT(_default_shader == nullptr);
@@ -147,6 +148,8 @@ namespace solar {
 	}
 
 	void d3d9_prim2d::render_rect(const vec2& top_left, const vec2& top_right, const vec2& bottom_right, const vec2& bottom_left, const color& color, const simple_rect_uvs& uvs) {
+		ASSERT(_is_rendering);
+
 		if (_buffered_rects.size() >= _setup_params.get_max_buffered_rect_count()) {
 			flush_rects();
 		}
@@ -155,6 +158,8 @@ namespace solar {
 	}
 
 	void d3d9_prim2d::render_tri(const vec2& v0, const vec2& v1, const vec2& v2, const color& color) {
+		ASSERT(_is_rendering);
+
 		if (_buffered_tris.size() >= _setup_params.get_max_buffered_tri_count()) {
 			flush_tris();
 		}
