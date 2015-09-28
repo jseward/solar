@@ -20,6 +20,14 @@ namespace solar {
 		const ValueT& at(EnumT e) const {
 			return array::at(static_cast<size_t>(e));
 		}
+
+		ValueT& operator[](EnumT e) {
+			return array::at(static_cast<size_t>(e));
+		}
+
+		const ValueT& operator[](EnumT e) const {
+			return array::at(static_cast<size_t>(e));
+		}
 	};
 
 }

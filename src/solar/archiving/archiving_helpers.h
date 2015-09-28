@@ -175,7 +175,7 @@ namespace solar {
 		}
 	}
 
-	template<typename VectorT> void read_vector(archive_reader& reader, const char* name, VectorT& values, std::function<typename VectorT::value_type(archive_reader&)> read_value_func) {
+	template<typename VectorT> void read_object_vector(archive_reader& reader, const char* name, VectorT& values, std::function<typename VectorT::value_type(archive_reader&)> read_value_func) {
 		values.clear();
 		reader.read_objects(
 			name,
@@ -184,14 +184,14 @@ namespace solar {
 	}
 
 	template<typename VectorT> void read_object_vector(archive_reader& reader, const char* name, VectorT& values) {
-		read_vector(reader, name, values, [](archive_reader& reader) {
+		read_object_vector(reader, name, values, [](archive_reader& reader) {
 			VectorT::value_type value;
 			value.read_from_archive(reader);
 			return value;
 		});
 	}
 
-	template<typename VectorT> void write_vector(archive_writer& writer, const char* name, const VectorT& values, std::function<void(archive_writer&, typename const VectorT::value_type&)> write_value_func) {
+	template<typename VectorT> void write_object_vector(archive_writer& writer, const char* name, const VectorT& values, std::function<void(archive_writer&, typename const VectorT::value_type&)> write_value_func) {
 		auto iter = values.begin();
 		writer.write_objects(
 			name,
@@ -203,7 +203,40 @@ namespace solar {
 	}
 
 	template<typename VectorT> void write_object_vector(archive_writer& writer, const char* name, const VectorT& values) {
-		write_vector(writer, name, values, [](archive_writer& writer, typename const VectorT::value_type& value) {
+		write_object_vector(writer, name, values, [](archive_writer& writer, typename const VectorT::value_type& value) {
+			value.write_to_archive(writer);
+		});
+	}
+
+	template<typename DequeT> void read_object_deque(archive_reader& reader, const char* name, DequeT& values, std::function<typename DequeT::value_type(archive_reader&)> read_value_func) {
+		values.clear();
+		reader.read_objects(
+			name,
+			[](int) {},
+			[&](archive_reader& reader, unsigned int) { values.push_back(read_value_func(reader)); });
+	}
+
+	template<typename DequeT> void read_object_deque(archive_reader& reader, const char* name, DequeT& values) {
+		read_object_deque(reader, name, values, [](archive_reader& reader) {
+			DequeT::value_type value;
+			value.read_from_archive(reader);
+			return value;
+		});
+	}
+
+	template<typename DequeT> void write_object_deque(archive_writer& writer, const char* name, const DequeT& values, std::function<void(archive_writer&, typename const DequeT::value_type&)> write_value_func) {
+		auto iter = values.begin();
+		writer.write_objects(
+			name,
+			values.size(),
+			[&](archive_writer& writer, unsigned int) {
+				write_value_func(writer, *iter);
+				iter++;
+			});
+	}
+
+	template<typename DequeT> void write_object_deque(archive_writer& writer, const char* name, const DequeT& values) {
+		write_object_deque(writer, name, values, [](archive_writer& writer, typename const DequeT::value_type& value) {
 			value.write_to_archive(writer);
 		});
 	}

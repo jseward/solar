@@ -31,6 +31,8 @@ namespace solar {
 		void allocate_memory(size_t max_object_size, size_t max_object_count);
 		void deallocate_memory();
 
+		unsigned int get_created_object_count() const;
+
 		template<typename T, typename...Args> T* create_object(const Args&... args);
 		template<typename T> void release_object(T* obj);
 

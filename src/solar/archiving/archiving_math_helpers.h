@@ -87,7 +87,7 @@ namespace solar {
 	}
 
 	template<typename T> void read_vec2_vector(archive_reader& reader, const char* name, T& values) {
-		read_vector(reader, name, values, [](archive_reader& reader) {
+		read_object_vector(reader, name, values, [](archive_reader& reader) {
 			archiving_vec2_impl::archivable_vec2 v;
 			v.read_from_archive(reader);
 			return static_cast<vec2>(v);
@@ -95,13 +95,13 @@ namespace solar {
 	}
 
 	template<typename T> void write_vec2_vector(archive_writer& writer, const char* name, const T& values) {
-		write_vector(writer, name, values, [](archive_writer& writer, const vec2& value) {
+		write_object_vector(writer, name, values, [](archive_writer& writer, const vec2& value) {
 			archiving_vec2_impl::archivable_vec2(value).write_to_archive(writer);
 		});
 	}
 
 	template<typename T> void read_vec3_no_z_vector(archive_reader& reader, const char* name, T& values) {
-		read_vector(reader, name, values, [](archive_reader& reader) {
+		read_object_vector(reader, name, values, [](archive_reader& reader) {
 			archiving_vec2_impl::archivable_vec2 v;
 			v.read_from_archive(reader);
 			return vec3(v._x, v._y, 0.f);
@@ -109,7 +109,7 @@ namespace solar {
 	}
 
 	template<typename T> void write_vec3_no_z_vector(archive_writer& writer, const char* name, const T& values) {
-		write_vector(writer, name, values, [](archive_writer& writer, const vec3& value) {
+		write_object_vector(writer, name, values, [](archive_writer& writer, const vec3& value) {
 			ASSERT(value._z == 0.f);
 			archiving_vec2_impl::archivable_vec2(vec2(value._x, value._y)).write_to_archive(writer);
 		});
