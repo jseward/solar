@@ -15,5 +15,6 @@
 #include "solar/math/random_stream.cpp"
 #include "solar/math/tri2.cpp"
 #include "solar/math/ray2.cpp"
+#include "solar/math/circle.cpp"
 
 

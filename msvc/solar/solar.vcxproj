@@ -69,6 +69,7 @@
     <ClInclude Include="..\..\src\solar\json\json_value_builder.h" />
     <ClInclude Include="..\..\src\solar\json\json_writer.h" />
     <ClInclude Include="..\..\src\solar\math\basis.h" />
+    <ClInclude Include="..\..\src\solar\math\circle.h" />
     <ClInclude Include="..\..\src\solar\math\clamp.h" />
     <ClInclude Include="..\..\src\solar\math\deg.h" />
     <ClInclude Include="..\..\src\solar\math\mat33.h" />
@@ -499,6 +500,7 @@
     <ClCompile Include="..\..\src\solar\json\json_object.cpp" />
     <ClCompile Include="..\..\src\solar\json\json_writer.cpp" />
     <ClCompile Include="..\..\src\solar\math\basis.cpp" />
+    <ClCompile Include="..\..\src\solar\math\circle.cpp" />
     <ClCompile Include="..\..\src\solar\math\mat33.cpp" />
     <ClCompile Include="..\..\src\solar\math\mat44.cpp" />
     <ClCompile Include="..\..\src\solar\math\math_constants.cpp" />

@@ -1260,6 +1260,9 @@
     <ClInclude Include="..\..\src\solar\math\ray2.h">
       <Filter>src\solar\math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\math\circle.h">
+      <Filter>src\solar\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1866,6 +1869,9 @@
       <Filter>src\solar\math</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar\math\ray2.cpp">
+      <Filter>src\solar\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\math\circle.cpp">
       <Filter>src\solar\math</Filter>
     </ClCompile>
   </ItemGroup>
