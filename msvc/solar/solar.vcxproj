@@ -89,6 +89,16 @@
     <ClInclude Include="..\..\src\solar\math\vec2.h" />
     <ClInclude Include="..\..\src\solar\math\vec3.h" />
     <ClInclude Include="..\..\src\solar\math\vec4.h" />
+    <ClInclude Include="..\..\src\solar\networking\enetpp\client.h" />
+    <ClInclude Include="..\..\src\solar\networking\enetpp\client_connect_params.h" />
+    <ClInclude Include="..\..\src\solar\networking\enetpp\client_queued_packet.h" />
+    <ClInclude Include="..\..\src\solar\networking\enetpp\server.h" />
+    <ClInclude Include="..\..\src\solar\networking\enetpp\server_listen_params.h" />
+    <ClInclude Include="..\..\src\solar\networking\enetpp\server_peer_context.h" />
+    <ClInclude Include="..\..\src\solar\networking\enetpp\server_peer_event.h" />
+    <ClInclude Include="..\..\src\solar\networking\enetpp\server_queued_packet.h" />
+    <ClInclude Include="..\..\src\solar\networking\enetpp\set_current_thread_name.h" />
+    <ClInclude Include="..\..\src\solar\networking\enetpp\global_state.h" />
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush.h" />
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush_factory.h" />
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush_id.h" />
@@ -302,6 +312,15 @@
     <ClInclude Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\XInput.h" />
     <ClInclude Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xma2defs.h" />
     <ClInclude Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xnamath.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\callbacks.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\enet.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\list.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\protocol.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\time.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\types.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\unix.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\utility.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\win32.h" />
     <ClInclude Include="..\..\src\solar_dependencies\rapidjson\include\rapidjson\allocators.h" />
     <ClInclude Include="..\..\src\solar_dependencies\rapidjson\include\rapidjson\document.h" />
     <ClInclude Include="..\..\src\solar_dependencies\rapidjson\include\rapidjson\encodedstream.h" />
@@ -405,6 +424,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies_all.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies_enet.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -517,6 +540,13 @@
     <ClCompile Include="..\..\src\solar\math\vec2.cpp" />
     <ClCompile Include="..\..\src\solar\math\vec3.cpp" />
     <ClCompile Include="..\..\src\solar\math\vec4.cpp" />
+    <ClCompile Include="..\..\src\solar\networking\enetpp\client.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\networking\enetpp\server.cpp" />
+    <ClCompile Include="..\..\src\solar\networking\enetpp\set_current_thread_name.cpp" />
+    <ClCompile Include="..\..\src\solar\networking\enetpp\global_state.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush_factory.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush_id.cpp" />
@@ -610,6 +640,15 @@
     <ClCompile Include="..\..\src\solar\windows\window_render_state.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_render_state_helpers.cpp" />
     <ClCompile Include="..\..\src\solar_dependencies\cppformat\format.cc" />
+    <ClCompile Include="..\..\src\solar_dependencies\enet\callbacks.c" />
+    <ClCompile Include="..\..\src\solar_dependencies\enet\compress.c" />
+    <ClCompile Include="..\..\src\solar_dependencies\enet\host.c" />
+    <ClCompile Include="..\..\src\solar_dependencies\enet\list.c" />
+    <ClCompile Include="..\..\src\solar_dependencies\enet\packet.c" />
+    <ClCompile Include="..\..\src\solar_dependencies\enet\peer.c" />
+    <ClCompile Include="..\..\src\solar_dependencies\enet\protocol.c" />
+    <ClCompile Include="..\..\src\solar_dependencies\enet\unix.c" />
+    <ClCompile Include="..\..\src\solar_dependencies\enet\win32.c" />
     <ClCompile Include="..\..\src\solar_engines\win32_cli_engine.cpp" />
     <ClCompile Include="..\..\src\solar_engines\win32_d3d9_engine.cpp" />
     <ClCompile Include="..\..\src\solar_engines\win32_d3d9_engine_settings.cpp" />
@@ -712,7 +751,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src\;$(ProjectDir)..\..\src\solar_dependencies\enet\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -725,7 +764,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src\;$(ProjectDir)..\..\src\solar_dependencies\enet\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
