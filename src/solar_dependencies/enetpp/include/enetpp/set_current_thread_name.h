@@ -1,10 +1,11 @@
-#include "set_current_thread_name.h"
+#ifndef ENETPP_SET_CURRENT_THREAD_NAME_H_
+#define ENETPP_SET_CURRENT_THREAD_NAME_H_
 
-#include "solar_dependencies/enet/include/enet/enet.h"
+#include "enet/enet.h"
 
 namespace enetpp {
 
-	void set_current_thread_name(const char* name) {
+	inline void set_current_thread_name(const char* name) {
 
 #ifdef _WIN32
 
@@ -12,8 +13,7 @@ namespace enetpp {
 		const DWORD MS_VC_EXCEPTION = 0x406D1388;
 
 		#pragma pack(push,8)
-		typedef struct tagTHREADNAME_INFO
-		{
+		typedef struct tagTHREADNAME_INFO {
 			DWORD dwType; // Must be 0x1000.
 			LPCSTR szName; // Pointer to name (in user addr space).
 			DWORD dwThreadID; // Thread ID (-1=caller thread).
@@ -35,10 +35,12 @@ namespace enetpp {
 
 #else
 
-		#pragma error("unknown platform")
+		//todo - unknown platform
 
 #endif
 
 	}
 
 }
+
+#endif

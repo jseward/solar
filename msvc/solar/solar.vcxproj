@@ -89,16 +89,6 @@
     <ClInclude Include="..\..\src\solar\math\vec2.h" />
     <ClInclude Include="..\..\src\solar\math\vec3.h" />
     <ClInclude Include="..\..\src\solar\math\vec4.h" />
-    <ClInclude Include="..\..\src\solar\networking\enetpp\client.h" />
-    <ClInclude Include="..\..\src\solar\networking\enetpp\client_connect_params.h" />
-    <ClInclude Include="..\..\src\solar\networking\enetpp\client_queued_packet.h" />
-    <ClInclude Include="..\..\src\solar\networking\enetpp\server.h" />
-    <ClInclude Include="..\..\src\solar\networking\enetpp\server_listen_params.h" />
-    <ClInclude Include="..\..\src\solar\networking\enetpp\server_peer_context.h" />
-    <ClInclude Include="..\..\src\solar\networking\enetpp\server_peer_event.h" />
-    <ClInclude Include="..\..\src\solar\networking\enetpp\server_queued_packet.h" />
-    <ClInclude Include="..\..\src\solar\networking\enetpp\set_current_thread_name.h" />
-    <ClInclude Include="..\..\src\solar\networking\enetpp\global_state.h" />
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush.h" />
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush_factory.h" />
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush_id.h" />
@@ -312,6 +302,16 @@
     <ClInclude Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\XInput.h" />
     <ClInclude Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xma2defs.h" />
     <ClInclude Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xnamath.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client_connect_params.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client_queued_packet.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\global_state.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\server.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\server_event.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\server_listen_params.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\server_queued_packet.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\set_current_thread_name.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\trace_handler.h" />
     <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\callbacks.h" />
     <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\enet.h" />
     <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\list.h" />
@@ -540,13 +540,6 @@
     <ClCompile Include="..\..\src\solar\math\vec2.cpp" />
     <ClCompile Include="..\..\src\solar\math\vec3.cpp" />
     <ClCompile Include="..\..\src\solar\math\vec4.cpp" />
-    <ClCompile Include="..\..\src\solar\networking\enetpp\client.cpp">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\networking\enetpp\server.cpp" />
-    <ClCompile Include="..\..\src\solar\networking\enetpp\set_current_thread_name.cpp" />
-    <ClCompile Include="..\..\src\solar\networking\enetpp\global_state.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush_factory.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush_id.cpp" />

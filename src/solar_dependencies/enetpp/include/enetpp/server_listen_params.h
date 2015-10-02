@@ -1,15 +1,16 @@
-#pragma once
+#ifndef ENETPP_SERVER_LISTEN_PARAMS_H_
+#define ENETPP_SERVER_LISTEN_PARAMS_H_
 
-#include "solar_dependencies/enet/include/enet/enet.h"
+#include "enet/enet.h"
 #include <chrono>
 #include <functional>
-#include "server_peer_context.h"
 
 namespace enetpp {
 
+	template<typename ClientT>
 	class server_listen_params {
 	public:
-		using create_peer_context_func = std::function<server_peer_context*(const char*)>;
+		using initialize_client_function = std::function<void(ClientT& client, const char* ip)>;
 
 	public:
 		size_t _max_client_count;
@@ -18,7 +19,7 @@ namespace enetpp {
 		enet_uint32 _outgoing_bandwidth;
 		enet_uint16 _listen_port;
 		std::chrono::milliseconds _peer_timeout;
-		create_peer_context_func _create_peer_context_func;
+		initialize_client_function _initialize_client_function;
 
 	public:
 		server_listen_params()
@@ -31,6 +32,11 @@ namespace enetpp {
 
 		server_listen_params& set_listen_port(enet_uint16 port) {
 			_listen_port = port;
+			return *this;
+		}
+
+		server_listen_params& set_max_client_count(size_t count) {
+			_max_client_count = count;
 			return *this;
 		}
 
@@ -54,8 +60,8 @@ namespace enetpp {
 			return *this;
 		}
 
-		server_listen_params& set_create_peer_context_func(create_peer_context_func func) {
-			_create_peer_context_func = func;
+		server_listen_params& set_initialize_client_function(initialize_client_function f) {
+			_initialize_client_function = f;
 			return *this;
 		}		
 
@@ -68,3 +74,5 @@ namespace enetpp {
 	};
 
 }
+
+#endif

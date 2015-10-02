@@ -139,9 +139,6 @@
     <Filter Include="src\solar\networking">
       <UniqueIdentifier>{14fe4a23-10f0-4065-a602-19440e1be4af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\solar\networking\enetpp">
-      <UniqueIdentifier>{aea9bf51-6127-43aa-ac28-a1389e8e3406}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\solar_dependencies\enet">
       <UniqueIdentifier>{e32a76f0-7862-428f-9c70-b1c5f3e3a0f4}</UniqueIdentifier>
     </Filter>
@@ -150,6 +147,15 @@
     </Filter>
     <Filter Include="src\solar_dependencies\enet\include\enet">
       <UniqueIdentifier>{fc08b099-253d-4171-a33b-37f39adbe5c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\solar_dependencies\enetpp">
+      <UniqueIdentifier>{03d66b75-ceaf-406e-8333-96de0a488f43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\solar_dependencies\enetpp\include">
+      <UniqueIdentifier>{9e87e558-c66c-45ae-9290-ca8b377639d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\solar_dependencies\enetpp\include\enetpp">
+      <UniqueIdentifier>{caf1d5a3-65ab-4c19-a8f0-427c2f92e87b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1278,18 +1284,6 @@
     <ClInclude Include="..\..\src\solar\math\circle.h">
       <Filter>src\solar\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\networking\enetpp\client.h">
-      <Filter>src\solar\networking\enetpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\networking\enetpp\server.h">
-      <Filter>src\solar\networking\enetpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\networking\enetpp\client_connect_params.h">
-      <Filter>src\solar\networking\enetpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\networking\enetpp\set_current_thread_name.h">
-      <Filter>src\solar\networking\enetpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\types.h">
       <Filter>src\solar_dependencies\enet\include\enet</Filter>
     </ClInclude>
@@ -1317,23 +1311,35 @@
     <ClInclude Include="..\..\src\solar_dependencies\enet\include\enet\time.h">
       <Filter>src\solar_dependencies\enet\include\enet</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\networking\enetpp\client_queued_packet.h">
-      <Filter>src\solar\networking\enetpp</Filter>
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\global_state.h">
+      <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\networking\enetpp\global_state.h">
-      <Filter>src\solar\networking\enetpp</Filter>
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\server.h">
+      <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\networking\enetpp\server_listen_params.h">
-      <Filter>src\solar\networking\enetpp</Filter>
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\server_event.h">
+      <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\networking\enetpp\server_queued_packet.h">
-      <Filter>src\solar\networking\enetpp</Filter>
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\server_listen_params.h">
+      <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\networking\enetpp\server_peer_event.h">
-      <Filter>src\solar\networking\enetpp</Filter>
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\server_queued_packet.h">
+      <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\networking\enetpp\server_peer_context.h">
-      <Filter>src\solar\networking\enetpp</Filter>
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\set_current_thread_name.h">
+      <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\trace_handler.h">
+      <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client.h">
+      <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client_connect_params.h">
+      <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client_queued_packet.h">
+      <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1949,15 +1955,6 @@
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies_enet.cpp">
       <Filter>bulkbuild</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar\networking\enetpp\server.cpp">
-      <Filter>src\solar\networking\enetpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\networking\enetpp\client.cpp">
-      <Filter>src\solar\networking\enetpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\networking\enetpp\set_current_thread_name.cpp">
-      <Filter>src\solar\networking\enetpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar_dependencies\enet\peer.c">
       <Filter>src\solar_dependencies\enet</Filter>
     </ClCompile>
@@ -1984,9 +1981,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar_dependencies\enet\packet.c">
       <Filter>src\solar_dependencies\enet</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\networking\enetpp\global_state.cpp">
-      <Filter>src\solar\networking\enetpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

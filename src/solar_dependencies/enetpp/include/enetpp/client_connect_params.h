@@ -1,6 +1,7 @@
-#pragma once
+#ifndef ENETPP_CLIENT_CONNECT_PARAMS_H_
+#define ENETPP_CLIENT_CONNECT_PARAMS_H_
 
-#include "solar_dependencies/enet/include/enet/enet.h"
+#include "enet/enet.h"
 #include <chrono>
 
 namespace enetpp {
@@ -16,7 +17,7 @@ namespace enetpp {
 
 	public:
 		client_connect_params() 
-			: _channel_count(1)
+			: _channel_count(0)
 			, _incoming_bandwidth(0)
 			, _outgoing_bandwidth(0)
 			, _server_host_name()
@@ -60,3 +61,5 @@ namespace enetpp {
 	};
 
 }
+
+#endif
