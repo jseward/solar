@@ -1,5 +1,7 @@
 #include "ip_end_point.h"
 
+#include "solar/strings/string_build.h"
+
 namespace solar {
 
 	ip_end_point::ip_end_point() 
@@ -18,6 +20,10 @@ namespace solar {
 
 	int ip_end_point::get_port() const {
 		return _port;
+	}
+
+	std::string ip_end_point::to_string() const {
+		return build_string("{}:{}", _address.to_string(), _port);
 	}
 
 }

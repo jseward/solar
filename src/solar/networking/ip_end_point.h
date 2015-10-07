@@ -15,6 +15,8 @@ namespace solar {
 
 		const ip_address& get_address() const;
 		int get_port() const;
+
+		std::string to_string() const;
 	};
 
 }
