@@ -11,6 +11,7 @@
 #include "_bulkbuild_solar_strings.cpp"
 #include "_bulkbuild_solar_text.cpp"
 #include "_bulkbuild_solar_threading.cpp"
+#include "_bulkbuild_solar_networking.cpp"
 #include "_bulkbuild_solar_time.cpp"
 #include "_bulkbuild_solar_utility.cpp"
 #include "_bulkbuild_solar_windows.cpp"

@@ -42,33 +42,36 @@ namespace solar {
 		write_atomic_value<unsigned short>(value);
 	}
 
-	void binary_archive_writer::write_ushorts(const char* name, unsigned int size, std::function<unsigned short(unsigned int)> get_value_at_func) {
+	void binary_archive_writer::write_ushorts_dynamic(const char* name, unsigned int size, std::function<unsigned short(unsigned int)> get_value_at_func) {
 		UNUSED_PARAMETER(name);
+		write_atomic_value<unsigned int>(size);
 		for (unsigned int i = 0; i < size; ++i) {
 			write_atomic_value<unsigned short>(get_value_at_func(i));
 		}
 	}
 
-	void binary_archive_writer::write_ushorts(const char* name, unsigned int size, const unsigned short* values_begin) {
+	void binary_archive_writer::write_ushorts_fixed(const char* name, unsigned int size, const unsigned short* values_begin) {
 		UNUSED_PARAMETER(name);
 		for (unsigned int i = 0; i < size; ++i) {
 			write_atomic_value<unsigned short>(values_begin[i]);
 		}
 	}
 
-	void binary_archive_writer::write_int(const char* name, int value) {
+	void binary_archive_writer::write_int(const char* name, int value, const archive_int_compression& compression) {
 		UNUSED_PARAMETER(name);
+		UNUSED_PARAMETER(compression);
 		write_atomic_value<int>(value);
 	}
 
-	void binary_archive_writer::write_ints(const char* name, unsigned int size, std::function<int(unsigned int)> get_value_at_func) {
+	void binary_archive_writer::write_ints_dynamic(const char* name, unsigned int size, std::function<int(unsigned int)> get_value_at_func) {
 		UNUSED_PARAMETER(name);
+		write_atomic_value<unsigned int>(size);
 		for (unsigned int i = 0; i < size; ++i) {
 			write_atomic_value<int>(get_value_at_func(i));
 		}
 	}
 
-	void binary_archive_writer::write_ints(const char* name, unsigned int size, const int* values_begin) {
+	void binary_archive_writer::write_ints_fixed(const char* name, unsigned int size, const int* values_begin) {
 		UNUSED_PARAMETER(name);
 		for (unsigned int i = 0; i < size; ++i) {
 			write_atomic_value<int>(values_begin[i]);
@@ -93,14 +96,15 @@ namespace solar {
 		write_atomic_value<float>(value);
 	}
 
-	void binary_archive_writer::write_floats(const char* name, unsigned int size, std::function<float(unsigned int)> get_value_at_func) {
+	void binary_archive_writer::write_floats_dynamic(const char* name, unsigned int size, std::function<float(unsigned int)> get_value_at_func) {
 		UNUSED_PARAMETER(name);
+		write_atomic_value<unsigned int>(size);
 		for (unsigned int i = 0; i < size; ++i) {
 			write_atomic_value<float>(get_value_at_func(i));
 		}
 	}
 
-	void binary_archive_writer::write_floats(const char* name, unsigned int size, const float* values_begin) {
+	void binary_archive_writer::write_floats_fixed(const char* name, unsigned int size, const float* values_begin) {
 		UNUSED_PARAMETER(name);
 		for (unsigned int i = 0; i < size; ++i) {
 			write_atomic_value<float>(values_begin[i]);

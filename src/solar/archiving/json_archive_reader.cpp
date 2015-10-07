@@ -1,5 +1,6 @@
 #include "json_archive_reader.h"
 #include "solar/utility/alert.h"
+#include "solar/utility/unused_parameter.h"
 #include "solar/strings/string_build.h"
 #include "archivable.h"
 #include "single_value_archivable.h"
@@ -79,7 +80,7 @@ namespace solar {
 		}
 	}
 
-	void json_archive_reader::read_ushorts(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, unsigned short)> handle_value_func) {
+	void json_archive_reader::read_ushorts_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, unsigned short)> handle_value_func) {
 		json_array a;
 		if (!_current_object->try_get_array(a, name)) {
 			raise_error(build_string("array not found : '{}'", name));
@@ -93,7 +94,7 @@ namespace solar {
 		}
 	}
 
-	void json_archive_reader::read_ushorts(const char* name, unsigned int size, unsigned short* values_begin) {
+	void json_archive_reader::read_ushorts_fixed(const char* name, unsigned int size, unsigned short* values_begin) {
 		json_array a;
 		if (try_get_array_of_size(a, name, size)) {
 			for (unsigned int i = 0; i < size; ++i) {
@@ -102,13 +103,14 @@ namespace solar {
 		}
 	}
 
-	void json_archive_reader::read_int(const char* name, int& value) {
+	void json_archive_reader::read_int(const char* name, int& value, const archive_int_compression& compression) {
+		UNUSED_PARAMETER(compression);
 		if (!_current_object->try_get_int(value, name)) {
 			raise_error(build_string("int not found : '{}'", name));
 		}
 	}
 
-	void json_archive_reader::read_ints(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, int)> handle_value_func) {
+	void json_archive_reader::read_ints_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, int)> handle_value_func) {
 		json_array a;
 		if (!_current_object->try_get_array(a, name)) {
 			raise_error(build_string("array not found : '{}'", name));
@@ -122,7 +124,7 @@ namespace solar {
 		}
 	}
 
-	void json_archive_reader::read_ints(const char* name, unsigned int size, int* values_begin) {
+	void json_archive_reader::read_ints_fixed(const char* name, unsigned int size, int* values_begin) {
 		json_array a;
 		if (try_get_array_of_size(a, name, size)) {
 			for (unsigned int i = 0; i < size; ++i) {
@@ -153,7 +155,7 @@ namespace solar {
 		}
 	}
 
-	void json_archive_reader::read_floats(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) {
+	void json_archive_reader::read_floats_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) {
 		json_array a;
 		if (!_current_object->try_get_array(a, name)) {
 			raise_error(build_string("array not found : '{}'", name));
@@ -167,7 +169,7 @@ namespace solar {
 		}
 	}
 
-	void json_archive_reader::read_floats(const char* name, unsigned int size, float* values_begin) {
+	void json_archive_reader::read_floats_fixed(const char* name, unsigned int size, float* values_begin) {
 		json_array a;
 		if (try_get_array_of_size(a, name, size)) {
 			for (unsigned int i = 0; i < size; ++i) {

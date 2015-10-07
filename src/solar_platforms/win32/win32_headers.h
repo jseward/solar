@@ -4,6 +4,7 @@
 #define VC_EXTRALEAN
 #define	WIN32_LEAN_AND_MEAN
 #define NOMINMAX //window header files define min() / max() as macros, causes conflicts with 3rdParty libs (ex. lua)
+#define _WINSOCK_DEPRECATED_NO_WARNINGS //should fix this in future, remove gethostbyname()
 
 #include <windows.h>
 #include <windowsx.h> //GET_X_LPARAM macro
@@ -11,3 +12,4 @@
 #include <shlwapi.h> //PathAppend
 #include <mmsystem.h> //timeGetTime
 #include <commdlg.h> //OPENFILENAMEW
+#include <winsock2.h>

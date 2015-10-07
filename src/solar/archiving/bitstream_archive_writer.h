@@ -1,20 +1,26 @@
 #pragma once
 
-#include <memory>
-#include "solar/io/file_stream.h"
-#include "solar/utility/verify.h"
 #include "archive_writer.h"
 
 namespace solar {
 
-	class binary_archive_writer : public archive_writer {
+	//writes directly to memory using only enough bits as required. (ex. bool is one bit)
 
+	class bitstream_archive_writer : public archive_writer {
 	private:
-		stream& _stream;
+		unsigned char* _preallocated_data;
+		size_t _preallocated_data_size;
+
+		unsigned char* _data;
+		size_t _data_bit_pos;
+		size_t _data_size_in_bits;
 
 	public:
-		binary_archive_writer(stream& stream);
-		virtual ~binary_archive_writer();
+		bitstream_archive_writer(unsigned char* preallocated_data, size_t preallocated_data_size);
+		virtual ~bitstream_archive_writer();
+
+		const unsigned char* get_data() const;
+		size_t get_data_size() const;
 
 		virtual void begin_writing() override;
 		virtual void end_writing() override;
@@ -35,11 +41,13 @@ namespace solar {
 		virtual void write_string(const char* name, const std::string& value) override;
 
 	private:
-		template<typename T> void write_atomic_value(const T& value);
-	};
+		void make_room_for_bits(unsigned int bit_count);
+		void write_bit(unsigned char bit);
+		void write_bits(const unsigned char* bits, unsigned int bit_count);
 
-	template<typename T> inline void binary_archive_writer::write_atomic_value(const T& value) {
-		_stream.write_bytes(reinterpret_cast<const char*>(&value), sizeof(T));
-	}
+		template<typename T> void write_atomic_value(const T& value) {
+			write_bits(reinterpret_cast<const unsigned char*>(&value), sizeof(T) * 8);
+		}
+	};
 
 }

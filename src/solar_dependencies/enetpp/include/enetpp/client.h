@@ -58,6 +58,8 @@ namespace enetpp {
 			assert(params._server_port != 0);
 			assert(!params._server_host_name.empty());
 
+			trace("connecting to '" + params._server_host_name + ":" + std::to_string(params._server_port) + "'");
+
 			_should_exit_thread = false;
 			_thread = std::make_unique<std::thread>(&client::run_in_thread, this, params);
 		}

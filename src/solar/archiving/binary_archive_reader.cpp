@@ -49,7 +49,7 @@ namespace solar {
 		read_atomic_value<unsigned short>(value);
 	}
 
-	void binary_archive_reader::read_ushorts(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, unsigned short)> handle_value_func) {
+	void binary_archive_reader::read_ushorts_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, unsigned short)> handle_value_func) {
 		UNUSED_PARAMETER(name);
 		unsigned int size = 0;
 		read_atomic_value<unsigned int>(size);
@@ -61,19 +61,20 @@ namespace solar {
 		}
 	}
 
-	void binary_archive_reader::read_ushorts(const char* name, unsigned int size, unsigned short* values_begin) {
+	void binary_archive_reader::read_ushorts_fixed(const char* name, unsigned int size, unsigned short* values_begin) {
 		UNUSED_PARAMETER(name);
 		for (unsigned int i = 0; i < size; ++i) {
 			read_atomic_value<unsigned short>(values_begin[i]);
 		}
 	}
 
-	void binary_archive_reader::read_int(const char* name, int& value) {
+	void binary_archive_reader::read_int(const char* name, int& value, const archive_int_compression& compression) {
 		UNUSED_PARAMETER(name);
+		UNUSED_PARAMETER(compression);
 		read_atomic_value<int>(value);
 	}
 
-	void binary_archive_reader::read_ints(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, int)> handle_value_func) {
+	void binary_archive_reader::read_ints_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, int)> handle_value_func) {
 		UNUSED_PARAMETER(name);
 		unsigned int size = 0;
 		read_atomic_value<unsigned int>(size);
@@ -85,7 +86,7 @@ namespace solar {
 		}
 	}
 
-	void binary_archive_reader::read_ints(const char* name, unsigned int size, int* values_begin) {
+	void binary_archive_reader::read_ints_fixed(const char* name, unsigned int size, int* values_begin) {
 		UNUSED_PARAMETER(name);
 		for (unsigned int i = 0; i < size; ++i) {
 			read_atomic_value<int>(values_begin[i]);
@@ -115,7 +116,7 @@ namespace solar {
 		read_atomic_value<float>(value);
 	}
 
-	void binary_archive_reader::read_floats(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) {
+	void binary_archive_reader::read_floats_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) {
 		UNUSED_PARAMETER(name);
 		unsigned int size = 0;
 		read_atomic_value<unsigned int>(size);
@@ -127,7 +128,7 @@ namespace solar {
 		}
 	}
 
-	void binary_archive_reader::read_floats(const char* name, unsigned int size, float* values_begin) {
+	void binary_archive_reader::read_floats_fixed(const char* name, unsigned int size, float* values_begin) {
 		UNUSED_PARAMETER(name);
 		for (unsigned int i = 0; i < size; ++i) {
 			read_atomic_value<float>(values_begin[i]);

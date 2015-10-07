@@ -74,6 +74,8 @@ namespace enetpp {
 			assert(params._listen_port != 0);
 			assert(params._initialize_client_function != nullptr);
 
+			trace("listening on port " + std::to_string(params._listen_port));
+
 			_should_exit_thread = false;
 			_thread = std::make_unique<std::thread>(&server::run_in_thread, this, params);
 		}

@@ -1,6 +1,7 @@
 #include "json_archive_writer.h"
 
 #include "solar/utility/assert.h"
+#include "solar/utility/unused_parameter.h"
 #include "archivable.h"
 #include "single_value_archivable.h"
 
@@ -57,7 +58,7 @@ namespace solar {
 		_writer.write_ushort(name, value);
 	}
 
-	void json_archive_writer::write_ushorts(const char* name, unsigned int size, std::function<unsigned short(unsigned int)> get_value_at_func) {
+	void json_archive_writer::write_ushorts_dynamic(const char* name, unsigned int size, std::function<unsigned short(unsigned int)> get_value_at_func) {
 		ASSERT(_is_writing);
 		_writer.begin_array(name);
 		for (unsigned int i = 0; i < size; ++i) {
@@ -66,7 +67,7 @@ namespace solar {
 		_writer.end_array();
 	}
 
-	void json_archive_writer::write_ushorts(const char* name, unsigned int size, const unsigned short* values_begin) {
+	void json_archive_writer::write_ushorts_fixed(const char* name, unsigned int size, const unsigned short* values_begin) {
 		ASSERT(_is_writing);
 		_writer.begin_array(name);
 		for (unsigned int i = 0; i < size; ++i) {
@@ -75,12 +76,13 @@ namespace solar {
 		_writer.end_array();
 	}
 
-	void json_archive_writer::write_int(const char* name, int value) {
+	void json_archive_writer::write_int(const char* name, int value, const archive_int_compression& compression) {
+		UNUSED_PARAMETER(compression);
 		ASSERT(_is_writing);
 		_writer.write_int(name, value);
 	}
 
-	void json_archive_writer::write_ints(const char* name, unsigned int size, std::function<int(unsigned int)> get_value_at_func) {
+	void json_archive_writer::write_ints_dynamic(const char* name, unsigned int size, std::function<int(unsigned int)> get_value_at_func) {
 		ASSERT(_is_writing);
 		_writer.begin_array(name);
 		for (unsigned int i = 0; i < size; ++i) {
@@ -89,7 +91,7 @@ namespace solar {
 		_writer.end_array();
 	}
 
-	void json_archive_writer::write_ints(const char* name, unsigned int size, const int* values_begin) {
+	void json_archive_writer::write_ints_fixed(const char* name, unsigned int size, const int* values_begin) {
 		ASSERT(_is_writing);
 		_writer.begin_array(name);
 		for (unsigned int i = 0; i < size; ++i) {
@@ -115,7 +117,7 @@ namespace solar {
 		_writer.write_float(name, value);
 	}
 
-	void json_archive_writer::write_floats(const char* name, unsigned int size, std::function<float(unsigned int)> get_value_at_func) {
+	void json_archive_writer::write_floats_dynamic(const char* name, unsigned int size, std::function<float(unsigned int)> get_value_at_func) {
 		ASSERT(_is_writing);
 		_writer.begin_array(name);
 		for (unsigned int i = 0; i < size; ++i) {
@@ -124,7 +126,7 @@ namespace solar {
 		_writer.end_array();
 	}
 
-	void json_archive_writer::write_floats(const char* name, unsigned int size, const float* values_begin) {
+	void json_archive_writer::write_floats_fixed(const char* name, unsigned int size, const float* values_begin) {
 		ASSERT(_is_writing);
 		_writer.begin_array(name);
 		for (unsigned int i = 0; i < size; ++i) {

@@ -4,3 +4,5 @@
 #include "solar/archiving/binary_archive_reader.cpp"
 #include "solar/archiving/binary_archive_writer.cpp"
 #include "solar/archiving/archivable_cloning.cpp"
+#include "solar/archiving/bitstream_archive_writer.cpp"
+#include "solar/archiving/bitstream_archive_reader.cpp"

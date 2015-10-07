@@ -10,4 +10,13 @@ namespace solar {
 		return (unsigned int)(mb * 1024.f * 1024.f);
 	}
 
+	unsigned int bytes_to_bits(unsigned int bytes) {
+		return (bytes * 8);
+	}
+
+	extern unsigned int bits_to_bytes(unsigned int bits) {
+		//always rounds up
+		return ((bits + 7) >> 3);
+	}
+
 }

@@ -1,23 +1,20 @@
 #pragma once
 
 #include "archive_reader.h"
-#include "solar/json/json_document.h"
 
 namespace solar {
 
-	class json_archive_reader : public archive_reader {
-
+	class bitstream_archive_reader : public archive_reader {
 	private:
-		stream& _stream;
-		json_document _document;
-		json_object* _current_object; //not using std::unique_ptr due to internal trickery when reading object/objects
-		const char* _current_object_name;
+		const unsigned char* _data;
+		size_t _data_size;
+		size_t _data_size_in_bits;
+
+		size_t _data_bit_pos;
 
 	public:
-		explicit json_archive_reader(stream& stream);
-		virtual ~json_archive_reader();
-
-		void attempt_raise_error_for_unused_values() const;
+		bitstream_archive_reader(const unsigned char* data, size_t data_size);
+		virtual ~bitstream_archive_reader();
 
 		virtual std::string get_source_description() const override;
 		virtual void raise_error(const std::string& error_message) override;
@@ -38,21 +35,14 @@ namespace solar {
 		virtual void read_string(const char* name, std::string& value) override;
 
 	private:
-		bool try_get_array_of_size(json_array& out, const char* name, unsigned int required_size);
+		bool read_bit(unsigned char* bit);
+		bool read_bits(unsigned char* bits, unsigned int bit_count);
 
-	private:
-		class temp_swap_current_object {
-		private:
-			json_archive_reader* _reader;
-			const char* _name;
-			json_object* _old_object;
-			const char* _old_object_name;
-			json_object* _new_object;
-
-		public:
-			temp_swap_current_object(json_archive_reader* reader, const char* name, json_object* new_object);
-			~temp_swap_current_object();
-		};
+		template<typename T> T read_atomic_value() {
+			T value;
+			read_bits(reinterpret_cast<unsigned char*>(&value), sizeof(T) * 8);
+			return value;
+		}
 	};
 
 }

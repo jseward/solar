@@ -7,6 +7,7 @@
 #include "solar/utility/enum_helpers.h"
 #include "archive_reader.h"
 #include "archive_writer.h"
+#include "archive_int_compression.h"
 #include "single_value_archivable.h"
 
 namespace solar {
@@ -29,7 +30,7 @@ namespace solar {
 
 	inline void read_ushorts(archive_reader& reader, const char* name, unsigned short& v0, unsigned short& v1, unsigned short& v2) {
 		unsigned short values[3] = {};
-		reader.read_ushorts(name, 3, values);
+		reader.read_ushorts_fixed(name, 3, values);
 		v0 = values[0];
 		v1 = values[1];
 		v2 = values[2];
@@ -37,12 +38,12 @@ namespace solar {
 
 	inline void write_ushorts(archive_writer& writer, const char* name, unsigned short v0, unsigned short v1, unsigned short v2) {
 		const unsigned short values[3] = { v0, v1, v2 };
-		writer.write_ushorts(name, 3, values);
+		writer.write_ushorts_fixed(name, 3, values);
 	}
 
 	template<typename VectorT> void read_ushort_vector(archive_reader& reader, const char* name, VectorT& v) {
 		v.clear();
-		reader.read_ushorts(
+		reader.read_ushorts_dynamic(
 			name,
 			[&v](unsigned int size) { v.reserve(size); },
 			[&v](unsigned int, unsigned short value) { v.push_back(value); });
@@ -50,15 +51,15 @@ namespace solar {
 
 	template<typename VectorT> 
 	void write_ushort_vector(archive_writer& writer, const char* name, const VectorT& v) {
-		writer.write_ushorts(name, v.size(), [&v](unsigned int i) { return v[i]; });
+		writer.write_ushorts_dynamic(name, v.size(), [&v](unsigned int i) { return v[i]; });
 	}
 
 	inline void read_int(archive_reader& reader, const char* name, int& value) {
-		reader.read_int(name, value);
+		reader.read_int(name, value, archive_int_compression());
 	}
 
 	inline void write_int(archive_writer& writer, const char* name, int value) {
-		writer.write_int(name, value);
+		writer.write_int(name, value, archive_int_compression());
 	}
 
 	inline void read_optional_int(archive_reader& reader, const char* name, optional<int>& value) {
@@ -71,19 +72,19 @@ namespace solar {
 
 	inline void read_ints(archive_reader& reader, const char* name, int& v0, int& v1) {
 		int values[2] = {};
-		reader.read_ints(name, 2, values);
+		reader.read_ints_fixed(name, 2, values);
 		v0 = values[0];
 		v1 = values[1];
 	}
 
 	inline void write_ints(archive_writer& writer, const char* name, int v0, int v1) {
 		const int values[2] = { v0, v1 };
-		writer.write_ints(name, 2, values);
+		writer.write_ints_fixed(name, 2, values);
 	}
 
 	inline void read_ints(archive_reader& reader, const char* name, int& v0, int& v1, int& v2, int& v3) {
 		int values[4] = {};
-		reader.read_ints(name, 4, values);
+		reader.read_ints_fixed(name, 4, values);
 		v0 = values[0];
 		v1 = values[1];
 		v2 = values[2];
@@ -92,7 +93,7 @@ namespace solar {
 
 	inline void write_ints(archive_writer& writer, const char* name, int v0, int v1, int v2, int v3) {
 		const int values[4] = { v0, v1, v2, v3 };
-		writer.write_ints(name, 4, values);
+		writer.write_ints_fixed(name, 4, values);
 	}
 
 	inline void read_uint(archive_reader& reader, const char* name, unsigned int& value) {
@@ -113,19 +114,19 @@ namespace solar {
 
 	inline void read_floats(archive_reader& reader, const char* name, float& v0, float& v1) {
 		float values[2] = {};
-		reader.read_floats(name, 2, values);
+		reader.read_floats_fixed(name, 2, values);
 		v0 = values[0];
 		v1 = values[1];
 	}
 
 	inline void write_floats(archive_writer& writer, const char* name, float v0, float v1) {
 		const float values[2] = { v0, v1 };
-		writer.write_floats(name, 2, values);
+		writer.write_floats_fixed(name, 2, values);
 	}
 
 	inline void read_floats(archive_reader& reader, const char* name, float& v0, float& v1, float& v2) {
 		float values[3] = {};
-		reader.read_floats(name, 3, values);
+		reader.read_floats_fixed(name, 3, values);
 		v0 = values[0];
 		v1 = values[1];
 		v2 = values[2];
@@ -133,7 +134,7 @@ namespace solar {
 
 	inline void write_floats(archive_writer& writer, const char* name, float v0, float v1, float v2) {
 		const float values[3] = { v0, v1, v2 };
-		writer.write_floats(name, 3, values);
+		writer.write_floats_fixed(name, 3, values);
 	}
 
 	inline void read_string(archive_reader& reader, const char* name, std::string& value) {

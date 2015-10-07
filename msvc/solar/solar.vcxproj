@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\solar\archiving\archivable.h" />
     <ClInclude Include="..\..\src\solar\archiving\archivable_cloning.h" />
+    <ClInclude Include="..\..\src\solar\archiving\archive_int_compression.h" />
     <ClInclude Include="..\..\src\solar\archiving\archive_reader.h" />
     <ClInclude Include="..\..\src\solar\archiving\archive_writer.h" />
     <ClInclude Include="..\..\src\solar\archiving\archiving_enum_helpers.h" />
@@ -22,6 +23,8 @@
     <ClInclude Include="..\..\src\solar\archiving\auto_versioned_json_archive_helpers.h" />
     <ClInclude Include="..\..\src\solar\archiving\binary_archive_reader.h" />
     <ClInclude Include="..\..\src\solar\archiving\binary_archive_writer.h" />
+    <ClInclude Include="..\..\src\solar\archiving\bitstream_archive_reader.h" />
+    <ClInclude Include="..\..\src\solar\archiving\bitstream_archive_writer.h" />
     <ClInclude Include="..\..\src\solar\archiving\json_archive_reader.h" />
     <ClInclude Include="..\..\src\solar\archiving\json_archive_writer.h" />
     <ClInclude Include="..\..\src\solar\archiving\single_value_archivable.h" />
@@ -89,6 +92,8 @@
     <ClInclude Include="..\..\src\solar\math\vec2.h" />
     <ClInclude Include="..\..\src\solar\math\vec3.h" />
     <ClInclude Include="..\..\src\solar\math\vec4.h" />
+    <ClInclude Include="..\..\src\solar\networking\ip_address.h" />
+    <ClInclude Include="..\..\src\solar\networking\ip_end_point.h" />
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush.h" />
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush_factory.h" />
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush_id.h" />
@@ -451,6 +456,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_networking.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_rendering.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -503,6 +512,8 @@
     <ClCompile Include="..\..\src\solar\archiving\auto_versioned_json_archive_helpers.cpp" />
     <ClCompile Include="..\..\src\solar\archiving\binary_archive_reader.cpp" />
     <ClCompile Include="..\..\src\solar\archiving\binary_archive_writer.cpp" />
+    <ClCompile Include="..\..\src\solar\archiving\bitstream_archive_reader.cpp" />
+    <ClCompile Include="..\..\src\solar\archiving\bitstream_archive_writer.cpp" />
     <ClCompile Include="..\..\src\solar\archiving\json_archive_reader.cpp" />
     <ClCompile Include="..\..\src\solar\archiving\json_archive_writer.cpp" />
     <ClCompile Include="..\..\src\solar\input\input_mapping.cpp" />
@@ -540,6 +551,8 @@
     <ClCompile Include="..\..\src\solar\math\vec2.cpp" />
     <ClCompile Include="..\..\src\solar\math\vec3.cpp" />
     <ClCompile Include="..\..\src\solar\math\vec4.cpp" />
+    <ClCompile Include="..\..\src\solar\networking\ip_address.cpp" />
+    <ClCompile Include="..\..\src\solar\networking\ip_end_point.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush_factory.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush_id.cpp" />
@@ -680,6 +693,7 @@
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_file_path_helpers.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_file_stream.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_file_system.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\win32\win32_ip_address.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_keyboard_device.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_mouse_device.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_real_time.cpp" />

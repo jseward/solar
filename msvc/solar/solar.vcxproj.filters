@@ -1341,6 +1341,21 @@
     <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client_queued_packet.h">
       <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\networking\ip_address.h">
+      <Filter>src\solar\networking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\networking\ip_end_point.h">
+      <Filter>src\solar\networking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\archiving\bitstream_archive_writer.h">
+      <Filter>src\solar\archiving</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\archiving\bitstream_archive_reader.h">
+      <Filter>src\solar\archiving</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\archiving\archive_int_compression.h">
+      <Filter>src\solar\archiving</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1981,6 +1996,24 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar_dependencies\enet\packet.c">
       <Filter>src\solar_dependencies\enet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\networking\ip_end_point.cpp">
+      <Filter>src\solar\networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\networking\ip_address.cpp">
+      <Filter>src\solar\networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\win32\win32_ip_address.cpp">
+      <Filter>src\solar_platforms\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_networking.cpp">
+      <Filter>bulkbuild</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\archiving\bitstream_archive_writer.cpp">
+      <Filter>src\solar\archiving</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\archiving\bitstream_archive_reader.cpp">
+      <Filter>src\solar\archiving</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
