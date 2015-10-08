@@ -102,6 +102,10 @@ namespace solar {
 		}
 	}
 
+	void bitstream_archive_reader::read_int64(const char*, int64_t& value) {
+		value = read_atomic_value<int64_t>();
+	}
+
 	void bitstream_archive_reader::read_uint(const char*, unsigned int& value) {
 		value = read_atomic_value<unsigned int>();
 	}

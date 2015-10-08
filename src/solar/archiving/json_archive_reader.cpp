@@ -143,6 +143,13 @@ namespace solar {
 		}
 	}
 
+	void json_archive_reader::read_int64(const char* name, int64_t& value) {
+		value = 0;
+		if (!_current_object->try_get_int64(value, name)) {
+			raise_error(build_string("int64 not found : '{}'", name));
+		}
+	}
+
 	void json_archive_reader::read_uint(const char* name, unsigned int& value) {
 		if (!_current_object->try_get_uint(value, name)) {
 			raise_error(build_string("uint not found : '{}'", name));

@@ -112,6 +112,14 @@ namespace solar {
 		return v;
 	}
 
+	int64_t json_object::get_int64(const char* name) {
+		int64_t v = 0;
+		if (!try_get_int64(v, name)) {
+			_error_handler(build_string("int64 not found : {}", name));
+		}
+		return v;
+	}
+
 	float json_object::get_float(const char* name) {
 		float v = 0;
 		if (!try_get_float(v, name)) {
@@ -227,6 +235,24 @@ namespace solar {
 		}
 
 		out = v.GetUint();
+		return true;
+	}
+
+	bool json_object::try_get_int64(int64_t& out, const char* name) {
+		if (!_value.HasMember(name)) {
+			return false;
+		}
+
+		auto& v = _value[name];
+		if (!v.IsInt64()) {
+			return false;
+		}
+
+		if (_should_track_used_values) {
+			_used_values.emplace_back(name);
+		}
+
+		out = v.GetInt64();
 		return true;
 	}
 

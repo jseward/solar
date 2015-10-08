@@ -31,6 +31,7 @@ namespace solar {
 		virtual void read_ints_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, int)> handle_value_func) override;
 		virtual void read_ints_fixed(const char* name, unsigned int size, int* values_begin) override;
 		virtual void read_optional_int(const char* name, optional<int>& value) override;
+		virtual void read_int64(const char* name, int64_t& value) override;
 		virtual void read_uint(const char* name, unsigned int& value) override;
 		virtual void read_float(const char* name, float& value) override;
 		virtual void read_floats_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) override;

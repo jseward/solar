@@ -70,6 +70,14 @@ namespace solar {
 		writer.write_optional_int(name, value);
 	}
 
+	inline void write_int64(archive_writer& writer, const char* name, int64_t value) {
+		writer.write_int64(name, value);
+	}
+
+	inline void read_int64(archive_reader& reader, const char* name, int64_t& value) {
+		reader.read_int64(name, value);
+	}
+
 	inline void read_ints(archive_reader& reader, const char* name, int& v0, int& v1) {
 		int values[2] = {};
 		reader.read_ints_fixed(name, 2, values);

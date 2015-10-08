@@ -106,6 +106,10 @@ namespace solar {
 		}
 	}
 
+	void bitstream_archive_writer::write_int64(const char*, int64_t value) {
+		write_atomic_value<int64_t>(value);
+	}
+
 	void bitstream_archive_writer::write_uint(const char*, unsigned int value) {
 		write_atomic_value<unsigned int>(value);
 	}

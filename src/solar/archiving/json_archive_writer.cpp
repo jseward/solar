@@ -107,6 +107,11 @@ namespace solar {
 		}
 	}
 
+	void json_archive_writer::write_int64(const char* name, int64_t value) {
+		ASSERT(_is_writing);
+		_writer.write_int64(name, value);
+	}
+
 	void json_archive_writer::write_uint(const char* name, unsigned int value) {
 		ASSERT(_is_writing);
 		_writer.write_uint(name, value);

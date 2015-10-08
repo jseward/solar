@@ -56,6 +56,11 @@ namespace solar {
 		_writer.Int(value);
 	}
 
+	void json_writer::write_int64(const char* name, int64_t value) {
+		_writer.String(name);
+		_writer.Int64(value);
+	}
+
 	void json_writer::write_uint(const char* name, unsigned int value) {
 		_writer.String(name);
 		_writer.Uint(value);

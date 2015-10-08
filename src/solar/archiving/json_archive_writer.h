@@ -29,6 +29,7 @@ namespace solar {
 		virtual void write_ints_dynamic(const char* name, unsigned int size, std::function<int(unsigned int)> get_value_at_func) override;
 		virtual void write_ints_fixed(const char* name, unsigned int size, const int* values_begin) override;
 		virtual void write_optional_int(const char* name, const optional<int>& value) override;
+		virtual void write_int64(const char* name, int64_t value);
 		virtual void write_uint(const char* name, unsigned int value) override;
 		virtual void write_float(const char* name, float value) override;
 		virtual void write_floats_dynamic(const char* name, unsigned int size, std::function<float(unsigned int)> get_value_at_func) override;

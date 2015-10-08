@@ -86,6 +86,11 @@ namespace solar {
 		}
 	}
 
+	void binary_archive_writer::write_int64(const char* name, int64_t value) {
+		UNUSED_PARAMETER(name);
+		write_atomic_value<int64_t>(value);
+	}
+
 	void binary_archive_writer::write_uint(const char* name, unsigned int value) {
 		UNUSED_PARAMETER(name);
 		write_atomic_value<unsigned int>(value);

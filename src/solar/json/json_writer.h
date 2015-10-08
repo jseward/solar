@@ -27,6 +27,7 @@ namespace solar {
 		void write_ushort(unsigned short value);
 		void write_int(const char* name, int value);
 		void write_int(int value);
+		void write_int64(const char* name, int64_t value);
 		void write_uint(const char* name, unsigned int value);
 		void write_float(const char* name, float value);
 		void write_float(float value);
