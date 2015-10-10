@@ -69,6 +69,15 @@ namespace solar {
 		return std::find_if(in.begin(), in.end(), predicate);
 	}
 
+	template<typename Con, typename Pr> typename int find_index_if(const Con& in, Pr predicate) {
+		for (unsigned int i = 0; i < in.size(); ++i) {
+			if (predicate(in[i])) {
+				return uint_to_int(i);
+			}
+		}
+		return -1;
+	}
+
 	template<typename Con, typename Pr> Con copy_if(const Con& in, Pr predicate) {
 		//http://www.cplusplus.com/reference/algorithm/copy_if
 		Con out(in.size());
