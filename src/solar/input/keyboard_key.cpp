@@ -90,7 +90,7 @@ namespace solar {
 			RETURN_ENUM_STRING(keyboard_key, F11); 
 			RETURN_ENUM_STRING(keyboard_key, F12);
 
-			END_ENUM_STRINGS();
+			END_ENUM_STRINGS(e);
 		}
 	}
 

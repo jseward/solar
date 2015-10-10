@@ -14,7 +14,7 @@ namespace solar {
 			RETURN_ENUM_STRING(directory_change_type, ITEM_REMOVED);
 			RETURN_ENUM_STRING(directory_change_type, ITEM_MODIFIED);
 			RETURN_ENUM_STRING(directory_change_type, ITEM_RENAMED);
-			END_ENUM_STRINGS();
+			END_ENUM_STRINGS(e);
 		}
 	}
 

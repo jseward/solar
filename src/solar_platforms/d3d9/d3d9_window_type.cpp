@@ -11,7 +11,7 @@ namespace solar {
 			RETURN_ENUM_STRING(d3d9_window_type, VIRTUAL_FULLSCREEN);
 			RETURN_ENUM_STRING(d3d9_window_type, EXCLUSIVE_FULLSCREEN);
 			RETURN_ENUM_STRING(d3d9_window_type, CHILD_WINDOW);
-			END_ENUM_STRINGS();
+			END_ENUM_STRINGS(e);
 		}
 	}
 

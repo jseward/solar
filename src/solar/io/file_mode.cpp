@@ -9,7 +9,7 @@ namespace solar {
 			RETURN_ENUM_STRING(file_mode, OPEN_READ);
 			RETURN_ENUM_STRING(file_mode, CREATE_WRITE);
 			RETURN_ENUM_STRING(file_mode, APPEND_WRITE);
-			END_ENUM_STRINGS();
+			END_ENUM_STRINGS(e);
 		}
 	};
 

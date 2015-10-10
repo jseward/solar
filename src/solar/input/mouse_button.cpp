@@ -12,7 +12,7 @@ namespace solar {
 			RETURN_ENUM_STRING(mouse_button, MIDDLE);
 			RETURN_ENUM_STRING(mouse_button, EXTRA_0);
 			RETURN_ENUM_STRING(mouse_button, EXTRA_1);
-			END_ENUM_STRINGS();
+			END_ENUM_STRINGS(e);
 		}
 	}
 

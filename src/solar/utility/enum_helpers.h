@@ -4,7 +4,7 @@
 #include "solar/strings/string_helpers.h"
 
 #define RETURN_ENUM_STRING(enum_type, enum_value) case enum_type##::enum_value: return #enum_value
-#define END_ENUM_STRINGS() default: ALERT("unknown enum value : {0}", (int)e); return "";
+#define END_ENUM_STRINGS(e) default: ALERT("unknown enum value : {0}", (int)e); return "";
 #define FOR_EACH_ENUM(enum_type, e) for(enum_type e = (enum_type)(0); e < enum_type::count; e = (enum_type)((int)e + 1))
 
 namespace solar {

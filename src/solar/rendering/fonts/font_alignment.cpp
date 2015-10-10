@@ -14,7 +14,7 @@ namespace solar {
 			RETURN_ENUM_STRING(font_alignment, BOTTOM_LEFT);
 			RETURN_ENUM_STRING(font_alignment, BOTTOM_CENTER);
 			RETURN_ENUM_STRING(font_alignment, BOTTOM_RIGHT);
-			END_ENUM_STRINGS();
+			END_ENUM_STRINGS(e);
 		}
 	}
 
