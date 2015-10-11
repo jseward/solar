@@ -19,7 +19,7 @@ namespace solar {
 	void window_font_def::read_from_archive(archive_reader& reader) {
 		read_object(reader, "font_id", _font_id);
 		read_float(reader, "font_size", _font_size);
-		read_enum_as_string<font_alignment_details>(reader, "alignment", _alignment);
+		read_enum_as_string<font_alignment>(reader, "alignment", _alignment);
 		read_bool(reader, "is_multiline", _is_multiline);
 		read_bool(reader, "is_clipping_enabled", _is_clipping_enabled);
 		read_color(reader, "color", _color);
@@ -32,7 +32,7 @@ namespace solar {
 	void window_font_def::write_to_archive(archive_writer& writer) const {
 		write_object(writer, "font_id", _font_id);
 		write_float(writer, "font_size", _font_size);
-		write_enum_as_string<font_alignment_details>(writer, "alignment", _alignment);
+		write_enum_as_string<font_alignment>(writer, "alignment", _alignment);
 		write_bool(writer, "is_multiline", _is_multiline);
 		write_bool(writer, "is_clipping_enabled", _is_clipping_enabled);
 		write_color(writer, "color", _color);

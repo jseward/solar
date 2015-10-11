@@ -68,7 +68,7 @@ namespace solar {
 						if (combo._is_windowed && combo._adapter_format != adapter_desktop_display_mode.Format) {
 							//skip this combo, doesn't match desktop
 						}
-						else if (combo._is_windowed != d3d9_window_type_details::is_device_windowed(user_settings.get_window_type())) {
+						else if (combo._is_windowed != d3d9_window_type_is_device_windowed(user_settings.get_window_type())) {
 							//skip this combo, doesn't match is_windowed
 						}
 						else {

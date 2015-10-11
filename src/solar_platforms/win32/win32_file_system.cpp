@@ -49,7 +49,7 @@ namespace solar {
 
 		FILE* handle = ::_wfsopen(utf8_to_utf16(path).c_str(), mode_string, share_flag);
 		if (handle == NULL) {
-			ALERT("Open file failed.\npath : {}\nmode : {}", path, file_mode_details::get_string(mode));
+			ALERT("Open file failed.\npath : {}\nmode : {}", path, mode);
 			return nullptr;
 		}
 

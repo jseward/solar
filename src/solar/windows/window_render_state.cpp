@@ -3,7 +3,7 @@
 
 namespace solar {
 
-	const char* window_render_state_details::get_string(window_render_state e) {
+	const char* to_string(window_render_state e) {
 		switch (e) {
 			RETURN_ENUM_STRING(window_render_state, NORMAL);
 			RETURN_ENUM_STRING(window_render_state, DISABLED);

@@ -13,11 +13,7 @@ namespace solar {
 		ITEM_RENAMED,
 	};
 
-	std::ostream& operator<<(std::ostream& os, directory_change_type e);
-
-	class directory_change_type_details {
-	public:
-		static const char* get_string(directory_change_type e);
-	};
+	extern const char* to_string(directory_change_type type);
+	extern std::ostream& operator<<(std::ostream& os, directory_change_type type);
 
 }

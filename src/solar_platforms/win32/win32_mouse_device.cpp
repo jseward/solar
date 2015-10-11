@@ -145,7 +145,7 @@ namespace solar {
 			case mouse_button::RIGHT: vk = VK_RBUTTON; break;
 			case mouse_button::EXTRA_0: vk = VK_XBUTTON1; break;
 			case mouse_button::EXTRA_1: vk = VK_XBUTTON2; break;
-			default: ALERT("unsupported mouse_button : {}", mouse_button_details::get_string(button));
+			default: ALERT("unsupported mouse_button : {}", to_string(button));
 		}
 		
 		if (vk != 0) {

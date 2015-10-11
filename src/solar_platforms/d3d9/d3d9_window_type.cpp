@@ -5,7 +5,7 @@
 
 namespace solar {
 
-	const char* d3d9_window_type_details::get_string(d3d9_window_type e) {
+	const char* to_string(d3d9_window_type e) {
 		switch (e) {
 			RETURN_ENUM_STRING(d3d9_window_type, RESIZABLE_WINDOW);
 			RETURN_ENUM_STRING(d3d9_window_type, VIRTUAL_FULLSCREEN);
@@ -15,7 +15,7 @@ namespace solar {
 		}
 	}
 
-	bool d3d9_window_type_details::is_device_windowed(d3d9_window_type e) {
+	bool d3d9_window_type_is_device_windowed(d3d9_window_type e) {
 		switch (e) {
 			case d3d9_window_type::RESIZABLE_WINDOW: return true;
 			case d3d9_window_type::VIRTUAL_FULLSCREEN: return true;

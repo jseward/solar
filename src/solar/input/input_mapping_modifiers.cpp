@@ -2,7 +2,7 @@
 
 namespace solar {
 
-	bool input_mapping_modifiers_details::has_alt(input_mapping_modifiers modifiers) {
+	bool input_mapping_modifiers_has_alt(input_mapping_modifiers modifiers) {
 		return
 			(modifiers == input_mapping_modifiers::ALT) ||
 			(modifiers == input_mapping_modifiers::CTRL_ALT) ||
@@ -10,7 +10,7 @@ namespace solar {
 			(modifiers == input_mapping_modifiers::CTRL_SHIFT_ALT);
 	}
 
-	bool input_mapping_modifiers_details::has_ctrl(input_mapping_modifiers modifiers) {
+	bool input_mapping_modifiers_has_ctrl(input_mapping_modifiers modifiers) {
 		return
 			(modifiers == input_mapping_modifiers::CTRL) ||
 			(modifiers == input_mapping_modifiers::CTRL_ALT) ||
@@ -18,7 +18,7 @@ namespace solar {
 			(modifiers == input_mapping_modifiers::CTRL_SHIFT_ALT);
 	}
 
-	bool input_mapping_modifiers_details::has_shift(input_mapping_modifiers modifiers) {
+	bool input_mapping_modifiers_has_shift(input_mapping_modifiers modifiers) {
 		return
 			(modifiers == input_mapping_modifiers::SHIFT) ||
 			(modifiers == input_mapping_modifiers::SHIFT_ALT) ||
@@ -26,27 +26,27 @@ namespace solar {
 			(modifiers == input_mapping_modifiers::CTRL_SHIFT_ALT);
 	}
 
-	bool input_mapping_modifiers_details::is_subset_of(input_mapping_modifiers check_against, input_mapping_modifiers check_with) {
+	bool input_mapping_modifiers_is_subset_of(input_mapping_modifiers check_against, input_mapping_modifiers check_with) {
 		if (check_against == input_mapping_modifiers::NONE) {
 			return false;
 		}
 
-		if (has_alt(check_against) && !has_alt(check_with)) {
+		if (input_mapping_modifiers_has_alt(check_against) && !input_mapping_modifiers_has_alt(check_with)) {
 			return false;
 		}
 
-		if (has_ctrl(check_against) && !has_ctrl(check_with)) {
+		if (input_mapping_modifiers_has_ctrl(check_against) && !input_mapping_modifiers_has_ctrl(check_with)) {
 			return false;
 		}
 
-		if (has_shift(check_against) && !has_shift(check_with)) {
+		if (input_mapping_modifiers_has_shift(check_against) && !input_mapping_modifiers_has_shift(check_with)) {
 			return false;
 		}
 
 		return true;
 	}
 
-	input_mapping_modifiers input_mapping_modifiers_details::make_input_mapping_modifiers(bool ctrl, bool shift, bool alt) {
+	input_mapping_modifiers make_input_mapping_modifiers(bool ctrl, bool shift, bool alt) {
 		if (ctrl) {
 			if (shift) {
 				if (alt) {

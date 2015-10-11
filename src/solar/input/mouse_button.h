@@ -14,7 +14,6 @@ namespace solar {
 		count
 	};
 
-	struct mouse_button_details {
-		static const char* get_string(mouse_button e);
-	};
+	extern const char* to_string(mouse_button button);
+
 }

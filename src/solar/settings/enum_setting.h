@@ -6,18 +6,18 @@
 namespace solar {
 
 	template<typename T>
-	class enum_setting : public setting_template<typename T::enum_type> {
+	class enum_setting : public setting_template<typename T> {
 	public:
-		enum_setting(const char* group_name, const char* name, typename T::enum_type default_value)
-			: setting_template<T::enum_type>(setting_value_type::ENUM, group_name, name, default_value) {
+		enum_setting(const char* group_name, const char* name, typename T default_value)
+			: setting_template<T>(setting_value_type::ENUM, group_name, name, default_value) {
 			}
 
 		virtual checksum get_default_value_checksum() const override {
-			return checksum().add_enum<T::enum_type>(get_default_value());
+			return checksum().add_enum<T>(get_default_value());
 		}
 
 		virtual void read_from_archive(archive_reader& reader, const char* name) override {
-			auto e = T::enum_type::invalid;
+			auto e = T::invalid;
 			read_enum_as_string<T>(reader, name, e);
 			set_current_value(e);
 		}

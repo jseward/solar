@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 namespace solar {
 
 	enum class file_mode {
@@ -8,8 +10,7 @@ namespace solar {
 		APPEND_WRITE
 	};
 
-	struct file_mode_details {
-		static const char* get_string(file_mode e);
-	};
+	extern const char* to_string(file_mode mode);
+	extern std::ostream& operator<<(std::ostream& os, file_mode mode);
 
 }

@@ -30,20 +30,20 @@ namespace solar {
 		float x = int_to_float(params._render_area.get_left());
 		float y = int_to_float(params._render_area.get_top());
 
-		if (font_alignment_details::is_center_horizontal(params._alignment)) {
+		if (font_alignment_is_center_horizontal(params._alignment)) {
 			float width = params._font.get_text_width(params._font_size, params._text);
 			x = int_to_float(params._render_area.get_center_x()) - (width / 2.f);
 		}
-		else if (font_alignment_details::is_right(params._alignment)) {
+		else if (font_alignment_is_right(params._alignment)) {
 			float width = params._font.get_text_width(params._font_size, params._text);
 			x = int_to_float(params._render_area.get_right()) - width;
 		}
 
-		if (font_alignment_details::is_center_vertical(params._alignment)) {
+		if (font_alignment_is_center_vertical(params._alignment)) {
 			float height = params._font.get_line_height(params._font_size);
 			y = int_to_float(params._render_area.get_center_y()) - (height / 2.f);
 		}
-		else if (font_alignment_details::is_bottom(params._alignment)) {
+		else if (font_alignment_is_bottom(params._alignment)) {
 			float height = params._font.get_line_height(params._font_size);
 			y = int_to_float(params._render_area.get_bottom()) - height;
 		}

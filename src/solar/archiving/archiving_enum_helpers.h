@@ -25,7 +25,7 @@ namespace solar {
 		writer.write_int(name, value_as_int, make_archive_int_compression_range(0, static_cast<int>(T::count) - 1));
 	}
 
-	template<typename T> void read_enum_as_string(archive_reader& reader, const char* name, typename T::enum_type& value) {
+	template<typename T> void read_enum_as_string(archive_reader& reader, const char* name, typename T& value) {
 		std::string value_as_string;
 		reader.read_string(name, value_as_string);
 		if (!try_parse_enum<T>(value, value_as_string)) {
@@ -33,13 +33,13 @@ namespace solar {
 		}
 	}
 
-	template<typename T> void write_enum_as_string(archive_writer& writer, const char* name, typename T::enum_type value) {
-		writer.write_string(name, T::get_string(value));
+	template<typename T> void write_enum_as_string(archive_writer& writer, const char* name, typename T value) {
+		writer.write_string(name, to_string(value));
 	}
 
 	namespace archiving_enum_helpers_impl {
 
-		template<typename ArrayT, typename EnumDetailsT>
+		template<typename ArrayT, typename EnumT>
 		class archivable_enum_array : public archivable {
 		private:
 			ArrayT* _array;
@@ -61,26 +61,26 @@ namespace solar {
 			virtual void read_from_archive(archive_reader& reader) {
 				ASSERT(_array != nullptr);
 				FOR_EACH_ENUM(ArrayT::enum_type, e) {
-					read_object(reader, EnumDetailsT::get_string(e), _array->at(e));
+					read_object(reader, to_string(e), _array->at(e));
 				}
 			}
 
 			virtual void write_to_archive(archive_writer& writer) const {
 				ASSERT(_const_array != nullptr);
 				FOR_EACH_ENUM(ArrayT::enum_type, e) {
-					write_object(writer, EnumDetailsT::get_string(e), _const_array->at(e));
+					write_object(writer, to_string(e), _const_array->at(e));
 				}
 			}
 		};
 	}
 
-	template<typename ArrayT, typename EnumDetailsT> void read_enum_array(archive_reader& reader, const char* array_name, typename ArrayT& arr) {
-		archiving_enum_helpers_impl::archivable_enum_array<ArrayT, EnumDetailsT> archivable_array(arr);
+	template<typename ArrayT, typename EnumT> void read_enum_array(archive_reader& reader, const char* array_name, typename ArrayT& arr) {
+		archiving_enum_helpers_impl::archivable_enum_array<ArrayT, EnumT> archivable_array(arr);
 		reader.read_object(array_name, archivable_array);
 	}
 
-	template<typename ArrayT, typename EnumDetailsT> void write_enum_array(archive_writer& writer, const char* array_name, typename const ArrayT& arr) {
-		archiving_enum_helpers_impl::archivable_enum_array<ArrayT, EnumDetailsT> archivable_array(arr);
+	template<typename ArrayT, typename EnumT> void write_enum_array(archive_writer& writer, const char* array_name, typename const ArrayT& arr) {
+		archiving_enum_helpers_impl::archivable_enum_array<ArrayT, EnumT> archivable_array(arr);
 		writer.write_object(array_name, archivable_array);
 	}
 

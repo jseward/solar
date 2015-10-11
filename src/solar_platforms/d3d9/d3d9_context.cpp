@@ -221,7 +221,7 @@ namespace solar {
 			change_device(new_params);
 		}
 		else {
-			TRACE("ignoring toggle_virtual_fullscreen due to current window_type being unsupported : {}", d3d9_window_type_details::get_string(_device_params.get_window_type()));
+			TRACE("ignoring toggle_virtual_fullscreen due to current window_type being unsupported : {}", to_string(_device_params.get_window_type()));
 		}
 	}
 
@@ -338,8 +338,8 @@ namespace solar {
 				}
 
 				TRACE("d3d9_window_type is changing GWL_STYLE {{ old_window_type:{} , new_window_type:{} }}"
-					, d3d9_window_type_details::get_string(old_device_params.get_window_type())
-					, d3d9_window_type_details::get_string(_device_params.get_window_type()));
+					, to_string(old_device_params.get_window_type())
+					, to_string(_device_params.get_window_type()));
 
 				::ShowWindow(_hwnd, SW_HIDE);
 				::ShowWindow(_hwnd, SW_RESTORE);

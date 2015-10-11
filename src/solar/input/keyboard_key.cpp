@@ -3,8 +3,8 @@
 
 namespace solar {
 
-	const char* keyboard_key_details::get_string(keyboard_key e) {
-		switch (e) {
+	const char* to_string(keyboard_key key) {
+		switch (key) {
 			RETURN_ENUM_STRING(keyboard_key, invalid);
 
 			RETURN_ENUM_STRING(keyboard_key, BACKSPACE);
@@ -90,7 +90,7 @@ namespace solar {
 			RETURN_ENUM_STRING(keyboard_key, F11); 
 			RETURN_ENUM_STRING(keyboard_key, F12);
 
-			END_ENUM_STRINGS(e);
+			END_ENUM_STRINGS(key);
 		}
 	}
 

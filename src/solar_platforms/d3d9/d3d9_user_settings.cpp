@@ -7,7 +7,7 @@
 namespace solar {
 
 	void d3d9_user_settings::trace_dump() const {
-		TRACE("window_type : {0}", d3d9_window_type_details::get_string(get_window_type()));
+		TRACE("window_type : {0}", to_string(get_window_type()));
 		TRACE("window_top_left : {0}", get_window_top_left());
 		TRACE("is_window_constrainted_to_desktop : {0}", bool_to_string(get_is_window_constrainted_to_desktop()));
 		TRACE("is_cursor_clipped : {0}", bool_to_string(get_is_cursor_clipped()));
