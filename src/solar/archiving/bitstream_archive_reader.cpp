@@ -131,7 +131,7 @@ namespace solar {
 
 	void bitstream_archive_reader::read_string(const char*, std::string& value) {
 		unsigned short string_length = read_atomic_value<unsigned short>();
-		value.reserve(string_length);
+		value = std::string(string_length, '?');
 		for (unsigned short i = 0; i < string_length; ++i) {
 			value[i] = read_atomic_value<char>();
 		}
