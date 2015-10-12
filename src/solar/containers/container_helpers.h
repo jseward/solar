@@ -69,6 +69,15 @@ namespace solar {
 		return std::find_if(in.begin(), in.end(), predicate);
 	}
 
+	template<typename Con> typename int find_index(const Con& in, const typename Con::value_type& v) {
+		for (unsigned int i = 0; i < in.size(); ++i) {
+			if (in[i] == v) {
+				return uint_to_int(i);
+			}
+		}
+		return -1;
+	}
+
 	template<typename Con, typename Pr> typename int find_index_if(const Con& in, Pr predicate) {
 		for (unsigned int i = 0; i < in.size(); ++i) {
 			if (predicate(in[i])) {

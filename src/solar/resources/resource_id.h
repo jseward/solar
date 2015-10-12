@@ -14,6 +14,7 @@ namespace solar {
 
 	public:
 		static void set_factory(FactoryT* factory);
+		static const FactoryT& get_factory();
 
 	private:
 		std::string _id;
@@ -46,6 +47,11 @@ namespace solar {
 	template<typename ResourceT, typename FactoryT>
 	void resource_id<ResourceT, FactoryT>::set_factory(FactoryT* factory) {
 		_s_factory = factory;
+	}
+
+	template<typename ResourceT, typename FactoryT>
+	const FactoryT& resource_id<ResourceT, FactoryT>::get_factory() {
+		return *_s_factory;
 	}
 
 	template<typename ResourceT, typename FactoryT>
