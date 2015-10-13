@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <memory>
+#include <functional>
 #include "solar/math/rect.h"
 #include "solar/archiving/archivable.h"
 #include "window_render_params.h"
@@ -12,11 +13,15 @@ namespace solar {
 	class window_component;
 
 	class window : public archivable {
+	public:
+		using is_visible_callback_function = std::function<bool()>;
+
 	private:
 		const char* _id;
 		rect _area;
 		float _alpha;
 		bool _is_visible;
+		is_visible_callback_function _is_visible_callback;
 		bool _can_be_under_cursor;
 		bool _will_clip_viewport;
 		
@@ -30,6 +35,8 @@ namespace solar {
 		window& operator=(const window&) = delete;
 		virtual ~window();
 		
+		void set_is_visible_callback(is_visible_callback_function is_visible_callback);
+
 		const char* get_id() const;
 
 		void lock_children();
@@ -53,6 +60,7 @@ namespace solar {
 
 		bool is_focused() const;
 
+		void set_is_visible(bool is_visible);
 		bool is_visible() const;
 		bool can_be_under_cursor() const;
 

@@ -1,6 +1,6 @@
 #include "label_style.h"
 
-#include "solar/utility/unused_parameter.h"
+#include "solar/archiving/archiving_helpers.h"
 
 namespace solar {
 
@@ -13,11 +13,11 @@ namespace solar {
 	}
 
 	void label_style::read_from_archive(archive_reader& reader) {
-		UNUSED_PARAMETER(reader);
+		read_object(reader, "font_def", _font_def);
 	}
 
 	void label_style::write_to_archive(archive_writer& writer) const {
-		UNUSED_PARAMETER(writer);
+		write_object(writer, "font_def", _font_def);
 	}
 
 }

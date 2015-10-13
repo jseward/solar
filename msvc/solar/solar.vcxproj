@@ -58,6 +58,7 @@
     <ClInclude Include="..\..\src\solar\io\file_system.h" />
     <ClInclude Include="..\..\src\solar\io\directory_change_watcher.h" />
     <ClInclude Include="..\..\src\solar\io\find_file_names_options.h" />
+    <ClInclude Include="..\..\src\solar\io\memory_stream.h" />
     <ClInclude Include="..\..\src\solar\io\stream.h" />
     <ClInclude Include="..\..\src\solar\io\text_reader.h" />
     <ClInclude Include="..\..\src\solar\io\stream_seek_anchor.h" />
@@ -526,6 +527,7 @@
     <ClCompile Include="..\..\src\solar\io\file_change_watcher.cpp" />
     <ClCompile Include="..\..\src\solar\io\file_mode.cpp" />
     <ClCompile Include="..\..\src\solar\io\file_path_helpers.cpp" />
+    <ClCompile Include="..\..\src\solar\io\memory_stream.cpp" />
     <ClCompile Include="..\..\src\solar\io\text_reader.cpp" />
     <ClCompile Include="..\..\src\solar\io\text_writer.cpp" />
     <ClCompile Include="..\..\src\solar\json\internal\rapidjson_stream.cpp" />

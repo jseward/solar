@@ -12,7 +12,6 @@ namespace solar {
 	class stack_panel : public window_component {
 	private:
 		const stack_panel_orientation _orientation;
-		int _child_spacing;
 
 	public:
 		stack_panel(const char* id, stack_panel_orientation orientation);

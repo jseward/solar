@@ -29,6 +29,10 @@ namespace solar {
 		return _id;
 	}
 
+	void window::set_is_visible_callback(is_visible_callback_function is_visible_callback) {
+		_is_visible_callback = is_visible_callback;
+	}
+
 	void window::lock_children() {
 		ASSERT(!_are_children_locked);
 		_are_children_locked = true;
@@ -108,7 +112,15 @@ namespace solar {
 		return false; //todo
 	}
 
+	void window::set_is_visible(bool is_visible) {
+		ASSERT(_is_visible_callback == nullptr);
+		_is_visible = is_visible;
+	}
+
 	bool window::is_visible() const {
+		if (_is_visible_callback != nullptr) {
+			return _is_visible_callback();
+		}
 		return _is_visible;
 	}
 

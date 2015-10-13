@@ -1356,6 +1356,9 @@
     <ClInclude Include="..\..\src\solar\archiving\archive_int_compression.h">
       <Filter>src\solar\archiving</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\io\memory_stream.h">
+      <Filter>src\solar\io</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -2014,6 +2017,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\archiving\bitstream_archive_reader.cpp">
       <Filter>src\solar\archiving</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\io\memory_stream.cpp">
+      <Filter>src\solar\io</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -20,7 +20,7 @@ namespace solar {
 		window_component(const char* id);
 		virtual ~window_component();
 
-		bool get_has_layout() const;
+		bool has_layout() const;
 		void set_has_layout(bool has_layout);
 		const window_layout& get_layout() const;
 

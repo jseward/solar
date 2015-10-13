@@ -17,7 +17,7 @@ namespace solar {
 	window_component::~window_component() {
 	}
 
-	bool window_component::get_has_layout() const {
+	bool window_component::has_layout() const {
 		return _has_layout;
 	}
 
@@ -65,6 +65,7 @@ namespace solar {
 	}
 
 	void window_component::update_area(const rect& parent_area) {
+		ASSERT(_has_layout);
 		set_area(_layout.build_area(parent_area, get_area_scale()));
 	}
 
@@ -78,8 +79,12 @@ namespace solar {
 	}
 
 	void window_component::write_to_archive(archive_writer& writer) const {
-		ASSERT(false);
-		UNUSED_PARAMETER(writer);
+		if (_has_layout) {
+			write_object(writer, "layout", _layout);
+		}
+		if (_has_grid_position) {
+			write_object(writer, "grid_position", _grid_position);
+		}
 	}
 
 }
