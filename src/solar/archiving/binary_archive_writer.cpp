@@ -7,10 +7,25 @@
 namespace solar {
 
 	binary_archive_writer::binary_archive_writer(stream& stream)
-		: _stream(stream) {
+		: _stream(&stream) 
+		, _should_calculate_size(should_calculate_size::NO)
+		, _calculated_size(0) {
+	}
+
+	binary_archive_writer::binary_archive_writer(should_calculate_size should_calculate_size)
+		: _stream(nullptr)
+		, _should_calculate_size(should_calculate_size)
+		, _calculated_size(0) {
+
+		ASSERT(_should_calculate_size == should_calculate_size::YES);
 	}
 
 	binary_archive_writer::~binary_archive_writer() {
+	}
+
+	const unsigned int binary_archive_writer::get_calculated_size() const {
+		ASSERT(_should_calculate_size == should_calculate_size::YES);
+		return _calculated_size;
 	}
 
 	void binary_archive_writer::begin_writing() {
@@ -120,7 +135,16 @@ namespace solar {
 		UNUSED_PARAMETER(name);
 		write_atomic_value<int>(value.size());
 		if (value.size() > 0) {
-			_stream.write_bytes(value.c_str(), value.size());
+			write_bytes(value.c_str(), value.size());
+		}
+	}
+
+	void binary_archive_writer::write_bytes(const char* data, unsigned int data_size) {
+		if (_should_calculate_size == should_calculate_size::YES) {
+			_calculated_size += data_size;
+		}
+		else {
+			_stream->write_bytes(data, data_size);
 		}
 	}
 

@@ -8,13 +8,20 @@
 namespace solar {
 
 	class binary_archive_writer : public archive_writer {
+	public:
+		enum class should_calculate_size { YES, NO };
 
 	private:
-		stream& _stream;
+		stream* _stream;
+		should_calculate_size _should_calculate_size;
+		unsigned int _calculated_size;
 
 	public:
 		binary_archive_writer(stream& stream);
+		binary_archive_writer(should_calculate_size should_calculate_size);
 		virtual ~binary_archive_writer();
+
+		const unsigned int get_calculated_size() const;
 
 		virtual void begin_writing() override;
 		virtual void end_writing() override;
@@ -37,10 +44,11 @@ namespace solar {
 
 	private:
 		template<typename T> void write_atomic_value(const T& value);
+		void write_bytes(const char* data, unsigned int data_size);
 	};
 
 	template<typename T> inline void binary_archive_writer::write_atomic_value(const T& value) {
-		_stream.write_bytes(reinterpret_cast<const char*>(&value), sizeof(T));
+		write_bytes(reinterpret_cast<const char*>(&value), sizeof(T));
 	}
 
 }

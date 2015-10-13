@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "solar/strings/string_build.h"
+#include "solar/strings/string_marshal.h"
 #include "solar/utility/assert.h"
 #include "solar/utility/enum_helpers.h"
 #include "archive_reader.h"
@@ -151,6 +152,17 @@ namespace solar {
 
 	inline void write_string(archive_writer& writer, const char* name, const std::string& value) {
 		writer.write_string(name, value);
+	}
+
+	inline void read_string(archive_reader& reader, const char* name, std::wstring& value) {
+		std::string utf8_value;
+		reader.read_string(name, utf8_value);
+		value = utf8_to_utf16(utf8_value);
+	}
+
+	inline void write_string(archive_writer& writer, const char* name, const std::wstring& value) {
+		auto utf8_value = utf16_to_utf8(value);
+		writer.write_string(name, utf8_value);
 	}
 
 	inline void read_object(archive_reader& reader, const char* name, archivable& value) {
