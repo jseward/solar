@@ -15,6 +15,7 @@ namespace solar {
 	class window : public archivable {
 	public:
 		using is_visible_callback_function = std::function<bool()>;
+		using is_enabled_callback_function = std::function<bool()>;
 
 	private:
 		const char* _id;
@@ -22,6 +23,7 @@ namespace solar {
 		float _alpha;
 		bool _is_visible;
 		is_visible_callback_function _is_visible_callback;
+		is_enabled_callback_function _is_enabled_callback;
 		bool _can_be_under_cursor;
 		bool _will_clip_viewport;
 		
@@ -36,6 +38,7 @@ namespace solar {
 		virtual ~window();
 		
 		void set_is_visible_callback(is_visible_callback_function is_visible_callback);
+		void set_is_enabled_callback(is_enabled_callback_function is_enabled_callback);
 
 		const char* get_id() const;
 

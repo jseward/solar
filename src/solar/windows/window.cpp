@@ -33,6 +33,10 @@ namespace solar {
 		_is_visible_callback = is_visible_callback;
 	}
 
+	void window::set_is_enabled_callback(is_enabled_callback_function is_enabled_callback) {
+		_is_enabled_callback = is_enabled_callback;
+	}
+
 	void window::lock_children() {
 		ASSERT(!_are_children_locked);
 		_are_children_locked = true;
@@ -105,7 +109,10 @@ namespace solar {
 	}
 
 	bool window::is_enabled() const {
-		return true; //todo
+		if (_is_enabled_callback != nullptr) {
+			return _is_enabled_callback();
+		}
+		return true;
 	}
 
 	bool window::is_focused() const {
