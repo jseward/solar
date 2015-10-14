@@ -63,6 +63,14 @@ namespace solar {
 		writer.write_int(name, value, archive_int_compression());
 	}
 
+	inline void read_int(archive_reader& reader, const char* name, int& value, const archive_int_compression& compression) {
+		reader.read_int(name, value, compression);
+	}
+
+	inline void write_int(archive_writer& writer, const char* name, int value, const archive_int_compression& compression) {
+		writer.write_int(name, value, compression);
+	}
+
 	inline void read_optional_int(archive_reader& reader, const char* name, optional<int>& value) {
 		reader.read_optional_int(name, value);
 	}

@@ -81,6 +81,16 @@ namespace solar {
 			int relative_value = value - compression._min_value;
 			write_bits(reinterpret_cast<const unsigned char*>(&relative_value), compression.get_bits_required());
 		}
+		else if (compression._type == archive_int_compression_type::SOFT_MAX_COUNT) {
+			const bool is_within_max_count = (value <= compression._max_value);
+			write_bool(nullptr, is_within_max_count);
+			if (is_within_max_count) {
+				write_int(nullptr, value, make_archive_int_compression_range(0, compression._max_value));
+			}
+			else {
+				write_atomic_value<int>(value);
+			}
+		}
 		else {
 			ASSERT(false);
 		}

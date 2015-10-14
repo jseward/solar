@@ -7,7 +7,8 @@ namespace solar {
 
 	enum class archive_int_compression_type {
 		NONE,
-		RANGE
+		RANGE,
+		SOFT_MAX_COUNT
 	};
 
 	class archive_int_compression {
@@ -54,6 +55,15 @@ namespace solar {
 		c._min_value = min_value;
 		c._max_value = max_value;
 		return c;
+	}
+
+	inline archive_int_compression make_archive_int_compression_soft_max_count(int max_count) {
+		ASSERT(max_count >= 0);
+		archive_int_compression c;
+		c._type = archive_int_compression_type::SOFT_MAX_COUNT;
+		c._max_value = max_count;
+		return c;
+
 	}
 
 }

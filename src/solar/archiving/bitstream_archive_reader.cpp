@@ -71,6 +71,16 @@ namespace solar {
 			read_bits(reinterpret_cast<unsigned char*>(&relative_value), compression.get_bits_required());
 			value = compression._min_value + relative_value;
 		}
+		else if (compression._type == archive_int_compression_type::SOFT_MAX_COUNT) {
+			bool is_within_max_count = false;
+			read_bool(nullptr, is_within_max_count);
+			if (is_within_max_count) {
+				read_int(nullptr, value, make_archive_int_compression_range(0, compression._max_value));
+			}
+			else {
+				value = read_atomic_value<int>();
+			}
+		}
 		else {
 			ASSERT(false);
 		}
