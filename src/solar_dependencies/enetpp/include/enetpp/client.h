@@ -9,6 +9,7 @@
 #include "global_state.h"
 #include "client_connect_params.h"
 #include "client_queued_packet.h"
+#include "client_statistics.h"
 #include "set_current_thread_name.h"
 #include "trace_handler.h"
 
@@ -27,6 +28,8 @@ namespace enetpp {
 
 		bool _should_exit_thread;
 		std::unique_ptr<std::thread> _thread;
+
+		client_statistics _statistics;
 
 	public:
 		client::client()
@@ -140,6 +143,10 @@ namespace enetpp {
 			}
 		}
 
+		const client_statistics& get_statistics() const {
+			return _statistics;
+		}
+
 	private:
 		void client::destroy_all_queued_packets() {
 			std::lock_guard<std::mutex> lock(_packet_queue_mutex);
@@ -187,6 +194,9 @@ namespace enetpp {
 			enet_uint32 disconnect_start_time = 0;
 
 			while (peer != nullptr) {
+
+				_statistics._round_trip_time_in_ms = peer->roundTripTime;
+				_statistics._round_trip_time_variance_in_ms = peer->roundTripTimeVariance;
 
 				if (_should_exit_thread) {
 					if (!is_disconnecting) {

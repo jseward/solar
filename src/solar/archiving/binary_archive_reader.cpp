@@ -24,6 +24,10 @@ namespace solar {
 		ALERT("binary_archive_reader error : {}\nstream : {}", error_message, _stream.get_description());
 	}
 
+	unsigned int binary_archive_reader::get_read_position() const {
+		return 0; //not supported
+	}
+
 	void binary_archive_reader::read_object(const char* name, archivable& value) {
 		UNUSED_PARAMETER(name);
 		value.read_from_archive(*this);

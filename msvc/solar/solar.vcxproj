@@ -311,6 +311,7 @@
     <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client.h" />
     <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client_connect_params.h" />
     <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client_queued_packet.h" />
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client_statistics.h" />
     <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\global_state.h" />
     <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\server.h" />
     <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\server_event.h" />

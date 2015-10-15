@@ -40,6 +40,10 @@ namespace solar {
 		ALERT("json_archive_reader error : {}\nstream : {}\nobject : {}", error_message, _stream.get_description(), _current_object_name != nullptr ? _current_object_name : "root");
 	}
 
+	unsigned int json_archive_reader::get_read_position() const {
+		return 0; //not supported
+	}
+
 	void json_archive_reader::read_object(const char* name, archivable& value) {
 		json_object o;
 		if (!_current_object->try_get_object(o, name)) {

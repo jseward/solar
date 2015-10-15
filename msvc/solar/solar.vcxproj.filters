@@ -1359,6 +1359,9 @@
     <ClInclude Include="..\..\src\solar\io\memory_stream.h">
       <Filter>src\solar\io</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client_statistics.h">
+      <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">

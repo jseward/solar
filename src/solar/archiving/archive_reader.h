@@ -18,6 +18,7 @@ namespace solar {
 
 		virtual std::string get_source_description() const = 0;
 		virtual void raise_error(const std::string& error_message) = 0;
+		virtual unsigned int get_read_position() const = 0;
 
 		virtual void read_object(const char* name, archivable& value) = 0;
 		virtual void read_objects(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(archive_reader&, unsigned int)> read_object_func) = 0;

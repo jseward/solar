@@ -25,6 +25,10 @@ namespace solar {
 		ALERT("bitstream_archive_reader error : {}", error_message);
 	}
 
+	unsigned int bitstream_archive_reader::get_read_position() const {
+		return bits_to_bytes(_data_bit_pos);
+	}
+
 	void bitstream_archive_reader::read_object(const char*, archivable& value) {
 		value.read_from_archive(*this);
 	}
