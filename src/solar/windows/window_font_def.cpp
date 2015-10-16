@@ -1,7 +1,6 @@
 #include "window_font_def.h"
 #include "solar/archiving/archiving_helpers.h"
 #include "solar/archiving/archiving_enum_helpers.h"
-#include "solar/archiving/archiving_rendering_helpers.h"
 
 namespace solar {
 

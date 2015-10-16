@@ -39,6 +39,14 @@ namespace solar {
 		return _prim2d_lines;
 	}
 
+	brush_renderer& window_renderer::get_brush_renderer() {
+		return _brush_renderer;
+	}
+
+	shader& window_renderer::get_brush_shader(window_render_state state) {
+		return _def._brush_shader_ids.at(state).get();
+	}
+
 	void window_renderer::begin_brush_rendering(window_render_state state) {
 		_brush_renderer.begin_rendering(root_window::get().get_area(), _def._brush_shader_ids.at(state).get());
 	}

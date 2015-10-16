@@ -30,7 +30,16 @@ namespace solar {
 		return *this;
 	}
 
+	button& button::set_get_text_callback(get_text_callback_function callback) {
+		ASSERT(_get_text_callback == nullptr);
+		_get_text_callback = callback;
+		return *this;
+	}
+
 	const wchar_t* button::get_text() const {
+		if (_get_text_callback != nullptr) {
+			return _get_text_callback();
+		}
 		return _text.get();
 	}
 
@@ -84,14 +93,18 @@ namespace solar {
 		window_component::read_from_archive(reader);
 		read_object(reader, "style", _style);
 		read_object(reader, "icon", _icon);
-		read_object(reader, "text", _text);
+		if (_get_text_callback == nullptr) {
+			read_object(reader, "text", _text);
+		}
 	}
 
 	void button::write_to_archive(archive_writer& writer) const {
 		window_component::write_to_archive(writer);
 		write_object(writer, "style", _style);
 		write_object(writer, "icon", _icon);
-		write_object(writer, "text", _text);
+		if (_get_text_callback == nullptr) {
+			write_object(writer, "text", _text);
+		}
 	}
 
 }

@@ -157,6 +157,9 @@
     <Filter Include="src\solar_dependencies\enetpp\include\enetpp">
       <UniqueIdentifier>{caf1d5a3-65ab-4c19-a8f0-427c2f92e87b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\solar\windows\dialogs">
+      <UniqueIdentifier>{84f61af2-b62f-4b82-81ff-dfe109930d0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\solar\utility\assert.h">
@@ -1035,9 +1038,6 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_error.h">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\archiving\archiving_rendering_helpers.h">
-      <Filter>src\solar\archiving</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\rendering\cursors\cursor.h">
       <Filter>src\solar\rendering\cursors</Filter>
     </ClInclude>
@@ -1361,6 +1361,24 @@
     </ClInclude>
     <ClInclude Include="..\..\src\solar_dependencies\enetpp\include\enetpp\client_statistics.h">
       <Filter>src\solar_dependencies\enetpp\include\enetpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_window.h">
+      <Filter>src\solar\windows\dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_window_style.h">
+      <Filter>src\solar\windows\dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_frame_window.h">
+      <Filter>src\solar\windows\dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_content_window.h">
+      <Filter>src\solar\windows\dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_title_window.h">
+      <Filter>src\solar\windows\dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_close_button.h">
+      <Filter>src\solar\windows\dialogs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2023,6 +2041,24 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\io\memory_stream.cpp">
       <Filter>src\solar\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_window_style.cpp">
+      <Filter>src\solar\windows\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_window.cpp">
+      <Filter>src\solar\windows\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_frame_window.cpp">
+      <Filter>src\solar\windows\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_content_window.cpp">
+      <Filter>src\solar\windows\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_title_window.cpp">
+      <Filter>src\solar\windows\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_close_button.cpp">
+      <Filter>src\solar\windows\dialogs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

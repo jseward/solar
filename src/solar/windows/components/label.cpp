@@ -13,8 +13,9 @@ namespace solar {
 	label::~label() {
 	}
 
-	void label::set_get_text_callback(get_text_callback_function get_text_callback) {
+	label& label::set_get_text_callback(get_text_callback_function get_text_callback) {
 		_get_text_callback = get_text_callback;
+		return *this;
 	}
 
 	void label::render(const window_render_params& params) {

@@ -39,6 +39,16 @@ namespace solar {
 		return *this;
 	}
 
+	bool viewport::try_project(point& screen_position, const mat44& view_projection_transform, const vec3& world_position) const {
+		vec3 sp3;
+		if (try_project(sp3, view_projection_transform, world_position)) {
+			screen_position._x = float_to_int(sp3._x);
+			screen_position._y = float_to_int(sp3._y);
+			return true;
+		}
+		return false;
+	}
+
 	bool viewport::try_project(vec2& screen_position, const mat44& view_projection_transform, const vec3& world_position) const {
 		vec3 sp3;
 		if (try_project(sp3, view_projection_transform, world_position)) {

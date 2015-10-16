@@ -1,7 +1,6 @@
 #include "font_dropshadow_def.h"
 #include "solar/archiving/archiving_helpers.h"
 #include "solar/archiving/archiving_math_helpers.h"
-#include "solar/archiving/archiving_rendering_helpers.h"
 
 namespace solar {
 

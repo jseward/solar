@@ -19,7 +19,6 @@
     <ClInclude Include="..\..\src\solar\archiving\archiving_enum_helpers.h" />
     <ClInclude Include="..\..\src\solar\archiving\archiving_helpers.h" />
     <ClInclude Include="..\..\src\solar\archiving\archiving_math_helpers.h" />
-    <ClInclude Include="..\..\src\solar\archiving\archiving_rendering_helpers.h" />
     <ClInclude Include="..\..\src\solar\archiving\auto_versioned_json_archive_helpers.h" />
     <ClInclude Include="..\..\src\solar\archiving\binary_archive_reader.h" />
     <ClInclude Include="..\..\src\solar\archiving\binary_archive_writer.h" />
@@ -213,6 +212,12 @@
     <ClInclude Include="..\..\src\solar\windows\components\label.h" />
     <ClInclude Include="..\..\src\solar\windows\components\label_style.h" />
     <ClInclude Include="..\..\src\solar\windows\components\stack_panel.h" />
+    <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_close_button.h" />
+    <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_content_window.h" />
+    <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_frame_window.h" />
+    <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_title_window.h" />
+    <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_window.h" />
+    <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_window_style.h" />
     <ClInclude Include="..\..\src\solar\windows\layout\window_layout.h" />
     <ClInclude Include="..\..\src\solar\windows\layout\window_layout_anchors.h" />
     <ClInclude Include="..\..\src\solar\windows\layout\window_layout_margins.h" />
@@ -631,6 +636,12 @@
     <ClCompile Include="..\..\src\solar\windows\components\label.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\label_style.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\stack_panel.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_close_button.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_content_window.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_frame_window.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_title_window.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_window.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_window_style.cpp" />
     <ClCompile Include="..\..\src\solar\windows\layout\window_layout.cpp" />
     <ClCompile Include="..\..\src\solar\windows\layout\window_layout_anchors.cpp" />
     <ClCompile Include="..\..\src\solar\windows\layout\window_layout_margins.cpp" />

@@ -54,7 +54,12 @@ namespace solar {
 		child->_parent = this;
 
 		on_child_added(child);
-		child->on_parent_area_changed();
+
+		//NOT calling on_parent_area_changed because there are too many side effects. add_child is usually done
+		//in constructors when nothing is loaded so area changes can't be properly handled. clients need hacky code
+		//to ignore the area change event if nothing loaded...
+		//
+		//child->on_parent_area_changed();
 	}
 
 	void window::remove_child(window* child) {

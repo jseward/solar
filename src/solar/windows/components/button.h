@@ -15,6 +15,7 @@ namespace solar {
 	public:
 		using is_toggled_callback_function = std::function<bool()>;
 		using pressed_callback_function = std::function<void(const button_press_params&)>;
+		using get_text_callback_function = std::function<const wchar_t*()>;
 
 	private:
 		button_style_id _style;
@@ -22,6 +23,7 @@ namespace solar {
 		text_id _text;
 		is_toggled_callback_function _is_toggled_callback;
 		pressed_callback_function _pressed_callback;
+		get_text_callback_function _get_text_callback;
 		enum_array<bool, mouse_button> _is_mouse_button_down;
 
 	public:
@@ -30,6 +32,7 @@ namespace solar {
 
 		button& set_is_toggled_callback(is_toggled_callback_function callback);
 		button& set_pressed_callback(pressed_callback_function callback);
+		button& set_get_text_callback(get_text_callback_function get_text_callback);
 
 		const wchar_t* get_text() const;
 

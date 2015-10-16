@@ -19,7 +19,7 @@ namespace solar {
 		label(const char* id);
 		virtual ~label();
 
-		void set_get_text_callback(get_text_callback_function get_text_callback);
+		label& set_get_text_callback(get_text_callback_function get_text_callback);
 
 		virtual void render(const window_render_params& params) override;
 
