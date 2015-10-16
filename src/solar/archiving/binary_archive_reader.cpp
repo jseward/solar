@@ -3,6 +3,7 @@
 #include <memory>
 #include "solar/utility/alert.h"
 #include "solar/utility/unused_parameter.h"
+#include "solar/rendering/color.h"
 #include "archivable.h"
 #include "single_value_archivable.h"
 
@@ -158,6 +159,13 @@ namespace solar {
 			buffer[length] = '\0';
 			value = buffer.get();
 		}
+	}
+
+	void binary_archive_reader::read_color(const char* name, color& value) {
+		UNUSED_PARAMETER(name);
+		uint32_t argb = 0;
+		read_atomic_value<uint32_t>(argb);
+		value = make_color_from_argb(argb);
 	}
 
 }

@@ -33,7 +33,7 @@ namespace solar {
 	public:
 		friend bool try_make_color_from_string(color& c, const char* s);
 		friend color make_color_from_string(const char* s);
-		friend color make_color_from_argb(unsigned int argb);
+		friend color make_color_from_argb(uint32_t argb);
 	};
 
 }

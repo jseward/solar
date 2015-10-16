@@ -86,7 +86,7 @@ namespace solar {
 		return c;
 	}
 
-	color make_color_from_argb(unsigned int argb) {
+	color make_color_from_argb(uint32_t argb) {
 		const float f = 1.0f / 255.0f;
 		unsigned char a = static_cast<unsigned char>(argb >> 24);
 		unsigned char r = static_cast<unsigned char>(argb >> 16);

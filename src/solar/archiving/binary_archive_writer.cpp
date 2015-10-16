@@ -3,6 +3,7 @@
 #include "archivable.h"
 #include "single_value_archivable.h"
 #include "solar/utility/unused_parameter.h"
+#include "solar/rendering/color.h"
 
 namespace solar {
 
@@ -137,6 +138,11 @@ namespace solar {
 		if (value.size() > 0) {
 			write_bytes(value.c_str(), value.size());
 		}
+	}
+
+	void binary_archive_writer::write_color(const char* name, const color& value) {
+		UNUSED_PARAMETER(name);
+		write_atomic_value<uint32_t>(value.to_argb32());
 	}
 
 	void binary_archive_writer::write_bytes(const char* data, unsigned int data_size) {

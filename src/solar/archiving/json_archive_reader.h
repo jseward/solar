@@ -38,6 +38,7 @@ namespace solar {
 		virtual void read_floats_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) override;
 		virtual void read_floats_fixed(const char* name, unsigned int size, float* values_begin) override;
 		virtual void read_string(const char* name, std::string& value) override;
+		virtual void read_color(const char* name, color& value) override;
 
 	private:
 		bool try_get_array_of_size(json_array& out, const char* name, unsigned int required_size);

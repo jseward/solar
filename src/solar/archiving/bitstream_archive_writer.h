@@ -40,6 +40,7 @@ namespace solar {
 		virtual void write_floats_dynamic(const char* name, unsigned int size, std::function<float(unsigned int)> get_value_at_func) override;
 		virtual void write_floats_fixed(const char* name, unsigned int size, const float* values_begin) override;
 		virtual void write_string(const char* name, const std::string& value) override;
+		virtual void write_color(const char* name, const color& value) override;
 
 	private:
 		void make_room_for_bits(unsigned int bit_count);

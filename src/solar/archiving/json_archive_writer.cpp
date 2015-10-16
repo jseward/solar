@@ -2,6 +2,7 @@
 
 #include "solar/utility/assert.h"
 #include "solar/utility/unused_parameter.h"
+#include "solar/rendering/color.h"
 #include "archivable.h"
 #include "single_value_archivable.h"
 
@@ -143,6 +144,11 @@ namespace solar {
 	void json_archive_writer::write_string(const char* name, const std::string& value) {
 		ASSERT(_is_writing);
 		_writer.write_string(name, value);
+	}
+
+	void json_archive_writer::write_color(const char* name, const color& value) {
+		ASSERT(_is_writing);
+		_writer.write_string(name, value.to_string());
 	}
 
 }

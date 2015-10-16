@@ -4,6 +4,7 @@
 #include "archive_int_compression.h"
 #include "solar/utility/alert.h"
 #include "solar/utility/unit_convert.h"
+#include "solar/rendering/color.h"
 
 namespace solar {
 
@@ -149,6 +150,11 @@ namespace solar {
 		for (unsigned short i = 0; i < string_length; ++i) {
 			value[i] = read_atomic_value<char>();
 		}
+	}
+
+	void bitstream_archive_reader::read_color(const char*, color& value) {
+		uint32_t argb = read_atomic_value<uint32_t>();
+		value = make_color_from_argb(argb);
 	}
 
 	bool bitstream_archive_reader::read_bit(unsigned char* bit) {

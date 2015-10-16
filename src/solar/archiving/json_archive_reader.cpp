@@ -2,6 +2,7 @@
 #include "solar/utility/alert.h"
 #include "solar/utility/unused_parameter.h"
 #include "solar/strings/string_build.h"
+#include "solar/rendering/color.h"
 #include "archivable.h"
 #include "single_value_archivable.h"
 
@@ -192,6 +193,18 @@ namespace solar {
 	void json_archive_reader::read_string(const char* name, std::string& value) {
 		if (!_current_object->try_get_string(value, name)) {
 			raise_error(build_string("string not found : '{}'", name));
+		}
+	}
+
+	void json_archive_reader::read_color(const char* name, color& value) {
+		std::string s;
+		if (!_current_object->try_get_string(s, name)) {
+			raise_error(build_string("color not found : '{}'", name));
+		}
+		else {
+			if (!try_make_color_from_string(value, s.c_str())) {
+				raise_error(build_string("color could not be parsed : '{}'", name));
+			}
 		}
 	}
 

@@ -35,6 +35,7 @@ namespace solar {
 		virtual void read_floats_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) override;
 		virtual void read_floats_fixed(const char* name, unsigned int size, float* values_begin) override;
 		virtual void read_string(const char* name, std::string& value) override;
+		virtual void read_color(const char* name, color& value) override;
 
 	private:
 		template<typename T> void read_atomic_value(T& value);

@@ -173,6 +173,14 @@ namespace solar {
 		writer.write_string(name, utf8_value);
 	}
 
+	inline void write_color(archive_writer& writer, const char* name, const color& value) {
+		writer.write_color(name, value);
+	}
+
+	inline void read_color(archive_reader& reader, const char* name, color& value) {
+		reader.read_color(name, value);
+	}
+
 	inline void read_object(archive_reader& reader, const char* name, archivable& value) {
 		reader.read_object(name, value);
 	}

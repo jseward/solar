@@ -10,9 +10,9 @@ namespace solar {
 	class archivable;
 	class single_value_archivable;
 	class archive_int_compression;
+	class color;
 	
 	class archive_reader {
-
 	public:
 		virtual ~archive_reader() = 0 {};
 
@@ -36,6 +36,7 @@ namespace solar {
 		virtual void read_floats_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) = 0;
 		virtual void read_floats_fixed(const char* name, unsigned int size, float* values_begin) = 0;
 		virtual void read_string(const char* name, std::string& value) = 0;
+		virtual void read_color(const char* name, color& value) = 0;
 	};
 
 }
