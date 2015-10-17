@@ -2,6 +2,8 @@
 
 #include "solar/windows/rendering/window_renderer.h"
 #include "solar/rendering/primatives/prim2d.h"
+#include "solar/utility/assert.h"
+#include "solar/utility/trace.h"
 
 namespace solar {
 
@@ -17,6 +19,8 @@ namespace solar {
 		, _title_window(*this)
 		, _close_button(*this)
 
+		, _is_closable_ever(true)
+
 		, _is_open(false) {
 
 		//using visible callback to prevent extern code being able to call set_is_visible() at any time. need to go through open() and try_close()
@@ -31,6 +35,18 @@ namespace solar {
 	dialog_window::~dialog_window() {
 		_frame_window.remove_all_children();
 		remove_all_children();
+	}
+
+	void dialog_window::set_is_closable_ever(bool is_closable_ever) {
+		_is_closable_ever = is_closable_ever;
+	}
+
+	bool dialog_window::is_closable_ever() const {
+		return _is_closable_ever;
+	}
+
+	bool dialog_window::is_closable_now() const {
+		return true;
 	}
 
 	const dialog_window_style& dialog_window::get_style() const {
@@ -54,16 +70,37 @@ namespace solar {
 	}
 
 	void dialog_window::open() {
+		TRACE("dialog_window opening... id:{}", get_id());
 		_is_open = true;
 	}
 
+	void dialog_window::close() {
+		ASSERT(is_closable_ever());
+		ASSERT(is_closable_now());
+		TRACE("dialog_window closing... id:{}", get_id());
+		_is_open = false;
+	}
+
 	bool dialog_window::try_close() {
-		ASSERT(false);//todo
+		if (is_closable_ever() && is_closable_now()) {
+			close();
+			return true;
+		}
 		return false;
 	}
 
 	void dialog_window::on_parent_area_changed() {
 		set_area(get_parent().get_area());
+	}
+
+	bool dialog_window::on_key_down_anywhere(const window_key_event_params& params) {
+		if (params._key == keyboard_key::ESCAPE) {
+			//ESCAPE must be handled here so that escapable dialogs on top of one another will
+			//be closed in the correct order.
+			try_close();
+			return true;
+		}
+		return false;
 	}
 
 	void dialog_window::render(const window_render_params& params) {

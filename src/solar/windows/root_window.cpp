@@ -49,7 +49,8 @@ namespace solar {
 		bool is_trapped = false;
 
 		if (!is_trapped_externally) {
-			//NOTE: not checking is_enabled here, windows do that internally so they can trap the event
+			//NOTE: not checking is_enabled here, windows do that internally so they can trap the event EVEN when disabled 
+			//(ex. button still blocks mouse button presses even when disabled)
 			auto filter = [&params](window& w) { return w.is_visible() && w.get_area().is_point_within(params._cursor_pos); };
 			auto handler = [&params](window& w) { return w.on_mouse_button_up(params); };
 			if (handle_event_recursive(filter, handler, *this)) {
@@ -60,6 +61,28 @@ namespace solar {
 		{
 			auto anywhere_filter = [](window&) { return true; };
 			auto anywhere_handler = [&params](window& w) { return w.on_mouse_button_up_anywhere(params); };
+			if (handle_event_recursive(anywhere_filter, anywhere_handler, *this)) {
+				is_trapped = true;
+			}
+		}
+
+		return is_trapped;
+	}
+
+	bool root_window::root_on_key_down(const window_key_event_params& params, bool is_trapped_externally) {
+		bool is_trapped = false;
+
+		if (!is_trapped_externally) {
+			auto filter = [&params](window& w) { return w.is_visible() && w.is_enabled(); };
+			auto handler = [&params](window& w) { return w.on_key_down(params); };
+			if (handle_event_recursive(filter, handler, *this)) {
+				is_trapped = true;
+			}
+		}
+
+		{
+			auto anywhere_filter = [](window&) { return true; };
+			auto anywhere_handler = [&params](window& w) { return w.on_key_down_anywhere(params); };
 			if (handle_event_recursive(anywhere_filter, anywhere_handler, *this)) {
 				is_trapped = true;
 			}

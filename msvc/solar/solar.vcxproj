@@ -238,6 +238,7 @@
     <ClInclude Include="..\..\src\solar\windows\window_dragging_state.h" />
     <ClInclude Include="..\..\src\solar\windows\window_font_def.h" />
     <ClInclude Include="..\..\src\solar\windows\window_helpers.h" />
+    <ClInclude Include="..\..\src\solar\windows\window_key_event_params.h" />
     <ClInclude Include="..\..\src\solar\windows\window_mouse_button_event_params.h" />
     <ClInclude Include="..\..\src\solar_dependencies\cppformat\format.h" />
     <ClInclude Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\audiodefs.h" />

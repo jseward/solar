@@ -22,6 +22,7 @@ namespace solar {
 		void render_all(const window_render_params& params);
 		bool root_on_mouse_button_down(const window_mouse_button_event_params& params, bool is_trapped_externally);
 		bool root_on_mouse_button_up(const window_mouse_button_event_params& params, bool is_trapped_externally);
+		bool root_on_key_down(const window_key_event_params& params, bool is_trapped_externally);
 
 	private:
 		static window* get_window_under_cursor_recursive(const point& cursor_pos, window& current_window);

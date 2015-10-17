@@ -184,6 +184,16 @@ namespace solar {
 		return false;
 	}
 
+	bool window::on_key_down(const window_key_event_params& params) {
+		UNUSED_PARAMETER(params);
+		return false;
+	}
+
+	bool window::on_key_down_anywhere(const window_key_event_params& params) {
+		UNUSED_PARAMETER(params);
+		return false;
+	}
+
 	void window::read_from_archive(archive_reader& reader) {
 		UNUSED_PARAMETER(reader);
 	}

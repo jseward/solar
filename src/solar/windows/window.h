@@ -7,6 +7,7 @@
 #include "solar/archiving/archivable.h"
 #include "solar/windows/rendering/window_render_params.h"
 #include "window_mouse_button_event_params.h"
+#include "window_key_event_params.h"
 
 namespace solar {
 
@@ -81,7 +82,11 @@ namespace solar {
 		virtual bool on_mouse_button_down(const window_mouse_button_event_params& params);
 		virtual bool on_mouse_button_up(const window_mouse_button_event_params& params);
 		virtual bool on_mouse_button_up_anywhere(const window_mouse_button_event_params& params);
-		virtual window_component* as_component(); //cheap replacement for dynamic cast. needed so on_child_added() can useful actions like querying layout information.
+		virtual bool on_key_down(const window_key_event_params& params);
+		virtual bool on_key_down_anywhere(const window_key_event_params& params);
+
+		//cheap replacement for dynamic cast. needed so on_child_added() can useful actions like querying layout information.
+		virtual window_component* as_component();
 
 	protected:
 		virtual void read_from_archive(archive_reader& reader) override;

@@ -22,11 +22,17 @@ namespace solar {
 		dialog_title_window _title_window;
 		dialog_close_button _close_button;
 
+		bool _is_closable_ever;
+
 		bool _is_open;
 
 	public:
 		dialog_window(const char* id);
 		virtual ~dialog_window();
+
+		void set_is_closable_ever(bool is_closable_ever);
+		bool is_closable_ever() const;
+		bool is_closable_now() const;
 
 		const dialog_window_style& get_style() const;
 		const window_layout& get_frame_layout() const;
@@ -36,9 +42,11 @@ namespace solar {
 		void remove_all_children_from_content_window();
 
 		void open();
+		void close();
 		bool try_close();
 
 		virtual void on_parent_area_changed() override;
+		virtual bool on_key_down_anywhere(const window_key_event_params& params) override;
 		virtual void render(const window_render_params& params) override;
 		virtual void read_from_archive(archive_reader& reader) override;
 		virtual void write_to_archive(archive_writer& writer) const override;

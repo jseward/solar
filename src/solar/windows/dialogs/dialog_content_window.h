@@ -12,6 +12,7 @@ namespace solar {
 
 	public:
 		dialog_content_window(dialog_window& dialog_window);
+		virtual void on_parent_area_changed() override;
 	};
 
 }

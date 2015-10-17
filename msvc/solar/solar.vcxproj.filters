@@ -1386,6 +1386,9 @@
     <ClInclude Include="..\..\src\solar\windows\rendering\window_render_state_brush_collection.h">
       <Filter>src\solar\windows\rendering</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\window_key_event_params.h">
+      <Filter>src\solar\windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
