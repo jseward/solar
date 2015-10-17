@@ -18,22 +18,23 @@ namespace solar {
 	button::~button() {
 	}
 
-	button& button::set_is_toggled_callback(is_toggled_callback_function callback) {
-		ASSERT(_is_toggled_callback == nullptr);
-		_is_toggled_callback = callback;
-		return *this;
-	}
-
 	button& button::set_pressed_callback(pressed_callback_function callback) {
-		ASSERT(_pressed_callback == nullptr);
 		_pressed_callback = callback;
 		return *this;
 	}
 
 	button& button::set_get_text_callback(get_text_callback_function callback) {
-		ASSERT(_get_text_callback == nullptr);
 		_get_text_callback = callback;
 		return *this;
+	}
+
+	button& button::set_get_underlay_callback(get_underlay_callback_function callback) {
+		_get_underlay_callback = callback;
+		return *this;
+	}
+
+	const button_style& button::get_style() const {
+		return _style.get();
 	}
 
 	const wchar_t* button::get_text() const {
@@ -43,19 +44,20 @@ namespace solar {
 		return _text.get();
 	}
 
+	const brush* button::get_underlay(window_render_state state) const {
+		if (_get_underlay_callback != nullptr) {
+			return _get_underlay_callback(state);
+		}
+		return &_style.get()._underlay_brushes.get(state).get();
+	}
+
 	void button::render(const window_render_params& params) {
 		auto& renderer = params._window_renderer;
 		
 		auto state = make_best_window_render_state(*this, params);
-		renderer.begin_brush_rendering();
-		bool is_toggled = false;
-		if (_is_toggled_callback != nullptr) {
-			is_toggled = _is_toggled_callback();
-		}
-		const auto& underlay_brushes = is_toggled ?
-			_style.get()._toggled_underlay_brushes :
-			_style.get()._underlay_brushes;
-		renderer.render_brush(*this, underlay_brushes.get(state), brush_render_mode::STRETCHED);
+
+		renderer.begin_brush_rendering();		
+		renderer.render_brush(*this, get_underlay(state), brush_render_mode::STRETCHED);
 		renderer.render_brush(*this, _icon, brush_render_mode::STRETCHED, _style.get()._icon_layout);
 		renderer.end_brush_rendering();
 
