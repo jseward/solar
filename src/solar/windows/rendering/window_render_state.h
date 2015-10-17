@@ -9,7 +9,7 @@ namespace solar {
 		DISABLED,
 		FOCUSED,
 		PRESSED,
-		CURSOROVER,
+		HOVERED,
 
 		count
 	};

@@ -9,7 +9,7 @@ namespace solar {
 			RETURN_ENUM_STRING(window_render_state, DISABLED);
 			RETURN_ENUM_STRING(window_render_state, FOCUSED);
 			RETURN_ENUM_STRING(window_render_state, PRESSED);
-			RETURN_ENUM_STRING(window_render_state, CURSOROVER);
+			RETURN_ENUM_STRING(window_render_state, HOVERED);
 			END_ENUM_STRINGS(e);
 		}
 	}

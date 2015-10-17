@@ -5,7 +5,7 @@
 #include <functional>
 #include "solar/math/rect.h"
 #include "solar/archiving/archivable.h"
-#include "window_render_params.h"
+#include "solar/windows/rendering/window_render_params.h"
 #include "window_mouse_button_event_params.h"
 
 namespace solar {

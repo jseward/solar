@@ -1,7 +1,6 @@
 #pragma once
 
 #include "window.h"
-#include "window_render_params.h"
 
 namespace solar {
 

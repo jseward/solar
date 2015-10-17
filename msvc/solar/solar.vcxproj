@@ -223,6 +223,12 @@
     <ClInclude Include="..\..\src\solar\windows\layout\window_layout_margins.h" />
     <ClInclude Include="..\..\src\solar\windows\registry\window_registry.h" />
     <ClInclude Include="..\..\src\solar\windows\registry\window_registry_window_collection.h" />
+    <ClInclude Include="..\..\src\solar\windows\rendering\window_renderer.h" />
+    <ClInclude Include="..\..\src\solar\windows\rendering\window_renderer_def.h" />
+    <ClInclude Include="..\..\src\solar\windows\rendering\window_render_params.h" />
+    <ClInclude Include="..\..\src\solar\windows\rendering\window_render_state.h" />
+    <ClInclude Include="..\..\src\solar\windows\rendering\window_render_state_brush_collection.h" />
+    <ClInclude Include="..\..\src\solar\windows\rendering\window_render_state_helpers.h" />
     <ClInclude Include="..\..\src\solar\windows\root_window.h" />
     <ClInclude Include="..\..\src\solar\windows\styling\window_style.h" />
     <ClInclude Include="..\..\src\solar\windows\styling\window_style_factory.h" />
@@ -233,11 +239,6 @@
     <ClInclude Include="..\..\src\solar\windows\window_font_def.h" />
     <ClInclude Include="..\..\src\solar\windows\window_helpers.h" />
     <ClInclude Include="..\..\src\solar\windows\window_mouse_button_event_params.h" />
-    <ClInclude Include="..\..\src\solar\windows\window_renderer.h" />
-    <ClInclude Include="..\..\src\solar\windows\window_renderer_def.h" />
-    <ClInclude Include="..\..\src\solar\windows\window_render_params.h" />
-    <ClInclude Include="..\..\src\solar\windows\window_render_state.h" />
-    <ClInclude Include="..\..\src\solar\windows\window_render_state_helpers.h" />
     <ClInclude Include="..\..\src\solar_dependencies\cppformat\format.h" />
     <ClInclude Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\audiodefs.h" />
     <ClInclude Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\comdecl.h" />
@@ -647,6 +648,11 @@
     <ClCompile Include="..\..\src\solar\windows\layout\window_layout_margins.cpp" />
     <ClCompile Include="..\..\src\solar\windows\registry\window_registry.cpp" />
     <ClCompile Include="..\..\src\solar\windows\registry\window_registry_window_collection.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\rendering\window_renderer.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\rendering\window_renderer_def.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\rendering\window_render_state.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\rendering\window_render_state_brush_collection.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\rendering\window_render_state_helpers.cpp" />
     <ClCompile Include="..\..\src\solar\windows\root_window.cpp" />
     <ClCompile Include="..\..\src\solar\windows\styling\window_style.cpp" />
     <ClCompile Include="..\..\src\solar\windows\styling\window_style_factory.cpp" />
@@ -655,10 +661,6 @@
     <ClCompile Include="..\..\src\solar\windows\window_dragging_state.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_font_def.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_helpers.cpp" />
-    <ClCompile Include="..\..\src\solar\windows\window_renderer.cpp" />
-    <ClCompile Include="..\..\src\solar\windows\window_renderer_def.cpp" />
-    <ClCompile Include="..\..\src\solar\windows\window_render_state.cpp" />
-    <ClCompile Include="..\..\src\solar\windows\window_render_state_helpers.cpp" />
     <ClCompile Include="..\..\src\solar_dependencies\cppformat\format.cc" />
     <ClCompile Include="..\..\src\solar_dependencies\enet\callbacks.c" />
     <ClCompile Include="..\..\src\solar_dependencies\enet\compress.c" />

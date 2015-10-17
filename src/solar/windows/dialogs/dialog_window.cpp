@@ -1,6 +1,6 @@
 #include "dialog_window.h"
 
-#include "solar/windows/window_renderer.h"
+#include "solar/windows/rendering/window_renderer.h"
 #include "solar/rendering/primatives/prim2d.h"
 
 namespace solar {

@@ -3,8 +3,8 @@
 #include "solar/rendering/brushes/brush_render_mode.h"
 #include "solar/rendering/shaders/shader_id.h"
 #include "solar/rendering/color.h"
+#include "solar/windows/window_font_def.h"
 #include "window_renderer_def.h"
-#include "window_font_def.h"
 
 namespace solar {
 
@@ -40,10 +40,11 @@ namespace solar {
 		prim2d& get_prim2d();
 		prim2d_lines& get_prim2d_lines();
 		brush_renderer& get_brush_renderer();
-		shader& get_brush_shader(window_render_state state);
+		shader& get_brush_shader();
 
-		void begin_brush_rendering(window_render_state state);
+		void begin_brush_rendering();
 		void end_brush_rendering();
+		void render_brush(const window& window, const brush_id& brush_id);
 		void render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode);
 		void render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode, const window_layout& layout);
 		void render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode, const rect& render_area);

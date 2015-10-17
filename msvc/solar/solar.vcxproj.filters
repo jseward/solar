@@ -160,6 +160,9 @@
     <Filter Include="src\solar\windows\dialogs">
       <UniqueIdentifier>{84f61af2-b62f-4b82-81ff-dfe109930d0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\solar\windows\rendering">
+      <UniqueIdentifier>{87b1ce4f-5df5-4cf8-8112-ab4a275ef5a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\solar\utility\assert.h">
@@ -538,9 +541,6 @@
       <Filter>src\solar\settings</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar\windows\window.h">
-      <Filter>src\solar\windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\windows\window_render_params.h">
       <Filter>src\solar\windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar\json\json_object.h">
@@ -924,20 +924,8 @@
     <ClInclude Include="..\..\src\solar\rendering\brushes\brush_stretch_region.h">
       <Filter>src\solar\rendering\brushes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\windows\window_renderer.h">
-      <Filter>src\solar\windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\windows\window_renderer_def.h">
-      <Filter>src\solar\windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\utility\type_convert.h">
       <Filter>src\solar\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\windows\window_render_state.h">
-      <Filter>src\solar\windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\windows\window_render_state_helpers.h">
-      <Filter>src\solar\windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar\archiving\archiving_enum_helpers.h">
       <Filter>src\solar\archiving</Filter>
@@ -1380,6 +1368,24 @@
     <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_close_button.h">
       <Filter>src\solar\windows\dialogs</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\rendering\window_render_state_helpers.h">
+      <Filter>src\solar\windows\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\rendering\window_renderer.h">
+      <Filter>src\solar\windows\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\rendering\window_renderer_def.h">
+      <Filter>src\solar\windows\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\rendering\window_render_params.h">
+      <Filter>src\solar\windows\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\rendering\window_render_state.h">
+      <Filter>src\solar\windows\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\rendering\window_render_state_brush_collection.h">
+      <Filter>src\solar\windows\rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1715,18 +1721,6 @@
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush_render_mode.cpp">
       <Filter>src\solar\rendering\brushes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar\windows\window_renderer.cpp">
-      <Filter>src\solar\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\windows\window_renderer_def.cpp">
-      <Filter>src\solar\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\windows\window_render_state_helpers.cpp">
-      <Filter>src\solar\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\windows\window_render_state.cpp">
-      <Filter>src\solar\windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_dialog_control.cpp">
       <Filter>src\solar_platforms\win32</Filter>
     </ClCompile>
@@ -2059,6 +2053,21 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_close_button.cpp">
       <Filter>src\solar\windows\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\rendering\window_renderer.cpp">
+      <Filter>src\solar\windows\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\rendering\window_renderer_def.cpp">
+      <Filter>src\solar\windows\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\rendering\window_render_state.cpp">
+      <Filter>src\solar\windows\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\rendering\window_render_state_helpers.cpp">
+      <Filter>src\solar\windows\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\rendering\window_render_state_brush_collection.cpp">
+      <Filter>src\solar\windows\rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

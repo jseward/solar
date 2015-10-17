@@ -43,16 +43,20 @@ namespace solar {
 		return _brush_renderer;
 	}
 
-	shader& window_renderer::get_brush_shader(window_render_state state) {
-		return _def._brush_shader_ids.at(state).get();
+	shader& window_renderer::get_brush_shader() {
+		return _def._brush_shader.get();
 	}
 
-	void window_renderer::begin_brush_rendering(window_render_state state) {
-		_brush_renderer.begin_rendering(root_window::get().get_area(), _def._brush_shader_ids.at(state).get());
+	void window_renderer::begin_brush_rendering() {
+		_brush_renderer.begin_rendering(root_window::get().get_area(), _def._brush_shader.get());
 	}
 
 	void window_renderer::end_brush_rendering() {
 		_brush_renderer.end_rendering();
+	}
+
+	void window_renderer::render_brush(const window& window, const brush_id& brush_id) {
+		render_brush(window, brush_id, brush_render_mode::STRETCHED);
 	}
 
 	void window_renderer::render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode) {

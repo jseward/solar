@@ -1,7 +1,7 @@
 #include "button.h"
-#include "solar/windows/window_render_params.h"
-#include "solar/windows/window_renderer.h"
-#include "solar/windows/window_render_state_helpers.h"
+#include "solar/windows/rendering/window_render_params.h"
+#include "solar/windows/rendering/window_renderer.h"
+#include "solar/windows/rendering/window_render_state_helpers.h"
 #include "solar/rendering/brushes/brush_renderer.h"
 #include "solar/containers/container_helpers.h"
 
@@ -46,16 +46,16 @@ namespace solar {
 	void button::render(const window_render_params& params) {
 		auto& renderer = params._window_renderer;
 		
-		auto state = get_best_window_render_state(*this, params);
-		renderer.begin_brush_rendering(state);
+		auto state = make_best_window_render_state(*this, params);
+		renderer.begin_brush_rendering();
 		bool is_toggled = false;
 		if (_is_toggled_callback != nullptr) {
 			is_toggled = _is_toggled_callback();
 		}
-		const brush_id& underlay = is_toggled ?
-			_style.get()._toggled_underlay :
-			_style.get()._underlay;
-		renderer.render_brush(*this, underlay, brush_render_mode::STRETCHED);
+		const auto& underlay_brushes = is_toggled ?
+			_style.get()._toggled_underlay_brushes :
+			_style.get()._underlay_brushes;
+		renderer.render_brush(*this, underlay_brushes.get(state), brush_render_mode::STRETCHED);
 		renderer.render_brush(*this, _icon, brush_render_mode::STRETCHED, _style.get()._icon_layout);
 		renderer.end_brush_rendering();
 

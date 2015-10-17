@@ -25,6 +25,7 @@ namespace solar {
 		read_object(reader, "frame_underlay", _frame_underlay);
 		read_color(reader, "parent_fade_color", _parent_fade_color);
 		read_object(reader, "title_font_def", _title_font_def);
+		read_object(reader, "close_button_brushes", _close_button_brushes);
 	}
 
 	void dialog_window_style::write_to_archive(archive_writer& writer) const {
@@ -34,6 +35,7 @@ namespace solar {
 		write_object(writer, "frame_underlay", _frame_underlay);
 		write_color(writer, "parent_fade_color", _parent_fade_color);
 		write_object(writer, "title_font_def", _title_font_def);
+		write_object(writer, "close_button_brushes", _close_button_brushes);
 	}
 
 }

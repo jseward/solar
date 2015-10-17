@@ -1,7 +1,7 @@
 #include "label.h"
 
 #include "solar/utility/unused_parameter.h"
-#include "solar/windows/window_renderer.h"
+#include "solar/windows/rendering/window_renderer.h"
 
 namespace solar {
 

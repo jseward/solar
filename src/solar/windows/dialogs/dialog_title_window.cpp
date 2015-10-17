@@ -1,7 +1,7 @@
 #include "dialog_title_window.h"
 
 #include "dialog_window.h"
-#include "solar/windows/window_renderer.h"
+#include "solar/windows/rendering/window_renderer.h"
 
 namespace solar {
 
