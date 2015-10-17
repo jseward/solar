@@ -32,7 +32,9 @@ namespace solar {
 
 		bool is_id_empty() const;
 		ResourceT& get() const;
+		ResourceT* try_get_ptr() const;
 		ResourceT* operator->() const;
+		operator ResourceT*() const; //implicitely convert to ptr safetly (will return nullptr if id is empty)
 
 		bool operator==(const resource_id& rhs) const;
 
@@ -101,6 +103,19 @@ namespace solar {
 	template<typename ResourceT, typename FactoryT>
 	ResourceT* resource_id<ResourceT, FactoryT>::operator->() const {
 		return &get();
+	}
+
+	template<typename ResourceT, typename FactoryT>
+	ResourceT* resource_id<ResourceT, FactoryT>::try_get_ptr() const {
+		if (is_id_empty()) {
+			return nullptr;
+		}
+		return &get();
+	}
+
+	template<typename ResourceT, typename FactoryT>
+	resource_id<ResourceT, FactoryT>::operator ResourceT*() const {
+		return try_get_ptr();
 	}
 
 	template<typename ResourceT, typename FactoryT>

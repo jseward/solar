@@ -13,7 +13,7 @@ namespace solar {
 	class prim2d;
 	class prim2d_lines;
 	class font_renderer;
-	class brush_id;
+	class brush;
 	class brush_renderer;
 	class resource_system;
 
@@ -44,10 +44,10 @@ namespace solar {
 
 		void begin_brush_rendering();
 		void end_brush_rendering();
-		void render_brush(const window& window, const brush_id& brush_id);
-		void render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode);
-		void render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode, const window_layout& layout);
-		void render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode, const rect& render_area);
+		void render_brush(const window& window, const brush* brush);
+		void render_brush(const window& window, const brush* brush, brush_render_mode render_mode);
+		void render_brush(const window& window, const brush* brush, brush_render_mode render_mode, const window_layout& layout);
+		void render_brush(const window& window, const brush* brush, brush_render_mode render_mode, const rect& render_area);
 
 		void begin_font_rendering();
 		void end_font_rendering();

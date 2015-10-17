@@ -18,8 +18,11 @@ namespace solar {
 	}
 
 	bool dialog_close_button::on_mouse_button_up(const window_mouse_button_event_params& params) {
-		_dialog_window.try_close();
-		return true;
+		if (params._mouse_button == mouse_button::LEFT) {
+			_dialog_window.try_close();
+			return true;
+		}
+		return false;
 	}
 
 	void dialog_close_button::render(const window_render_params& params) {

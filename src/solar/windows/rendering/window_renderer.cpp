@@ -55,14 +55,14 @@ namespace solar {
 		_brush_renderer.end_rendering();
 	}
 
-	void window_renderer::render_brush(const window& window, const brush_id& brush_id) {
-		render_brush(window, brush_id, brush_render_mode::STRETCHED);
+	void window_renderer::render_brush(const window& window, const brush* brush) {
+		render_brush(window, brush, brush_render_mode::STRETCHED);
 	}
 
-	void window_renderer::render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode) {
-		if (!brush_id.is_id_empty()) {
+	void window_renderer::render_brush(const window& window, const brush* brush, brush_render_mode render_mode) {
+		if (brush != nullptr) {
 			_brush_renderer.render_brush(
-				brush_id.get(), 
+				*brush,
 				render_mode, 
 				window.get_area(), 
 				window.get_area_scale(), 
@@ -70,10 +70,10 @@ namespace solar {
 		}
 	}
 
-	void window_renderer::render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode, const window_layout& layout) {
-		if (!brush_id.is_id_empty()) {
+	void window_renderer::render_brush(const window& window, const brush* brush, brush_render_mode render_mode, const window_layout& layout) {
+		if (brush != nullptr) {
 			_brush_renderer.render_brush(
-				brush_id.get(), 
+				*brush,
 				render_mode, 
 				layout.build_area(window.get_area(), window.get_area_scale()),
 				window.get_area_scale(),
@@ -81,10 +81,10 @@ namespace solar {
 		}
 	}
 
-	void window_renderer::render_brush(const window& window, const brush_id& brush_id, brush_render_mode render_mode, const rect& render_area) {
-		if (!brush_id.is_id_empty()) {
+	void window_renderer::render_brush(const window& window, const brush* brush, brush_render_mode render_mode, const rect& render_area) {
+		if (brush != nullptr) {
 			_brush_renderer.render_brush(
-				brush_id.get(),
+				*brush,
 				render_mode,
 				render_area,
 				window.get_area_scale(),
