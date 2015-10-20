@@ -52,6 +52,7 @@ namespace solar {
 		void begin_font_rendering();
 		void end_font_rendering();
 		void render_font(const window& window, const window_font_def& font_def, const wchar_t* text);
+		void render_font(const window& window, const window_font_def& font_def, const wchar_t* text, const rect& render_area);
 
 		color get_default_brush_color(const window& window) const;
 	};

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "solar/math/rect.h"
+#include "solar/math/rectf.h"
 #include "solar/math/vec2.h"
 #include "solar/rendering/color.h"
 #include "solar/rendering/textures/simple_rect_uvs.h"
@@ -34,6 +35,7 @@ namespace solar {
 	public:
 		void render_rect(const rect& area, const color& color);
 		void render_rect(const rect& area, const color& color, const simple_rect_uvs& uvs);
+		void render_rect(const rectf& area, const color& color);
 		void render_circle(const vec2& center, float radius, const color& color);
 		void render_circle(const vec2& center, float radius, const color& color, unsigned int segment_count);
 		void render_polygon(const vec2* points, unsigned int point_count, const color& color);

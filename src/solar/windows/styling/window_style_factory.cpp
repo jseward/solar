@@ -7,6 +7,7 @@
 #include "solar/archiving/archiving_helpers.h"
 #include "solar/windows/components/button_style.h"
 #include "solar/windows/components/label_style.h"
+#include "solar/windows/components/text_entry_style.h"
 #include "solar/windows/dialogs/dialog_window_style.h"
 
 namespace solar {
@@ -48,12 +49,14 @@ namespace solar {
 	void window_style_factory::add_all_common_types() {
 		add_type<button_style>();
 		add_type<label_style>();
+		add_type<text_entry_style>();
 		add_type<dialog_window_style>();
 	}
 
 	void window_style_factory::remove_all_common_types() {
 		remove_type<button_style>();
 		remove_type<label_style>();
+		remove_type<text_entry_style>();
 		remove_type<dialog_window_style>();
 	}
 

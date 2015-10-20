@@ -1,6 +1,7 @@
 #include "color.h"
 
 #include "solar/math/clamp.h"
+#include "solar/math/math_helpers.h"
 #include "solar/strings/string_convert.h"
 #include "solar/utility/verify.h"
 
@@ -97,6 +98,14 @@ namespace solar {
 			f * static_cast<float>(g),
 			f * static_cast<float>(b),
 			f * static_cast<float>(a));
+	}
+
+	color lerp(const color& c0, const color& c1, float t) {
+		return color(
+			lerp(c0._r, c1._r, t),
+			lerp(c0._g, c1._g, t),
+			lerp(c0._b, c1._b, t),
+			lerp(c0._a, c1._a, t));
 	}
 
 }

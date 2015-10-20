@@ -105,12 +105,16 @@ namespace solar {
 	}
 
 	void window_renderer::render_font(const window& window, const window_font_def& font_def, const wchar_t* text) {
-		float font_size = font_def._font_size * window.get_font_scale();
+		render_font(window, font_def, text, window.get_area());
+	}
+
+	void window_renderer::render_font(const window& window, const window_font_def& font_def, const wchar_t* text, const rect& render_area) {
+		float font_size = font_def.get_scaled_font_size(window.get_font_scale());
 		_font_renderer.render(font_render_params(font_def._font_id.get(), font_size, text)
 			.set_alignment(font_def._alignment)
 			.set_is_multiline(font_def._is_multiline)
 			.set_is_clipping_enabled(font_def._is_clipping_enabled)
-			.set_render_area(window.get_area())
+			.set_render_area(render_area)
 			.set_color(make_window_alpha_scaled_color(window, font_def._color))
 			.set_is_dropshadow_enabled(font_def._is_dropshadow_enabled)
 			.set_dropshadow_def(font_def._dropshadow_def));

@@ -1,6 +1,7 @@
 #include "math_helpers.h"
 
 #include "solar/utility/assert.h"
+#include "solar/utility/verify.h"
 
 namespace solar {
 
@@ -69,6 +70,20 @@ namespace solar {
 
 	bool is_within_exclusive(float lower_bound, float upper_bound, float x) {
 		return (x > lower_bound && x < upper_bound);
+	}
+
+	float lerp(float v0, float v1, float t) {
+		return (v0 + ((v1 - v0) * t));
+	}
+
+	float calculate_oscillate_t(float current_time, float oscillation_time_period) {
+		float t = 0.f;
+		IF_VERIFY(oscillation_time_period > 0.f) {
+			t = sin(deg((std::fmodf(current_time, oscillation_time_period) / oscillation_time_period) * 360.f));
+			//sin is in range -1 : +1, want 0 : +1
+			t = (t + 1.f) / 2.f;
+		}
+		return t;
 	}
 
 }

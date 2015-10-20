@@ -84,7 +84,7 @@
     <ClInclude Include="..\..\src\solar\math\rectf.h" />
     <ClInclude Include="..\..\src\solar\math\point.h" />
     <ClInclude Include="..\..\src\solar\math\pointf.h" />
-    <ClInclude Include="..\..\src\solar\math\point_helpers.h" />
+    <ClInclude Include="..\..\src\solar\math\math_type_convert.h" />
     <ClInclude Include="..\..\src\solar\math\rect.h" />
     <ClInclude Include="..\..\src\solar\math\size.h" />
     <ClInclude Include="..\..\src\solar\math\sizef.h" />
@@ -212,6 +212,8 @@
     <ClInclude Include="..\..\src\solar\windows\components\label.h" />
     <ClInclude Include="..\..\src\solar\windows\components\label_style.h" />
     <ClInclude Include="..\..\src\solar\windows\components\stack_panel.h" />
+    <ClInclude Include="..\..\src\solar\windows\components\text_entry.h" />
+    <ClInclude Include="..\..\src\solar\windows\components\text_entry_style.h" />
     <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_close_button.h" />
     <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_content_window.h" />
     <ClInclude Include="..\..\src\solar\windows\dialogs\dialog_frame_window.h" />
@@ -236,6 +238,7 @@
     <ClInclude Include="..\..\src\solar\windows\window.h" />
     <ClInclude Include="..\..\src\solar\windows\window_component.h" />
     <ClInclude Include="..\..\src\solar\windows\window_dragging_state.h" />
+    <ClInclude Include="..\..\src\solar\windows\window_focus_controller.h" />
     <ClInclude Include="..\..\src\solar\windows\window_font_def.h" />
     <ClInclude Include="..\..\src\solar\windows\window_helpers.h" />
     <ClInclude Include="..\..\src\solar\windows\window_key_event_params.h" />
@@ -638,6 +641,8 @@
     <ClCompile Include="..\..\src\solar\windows\components\label.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\label_style.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\stack_panel.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\components\text_entry.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\components\text_entry_style.cpp" />
     <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_close_button.cpp" />
     <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_content_window.cpp" />
     <ClCompile Include="..\..\src\solar\windows\dialogs\dialog_frame_window.cpp" />
@@ -660,6 +665,7 @@
     <ClCompile Include="..\..\src\solar\windows\window.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_component.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_dragging_state.cpp" />
+    <ClCompile Include="..\..\src\solar\windows\window_focus_controller.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_font_def.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_helpers.cpp" />
     <ClCompile Include="..\..\src\solar_dependencies\cppformat\format.cc" />

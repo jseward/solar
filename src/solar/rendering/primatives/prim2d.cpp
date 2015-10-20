@@ -1,6 +1,6 @@
 #include "prim2d.h"
 
-#include "solar/math/point_helpers.h"
+#include "solar/math/math_type_convert.h"
 #include "solar/math/math_helpers.h"
 #include "solar/rendering/viewport.h"
 #include "solar/rendering/cameras/camera.h"
@@ -25,6 +25,16 @@ namespace solar {
 			point_to_vec2(area.get_bottom_left()),
 			color,
 			uvs);
+	}
+
+	void prim2d::render_rect(const rectf& area, const color& color) {
+		render_rect(
+			pointf_to_vec2(area.get_top_left()),
+			pointf_to_vec2(area.get_top_right()),
+			pointf_to_vec2(area.get_bottom_right()),
+			pointf_to_vec2(area.get_bottom_left()),
+			color,
+			simple_rect_uvs());
 	}
 
 	void prim2d::render_circle(const vec2& center, float radius, const color& color) {

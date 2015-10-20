@@ -17,11 +17,13 @@ namespace solar {
 		, _can_be_under_cursor(true)
 		, _will_clip_viewport(false)
 		, _parent(nullptr)
+		, _parent_focus_controller(nullptr)
 		, _are_children_locked(false) {
 	}
 
 	window::~window() {
 		ASSERT(_parent == nullptr);
+		ASSERT(_parent_focus_controller == nullptr);
 		ASSERT(_children.empty());
 	}
 
@@ -52,6 +54,7 @@ namespace solar {
 		push_back_and_verify_not_found(_children, child);		
 		ASSERT(child->_parent == nullptr);
 		child->_parent = this;
+		child->try_attach_self_and_children_to_best_focus_controller();
 
 		on_child_added(child);
 
@@ -67,6 +70,7 @@ namespace solar {
 		find_and_erase(_children, child);
 		ASSERT(child->_parent == this);
 		child->_parent = nullptr;
+		child->try_detach_self_and_children_from_focus_controller();
 	}
 
 	void window::remove_all_children() {
@@ -140,6 +144,23 @@ namespace solar {
 		return _will_clip_viewport;
 	}
 
+	void window::set_is_focus_controller(window_focus_controller_should_handle_key_down should_handle_key_down) {
+		_this_focus_controller = std::make_unique<window_focus_controller>(*this, should_handle_key_down);
+	}
+
+	void window::try_make_focused() {
+		ASSERT(is_focusable_ever());
+		if (_parent_focus_controller != nullptr) {
+			if (is_focusable_now()) {
+				_parent_focus_controller->set_focused_child(this, true);
+			}
+		}
+	}
+
+	bool window::is_focusable_now() const {
+		return false;
+	}
+
 	bool window::can_be_under_cursor() const {
 		return _can_be_under_cursor;
 	}
@@ -194,12 +215,55 @@ namespace solar {
 		return false;
 	}
 
+	bool window::is_focusable_ever() const {
+		return false;
+	}
+
+	void window::on_focus_lost(bool should_apply_changes) {
+		UNUSED_PARAMETER(should_apply_changes);
+	}
+
+	void window::on_focus_gained() {
+	}
+
 	void window::read_from_archive(archive_reader& reader) {
 		UNUSED_PARAMETER(reader);
 	}
 	
 	void window::write_to_archive(archive_writer& writer) const {
 		UNUSED_PARAMETER(writer);
+	}
+
+	void window::try_attach_self_and_children_to_best_focus_controller() {
+		//NOTE: this is a bit tricky. We need to handle the case where A(focusable) is added to B(not-focusable). Then
+		//later B is added to C(focus controller). A should be magically attached to the C focus controller.
+
+		if (is_focusable_ever() && _parent_focus_controller == nullptr) {
+			window* w = this;
+			while (w != nullptr) {
+				_parent_focus_controller = w->_this_focus_controller.get();
+				if (_parent_focus_controller != nullptr) {
+					_parent_focus_controller->add_focusable_child(this);
+					break;
+				}
+				w = w->_parent;
+			}
+		}
+
+		for (auto child : _children) {
+			child->try_attach_self_and_children_to_best_focus_controller();
+		}
+	}
+
+	void window::try_detach_self_and_children_from_focus_controller() {
+		if (_parent_focus_controller != nullptr) {
+			_parent_focus_controller->remove_focusable_child(this);
+			_parent_focus_controller = nullptr;
+		}
+
+		for (auto child : _children) {
+			child->try_detach_self_and_children_from_focus_controller();
+		}
 	}
 
 }

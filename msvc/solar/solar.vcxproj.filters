@@ -450,9 +450,6 @@
     <ClInclude Include="..\..\src\solar\rendering\primatives\prim2d.h">
       <Filter>src\solar\rendering\primatives</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\math\point_helpers.h">
-      <Filter>src\solar\math</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\rendering\textures\texture.h">
       <Filter>src\solar\rendering\textures</Filter>
     </ClInclude>
@@ -1389,6 +1386,18 @@
     <ClInclude Include="..\..\src\solar\windows\window_key_event_params.h">
       <Filter>src\solar\windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\components\text_entry.h">
+      <Filter>src\solar\windows\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\components\text_entry_style.h">
+      <Filter>src\solar\windows\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\math\math_type_convert.h">
+      <Filter>src\solar\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\window_focus_controller.h">
+      <Filter>src\solar\windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -2071,6 +2080,15 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\windows\rendering\window_render_state_brush_collection.cpp">
       <Filter>src\solar\windows\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\components\text_entry.cpp">
+      <Filter>src\solar\windows\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\components\text_entry_style.cpp">
+      <Filter>src\solar\windows\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\windows\window_focus_controller.cpp">
+      <Filter>src\solar\windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

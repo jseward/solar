@@ -1,5 +1,7 @@
 #include "window_layout_margins.h"
+
 #include "solar/archiving/archiving_helpers.h"
+#include "solar/utility/type_convert.h"
 
 namespace solar {
 
@@ -39,6 +41,14 @@ namespace solar {
 			static_cast<int>(_right * rhs),
 			static_cast<int>(_top * rhs),
 			static_cast<int>(_bottom * rhs));
+	}
+
+	rect window_layout_margins::transform_area(const rect& in_area, float in_area_scale) const {
+		return rect(
+			in_area.get_left() + float_to_int(_left * in_area_scale),
+			in_area.get_top() + float_to_int(_top * in_area_scale),
+			in_area.get_right() + float_to_int(_right * in_area_scale),
+			in_area.get_bottom() + float_to_int(_bottom * in_area_scale));
 	}
 
 	void window_layout_margins::read_from_archive(archive_reader& reader, const char* name) {

@@ -8,6 +8,7 @@
 #include "solar/windows/rendering/window_render_params.h"
 #include "window_mouse_button_event_params.h"
 #include "window_key_event_params.h"
+#include "window_focus_controller.h"
 
 namespace solar {
 
@@ -29,9 +30,11 @@ namespace solar {
 		bool _will_clip_viewport;
 		
 		window* _parent;
+		window_focus_controller* _parent_focus_controller;
 		bool _are_children_locked;
 		std::vector<window*> _children;
-		
+		std::unique_ptr<window_focus_controller> _this_focus_controller;
+
 	public:
 		window(const char* id);
 		window(const window&) = delete;
@@ -70,6 +73,10 @@ namespace solar {
 
 		bool will_clip_viewport() const;
 
+		void set_is_focus_controller(window_focus_controller_should_handle_key_down should_handle_key_down);
+		void try_make_focused();
+		bool is_focusable_now() const;
+
 	public:
 		virtual void render(const window_render_params& params);
 		virtual void render_after_children(const window_render_params& params);
@@ -84,6 +91,9 @@ namespace solar {
 		virtual bool on_mouse_button_up_anywhere(const window_mouse_button_event_params& params);
 		virtual bool on_key_down(const window_key_event_params& params);
 		virtual bool on_key_down_anywhere(const window_key_event_params& params);
+		virtual void on_focus_lost(bool should_apply_changes);
+		virtual void on_focus_gained();
+		virtual bool is_focusable_ever() const;
 
 		//cheap replacement for dynamic cast. needed so on_child_added() can useful actions like querying layout information.
 		virtual window_component* as_component();
@@ -91,6 +101,10 @@ namespace solar {
 	protected:
 		virtual void read_from_archive(archive_reader& reader) override;
 		virtual void write_to_archive(archive_writer& writer) const override;
+
+	private:
+		void try_attach_self_and_children_to_best_focus_controller();
+		void try_detach_self_and_children_from_focus_controller();
 	};
 
 }
