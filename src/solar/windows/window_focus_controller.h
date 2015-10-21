@@ -25,6 +25,8 @@ namespace solar {
 		window_focus_controller& operator=(const window_focus_controller&) = delete;
 		~window_focus_controller();
 
+		window& get_this_window() const;
+
 		void add_focusable_child(window* child);
 		void remove_focusable_child(window* child);
 

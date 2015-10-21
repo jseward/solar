@@ -1,6 +1,8 @@
 #include "root_window.h"
+
 #include "solar/utility/assert.h"
 #include "solar/rendering/render_device.h"
+#include "solar/containers/container_helpers.h"
 
 namespace solar {
 
@@ -22,6 +24,46 @@ namespace solar {
 
 	root_window::~root_window() {
 		ASSERT(_window_under_cursor_while_rendering == nullptr);
+		ASSERT(_focus_controllers.empty());
+	}
+
+	window_focus_controller* root_window::get_active_focus_controller() const {
+		for (auto fc : _focus_controllers) {
+			if (
+				fc->get_this_window().is_enabled() &&
+				fc->get_this_window().is_visible_recursive()) {
+				return fc;
+			}
+		}
+		return nullptr;
+	}
+
+	void root_window::on_child_added(window* child) {
+		add_focus_controller_recursive(child);
+	}
+
+	void root_window::on_child_removed(window* child) {
+		remove_focus_controller_recursive(child);
+	}
+
+	void root_window::add_focus_controller_recursive(window* window) {
+		if (window->as_focus_controller() != nullptr) {
+			push_back_and_verify_not_found(_focus_controllers, window->as_focus_controller());
+		}
+
+		for (auto c : window->get_children()) {
+			add_focus_controller_recursive(c);
+		}
+	}
+
+	void root_window::remove_focus_controller_recursive(window* window) {
+		if (window->as_focus_controller() != nullptr) {
+			find_and_erase(_focus_controllers, window->as_focus_controller());
+		}
+
+		for (auto c : window->get_children()) {
+			remove_focus_controller_recursive(c);
+		}
 	}
 
 	void root_window::render_all(const window_render_params& params) {
@@ -89,6 +131,11 @@ namespace solar {
 		}
 
 		return is_trapped;
+	}
+
+	bool root_window::root_on_char_received(const window_char_event_params& params) {
+		auto handler = [&params](window& w) { return w.on_char_received(params); };
+		return handle_event_focus_only(handler);
 	}
 
 	window* root_window::get_window_under_cursor_recursive(const point& cursor_pos, window& current_window) {

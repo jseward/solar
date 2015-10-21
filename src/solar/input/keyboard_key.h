@@ -45,5 +45,8 @@ namespace solar {
 	};
 
 	extern const char* to_string(keyboard_key key);
+	extern bool is_alpha_numeric(keyboard_key key);
+	extern bool is_alpha(keyboard_key key);
+	extern bool is_numeric(keyboard_key key);
 
 }

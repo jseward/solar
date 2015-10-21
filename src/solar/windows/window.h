@@ -8,6 +8,7 @@
 #include "solar/windows/rendering/window_render_params.h"
 #include "window_mouse_button_event_params.h"
 #include "window_key_event_params.h"
+#include "window_char_event_params.h"
 #include "window_focus_controller.h"
 
 namespace solar {
@@ -69,11 +70,14 @@ namespace solar {
 
 		void set_is_visible(bool is_visible);
 		bool is_visible() const;
+		bool is_visible_recursive() const;
+
 		bool can_be_under_cursor() const;
 
 		bool will_clip_viewport() const;
 
 		void set_is_focus_controller(window_focus_controller_should_handle_key_down should_handle_key_down);
+		window_focus_controller* as_focus_controller();
 		void try_make_focused();
 		bool is_focusable_now() const;
 
@@ -86,11 +90,13 @@ namespace solar {
 		virtual void on_parent_area_changed();
 		virtual void on_area_changed();
 		virtual void on_child_added(window* child);
+		virtual void on_child_removed(window* child);
 		virtual bool on_mouse_button_down(const window_mouse_button_event_params& params);
 		virtual bool on_mouse_button_up(const window_mouse_button_event_params& params);
 		virtual bool on_mouse_button_up_anywhere(const window_mouse_button_event_params& params);
 		virtual bool on_key_down(const window_key_event_params& params);
 		virtual bool on_key_down_anywhere(const window_key_event_params& params);
+		virtual bool on_char_received(const window_char_event_params& params);
 		virtual void on_focus_lost(bool should_apply_changes);
 		virtual void on_focus_gained();
 		virtual bool is_focusable_ever() const;

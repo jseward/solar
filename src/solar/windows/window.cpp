@@ -71,6 +71,8 @@ namespace solar {
 		ASSERT(child->_parent == this);
 		child->_parent = nullptr;
 		child->try_detach_self_and_children_from_focus_controller();
+
+		on_child_removed(child);
 	}
 
 	void window::remove_all_children() {
@@ -125,7 +127,10 @@ namespace solar {
 	}
 
 	bool window::is_focused() const {
-		return false; //todo
+		if (_parent_focus_controller != nullptr) {
+			return (_parent_focus_controller->get_focused_child() == this);
+		}
+		return false;
 	}
 
 	void window::set_is_visible(bool is_visible) {
@@ -140,12 +145,27 @@ namespace solar {
 		return _is_visible;
 	}
 
+	bool window::is_visible_recursive() const {
+		const window* w = this;
+		while (w != nullptr) {
+			if (!w->is_visible()) {
+				return false;
+			}
+			w = w->_parent;
+		}
+		return true;
+	}
+
 	bool window::will_clip_viewport() const {
 		return _will_clip_viewport;
 	}
 
 	void window::set_is_focus_controller(window_focus_controller_should_handle_key_down should_handle_key_down) {
 		_this_focus_controller = std::make_unique<window_focus_controller>(*this, should_handle_key_down);
+	}
+
+	window_focus_controller* window::as_focus_controller() {
+		return _this_focus_controller.get();
 	}
 
 	void window::try_make_focused() {
@@ -158,7 +178,7 @@ namespace solar {
 	}
 
 	bool window::is_focusable_now() const {
-		return false;
+		return is_enabled() && is_visible_recursive();
 	}
 
 	bool window::can_be_under_cursor() const {
@@ -190,6 +210,10 @@ namespace solar {
 		UNUSED_PARAMETER(child);
 	}
 
+	void window::on_child_removed(window* child) {
+		UNUSED_PARAMETER(child);
+	}
+
 	bool window::on_mouse_button_down(const window_mouse_button_event_params& params) {
 		UNUSED_PARAMETER(params);
 		return false;
@@ -211,6 +235,11 @@ namespace solar {
 	}
 
 	bool window::on_key_down_anywhere(const window_key_event_params& params) {
+		UNUSED_PARAMETER(params);
+		return false;
+	}
+
+	bool window::on_char_received(const window_char_event_params& params) {
 		UNUSED_PARAMETER(params);
 		return false;
 	}

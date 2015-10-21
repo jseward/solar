@@ -20,17 +20,39 @@ namespace solar {
 		, _max_text_length(128)
 		, _is_password(false)
 		, _is_read_only(false)
+		, _should_trap_enter(true)
 
 		, _visible_pos(0)
 		, _caret_pos(0) 
 		, _selection_pos(0)
-		, _is_dragging_selection(false) {
+		, _is_dragging_selection(false) 
+		, _has_changes_to_apply(false) {
 	}
 
 	text_entry::~text_entry() {
 	}
 
-	void text_entry::set_text_ignore_change(const wchar_t* new_text) {
+	void text_entry::set_should_trap_enter(bool should_trap) {
+		_should_trap_enter = should_trap;
+	}
+
+	void text_entry::set_text_changed_callback(text_changed_callback_fucntion callback) {
+		_text_changed_callback = callback;
+	}
+	
+	void text_entry::set_apply_changes_callback(apply_changes_callback_function callback) {
+		_apply_changes_callback = callback;
+	}
+
+	void text_entry::set_char_added_callback(char_added_callback_function callback) {
+		_char_added_callback = callback;
+	}
+
+	const wchar_t* text_entry::get_text() const {
+		return _text.c_str();
+	}
+
+	void text_entry::set_text_and_ignore_change(const wchar_t* new_text) {
 		copy_text_to_fit(new_text);
 		_caret_pos = _text.length();
 		_selection_pos = _caret_pos;
@@ -65,6 +87,11 @@ namespace solar {
 	}
 
 	void text_entry::render(const window_render_params& params) {
+		if (_is_dragging_selection) {
+			_caret_pos = get_cursor_caret_pos(params._cursor_pos);
+			make_caret_visible();
+		}
+		
 		refresh_render_text_parts();
 
 		auto& renderer = params._window_renderer;
@@ -105,14 +132,291 @@ namespace solar {
 		return false;
 	}
 
+	void text_entry::on_focus_gained() {
+		_has_changes_to_apply = false;
+	}
+
+	void text_entry::on_focus_lost(bool should_apply_changes) {
+		//remove selection, only the focused text entry should ever have focus (looks bad otherwise)
+		_selection_pos = _caret_pos;
+
+		if (should_apply_changes) {
+			try_apply_changes();
+		}
+	}
+
+	bool text_entry::on_char_received(const window_char_event_params& params) {
+		ASSERT(is_focused());
+		try_add_char(params._char);
+		return true;
+	}
+
+	bool text_entry::on_key_down(const window_key_event_params& params) {
+		bool is_trapped = false;
+
+		if (is_focused()) {
+			//don't trap when ALT is down, this would prevent ALT-TAB
+			if (!params.is_alt_down()) {
+				is_trapped = true;
+
+				if (params.is_ctrl_down()) {
+					if (params.is_shift_down()) {
+						if (params._key == keyboard_key::LEFT) {
+							move_caret_left_to_next_word(params.is_shift_down());
+						}
+						else if (params._key == keyboard_key::RIGHT) {
+							move_caret_right_to_next_word(params.is_shift_down());
+						}
+						else {
+							is_trapped = false;
+						}
+					}
+					else {
+						if (params._key == keyboard_key::C) {
+							copy_text_to_clipboard();
+						}
+						else if (params._key == keyboard_key::X) {
+							cut_text_to_clipboard();
+						}
+						else if (params._key == keyboard_key::V) {
+							paste_text_from_clipboard();
+						}
+						else {
+							is_trapped = false;
+						}
+					}
+				}
+				else {
+					if (params._key == keyboard_key::BACKSPACE) {
+						handle_backspace_key_down();
+					}
+					else if (params._key == keyboard_key::DEL) {
+						handle_delete_key_down();
+					}
+					else if (params._key == keyboard_key::HOME) {
+						move_caret_home(params.is_shift_down());
+					}
+					else if (params._key == keyboard_key::END) {
+						move_caret_end(params.is_shift_down());
+					}
+					else if (params._key == keyboard_key::LEFT) {
+						move_caret_left(1, params.is_shift_down());
+					}
+					else if (params._key == keyboard_key::RIGHT) {
+						move_caret_right(1, params.is_shift_down());
+					}
+					else if (params._key == keyboard_key::ENTER) {
+						if (_should_trap_enter) {
+							try_apply_changes();
+							move_caret_end(false);
+						}
+						else {
+							is_trapped = false;
+						}
+					}
+					else {
+						//NOTE: trap all keys, needs to by symmetrical with on_char_received(). Alphanumeric keys
+						//where being picked up by other windows even though on_char_received() was trapping the event.
+						is_trapped = is_alpha_numeric(params._key) || (params._key == keyboard_key::SPACE);
+					}
+				}
+			}
+		}
+
+		return is_trapped;
+	}
+
+	void text_entry::handle_backspace_key_down() {
+		if (!_is_read_only) {
+			if (get_selection_length() > 0) {
+				try_delete_selection();
+			}
+			else {
+				if (!_text.empty() && _caret_pos > 0) {
+					_text.erase(_caret_pos - 1, 1);
+					move_caret_left(1, false);
+					handle_text_changed();
+				}
+			}
+		}
+	}
+
+	void text_entry::handle_delete_key_down() {
+		if (!_is_read_only) {
+			if (get_selection_length() > 0) {
+				try_delete_selection();
+			}
+			else {
+				if (!_text.empty() && _caret_pos < uint_to_int(_text.length())) {
+					_text.erase(_caret_pos, 1);
+					handle_text_changed();
+				}
+			}
+		}
+	}
+
+	bool text_entry::is_char_valid(wchar_t c) const {
+		if (::iswcntrl(c) != 0) {
+			return false;
+		}
+
+		return true;
+	}
+
+	void text_entry::try_add_char(wchar_t c) {
+		if (!_is_read_only) {
+			if (is_char_valid(c)) {
+				try_delete_selection();
+
+				if (_text.length() < _max_text_length) {
+					_text.insert(_caret_pos, 1, c);
+					move_caret_right(1, false);
+					handle_text_changed();
+					handle_char_added(c);
+				}
+			}
+		}
+	}
+
+	void text_entry::move_caret_left(int count, bool should_select) {
+		for (int i = 0; i < count; ++i) {
+			if (!should_select && get_selection_length() > 0) {
+				_selection_pos = _caret_pos;
+			}
+			else {
+				if (_caret_pos > 0) {
+					_caret_pos--;
+					if (!should_select) {
+						_selection_pos = _caret_pos;
+					}
+					make_caret_visible();
+				}
+			}
+		}
+	}
+
+	void text_entry::move_caret_left_to_next_word(bool should_select) {
+		int test_pos = _caret_pos - 1;
+		bool is_first_check_word_break = is_pos_word_break(test_pos);
+		while (test_pos >= 0) {
+			test_pos--;
+			if (is_first_check_word_break != is_pos_word_break(test_pos)) {
+				break;
+			}
+		}
+
+		int distance = _caret_pos - test_pos - 1;
+		move_caret_left(distance, should_select);
+	}
+
+	void text_entry::move_caret_right(int count, bool should_select) {
+		for (int i = 0; i < count; ++i) {
+			if (!should_select && get_selection_length() > 0) {
+				_selection_pos = _caret_pos;
+			}
+			else {
+				int text_length = uint_to_int(_text.length());
+				if (_caret_pos < text_length) {
+					_caret_pos++;
+					if (!should_select) {
+						_selection_pos = _caret_pos;
+					}
+					make_caret_visible();
+				}
+				else if (_caret_pos > text_length) {
+					//this can happen if pasting in huge strings and causing the append to fail out, wiping out the string.
+					_caret_pos = text_length;
+				}
+			}
+		}
+	}
+
+	void text_entry::move_caret_right_to_next_word(bool should_select) {
+		int test_pos = _caret_pos + 1;
+		bool is_first_check_word_break = is_pos_word_break(test_pos);
+		while (test_pos <= uint_to_int(_text.length())) {
+			test_pos++;
+			if (is_first_check_word_break != is_pos_word_break(test_pos)) {
+				break;
+			}
+		}
+
+		int distance = test_pos - _caret_pos;
+		move_caret_right(distance, should_select);
+	}
+
+	void text_entry::move_caret_home(bool should_select) {
+		_caret_pos = 0;
+		if (!should_select) {
+			_selection_pos = _caret_pos;
+		}
+		make_caret_visible();
+	}
+
+	void text_entry::move_caret_end(bool should_select) {
+		_caret_pos = _text.length();
+		if (!should_select) {
+			_selection_pos = _caret_pos;
+		}
+		make_caret_visible();
+	}
+
+	bool text_entry::is_pos_word_break(int pos) const {
+		if (pos >= 0 && pos < uint_to_int(_text.length())) {
+			wchar_t c = _text.at(pos);
+			if (
+				c == L' ' ||
+				c == L'\t' ||
+				c == L',' ||
+				c == L'.') {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	void text_entry::try_delete_selection() {
+		if (!_is_read_only) {
+			if (get_selection_length() > 0) {
+				_text.erase(get_selection_begin(), get_selection_length());
+				_caret_pos += std::min(0, _selection_pos - _caret_pos);
+				_selection_pos = _caret_pos;
+				make_caret_visible();
+				handle_text_changed();
+			}
+		}
+	}
+
+	void text_entry::handle_text_changed() {
+		_has_changes_to_apply = true;
+		if (_text_changed_callback != nullptr) {
+			_text_changed_callback(*this);
+		}
+	}
+
+	void text_entry::handle_char_added(wchar_t c) {
+		if (_char_added_callback != nullptr) {
+			_char_added_callback(*this, c);
+		}
+	}
+
+	void text_entry::try_apply_changes() {
+		if (_has_changes_to_apply) {
+			_has_changes_to_apply = false;
+			if (_apply_changes_callback != nullptr) {
+				_apply_changes_callback(*this);
+			}
+		}
+	}
+
 	int text_entry::get_cursor_caret_pos(const point& cursor_pos) const {
 		int cursor_caret_pos = _visible_pos;
 
 		int text_area_left = get_text_area().get_left();
 		if (cursor_pos._x >= text_area_left) {
 			
-			auto& font = _style->_font._font_id.get();
-			float font_size = _style->_font.get_scaled_font_size(get_font_scale());
+			auto& font = get_font();
+			float font_size = get_font_size();
 
 			std::wstring visible_text = _text;
 			raw_text_to_visible_text(visible_text);
@@ -129,18 +433,20 @@ namespace solar {
 			}
 		}
 
-		return cursor_caret_pos;
+	 	return cursor_caret_pos;
 	}
 
 	int text_entry::get_caret_offset_from_left() const {
 		ASSERT(_caret_pos <= uint_to_int(_text.length()));
+
 		int caret_pos_in_visible_text = _caret_pos - _visible_pos;
-		if (caret_pos_in_visible_text >= 0) {
-			std::wstring visible_text = std::wstring(_text, _visible_pos, caret_pos_in_visible_text);
-			raw_text_to_visible_text(visible_text);
-			return float_to_int(std::ceil(get_text_width(visible_text)));
+		if (caret_pos_in_visible_text <= 0) {
+			return 0;
 		}
-		return 0;
+
+		std::wstring visible_text = std::wstring(_text, _visible_pos, caret_pos_in_visible_text);
+		raw_text_to_visible_text(visible_text);
+		return float_to_int(std::ceil(get_text_width(visible_text)));
 	}
 
 	rect text_entry::get_caret_area() const {
@@ -219,7 +525,7 @@ namespace solar {
 			
 			clipped_text_width = get_text_width(part._clipped_text);
 			if (previous_part != nullptr && !previous_part->_clipped_text.empty()) {
-				clipped_text_width += get_kerning_width(
+				clipped_text_width += get_kerning_pair_offset(
 					previous_part->_clipped_text[previous_part->_clipped_text.length() - 1],
 					part._clipped_text[0]);
 			}
@@ -248,17 +554,20 @@ namespace solar {
 		return _style->_text_margins.transform_area(get_area(), get_area_scale());
 	}
 
-	float text_entry::get_text_width(const std::wstring& text) const {
-		return _style->_font._font_id->get_text_width(
-			_style->_font.get_scaled_font_size(get_font_scale()), 
-			text.c_str());
+	const font& text_entry::get_font() const {
+		return _style->_font._font_id.get();
 	}
 
-	float text_entry::get_kerning_width(wchar_t a, wchar_t b) const {
-		//todo - kerning
-		UNUSED_PARAMETER(a);
-		UNUSED_PARAMETER(b);
-		return 0.f;
+	float text_entry::get_font_size() const {
+		return _style->_font.get_scaled_font_size(get_font_scale());
+	}
+
+	float text_entry::get_text_width(const std::wstring& text) const {
+		return get_font().get_text_width(get_font_size(), text.c_str());
+	}
+
+	float text_entry::get_kerning_pair_offset(wchar_t a, wchar_t b) const {
+		return get_font().get_kerning_pair_offset(get_font_size(), a, b);
 	}
 
 	int text_entry::get_selection_begin() const {
@@ -271,6 +580,18 @@ namespace solar {
 
 	int text_entry::get_selection_length() const {
 		return std::abs(_caret_pos - _selection_pos);
+	}
+
+	void text_entry::copy_text_to_clipboard() {
+		ASSERT(false);
+	}
+
+	void text_entry::cut_text_to_clipboard() {
+		ASSERT(false);
+	}
+
+	void text_entry::paste_text_from_clipboard() {
+		ASSERT(false);
 	}
 
 }

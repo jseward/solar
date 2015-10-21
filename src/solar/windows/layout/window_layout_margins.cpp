@@ -47,8 +47,8 @@ namespace solar {
 		return rect(
 			in_area.get_left() + float_to_int(_left * in_area_scale),
 			in_area.get_top() + float_to_int(_top * in_area_scale),
-			in_area.get_right() + float_to_int(_right * in_area_scale),
-			in_area.get_bottom() + float_to_int(_bottom * in_area_scale));
+			in_area.get_right() - float_to_int(_right * in_area_scale),
+			in_area.get_bottom() - float_to_int(_bottom * in_area_scale));
 	}
 
 	void window_layout_margins::read_from_archive(archive_reader& reader, const char* name) {

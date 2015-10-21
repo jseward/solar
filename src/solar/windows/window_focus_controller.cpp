@@ -18,6 +18,10 @@ namespace solar {
 		ASSERT(_children.empty())
 	}
 
+	window& window_focus_controller::get_this_window() const {
+		return _this_window;
+	}
+
 	void window_focus_controller::add_focusable_child(window* child) {
 		push_back_and_verify_not_found(_children, child);
 	}

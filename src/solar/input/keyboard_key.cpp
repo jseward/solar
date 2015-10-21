@@ -94,4 +94,60 @@ namespace solar {
 		}
 	}
 
+	bool is_alpha_numeric(keyboard_key key) {
+		return is_alpha(key) || is_numeric(key);
+	}
+
+	bool is_alpha(keyboard_key key) {
+		switch (key) {
+			case keyboard_key::A:
+			case keyboard_key::B:
+			case keyboard_key::C:
+			case keyboard_key::D:
+			case keyboard_key::E:
+			case keyboard_key::F:
+			case keyboard_key::G:
+			case keyboard_key::H:
+			case keyboard_key::I:
+			case keyboard_key::J:
+			case keyboard_key::K:
+			case keyboard_key::L:
+			case keyboard_key::M:
+			case keyboard_key::N:
+			case keyboard_key::O:
+			case keyboard_key::P:
+			case keyboard_key::Q:
+			case keyboard_key::R:
+			case keyboard_key::S:
+			case keyboard_key::T:
+			case keyboard_key::U:
+			case keyboard_key::V:
+			case keyboard_key::W:
+			case keyboard_key::X:
+			case keyboard_key::Y:
+			case keyboard_key::Z:
+				return true;
+		}
+
+		return false;
+	}
+
+	bool is_numeric(keyboard_key key) {
+		switch (key) {
+			case keyboard_key::N0:
+			case keyboard_key::N1:
+			case keyboard_key::N2:
+			case keyboard_key::N3:
+			case keyboard_key::N4:
+			case keyboard_key::N5:
+			case keyboard_key::N6:
+			case keyboard_key::N7:
+			case keyboard_key::N8:
+			case keyboard_key::N9:
+				return true;
+		}
+
+		return false;
+	}
+
 }

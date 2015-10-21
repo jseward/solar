@@ -236,6 +236,7 @@
     <ClInclude Include="..\..\src\solar\windows\styling\window_style_factory.h" />
     <ClInclude Include="..\..\src\solar\windows\styling\window_style_id.h" />
     <ClInclude Include="..\..\src\solar\windows\window.h" />
+    <ClInclude Include="..\..\src\solar\windows\window_char_event_params.h" />
     <ClInclude Include="..\..\src\solar\windows\window_component.h" />
     <ClInclude Include="..\..\src\solar\windows\window_dragging_state.h" />
     <ClInclude Include="..\..\src\solar\windows\window_focus_controller.h" />
