@@ -105,9 +105,9 @@ namespace solar {
 		void move_caret_end(bool should_select);
 		bool is_pos_word_break(int pos) const;
 		void try_delete_selection();
-		void copy_text_to_clipboard();
-		void cut_text_to_clipboard();
-		void paste_text_from_clipboard();
+		void copy_text_to_clipboard(clipboard& clipboard);
+		void cut_text_to_clipboard(clipboard& clipboard);
+		void paste_text_from_clipboard(clipboard& clipboard);
 	};
 
 }

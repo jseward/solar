@@ -4,16 +4,20 @@
 #include "solar/input/keyboard_device.h"
 
 namespace solar {
+	
+	class clipboard;
 
 	class window_key_event_params {
 	public:
 		const keyboard_key _key;
-		const keyboard_device& _keyboard_device;
+		keyboard_device& _keyboard_device;
+		clipboard& _clipboard;
 
 	public:
-		window_key_event_params(keyboard_key key, const keyboard_device& keyboard_device)
+		window_key_event_params(keyboard_key key, keyboard_device& keyboard_device, clipboard& clipboard)
 			: _key(key) 
-			, _keyboard_device(keyboard_device) {
+			, _keyboard_device(keyboard_device) 
+			, _clipboard(clipboard) {
 		}
 
 		bool is_alt_down() const {

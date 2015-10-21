@@ -10,6 +10,7 @@
 #include "solar/math/math_type_convert.h"
 #include "solar/math/math_helpers.h"
 #include "solar/time/real_time.h"
+#include "solar/io/clipboard.h"
 
 namespace solar {
 
@@ -173,13 +174,13 @@ namespace solar {
 					}
 					else {
 						if (params._key == keyboard_key::C) {
-							copy_text_to_clipboard();
+							copy_text_to_clipboard(params._clipboard);
 						}
 						else if (params._key == keyboard_key::X) {
-							cut_text_to_clipboard();
+							cut_text_to_clipboard(params._clipboard);
 						}
 						else if (params._key == keyboard_key::V) {
-							paste_text_from_clipboard();
+							paste_text_from_clipboard(params._clipboard);
 						}
 						else {
 							is_trapped = false;
@@ -582,16 +583,29 @@ namespace solar {
 		return std::abs(_caret_pos - _selection_pos);
 	}
 
-	void text_entry::copy_text_to_clipboard() {
-		ASSERT(false);
+	void text_entry::copy_text_to_clipboard(clipboard& clipboard) {
+		clipboard.set_clipboard_text(_text.substr(get_selection_begin(), get_selection_length()));
 	}
 
-	void text_entry::cut_text_to_clipboard() {
-		ASSERT(false);
+	void text_entry::cut_text_to_clipboard(clipboard& clipboard) {
+		if (!_is_read_only) {
+			copy_text_to_clipboard(clipboard);
+			try_delete_selection();
+		}
 	}
 
-	void text_entry::paste_text_from_clipboard() {
-		ASSERT(false);
+	void text_entry::paste_text_from_clipboard(clipboard& clipboard) {
+		if (!_is_read_only) {
+			try_delete_selection();
+
+			std::wstring paste_text = clipboard.get_clipboard_text();
+			std::wstring new_text = _text;
+			new_text.insert(_caret_pos, paste_text);
+
+			copy_text_to_fit(new_text.c_str());
+			move_caret_right(paste_text.length(), false);
+			handle_text_changed();
+		}
 	}
 
 }

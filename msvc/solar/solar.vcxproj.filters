@@ -1398,6 +1398,13 @@
     <ClInclude Include="..\..\src\solar\windows\window_focus_controller.h">
       <Filter>src\solar\windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\window_char_event_params.h" />
+    <ClInclude Include="..\..\src\solar\io\clipboard.h">
+      <Filter>src\solar\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\win32\win32_clipboard.h">
+      <Filter>src\solar_platforms\win32</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -2089,6 +2096,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\windows\window_focus_controller.cpp">
       <Filter>src\solar\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\win32\win32_clipboard.cpp">
+      <Filter>src\solar_platforms\win32</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

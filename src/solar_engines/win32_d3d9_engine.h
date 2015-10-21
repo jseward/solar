@@ -9,6 +9,7 @@
 #include "solar_platforms/win32/win32_directory_change_watcher.h"
 #include "solar_platforms/win32/win32_mouse_device.h"
 #include "solar_platforms/win32/win32_keyboard_device.h"
+#include "solar_platforms/win32/win32_clipboard.h"
 #include "solar_platforms/d3d9/d3d9_context.h"
 #include "solar_platforms/d3d9/d3d9_render_device.h"
 #include "solar_platforms/d3d9/d3d9_cursor.h"
@@ -31,6 +32,7 @@ namespace solar {
 
 	class win32_d3d9_engine {
 	public:
+		win32_clipboard _win32_clipboard;
 		win32_file_system _win32_file_system;
 		win32_directory_change_watcher _win32_directory_change_watcher;
 		win32_windowed_app _win32_windowed_app;

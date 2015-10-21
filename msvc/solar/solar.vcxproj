@@ -44,6 +44,7 @@
     <ClInclude Include="..\..\src\solar\input\mouse_button.h" />
     <ClInclude Include="..\..\src\solar\input\mouse_device.h" />
     <ClInclude Include="..\..\src\solar\input\mouse_device_event_handler.h" />
+    <ClInclude Include="..\..\src\solar\io\clipboard.h" />
     <ClInclude Include="..\..\src\solar\io\directory_change.h" />
     <ClInclude Include="..\..\src\solar\io\directory_change_type.h" />
     <ClInclude Include="..\..\src\solar\io\file_change_handler.h" />
@@ -404,6 +405,7 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_verify.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_vertex_declaration.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_window_type.h" />
+    <ClInclude Include="..\..\src\solar_platforms\win32\win32_clipboard.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_cli_app.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_cli_app_error_behavoir.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_dialog_control.h" />
@@ -707,6 +709,7 @@
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_texture_pool.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_user_settings.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_window_type.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\win32\win32_clipboard.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_cli_app.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_debugging.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_dialog_control.cpp" />

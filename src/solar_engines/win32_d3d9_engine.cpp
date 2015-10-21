@@ -48,6 +48,7 @@ namespace solar {
 			return false;
 		}
 
+		_win32_clipboard.setup(_win32_windowed_app.get_hwnd());
 		_win32_mouse_device.setup(_win32_windowed_app.get_hwnd());		
 		_win32_file_system.setup(params.get_file_system_setup_params());
 
