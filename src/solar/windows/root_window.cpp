@@ -56,6 +56,7 @@ namespace solar {
 	void root_window::add_focus_controller_recursive(window* window) {
 		if (window->as_focus_controller() != nullptr) {
 			push_back_and_verify_not_found(_focus_controllers, window->as_focus_controller());
+			window->as_focus_controller()->set_root_window(this);
 		}
 
 		for (auto c : window->get_children()) {
@@ -65,6 +66,7 @@ namespace solar {
 
 	void root_window::remove_focus_controller_recursive(window* window) {
 		if (window->as_focus_controller() != nullptr) {
+			window->as_focus_controller()->set_root_window(nullptr);
 			find_and_erase(_focus_controllers, window->as_focus_controller());
 		}
 

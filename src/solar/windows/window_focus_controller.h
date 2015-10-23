@@ -30,6 +30,8 @@ namespace solar {
 
 		window& get_this_window() const;
 
+		void set_root_window(root_window* root_window);
+
 		void add_focusable_child(window* child);
 		void remove_focusable_child(window* child);
 
