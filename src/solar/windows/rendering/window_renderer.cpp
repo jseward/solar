@@ -60,7 +60,7 @@ namespace solar {
 	}
 
 	void window_renderer::render_brush(const window& window, const brush* brush, brush_render_mode render_mode) {
-		if (brush != nullptr) {
+		if (brush != nullptr && !brush->is_id_empty()) {
 			_brush_renderer.render_brush(
 				*brush,
 				render_mode, 
@@ -71,7 +71,7 @@ namespace solar {
 	}
 
 	void window_renderer::render_brush(const window& window, const brush* brush, brush_render_mode render_mode, const window_layout& layout) {
-		if (brush != nullptr) {
+		if (brush != nullptr  && !brush->is_id_empty()) {
 			_brush_renderer.render_brush(
 				*brush,
 				render_mode, 
@@ -82,7 +82,7 @@ namespace solar {
 	}
 
 	void window_renderer::render_brush(const window& window, const brush* brush, brush_render_mode render_mode, const rect& render_area) {
-		if (brush != nullptr) {
+		if (brush != nullptr  && !brush->is_id_empty()) {
 			_brush_renderer.render_brush(
 				*brush,
 				render_mode,

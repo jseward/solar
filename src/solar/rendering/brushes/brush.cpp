@@ -8,6 +8,10 @@ namespace solar {
 		: _texture_id(texture_pool_name) {
 	}
 
+	bool brush::is_id_empty() const {
+		return _id.empty();
+	}
+
 	const std::string& brush::get_id() const {
 		return _id;
 	}

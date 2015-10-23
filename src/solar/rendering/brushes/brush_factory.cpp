@@ -40,14 +40,17 @@ namespace solar {
 	}
 
 	brush* brush_factory::get_brush(const std::string& id, const std::string& id_source_description) {
-		for (auto& brush_set : _brush_sets) {
-			brush* brush = brush_set->get_brush_if_exists(id);
-			if (brush != nullptr) {
-				return brush;
+		if (!id.empty()) {
+			for (auto& brush_set : _brush_sets) {
+				brush* brush = brush_set->get_brush_if_exists(id);
+				if (brush != nullptr) {
+					return brush;
+				}
 			}
+
+			ALERT("brush not found.\n\nid : {0}\nid_source_description : {1}", id, id_source_description);
 		}
 
-		ALERT("brush not found.\n\nid : {0}\nid_source_description : {1}", id, id_source_description);
 		if (_empty_brush == nullptr) {
 			_empty_brush = std::make_unique<brush>("");
 		}
