@@ -3,6 +3,7 @@
 #include "solar/windows/rendering/window_renderer.h"
 #include "solar/rendering/primatives/prim2d.h"
 #include "solar/utility/assert.h"
+#include "solar/utility/verify.h"
 #include "solar/utility/trace.h"
 
 namespace solar {
@@ -22,6 +23,8 @@ namespace solar {
 		, _is_closable_ever(true)
 
 		, _is_open(false) {
+
+		set_is_focus_controller(window_focus_controller_should_handle_key_down::YES);
 
 		//using visible callback to prevent extern code being able to call set_is_visible() at any time. need to go through open() and try_close()
 		set_is_visible_callback([this]() { return _is_open; });
@@ -72,6 +75,9 @@ namespace solar {
 	void dialog_window::open() {
 		TRACE("dialog_window opening... id:{}", get_id());
 		_is_open = true;
+		IF_VERIFY(as_focus_controller() != nullptr) {
+			as_focus_controller()->move_to_front();
+		}
 	}
 
 	void dialog_window::close() {

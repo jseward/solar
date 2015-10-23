@@ -10,7 +10,15 @@ namespace solar {
 		, _dialog_window(dialog_window) {
 	}
 
+	void dialog_frame_window::on_loaded() {
+		update_area();
+	}
+
 	void dialog_frame_window::on_parent_area_changed() {
+		update_area();
+	}
+
+	void dialog_frame_window::update_area() {
 		set_area(_dialog_window.get_frame_layout().build_area(get_parent()));
 	}
 

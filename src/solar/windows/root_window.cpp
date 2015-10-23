@@ -1,6 +1,7 @@
 #include "root_window.h"
 
 #include "solar/utility/assert.h"
+#include "solar/utility/trace.h"
 #include "solar/rendering/render_device.h"
 #include "solar/containers/container_helpers.h"
 
@@ -25,6 +26,12 @@ namespace solar {
 	root_window::~root_window() {
 		ASSERT(_window_under_cursor_while_rendering == nullptr);
 		ASSERT(_focus_controllers.empty());
+	}
+
+	void root_window::move_focus_controller_to_front(window_focus_controller* fc) {
+		TRACE("moving focus controller to front : {}", fc->get_this_window().get_id());
+		find_and_erase(_focus_controllers, fc);
+		_focus_controllers.insert(_focus_controllers.begin(), fc);
 	}
 
 	window_focus_controller* root_window::get_active_focus_controller() const {

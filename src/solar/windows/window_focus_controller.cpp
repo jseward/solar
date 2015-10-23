@@ -5,13 +5,15 @@
 #include "solar/utility/type_convert.h"
 #include "solar/containers/container_helpers.h"
 #include "window.h"
+#include "root_window.h"
 
 namespace solar {
 
 	window_focus_controller::window_focus_controller(window& this_window, window_focus_controller_should_handle_key_down should_handle_key_down) 
 		: _this_window(this_window)
 		, _should_handle_key_down(should_handle_key_down) 
-		, _focused_child_index(-1) {
+		, _root_window(nullptr)
+		, _focused_child_index(0) {
 	}
 
 	window_focus_controller::~window_focus_controller() {
@@ -67,6 +69,11 @@ namespace solar {
 				child->on_focus_gained();
 			}
 		}
+	}
+
+	void window_focus_controller::move_to_front() {
+		ASSERT(_root_window != nullptr);
+		_root_window->move_focus_controller_to_front(this);
 	}
 
 }

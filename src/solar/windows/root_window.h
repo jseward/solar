@@ -26,6 +26,8 @@ namespace solar {
 		bool root_on_key_down(const window_key_event_params& params, bool is_trapped_externally);
 		bool root_on_char_received(const window_char_event_params& params);
 
+		void move_focus_controller_to_front(window_focus_controller* fc);
+
 	private:
 		virtual void on_child_added(window* child) override;
 		virtual void on_child_removed(window* child) override;
