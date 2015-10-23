@@ -13,6 +13,9 @@ namespace solar {
 	private:
 		const stack_panel_orientation _orientation;
 
+		int _cell_size;
+		int _cell_spacing;
+
 	public:
 		stack_panel(const char* id, stack_panel_orientation orientation);
 		virtual ~stack_panel();
