@@ -78,6 +78,7 @@ namespace solar {
 		IF_VERIFY(as_focus_controller() != nullptr) {
 			as_focus_controller()->move_to_front();
 		}
+		on_opened();
 	}
 
 	void dialog_window::close() {
@@ -85,6 +86,7 @@ namespace solar {
 		ASSERT(is_closable_now());
 		TRACE("dialog_window closing... id:{}", get_id());
 		_is_open = false;
+		on_closed();
 	}
 
 	bool dialog_window::try_close() {
@@ -130,6 +132,12 @@ namespace solar {
 		write_object(writer, "style", _style);
 		write_object(writer, "frame_layout", _frame_layout);
 		write_object(writer, "title_text", _title_text);
+	}
+
+	void dialog_window::on_opened() {
+	}
+
+	void dialog_window::on_closed() {
 	}
 
 }

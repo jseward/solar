@@ -50,6 +50,9 @@ namespace solar {
 		virtual void render(const window_render_params& params) override;
 		virtual void read_from_archive(archive_reader& reader) override;
 		virtual void write_to_archive(archive_writer& writer) const override;
+
+		virtual void on_opened();
+		virtual void on_closed();
 	};
 
 }
