@@ -23,6 +23,11 @@ namespace solar {
 			: _has_value(false) {
 		}
 
+		optional(const T& value)
+			: _has_value(true) 
+			, _value(value) {
+		}
+
 		bool has_value() const {
 			return _has_value;
 		}
