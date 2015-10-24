@@ -8,6 +8,7 @@ namespace solar {
 	public:
 		bool _is_dragging;
 		point _begin_cursor_pos;
+		point _last_cursor_pos;
 
 	public:
 		window_dragging_state();

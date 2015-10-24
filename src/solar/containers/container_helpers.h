@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <numeric>
 #include "solar/utility/verify.h"
+#include "solar/utility/type_convert.h"
 
 namespace solar {
 
@@ -38,7 +39,7 @@ namespace solar {
 
 	template<typename Con> void erase_at_index(Con& dst, int index) {		
 		ASSERT(index >= 0);
-		ASSERT(index < dst.size());
+		ASSERT(index < uint_to_int(dst.size()));
 		dst.erase(dst.begin() + index);
 	}
 

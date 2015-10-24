@@ -22,6 +22,18 @@ namespace solar {
 		return (_x * _x) + (_y * _y);
 	}
 
+	vec2& vec2::operator+=(const vec2& rhs) {
+		_x += rhs._x;
+		_y += rhs._y;
+		return *this;
+	}
+
+	vec2& vec2::operator-=(const vec2& rhs) {
+		_x -= rhs._x;
+		_y -= rhs._y;
+		return *this;
+	}
+
 	vec2 operator+(const vec2& lhs, const vec2& rhs) {
 		return vec2(lhs._x + rhs._x, lhs._y + rhs._y);
 	}

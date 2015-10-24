@@ -12,10 +12,12 @@ namespace solar {
 		ASSERT(!_is_dragging);
 		_is_dragging = true;
 		_begin_cursor_pos = cursor_pos;
+		_last_cursor_pos = cursor_pos;
 	}
 
 	void window_dragging_state::end_dragging() {
 		_is_dragging = false;
 		_begin_cursor_pos = point();
+		_last_cursor_pos = point();
 	}
 }
