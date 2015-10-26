@@ -100,6 +100,7 @@ namespace solar {
 		virtual void on_focus_lost(bool should_apply_changes);
 		virtual void on_focus_gained();
 		virtual bool is_focusable_ever() const;
+		virtual void on_is_visible_changed();
 
 		//cheap replacement for dynamic cast. needed so on_child_added() can useful actions like querying layout information.
 		virtual window_component* as_component();

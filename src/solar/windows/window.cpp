@@ -135,7 +135,10 @@ namespace solar {
 
 	void window::set_is_visible(bool is_visible) {
 		ASSERT(_is_visible_callback == nullptr);
-		_is_visible = is_visible;
+		if (_is_visible != is_visible) {
+			_is_visible = is_visible;
+			on_is_visible_changed();
+		}
 	}
 
 	bool window::is_visible() const {
@@ -183,6 +186,9 @@ namespace solar {
 
 	bool window::can_be_under_cursor() const {
 		return _can_be_under_cursor;
+	}
+
+	void window::on_is_visible_changed() {
 	}
 
 	void window::render(const window_render_params& params) {
