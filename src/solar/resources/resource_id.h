@@ -127,6 +127,8 @@ namespace solar {
 	void resource_id<ResourceT, FactoryT>::read_from_archive(archive_reader& reader, const char* name) {
 		read_string(reader, name, _id);
 		_id_source_description = reader.get_source_description();
+		_cached_resource = nullptr;
+		_caching_context.reset();
 	}
 
 	template<typename ResourceT, typename FactoryT>
