@@ -124,14 +124,13 @@ namespace solar {
 		bool is_trapped = false;
 
 		if (!is_trapped_externally) {
-			auto filter = [&params](window& w) { return w.is_visible() && w.is_enabled(); };
 			auto handler = [&params](window& w) { return w.on_key_down(params); };
-			if (handle_event_recursive(filter, handler, *this)) {
+			if (handle_event_focus_only(handler)) {
 				is_trapped = true;
 			}
 		}
 
-		{
+		if (!is_trapped) {
 			auto anywhere_filter = [](window&) { return true; };
 			auto anywhere_handler = [&params](window& w) { return w.on_key_down_anywhere(params); };
 			if (handle_event_recursive(anywhere_filter, anywhere_handler, *this)) {

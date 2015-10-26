@@ -5,6 +5,7 @@
 #include "solar/utility/assert.h"
 #include "solar/utility/verify.h"
 #include "solar/utility/trace.h"
+#include "solar/utility/unused_parameter.h"
 
 namespace solar {
 
@@ -102,13 +103,25 @@ namespace solar {
 	}
 
 	bool dialog_window::on_key_down_anywhere(const window_key_event_params& params) {
-		if (params._key == keyboard_key::ESCAPE) {
-			//ESCAPE must be handled here so that escapable dialogs on top of one another will
-			//be closed in the correct order.
-			try_close();
-			return true;
+		if (_is_open) {
+			if (params._key == keyboard_key::ESCAPE) {
+				//ESCAPE must be handled here so that escapable dialogs on top of one another will
+				//be closed in the correct order.
+				try_close();
+				return true;
+			}
 		}
 		return false;
+	}
+
+	bool dialog_window::on_mouse_button_down(const window_mouse_button_event_params& params) {
+		UNUSED_PARAMETER(params);
+		return true;
+	}
+
+	bool dialog_window::on_mouse_button_up(const window_mouse_button_event_params& params) {
+		UNUSED_PARAMETER(params);
+		return true;
 	}
 
 	void dialog_window::render(const window_render_params& params) {
