@@ -1,7 +1,7 @@
 #include "d3d9_texture_factory.h"
 #include "solar/utility/assert.h"
 #include "solar/utility/alert.h"
-#include "solar/utility/unit_convert.h"
+#include "solar/math/unit_convert.h"
 #include "solar/resources/resource_system.h"
 #include "d3d9_context.h"
 #include "d3d9_texture.h"

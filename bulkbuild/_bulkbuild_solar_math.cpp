@@ -16,5 +16,6 @@
 #include "solar/math/tri2.cpp"
 #include "solar/math/ray2.cpp"
 #include "solar/math/circle.cpp"
+#include "solar/math/unit_convert.cpp"
 
 

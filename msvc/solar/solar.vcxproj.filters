@@ -687,9 +687,6 @@
     <ClInclude Include="..\..\src\solar\resources\resource_mapped_memory.h">
       <Filter>src\solar\resources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\utility\unit_convert.h">
-      <Filter>src\solar\utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\io\file_stream_ptr.h">
       <Filter>src\solar\io</Filter>
     </ClInclude>
@@ -1098,9 +1095,6 @@
     <ClInclude Include="..\..\src\solar\math\mat33.h">
       <Filter>src\solar\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\math\deg.h">
-      <Filter>src\solar\math</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\math\math_constants.h">
       <Filter>src\solar\math</Filter>
     </ClInclude>
@@ -1405,6 +1399,9 @@
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_clipboard.h">
       <Filter>src\solar_platforms\win32</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\math\unit_convert.h">
+      <Filter>src\solar\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1556,9 +1553,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\resources\resource_mapped_memory.cpp">
       <Filter>src\solar\resources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\utility\unit_convert.cpp">
-      <Filter>src\solar\utility</Filter>
     </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_win32_cli_engine.cpp">
       <Filter>bulkbuild</Filter>
@@ -2099,6 +2093,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_clipboard.cpp">
       <Filter>src\solar_platforms\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\math\unit_convert.cpp">
+      <Filter>src\solar\math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

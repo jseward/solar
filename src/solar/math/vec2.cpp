@@ -1,6 +1,7 @@
 #include "vec2.h"
 
 #include "solar/math/math_helpers.h"
+#include "solar/utility/assert.h"
 
 namespace solar {
 

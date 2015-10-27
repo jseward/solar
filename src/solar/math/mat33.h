@@ -1,6 +1,5 @@
 #pragma once
 
-#include "deg.h"
 #include "vec3.h"
 
 namespace solar {
@@ -43,9 +42,9 @@ namespace solar {
 
 	public:
 		friend mat33 make_mat33_identity();
-		friend mat33 make_mat33_rotation_on_x(deg angle);
-		friend mat33 make_mat33_rotation_on_y(deg angle);
-		friend mat33 make_mat33_rotation_on_z(deg angle);
+		friend mat33 make_mat33_rotation_on_x(float radians);
+		friend mat33 make_mat33_rotation_on_y(float radians);
+		friend mat33 make_mat33_rotation_on_z(float radians);
 		friend mat33 make_mat33_rotation_with_forward(const vec3& forward, const vec3& up);
 	};
 

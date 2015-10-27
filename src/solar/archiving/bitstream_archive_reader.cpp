@@ -3,7 +3,7 @@
 #include "archivable.h"
 #include "archive_int_compression.h"
 #include "solar/utility/alert.h"
-#include "solar/utility/unit_convert.h"
+#include "solar/math/unit_convert.h"
 #include "solar/rendering/color.h"
 
 namespace solar {

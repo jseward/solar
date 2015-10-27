@@ -34,27 +34,27 @@ namespace solar {
 		return mat33(); //default constructor = identity, this function makes intent of clients clearer though.
 	}
 
-	mat33 make_mat33_rotation_on_x(deg angle) {
-		float c = cos(angle);
-		float s = sin(angle);
+	mat33 make_mat33_rotation_on_x(float radians) {
+		float c = cos(radians);
+		float s = sin(radians);
 		return mat33(
 			1.f, 0.f, 0.f,
 			0.f, c, s,
 			0.f, -s, c);
 	}
 
-	mat33 make_mat33_rotation_on_y(deg angle) {
-		float c = cos(angle);
-		float s = sin(angle);
+	mat33 make_mat33_rotation_on_y(float radians) {
+		float c = cos(radians);
+		float s = sin(radians);
 		return mat33(
 			c, 0.f, -s,
 			0.f, 1.f, 0.f,
 			s, 0.f, c);
 	}
 
-	mat33 make_mat33_rotation_on_z(deg angle) {
-		float c = cos(angle);
-		float s = sin(angle);
+	mat33 make_mat33_rotation_on_z(float radians) {
+		float c = cos(radians);
+		float s = sin(radians);
 		return mat33(
 			c, s, 0.f,
 			-s, c, 0.f,

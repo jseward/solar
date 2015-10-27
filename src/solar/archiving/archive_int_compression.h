@@ -1,7 +1,7 @@
 #pragma once
 
 #include "solar/utility/assert.h"
-#include "solar/utility/unit_convert.h"
+#include "solar/math/unit_convert.h"
 
 namespace solar {
 

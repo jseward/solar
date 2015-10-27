@@ -8,4 +8,7 @@ namespace solar {
 	extern unsigned int bytes_to_bits(unsigned int bytes);
 	extern unsigned int bits_to_bytes(unsigned int bits);
 
+	extern float deg_to_rad(float deg);
+	extern float rad_to_deg(float rad);
+
 }

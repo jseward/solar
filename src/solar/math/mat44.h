@@ -44,7 +44,7 @@ namespace solar {
 	public:
 		friend mat44 make_mat44_identity();
 		friend mat44 make_mat44_camera_view(const vec3& position, const mat33& rotation);
-		friend mat44 make_mat44_perspective_fov(deg fov_y, float aspect_ratio, float near_plane, float far_plane);
+		friend mat44 make_mat44_perspective_fov(float fov_y_radians, float aspect_ratio, float near_plane, float far_plane);
 		friend mat44 make_mat44_orthographic(float width, float height, float near_plane, float far_plane);
 		friend mat44 make_mat44_inverted(const mat44& in);
 	};

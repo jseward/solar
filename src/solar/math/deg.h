@@ -1,6 +1,6 @@
 #pragma once
 
-#include "math_constants.h"
+#include "unit_convert.h"
 #include "solar/utility/assert.h"
 
 namespace solar {
@@ -19,7 +19,7 @@ namespace solar {
 		}
 
 		float to_rad() const {
-			return (_value * (PI / 180.f));
+			return deg_to_rad(_value);
 		}
 
 		deg operator/(float d) const {

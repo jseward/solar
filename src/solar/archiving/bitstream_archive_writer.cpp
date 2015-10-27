@@ -1,7 +1,7 @@
 #include "bitstream_archive_writer.h"
 
 #include "archive_int_compression.h"
-#include "solar/utility/unit_convert.h"
+#include "solar/math/unit_convert.h"
 #include "solar/utility/type_convert.h"
 #include "solar/utility/trace.h"
 #include "solar/utility/unused_parameter.h"

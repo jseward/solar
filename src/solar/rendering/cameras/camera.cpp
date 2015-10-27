@@ -1,6 +1,7 @@
 #include "camera.h"
 
 #include "solar/math/math_constants.h"
+#include "solar/math/unit_convert.h"
 #include "solar/utility/assert.h"
 #include "solar/utility/type_convert.h"
 
@@ -8,7 +9,7 @@ namespace solar {
 
 	camera::camera() 
 		: _projection_type(camera_projection_type::PERSPECTIVE)
-		, _fov_y(45.f)
+		, _fov_y_radians(deg_to_rad(45.f))
 		, _aspect_ratio(1.f)
 		, _ortho_width(0.f)
 		, _ortho_height(0.f)
@@ -72,7 +73,7 @@ namespace solar {
 	const mat44& camera::get_projection_transform() const {
 		if (!_projection_transform.is_cached(_cache_context)) {
 			if (_projection_type == camera_projection_type::PERSPECTIVE) {
-				_projection_transform.set(_cache_context, make_mat44_perspective_fov(_fov_y, _aspect_ratio, _near_plane, _far_plane));
+				_projection_transform.set(_cache_context, make_mat44_perspective_fov(_fov_y_radians, _aspect_ratio, _near_plane, _far_plane));
 			}
 			else if (_projection_type == camera_projection_type::ORTHOGRAPHIC) {
 				_projection_transform.set(_cache_context, make_mat44_orthographic(_ortho_width, _ortho_height, _near_plane, _far_plane));

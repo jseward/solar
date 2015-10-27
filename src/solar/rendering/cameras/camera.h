@@ -2,7 +2,6 @@
 
 #include "solar/math/basis.h"
 #include "solar/math/mat44.h"
-#include "solar/math/deg.h"
 #include "solar/rendering/viewport.h"
 #include "camera_projection_type.h"
 #include "camera_cached_value.h"
@@ -13,7 +12,7 @@ namespace solar {
 	class camera {
 	private:
 		camera_projection_type _projection_type;
-		deg _fov_y;
+		float _fov_y_radians;
 		float _aspect_ratio;
 		float _ortho_width;
 		float _ortho_height;

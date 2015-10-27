@@ -75,7 +75,6 @@
     <ClInclude Include="..\..\src\solar\math\basis.h" />
     <ClInclude Include="..\..\src\solar\math\circle.h" />
     <ClInclude Include="..\..\src\solar\math\clamp.h" />
-    <ClInclude Include="..\..\src\solar\math\deg.h" />
     <ClInclude Include="..\..\src\solar\math\mat33.h" />
     <ClInclude Include="..\..\src\solar\math\mat44.h" />
     <ClInclude Include="..\..\src\solar\math\math_constants.h" />
@@ -90,6 +89,7 @@
     <ClInclude Include="..\..\src\solar\math\size.h" />
     <ClInclude Include="..\..\src\solar\math\sizef.h" />
     <ClInclude Include="..\..\src\solar\math\tri2.h" />
+    <ClInclude Include="..\..\src\solar\math\unit_convert.h" />
     <ClInclude Include="..\..\src\solar\math\vec2.h" />
     <ClInclude Include="..\..\src\solar\math\vec3.h" />
     <ClInclude Include="..\..\src\solar\math\vec4.h" />
@@ -202,7 +202,6 @@
     <ClInclude Include="..\..\src\solar\utility\property.h" />
     <ClInclude Include="..\..\src\solar\utility\trace.h" />
     <ClInclude Include="..\..\src\solar\utility\type_convert.h" />
-    <ClInclude Include="..\..\src\solar\utility\unit_convert.h" />
     <ClInclude Include="..\..\src\solar\utility\unused_parameter.h" />
     <ClInclude Include="..\..\src\solar\utility\verify.h" />
     <ClInclude Include="..\..\src\solar\windows\components\button_press_params.h" />
@@ -564,6 +563,7 @@
     <ClCompile Include="..\..\src\solar\math\size.cpp" />
     <ClCompile Include="..\..\src\solar\math\sizef.cpp" />
     <ClCompile Include="..\..\src\solar\math\tri2.cpp" />
+    <ClCompile Include="..\..\src\solar\math\unit_convert.cpp" />
     <ClCompile Include="..\..\src\solar\math\vec2.cpp" />
     <ClCompile Include="..\..\src\solar\math\vec3.cpp" />
     <ClCompile Include="..\..\src\solar\math\vec4.cpp" />
@@ -636,7 +636,6 @@
     <ClCompile Include="..\..\src\solar\utility\debugging.cpp" />
     <ClCompile Include="..\..\src\solar\utility\memory_pool.cpp" />
     <ClCompile Include="..\..\src\solar\utility\trace.cpp" />
-    <ClCompile Include="..\..\src\solar\utility\unit_convert.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\button.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\button_style.cpp" />
     <ClCompile Include="..\..\src\solar\windows\components\grid_panel.cpp" />

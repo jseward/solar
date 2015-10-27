@@ -2,6 +2,7 @@
 
 #include "solar/utility/assert.h"
 #include "solar/utility/verify.h"
+#include "solar/math/math_constants.h"
 
 namespace solar {
 
@@ -16,16 +17,16 @@ namespace solar {
 		return ::fabsf(x);
 	}
 
-	float cos(deg d) {
-		return ::cosf(d.to_rad());
+	float cos(float radians) {
+		return ::cosf(radians);
 	}
 
-	float sin(deg d) {
-		return ::sinf(d.to_rad());
+	float sin(float radians) {
+		return ::sinf(radians);
 	}
 
-	float tan(deg d) {
-		return ::tanf(d.to_rad());
+	float tan(float radians) {
+		return ::tanf(radians);
 	}
 
 	bool is_approx(float x, float y, float tolerance) {
@@ -79,7 +80,7 @@ namespace solar {
 	float calculate_oscillate_t(float current_time, float oscillation_time_period) {
 		float t = 0.f;
 		IF_VERIFY(oscillation_time_period > 0.f) {
-			t = sin(deg((std::fmodf(current_time, oscillation_time_period) / oscillation_time_period) * 360.f));
+			t = sin((std::fmodf(current_time, oscillation_time_period) / oscillation_time_period) * TWO_PI);
 			//sin is in range -1 : +1, want 0 : +1
 			t = (t + 1.f) / 2.f;
 		}

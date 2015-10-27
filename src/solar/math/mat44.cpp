@@ -89,7 +89,7 @@ namespace solar {
 		return mat44();
 	}
 
-	mat44 make_mat44_perspective_fov(deg fov_y, float aspect_ratio, float near_plane, float far_plane) {
+	mat44 make_mat44_perspective_fov(float fov_y_radians, float aspect_ratio, float near_plane, float far_plane) {
 		//Direct3D docs: D3DXMatrixPerspectiveFovLH
 		//
 		//x_scale    0          0               0
@@ -103,7 +103,7 @@ namespace solar {
 		ASSERT(aspect_ratio > 0.f);
 		ASSERT(near_plane < far_plane);
 
-		float y_scale = 1.f / tan(fov_y / 2.f);
+		float y_scale = 1.f / tan(fov_y_radians / 2.f);
 		float x_scale = y_scale / aspect_ratio;
 		float q = far_plane / (far_plane - near_plane);
 

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "deg.h"
 #include "vec2.h"
 
 namespace solar {
@@ -8,9 +7,9 @@ namespace solar {
 	extern float sqrt(float x);
 	extern float abs(float x);
 
-	extern float cos(deg d);
-	extern float sin(deg d);
-	extern float tan(deg d);
+	extern float cos(float radians);
+	extern float sin(float radians);
+	extern float tan(float radians);
 
 	extern bool is_approx(float x, float y, float tolerance);
 	extern float constrain(float lower_bound, float upper_bound, float x);

@@ -3,6 +3,7 @@
 #include "solar/utility/assert.h"
 #include "solar/utility/verify.h"
 #include "solar/math/math_helpers.h"
+#include "solar/math/math_constants.h"
 #include "solar/rendering/viewport.h"
 #include "solar/rendering/cameras/camera.h"
 
@@ -30,9 +31,9 @@ namespace solar {
 		_render_buffer.clear();
 		_render_buffer.reserve(segment_count + 1);
 
-		const deg deg_inc = deg(360.f / segment_count);
-		const float sin_inc = sin(deg_inc);
-		const float cos_inc = cos(deg_inc);
+		const float rad_inc = TWO_PI / segment_count;
+		const float sin_inc = sin(rad_inc);
+		const float cos_inc = cos(rad_inc);
 
 		vec2 r = vec2(1.f, 0.f);
 		for (unsigned int i = 0; i < segment_count; ++i) {
