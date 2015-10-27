@@ -23,7 +23,18 @@ namespace solar {
 		void begin_rendering(const rect& render_area, shader& shader);
 		void end_rendering();
 
-		void render_brush(const brush& brush, brush_render_mode render_mode, const rect& area, float area_scale, const color& color);
+		void render_brush(
+			const brush& brush, 
+			brush_render_mode render_mode, 
+			const rect& area, 
+			float area_scale, 
+			const color& color);
+
+		void render_brush_with_angle(
+			const brush& brush, 
+			const rect& area, 
+			const color& color, 
+			float angle);
 
 	private:
 		void render_brush_stretched(const brush& brush, const rect& area, float area_scale, const color& color);

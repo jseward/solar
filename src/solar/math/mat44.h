@@ -29,6 +29,7 @@ namespace solar {
 			float v10, float v11, float v12, float v13,
 			float v20, float v21, float v22, float v23,
 			float v30, float v31, float v32, float v33);
+		mat44(const mat33& mat33);
 
 		float& at(int row, int column);
 		float at(int row, int column) const;
@@ -47,6 +48,11 @@ namespace solar {
 		friend mat44 make_mat44_perspective_fov(float fov_y_radians, float aspect_ratio, float near_plane, float far_plane);
 		friend mat44 make_mat44_orthographic(float width, float height, float near_plane, float far_plane);
 		friend mat44 make_mat44_inverted(const mat44& in);
+		friend mat44 make_mat44_rotation_on_x(float radians);
+		friend mat44 make_mat44_rotation_on_y(float radians);
+		friend mat44 make_mat44_rotation_on_z(float radians);
+		friend mat44 make_mat44_translation(const vec3& t);
+		friend mat44 make_mat44_translation(float x, float y, float z);
 	};
 
 	inline float& mat44::at(int row, int column) {

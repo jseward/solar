@@ -23,6 +23,13 @@ namespace solar {
 		, _v30(v30), _v31(v31), _v32(v32), _v33(v33) {
 	}
 
+	mat44::mat44(const mat33& m) 
+		: _v00(m.at(0, 0)), _v01(m.at(0, 1)), _v02(m.at(0, 2)), _v03(0.f)
+		, _v10(m.at(1, 0)), _v11(m.at(1, 1)), _v12(m.at(1, 2)), _v13(0.f)
+		, _v20(m.at(2, 0)), _v21(m.at(2, 1)), _v22(m.at(2, 2)), _v23(0.f)
+		, _v30(0.f), _v31(0.f), _v32(0.f), _v33(1.f) {
+	}
+
 	mat44& operator*=(mat44& lhs, const mat44& rhs) {
 
 		mat44 new_lhs = mat44(
@@ -194,6 +201,30 @@ namespace solar {
 		out /= det;
 
 		return out;
+	}
+
+	mat44 make_mat44_rotation_on_x(float radians) {
+		return mat44(make_mat33_rotation_on_x(radians));
+	}
+
+	mat44 make_mat44_rotation_on_y(float radians) {
+		return mat44(make_mat33_rotation_on_y(radians));
+	}
+
+	mat44 make_mat44_rotation_on_z(float radians) {
+		return mat44(make_mat33_rotation_on_z(radians));
+	}
+
+	mat44 make_mat44_translation(const vec3& t) {
+		return make_mat44_translation(t._x, t._y, t._z);
+	}
+
+	mat44 make_mat44_translation(float x, float y, float z) {
+		mat44 m = make_mat44_identity();
+		m._v30 = x;
+		m._v31 = y;
+		m._v32 = z;
+		return m;
 	}
 
 }

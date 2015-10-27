@@ -36,6 +36,8 @@ namespace solar {
 		void render_rect(const rect& area, const color& color);
 		void render_rect(const rect& area, const color& color, const simple_rect_uvs& uvs);
 		void render_rect(const rectf& area, const color& color);
+		void render_rect_with_angle(const rect& area, const color& color, const simple_rect_uvs& uvs, float angle);
+		void render_rect_with_angle(const rectf& area, const color& color, const simple_rect_uvs& uvs, float angle);
 		void render_circle(const vec2& center, float radius, const color& color);
 		void render_circle(const vec2& center, float radius, const color& color, unsigned int segment_count);
 		void render_polygon(const vec2* points, unsigned int point_count, const color& color);

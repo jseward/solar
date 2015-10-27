@@ -82,6 +82,10 @@ namespace solar {
 		return pointf(_left, _bottom);
 	}
 
+	pointf rectf::get_center() const {
+		return pointf(get_center_x(), get_center_y());
+	}
+
 	rectf& rectf::move_up(float distance) {
 		_top -= distance;
 		_bottom -= distance;

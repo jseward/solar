@@ -32,6 +32,7 @@ namespace solar {
 		pointf get_top_right() const;
 		pointf get_bottom_right() const;
 		pointf get_bottom_left() const;
+		pointf get_center() const;
 
 		rectf& move_up(float distance);
 		rectf& move_down(float distance);

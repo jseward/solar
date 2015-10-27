@@ -38,6 +38,33 @@ namespace solar {
 			simple_rect_uvs());
 	}
 
+	void prim2d::render_rect_with_angle(const rect& area, const color& color, const simple_rect_uvs& uvs, float angle) {
+		render_rect_with_angle(rect_to_rectf(area), color, uvs, angle);
+	}
+
+	void prim2d::render_rect_with_angle(const rectf& area, const color& color, const simple_rect_uvs& uvs, float angle) {
+		const pointf center = area.get_center();
+		
+		//Need to translate center to 0,0 so the rotation works correctly...
+		const mat44 rotate = make_mat44_rotation_on_z(angle);
+		const mat44 translate = make_mat44_translation(-center._x, -center._y, 0.0f);
+		const mat44 transform = translate * rotate;
+
+		const vec3 inverse_translation = vec3(center._x, center._y, 0.f);
+		const vec3 rotated_top_left = inverse_translation + (vec3(area.get_left(), area.get_top(), 0.f) * transform);
+		const vec3 rotated_top_right = inverse_translation + (vec3(area.get_right(), area.get_top(), 0.f) * transform);
+		const vec3 rotated_bottom_right = inverse_translation + (vec3(area.get_right(), area.get_bottom(), 0.f) * transform);
+		const vec3 rotated_bottom_left = inverse_translation + (vec3(area.get_left(), area.get_bottom(), 0.f) * transform);
+
+		render_rect(
+			vec2(rotated_top_left._x, rotated_top_left._y),
+			vec2(rotated_top_right._x, rotated_top_right._y),
+			vec2(rotated_bottom_right._x, rotated_bottom_right._y),
+			vec2(rotated_bottom_left._x, rotated_bottom_left._y),
+			color,
+			uvs);
+	}
+
 	void prim2d::render_circle(const vec2& center, float radius, const color& color) {
 		render_circle(center, radius, color, 16);
 	}
