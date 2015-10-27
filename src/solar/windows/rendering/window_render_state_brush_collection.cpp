@@ -12,11 +12,11 @@ namespace solar {
 	}
 
 	void window_render_state_brush_collection::read_from_archive(archive_reader& reader, const char* name) {
-		read_enum_array<brush_id_array, window_render_state>(reader, name, _brush_ids);
+		read_enum_array_of_objects(reader, name, _brush_ids);
 	}
 
 	void window_render_state_brush_collection::write_to_archive(archive_writer& writer, const char* name) const {
-		write_enum_array<brush_id_array, window_render_state>(writer, name, _brush_ids);
+		write_enum_array_of_objects(writer, name, _brush_ids);
 	}
 
 }
