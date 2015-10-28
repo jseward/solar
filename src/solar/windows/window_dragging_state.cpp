@@ -9,7 +9,10 @@ namespace solar {
 	}
 
 	void window_dragging_state::begin_dragging(const point& cursor_pos) {
-		ASSERT(!_is_dragging);
+		
+		//too easy to mess up state by dragging outside of window client area, just ignore duplicate begins.
+		//ASSERT(!_is_dragging); 
+
 		_is_dragging = true;
 		_begin_cursor_pos = cursor_pos;
 		_last_cursor_pos = cursor_pos;

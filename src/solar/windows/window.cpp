@@ -108,11 +108,17 @@ namespace solar {
 	}
 
 	float window::get_area_scale() const {
-		return 1.f; //todo
+		if (_parent != nullptr) {
+			return _parent->get_area_scale();
+		}
+		return 1.f;
 	}
 
 	float window::get_font_scale() const {
-		return 1.f;//todo
+		if (_parent != nullptr) {
+			return _parent->get_font_scale();
+		}
+		return 1.f;
 	}
 
 	float window::get_alpha() const {

@@ -58,15 +58,10 @@ namespace solar {
 
 		void set_area(const rect& new_area);
 		const rect& get_area() const;
-		
-		float get_area_scale() const;		
-		float get_font_scale() const;
 
 		float get_alpha() const;
 
 		bool is_enabled() const;
-
-		bool is_focused() const;
 
 		void set_is_visible(bool is_visible);
 		bool is_visible() const;
@@ -80,6 +75,7 @@ namespace solar {
 		window_focus_controller* as_focus_controller();
 		void try_make_focused();
 		bool is_focusable_now() const;
+		bool is_focused() const;
 
 	public:
 		virtual void render(const window_render_params& params);
@@ -101,6 +97,8 @@ namespace solar {
 		virtual void on_focus_gained();
 		virtual bool is_focusable_ever() const;
 		virtual void on_is_visible_changed();
+		virtual float get_area_scale() const;
+		virtual float get_font_scale() const;
 
 		//cheap replacement for dynamic cast. needed so on_child_added() can useful actions like querying layout information.
 		virtual window_component* as_component();
