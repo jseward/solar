@@ -4,6 +4,7 @@
 #include "solar/utility/verify.h"
 #include "solar/math/math_helpers.h"
 #include "solar/math/math_constants.h"
+#include "solar/math/math_type_convert.h"
 #include "solar/rendering/viewport.h"
 #include "solar/rendering/cameras/camera.h"
 
@@ -19,6 +20,17 @@ namespace solar {
 			render_segments(points, point_count, color);
 			render_segment(points[point_count - 1], points[0], color);
 		}
+	}
+
+	void prim2d_lines::render_rect(const rect& area, const color& color) {
+		_render_buffer.clear();
+		_render_buffer.reserve(4);
+		_render_buffer.push_back(point_to_vec2(area.get_top_left()));
+		_render_buffer.push_back(point_to_vec2(area.get_top_right()));
+		_render_buffer.push_back(point_to_vec2(area.get_bottom_right()));
+		_render_buffer.push_back(point_to_vec2(area.get_bottom_left()));
+
+		render_segments_looped(_render_buffer.data(), _render_buffer.size(), color);
 	}
 
 	void prim2d_lines::render_circle(const vec2& center, float radius, const color& color) {

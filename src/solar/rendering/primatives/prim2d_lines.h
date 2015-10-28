@@ -29,6 +29,7 @@ namespace solar {
 		void render_segments_looped(const vec2* points, unsigned int point_count, const color& color);
 		void render_circle(const vec2& center, float radius, const color& color);
 		void render_circle(const vec2& center, float radius, const color& color, unsigned int segment_count);
+		void render_rect(const rect& area, const color& color);
 
 		void render_world_segment(const viewport& viewport, const camera& camera, const vec3& p0, const vec3& p1, const color& color);
 		void render_world_segments(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count, const color& color);
