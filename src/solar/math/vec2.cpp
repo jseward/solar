@@ -15,6 +15,10 @@ namespace solar {
 		, _y(y) {
 	}
 
+	bool vec2::is_normalized() const {
+		return is_approx(get_length(), 1.f, 0.01f);
+	}
+
 	float vec2::get_length() const {
 		return sqrt(get_length_squared());
 	}
@@ -50,6 +54,10 @@ namespace solar {
 	vec2 operator/(const vec2& lhs, float k) {
 		ASSERT(k != 0.f);
 		return vec2(lhs._x / k, lhs._y / k);
+	}
+
+	vec2 operator-(const vec2& v) {
+		return vec2(-v._x, -v._y);
 	}
 
 	vec2 make_perpendicular(const vec2& in, float dir) {
