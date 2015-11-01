@@ -28,7 +28,8 @@ namespace solar {
 		void render_segment(const vec2& p0, const vec2& p1, const color& color);
 		void render_segments_looped(const vec2* points, unsigned int point_count, const color& color);
 		void render_circle(const vec2& center, float radius, const color& color);
-		void render_circle(const vec2& center, float radius, const color& color, unsigned int segment_count);
+		void render_circle(const vec2& center, float radius, const color& color, float begin_rad, float end_rad);
+		void render_circle(const vec2& center, float radius, const color& color, float begin_rad, float end_rad, unsigned int segment_count);
 		void render_rect(const rect& area, const color& color);
 
 		void render_world_segment(const viewport& viewport, const camera& camera, const vec3& p0, const vec3& p1, const color& color);
@@ -36,7 +37,8 @@ namespace solar {
 		void render_world_segments_looped(const viewport& viewport, const camera& camera, const vec2* points, unsigned int point_count, const color& color);
 		void render_world_segments_looped(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count, const color& color);
 		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color);
-		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, unsigned int segment_count);
+		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad);
+		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad, unsigned int segment_count);
 	};
 
 }

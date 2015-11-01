@@ -29,8 +29,6 @@ namespace solar {
 			float v00, float v01, float v02,
 			float v10, float v11, float v12,
 			float v20, float v21, float v22);
-
-		vec3 transform_vec3(const vec3& in) const;
 		
 		float& at(int row, int column);
 		float at(int row, int column) const;
@@ -39,6 +37,10 @@ namespace solar {
 		const vec3& get_forward() const;
 		const vec3& get_up() const;
 		const vec3& get_cross() const;
+
+	public:
+		friend vec2 operator*(const vec2& vec, const mat33& mat);
+		friend vec3 operator*(const vec3& vec, const mat33& mat);
 
 	public:
 		friend mat33 make_mat33_identity();

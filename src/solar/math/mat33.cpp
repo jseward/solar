@@ -23,11 +23,17 @@ namespace solar {
 		, _v20(v20), _v21(v21), _v22(v22) {
 	}
 
-	vec3 mat33::transform_vec3(const vec3& in) const {
+	vec2 operator*(const vec2& vec, const mat33& mat) {
+		return vec2(
+			(vec._x * mat._v00) + (vec._y * mat._v10),
+			(vec._x * mat._v01) + (vec._y * mat._v11));
+	}
+
+	vec3 operator*(const vec3& vec, const mat33& mat) {
 		return vec3(
-			(in._x * _v00) + (in._y * _v10) + (in._z * _v20),
-			(in._x * _v01) + (in._y * _v11) + (in._z * _v21),
-			(in._x * _v02) + (in._y * _v12) + (in._z * _v22));
+			(vec._x * mat._v00) + (vec._y * mat._v10) + (vec._z * mat._v20),
+			(vec._x * mat._v01) + (vec._y * mat._v11) + (vec._z * mat._v21),
+			(vec._x * mat._v02) + (vec._y * mat._v12) + (vec._z * mat._v22));
 	}
 
 	mat33 make_mat33_identity() {
