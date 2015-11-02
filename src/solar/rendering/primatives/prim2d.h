@@ -39,12 +39,14 @@ namespace solar {
 		void render_rect_with_angle(const rect& area, const color& color, const simple_rect_uvs& uvs, float angle);
 		void render_rect_with_angle(const rectf& area, const color& color, const simple_rect_uvs& uvs, float angle);
 		void render_circle(const vec2& center, float radius, const color& color);
-		void render_circle(const vec2& center, float radius, const color& color, unsigned int segment_count);
+		void render_circle(const vec2& center, float radius, const color& color, float begin_rad, float end_rad);
+		void render_circle(const vec2& center, float radius, const color& color, float begin_rad, float end_rad, unsigned int segment_count);
 		void render_polygon(const vec2* points, unsigned int point_count, const color& color);
 
 		void render_world_polygon(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count, const color& color);
 		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color);
-		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, unsigned int segment_count);
+		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad);
+		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad, unsigned int segment_count);
 		void render_world_indexed_tris(const viewport& viewport, const camera& camera, const vec3* vertices, unsigned int vertex_count, const unsigned short* indices, unsigned int index_count, const color& color);
 	};
 

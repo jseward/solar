@@ -1,6 +1,7 @@
 #include "vec2.h"
 
 #include "solar/math/math_helpers.h"
+#include "solar/math/math_constants.h"
 #include "solar/utility/assert.h"
 
 namespace solar {
@@ -81,24 +82,33 @@ namespace solar {
 		return (v0 - v1).get_length_squared();
 	}
 
-	float get_dot_product(const vec2& v, const vec2& u) {
+	float cross(const vec2& u, const vec2& v) {
+		return (u._x * v._y) - (u._y * v._x);
+	}
+
+	float dot(const vec2& u, const vec2& v) {
 		return (u._x * v._x) + (u._y * v._y);
 	}
 
-	float get_angle_between(const vec2& u, const vec2& v) {
+	float get_angle_between_using_any_dir(const vec2& u, const vec2& v) {
 		//u and v must be normalized, but too slow to check
 		//ASSERT(u.is_normalized());
 		//ASSERT(v.is_normalized());
-		const float dot = constrain(-1.f, 1.f, get_dot_product(u, v));
-		return acos(dot);
+		return acos(constrain(-1.f, 1.f, dot(u, v)));
 	}
 
-	float get_angle_between_with_direction(const vec2& u, const vec2& v) {
-		const float dot = get_dot_product(u, v);
-		const float cross = (u._x * v._y) - (u._y * v._x);
-		
-		//The ATan2 is clockwise negative and counter-clockwise positive. We want the inverse to match DirectX's left handedness so the sign is -1.f
-		const float sign = -1.f;
-		return atan2(cross, dot) * sign;
+	float get_angle_between_using_cc_only(const vec2& u, const vec2& v) {
+		float a = atan2(cross(u, v), dot(u, v));
+		//will be in the range [-PI , PI]
+		//we want [0 , TWO_PI]
+		if (a < 0.f) {
+			return a + TWO_PI;
+		}
+		return a;
 	}
+
+	std::ostream& operator<<(std::ostream& os, const vec2& v) {
+		return os << "{ " << v._x << ", " << v._y << " }";
+	}
+
 }

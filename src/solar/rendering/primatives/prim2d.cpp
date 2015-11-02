@@ -66,23 +66,30 @@ namespace solar {
 	}
 
 	void prim2d::render_circle(const vec2& center, float radius, const color& color) {
-		render_circle(center, radius, color, 16);
+		render_circle(center, radius, color, 0.f, TWO_PI, DEFAULT_CIRCLE_SEGMENT_COUNT);
 	}
 
-	void prim2d::render_circle(const vec2& center, float radius, const color& color, unsigned int segment_count) {
-		const float rad_inc = TWO_PI / segment_count;
+	void prim2d::render_circle(const vec2& center, float radius, const color& color, float begin_rad, float end_rad) {
+		render_circle(center, radius, color, begin_rad, end_rad, DEFAULT_CIRCLE_SEGMENT_COUNT);
+	}
+
+	void prim2d::render_circle(const vec2& center, float radius, const color& color, float begin_rad, float end_rad, unsigned int segment_count) {
+		ASSERT(segment_count >= 3);
+		ASSERT(begin_rad <= end_rad);
+
+		const float rad_inc = (end_rad - begin_rad) / segment_count;
 		const float sin_inc = sin(rad_inc);
 		const float cos_inc = cos(rad_inc);
 
-		vec2 r = vec2(1.f, 0.f);
-		vec2 prev_segment_point = center + (r * radius);
+		vec2 r = vec2(cos(begin_rad), sin(begin_rad));
+		vec2 prev_segment_point = center + (vec2(r._x, -r._y) * radius);
 		for (unsigned int i = 0; i < segment_count; ++i) {
 			r = vec2(
 				(r._x * cos_inc) - (r._y * sin_inc),
 				(r._x * sin_inc) + (r._y * cos_inc));
-			vec2 curr_segment_point = center + (r * radius);
+			vec2 curr_segment_point = center + (vec2(r._x, -r._y) * radius);
 
-			render_tri(prev_segment_point, curr_segment_point, center, color);
+			render_tri(center, curr_segment_point, prev_segment_point, color);
 
 			prev_segment_point = curr_segment_point;
 		}
@@ -106,10 +113,14 @@ namespace solar {
 	}
 
 	void prim2d::render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color) {
-		render_world_circle(viewport, camera, center, radius, color, DEFAULT_CIRCLE_SEGMENT_COUNT);
+		render_world_circle(viewport, camera, center, radius, color, 0.f, TWO_PI, DEFAULT_CIRCLE_SEGMENT_COUNT);
 	}
 
-	void prim2d::render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, unsigned int segment_count) {
+	void prim2d::render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad) {
+		render_world_circle(viewport, camera, center, radius, color, begin_rad, end_rad, DEFAULT_CIRCLE_SEGMENT_COUNT);
+	}
+
+	void prim2d::render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad, unsigned int segment_count) {
 		vec3 radius_marker = center + (camera.get_basis().get_rotation().get_up() * radius);
 
 		vec2 screen_center;
@@ -119,7 +130,7 @@ namespace solar {
 			viewport.try_project(screen_radius_marker, camera.get_view_projection_transform(), radius_marker)) {
 
 			const float screen_radius = get_distance(screen_center, screen_radius_marker);
-			render_circle(screen_center, screen_radius, color, segment_count);
+			render_circle(screen_center, screen_radius, color, begin_rad, end_rad, segment_count);
 		}
 	}
 

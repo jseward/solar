@@ -56,7 +56,7 @@ namespace solar {
 
 		vec2 r = vec2(cos(begin_rad), sin(begin_rad));
 		for (unsigned int i = 0; i < point_count; ++i) {
-			vec2 segment_point = center + (r * radius);
+			vec2 segment_point = center + (vec2(r._x, -r._y) * radius);
 			_render_buffer.push_back(segment_point);
 			r = vec2(
 				(r._x * cos_inc) - (r._y * sin_inc),

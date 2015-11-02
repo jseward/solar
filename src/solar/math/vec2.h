@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 namespace solar {
 
 	class vec2 {
@@ -31,9 +33,11 @@ namespace solar {
 		friend vec2 normalize(const vec2& in);
 		friend float get_distance(const vec2& v0, const vec2& v1);
 		friend float get_distance_squared(const vec2& v0, const vec2& v1);
-		friend float get_dot_product(const vec2& v, const vec2& u);
-		friend float get_angle_between(const vec2& v, const vec2& u);
-		friend float get_angle_between_with_direction(const vec2& u, const vec2& v);
+		friend float dot(const vec2& u, const vec2& v);
+		friend float cross(const vec2& u, const vec2& v);
+		friend float get_angle_between_using_any_dir(const vec2& u, const vec2& v);
+		friend float get_angle_between_using_cc_only(const vec2& u, const vec2& v);
+		friend std::ostream& operator<<(std::ostream& os, const vec2& v);
 	};
 
 }
