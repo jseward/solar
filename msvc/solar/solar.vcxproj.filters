@@ -1402,6 +1402,9 @@
     <ClInclude Include="..\..\src\solar\math\unit_convert.h">
       <Filter>src\solar\math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\window_mouse_wheel_event_params.h">
+      <Filter>src\solar\windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">

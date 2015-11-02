@@ -241,6 +241,11 @@ namespace solar {
 		return false;
 	}
 
+	bool window::on_mouse_wheel_moved(const window_mouse_wheel_event_params& params) {
+		UNUSED_PARAMETER(params);
+		return false;
+	}
+
 	bool window::on_key_down(const window_key_event_params& params) {
 		UNUSED_PARAMETER(params);
 		return false;

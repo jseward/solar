@@ -120,6 +120,17 @@ namespace solar {
 		return is_trapped;
 	}
 
+	bool root_window::root_on_mouse_wheel_moved(const window_mouse_wheel_event_params& params) {
+		bool is_trapped = false;
+
+		auto handler = [&params](window& w) { return w.on_mouse_wheel_moved(params); };
+		if (handle_event_focus_only(handler)) {
+			is_trapped = true;
+		}
+
+		return is_trapped;
+	}
+
 	bool root_window::root_on_key_down(const window_key_event_params& params, bool is_trapped_externally) {
 		bool is_trapped = false;
 

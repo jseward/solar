@@ -23,6 +23,7 @@ namespace solar {
 		void render_all(const window_render_params& params);
 		bool root_on_mouse_button_down(const window_mouse_button_event_params& params, bool is_trapped_externally);
 		bool root_on_mouse_button_up(const window_mouse_button_event_params& params, bool is_trapped_externally);
+		bool root_on_mouse_wheel_moved(const window_mouse_wheel_event_params& params);
 		bool root_on_key_down(const window_key_event_params& params, bool is_trapped_externally);
 		bool root_on_char_received(const window_char_event_params& params);
 

@@ -5,8 +5,9 @@
 #include <functional>
 #include "solar/math/rect.h"
 #include "solar/archiving/archivable.h"
-#include "solar/windows/rendering/window_render_params.h"
+#include "./rendering/window_render_params.h"
 #include "window_mouse_button_event_params.h"
+#include "window_mouse_wheel_event_params.h"
 #include "window_key_event_params.h"
 #include "window_char_event_params.h"
 #include "window_focus_controller.h"
@@ -90,6 +91,7 @@ namespace solar {
 		virtual bool on_mouse_button_down(const window_mouse_button_event_params& params);
 		virtual bool on_mouse_button_up(const window_mouse_button_event_params& params);
 		virtual bool on_mouse_button_up_anywhere(const window_mouse_button_event_params& params);
+		virtual bool on_mouse_wheel_moved(const window_mouse_wheel_event_params& params);
 		virtual bool on_key_down(const window_key_event_params& params);
 		virtual bool on_key_down_anywhere(const window_key_event_params& params);
 		virtual bool on_char_received(const window_char_event_params& params);
