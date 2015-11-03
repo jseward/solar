@@ -39,6 +39,8 @@ namespace solar {
 		const mat44& get_view_transform() const;
 		const mat44& get_projection_transform() const;
 		const mat44& get_view_projection_transform() const;
+		float get_ortho_width() const;
+		float get_ortho_height() const;
 
 		mat44 build_world_view_projection_transform(const mat44& world_transform) const;
 

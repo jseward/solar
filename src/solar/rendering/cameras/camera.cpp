@@ -92,6 +92,16 @@ namespace solar {
 		return _view_projection_transform.get(_cache_context);
 	}
 
+	float camera::get_ortho_width() const {
+		ASSERT(_projection_type == camera_projection_type::ORTHOGRAPHIC);
+		return _ortho_width;
+	}
+
+	float camera::get_ortho_height() const {
+		ASSERT(_projection_type == camera_projection_type::ORTHOGRAPHIC);
+		return _ortho_height;
+	}
+
 	mat44 camera::build_world_view_projection_transform(const mat44& world_transform) const {
 		return world_transform * get_view_projection_transform();
 	}
