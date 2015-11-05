@@ -107,6 +107,12 @@ namespace solar {
 		return a;
 	}
 
+	bool is_approx(const vec2& v0, const vec2& v1, float tolerance) {
+		return
+			is_approx(v0._x, v1._x, tolerance) &&
+			is_approx(v0._y, v1._y, tolerance);
+	}
+
 	std::ostream& operator<<(std::ostream& os, const vec2& v) {
 		return os << "{ " << v._x << ", " << v._y << " }";
 	}

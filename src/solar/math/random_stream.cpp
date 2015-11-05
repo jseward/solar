@@ -21,6 +21,13 @@ namespace solar {
 		, _iy(0) {
 	}
 
+	random_stream::random_stream(int seed)
+		: _seed(0)
+		, _iy(0) {
+
+		initialize(seed);
+	}
+
 	random_stream::~random_stream() {
 	}
 

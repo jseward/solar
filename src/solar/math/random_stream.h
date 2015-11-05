@@ -17,6 +17,7 @@ namespace solar {
 
 	public:
 		random_stream();
+		random_stream(int seed);
 		random_stream(const random_stream&) = delete;
 		random_stream& operator=(const random_stream&) = delete;
 		virtual ~random_stream();

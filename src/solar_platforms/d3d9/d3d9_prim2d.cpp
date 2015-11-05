@@ -157,7 +157,7 @@ namespace solar {
 		_buffered_rects.emplace_back(top_left, top_right, bottom_right, bottom_left, color, uvs);
 	}
 
-	void d3d9_prim2d::render_tri(const vec2& v0, const vec2& v1, const vec2& v2, const color& color) {
+	void d3d9_prim2d::render_triangle(const vec2& v0, const vec2& v1, const vec2& v2, const color& color) {
 		ASSERT(_is_rendering);
 
 		if (_buffered_tris.size() >= _setup_params.get_max_buffered_tri_count()) {
@@ -167,7 +167,7 @@ namespace solar {
 		_buffered_tris.emplace_back(v0, v1, v2, color);
 	}
 
-	void d3d9_prim2d::render_indexed_tris(const vec2* vertices, unsigned int vertex_count, const unsigned short* indices, unsigned int index_count, const color& color) {
+	void d3d9_prim2d::render_indexed_triangles(const vec2* vertices, unsigned int vertex_count, const unsigned short* indices, unsigned int index_count, const color& color) {
 		auto lr = lock_buffers_and_render_if_needed(vertex_count, index_count);
 
 		for (unsigned int i_vertex = 0; i_vertex < vertex_count; ++i_vertex) {

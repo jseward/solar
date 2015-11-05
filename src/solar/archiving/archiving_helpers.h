@@ -181,6 +181,20 @@ namespace solar {
 		reader.read_color(name, value);
 	}
 
+	template<typename T> void read_color_vector(archive_reader& reader, const char* name, T& colors) {
+		read_object_vector(reader, name, colors, [](archive_reader& reader) {
+			color c;
+			read_color(reader, "color", c);
+			return c;
+		});
+	}
+
+	template<typename T> void write_color_vector(archive_writer& writer, const char* name, const T& colors) {
+		write_object_vector(writer, name, colors, [](archive_writer& writer, const color& c) {
+			write_color(writer, "color", c);
+		});
+	}
+
 	inline void read_object(archive_reader& reader, const char* name, archivable& value) {
 		reader.read_object(name, value);
 	}

@@ -89,7 +89,7 @@ namespace solar {
 				(r._x * sin_inc) + (r._y * cos_inc));
 			vec2 curr_segment_point = center + (vec2(r._x, -r._y) * radius);
 
-			render_tri(center, curr_segment_point, prev_segment_point, color);
+			render_triangle(center, curr_segment_point, prev_segment_point, color);
 
 			prev_segment_point = curr_segment_point;
 		}
@@ -97,7 +97,7 @@ namespace solar {
 
 	void prim2d::render_polygon(const vec2* points, unsigned int point_count, const color& color) {
 		for (unsigned int i = 1; i < point_count - 1; i++) {
-			render_tri(
+			render_triangle(
 				points[0], 
 				points[i], 
 				points[i + 1], 
@@ -134,10 +134,24 @@ namespace solar {
 		}
 	}
 
-	void prim2d::render_world_indexed_tris(const viewport& viewport, const camera& camera, const vec3* vertices, unsigned int vertex_count, const unsigned short* indices, unsigned int index_count, const color& color) {
+	void prim2d::render_world_indexed_triangles(const viewport& viewport, const camera& camera, const vec3* vertices, unsigned int vertex_count, const unsigned short* indices, unsigned int index_count, const color& color) {
 		auto screen_points = _world_projection_buffer.project_points(viewport, camera, vertices, vertex_count);
 		if (!screen_points.empty()) {
-			render_indexed_tris(screen_points.data(), screen_points.size(), indices, index_count, color);
+			render_indexed_triangles(screen_points.data(), screen_points.size(), indices, index_count, color);
+		}
+	}
+
+	void prim2d::render_world_triangle(const viewport& viewport, const camera& camera, const vec3& p0, const vec3& p1, const vec3& p2, const color& color) {
+		vec2 screen_p0;
+		vec2 screen_p1;
+		vec2 screen_p2;
+
+		if (
+			viewport.try_project(screen_p0, camera.get_view_projection_transform(), p0) &&
+			viewport.try_project(screen_p1, camera.get_view_projection_transform(), p1) &&
+			viewport.try_project(screen_p2, camera.get_view_projection_transform(), p2)) {
+
+			render_triangle(screen_p0, screen_p1, screen_p2, color);
 		}
 	}
 

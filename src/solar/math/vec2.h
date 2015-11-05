@@ -37,6 +37,7 @@ namespace solar {
 		friend float cross(const vec2& u, const vec2& v);
 		friend float get_angle_between_using_any_dir(const vec2& u, const vec2& v);
 		friend float get_angle_between_using_cc_only(const vec2& u, const vec2& v);
+		friend bool is_approx(const vec2& v0, const vec2& v1, float tolerance);
 		friend std::ostream& operator<<(std::ostream& os, const vec2& v);
 	};
 

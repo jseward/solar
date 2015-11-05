@@ -1405,6 +1405,9 @@
     <ClInclude Include="..\..\src\solar\windows\window_mouse_wheel_event_params.h">
       <Filter>src\solar\windows</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\containers\dynamic_array.h">
+      <Filter>src\solar\containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">

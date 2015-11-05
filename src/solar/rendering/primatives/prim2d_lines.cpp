@@ -118,4 +118,15 @@ namespace solar {
 		}
 	}
 
+	void prim2d_lines::render_world_triangle(const viewport& viewport, const camera& camera, const vec3& p0, const vec3& p1, const vec3& p2, const color& color) {
+		vec2 screen_points[3];
+		if (
+			viewport.try_project(screen_points[0], camera.get_view_projection_transform(), p0) &&
+			viewport.try_project(screen_points[1], camera.get_view_projection_transform(), p1) &&
+			viewport.try_project(screen_points[2], camera.get_view_projection_transform(), p2)) {
+
+			render_segments_looped(screen_points, 3, color);
+		}
+	}
+
 }
