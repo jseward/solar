@@ -163,6 +163,9 @@
     <Filter Include="src\solar\windows\rendering">
       <UniqueIdentifier>{87b1ce4f-5df5-4cf8-8112-ab4a275ef5a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\solar\windows\event_params">
+      <UniqueIdentifier>{04f9ba8f-a831-4f92-80ea-d35cee31a090}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\solar\utility\assert.h">
@@ -1164,9 +1167,6 @@
     <ClInclude Include="..\..\src\solar\windows\components\button_press_params.h">
       <Filter>src\solar\windows\components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\windows\window_mouse_button_event_params.h">
-      <Filter>src\solar\windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\containers\enum_vector.h">
       <Filter>src\solar\containers</Filter>
     </ClInclude>
@@ -1377,9 +1377,6 @@
     <ClInclude Include="..\..\src\solar\windows\rendering\window_render_state_brush_collection.h">
       <Filter>src\solar\windows\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\windows\window_key_event_params.h">
-      <Filter>src\solar\windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\windows\components\text_entry.h">
       <Filter>src\solar\windows\components</Filter>
     </ClInclude>
@@ -1392,7 +1389,6 @@
     <ClInclude Include="..\..\src\solar\windows\window_focus_controller.h">
       <Filter>src\solar\windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\windows\window_char_event_params.h" />
     <ClInclude Include="..\..\src\solar\io\clipboard.h">
       <Filter>src\solar\io</Filter>
     </ClInclude>
@@ -1402,11 +1398,20 @@
     <ClInclude Include="..\..\src\solar\math\unit_convert.h">
       <Filter>src\solar\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\windows\window_mouse_wheel_event_params.h">
-      <Filter>src\solar\windows</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\containers\dynamic_array.h">
       <Filter>src\solar\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\event_params\window_mouse_button_event_params.h">
+      <Filter>src\solar\windows\event_params</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\event_params\window_mouse_wheel_event_params.h">
+      <Filter>src\solar\windows\event_params</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\event_params\window_char_event_params.h">
+      <Filter>src\solar\windows\event_params</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\windows\event_params\window_key_event_params.h">
+      <Filter>src\solar\windows\event_params</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

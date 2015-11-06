@@ -6,10 +6,10 @@
 #include "solar/math/rect.h"
 #include "solar/archiving/archivable.h"
 #include "./rendering/window_render_params.h"
-#include "window_mouse_button_event_params.h"
-#include "window_mouse_wheel_event_params.h"
-#include "window_key_event_params.h"
-#include "window_char_event_params.h"
+#include "./event_params/window_mouse_button_event_params.h"
+#include "./event_params/window_mouse_wheel_event_params.h"
+#include "./event_params/window_key_event_params.h"
+#include "./event_params/window_char_event_params.h"
 #include "window_focus_controller.h"
 
 namespace solar {
