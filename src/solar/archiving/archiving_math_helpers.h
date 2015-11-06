@@ -1,6 +1,7 @@
 #pragma once
 
 #include "solar/math/rect.h"
+#include "solar/math/rectf.h"
 #include "solar/math/point.h"
 #include "solar/math/pointf.h"
 #include "solar/math/vec2.h"
@@ -20,6 +21,19 @@ namespace solar {
 
 	inline void write_rect(archive_writer& writer, const char* name, const rect& value) {
 		write_ints(writer, name, value.get_left(), value.get_top(), value.get_right(), value.get_bottom());
+	}
+
+	inline void read_rectf(archive_reader& reader, const char* name, rectf& value) {
+		float left = 0.f;
+		float top = 0.f;
+		float right = 0.f;
+		float bottom = 0.f;
+		read_floats(reader, name, left, top, right, bottom);
+		value = rectf(pointf(left, top), pointf(right, bottom));
+	}
+
+	inline void write_rectf(archive_writer& writer, const char* name, const rectf& value) {
+		write_floats(writer, name, value.get_left(), value.get_top(), value.get_right(), value.get_bottom());
 	}
 
 	inline void read_point(archive_reader& reader, const char* name, point& value) {

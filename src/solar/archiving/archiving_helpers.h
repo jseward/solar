@@ -154,6 +154,20 @@ namespace solar {
 		writer.write_floats_fixed(name, 3, values);
 	}
 
+	inline void read_floats(archive_reader& reader, const char* name, float& v0, float& v1, float& v2, float& v3) {
+		float values[4] = {};
+		reader.read_floats_fixed(name, 4, values);
+		v0 = values[0];
+		v1 = values[1];
+		v2 = values[2];
+		v3 = values[3];
+	}
+
+	inline void write_floats(archive_writer& writer, const char* name, float v0, float v1, float v2, float v3) {
+		const float values[4] = { v0, v1, v2, v3 };
+		writer.write_floats_fixed(name, 4, values);
+	}
+
 	inline void read_string(archive_reader& reader, const char* name, std::string& value) {
 		reader.read_string(name, value);
 	}
