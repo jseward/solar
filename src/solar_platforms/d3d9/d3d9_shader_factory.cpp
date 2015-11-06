@@ -141,6 +141,7 @@ namespace solar {
 	}
 
 	void d3d9_shader_factory::remove_all_shaders() {
+		_resource_system.end_watching_resources(this);
 		for (auto& iter : _shaders) {
 			iter.second->on_device_lost(_context.get_device());
 			iter.second->on_device_released(_context.get_device());
@@ -161,6 +162,7 @@ namespace solar {
 		d3d9_shader* new_shader = nullptr;
 		if (!address.empty()) {
 			new_shader = new d3d9_shader(*this, address);
+			_resource_system.begin_watching_resource(this, address, new_shader);
 		}
 		else {
 			new_shader = new d3d9_shader(*this, FALLBACK_SHADER_CODE);
@@ -259,6 +261,15 @@ namespace solar {
 
 	resource_mapped_memory& d3d9_shader_factory::get_resource_mapped_memory() {
 		return *_resource_mapped_memory.get();
+	}
+
+	void d3d9_shader_factory::on_file_changed(const std::string& path, void* data) {
+		d3d9_shader* shader = reinterpret_cast<d3d9_shader*>(data);
+		ASSERT(shader->get_resource_address().get_file_path() == path);
+		shader->on_device_lost(_context.get_device());
+		shader->on_device_released(_context.get_device());
+		shader->on_device_created(_context.get_device());
+		shader->on_device_reset(_context.get_device());
 	}
 
 }

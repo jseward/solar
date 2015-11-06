@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <memory>
 #include "solar/rendering/shaders/shader_factory.h"
+#include "solar/io/file_change_handler.h"
 #include "d3d9_shader.h"
 #include "d3d9_headers.h"
 #include "d3d9_device_event_handler.h"
@@ -15,6 +16,7 @@ namespace solar {
 
 	class d3d9_shader_factory 
 		: public shader_factory
+		, public file_change_handler
 		, public d3d9_device_event_handler {
 
 	private:
@@ -61,6 +63,8 @@ namespace solar {
 		virtual void on_device_released(IDirect3DDevice9* device) override;
 		virtual void on_device_reset(IDirect3DDevice9* device) override;
 		virtual void on_device_lost(IDirect3DDevice9* device) override;
+
+		virtual void on_file_changed(const std::string& path, void* data) override;
 	};
 
 }
