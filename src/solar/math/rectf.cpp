@@ -34,6 +34,22 @@ namespace solar {
 		, _bottom(bottom_right._y) {
 	}
 
+	void rectf::set_left(float left) {
+		_left = left;
+	}
+
+	void rectf::set_right(float right) {
+		_right = right;
+	}
+
+	void rectf::set_top(float top) {
+		_top = top;
+	}
+
+	void rectf::set_bottom(float bottom) {
+		_bottom = bottom;
+	}
+
 	float rectf::get_left() const {
 		return _left;
 	}

@@ -157,14 +157,14 @@ namespace solar {
 		_buffered_rects.emplace_back(top_left, top_right, bottom_right, bottom_left, color, uvs);
 	}
 
-	void d3d9_prim2d::render_triangle(const vec2& v0, const vec2& v1, const vec2& v2, const color& color) {
+	void d3d9_prim2d::render_triangle(const vec2& p0, const uv& uv0, const vec2& p1, const uv& uv1, const vec2& p2, const uv& uv2, const color& color) {
 		ASSERT(_is_rendering);
 
 		if (_buffered_tris.size() >= _setup_params.get_max_buffered_tri_count()) {
 			flush_tris();
 		}
 
-		_buffered_tris.emplace_back(v0, v1, v2, color);
+		_buffered_tris.emplace_back(p0, uv0, p1, uv1, p2, uv2, color);
 	}
 
 	void d3d9_prim2d::flush_all() {
@@ -215,9 +215,9 @@ namespace solar {
 			int vertex_offset = 0;
 			int index_offset = 0;
 			for (const auto& tri : _buffered_tris) {
-				lr._vertices[0 + vertex_offset].set(tri._p0, tri._color, uv());
-				lr._vertices[1 + vertex_offset].set(tri._p1, tri._color, uv());
-				lr._vertices[2 + vertex_offset].set(tri._p2, tri._color, uv());
+				lr._vertices[0 + vertex_offset].set(tri._p0, tri._color, tri._uv0);
+				lr._vertices[1 + vertex_offset].set(tri._p1, tri._color, tri._uv1);
+				lr._vertices[2 + vertex_offset].set(tri._p2, tri._color, tri._uv2);
 
 				WORD index_value_offset = static_cast<WORD>(lr._vertices_begin + vertex_offset);
 				lr._indices[0 + index_offset] = (0 + index_value_offset);

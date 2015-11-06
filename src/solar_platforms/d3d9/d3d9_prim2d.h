@@ -61,7 +61,7 @@ namespace solar {
 		virtual void set_shader(shader& shader) override;
 		virtual void set_texture(texture& texture) override;
 		virtual void render_rect(const vec2& top_left, const vec2& top_right, const vec2& bottom_right, const vec2& bottom_left, const color& color, const simple_rect_uvs& uvs) override;
-		virtual void render_triangle(const vec2& v0, const vec2& v1, const vec2& v2, const color& color) override;
+		virtual void render_triangle(const vec2& p0, const uv& uv0, const vec2& p1, const uv& uv1, const vec2& p2, const uv& uv2, const color& color) override;
 
 	private:
 		void flush_all();

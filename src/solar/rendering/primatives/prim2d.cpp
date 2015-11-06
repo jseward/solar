@@ -89,7 +89,8 @@ namespace solar {
 				(r._x * sin_inc) + (r._y * cos_inc));
 			vec2 curr_segment_point = center + (vec2(r._x, -r._y) * radius);
 
-			render_triangle(center, curr_segment_point, prev_segment_point, color);
+			//todo - calculate proper uvs
+			render_triangle(center, uv(), curr_segment_point, uv(), prev_segment_point, uv(), color);
 
 			prev_segment_point = curr_segment_point;
 		}
@@ -99,8 +100,11 @@ namespace solar {
 		for (unsigned int i = 1; i < point_count - 1; i++) {
 			render_triangle(
 				points[0], 
+				uv(),
 				points[i], 
+				uv(),
 				points[i + 1], 
+				uv(),
 				color);
 		}
 	}
@@ -134,7 +138,7 @@ namespace solar {
 		}
 	}
 
-	void prim2d::render_world_triangle(const viewport& viewport, const camera& camera, const vec3& p0, const vec3& p1, const vec3& p2, const color& color) {
+	void prim2d::render_world_triangle(const viewport& viewport, const camera& camera, const vec3& p0, const uv& uv0, const vec3& p1, const uv& uv1, const vec3& p2, const uv& uv2, const color& color) {
 		vec2 screen_p0;
 		vec2 screen_p1;
 		vec2 screen_p2;
@@ -144,7 +148,7 @@ namespace solar {
 			viewport.try_project(screen_p1, camera.get_view_projection_transform(), p1) &&
 			viewport.try_project(screen_p2, camera.get_view_projection_transform(), p2)) {
 
-			render_triangle(screen_p0, screen_p1, screen_p2, color);
+			render_triangle(screen_p0, uv0, screen_p1, uv1, screen_p2, uv2, color);
 		}
 	}
 

@@ -20,6 +20,11 @@ namespace solar {
 		rectf(const pointf& top_left, const sizef& size);
 		rectf(const pointf& top_left, const pointf& bottom_right);
 
+		void set_left(float left);
+		void set_right(float right);
+		void set_top(float top);
+		void set_bottom(float bottom);
+
 		float get_left() const;
 		float get_top() const;
 		float get_right() const;

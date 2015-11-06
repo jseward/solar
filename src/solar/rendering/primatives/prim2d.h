@@ -29,7 +29,7 @@ namespace solar {
 		virtual void set_shader(shader& shader) = 0;
 		virtual void set_texture(texture& texture) = 0;
 		virtual void render_rect(const vec2& top_left, const vec2& top_right, const vec2& bottom_right, const vec2& bottom_left, const color& color, const simple_rect_uvs& uvs) = 0;
-		virtual void render_triangle(const vec2& v0, const vec2& v1, const vec2& v2, const color& color) = 0;
+		virtual void render_triangle(const vec2& p0, const uv& uv0, const vec2& p1, const uv& uv1, const vec2& p2, const uv& uv2, const color& color) = 0;
 
 	public:
 		void render_rect(const rect& area, const color& color);
@@ -46,7 +46,7 @@ namespace solar {
 		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color);
 		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad);
 		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad, unsigned int segment_count);
-		void render_world_triangle(const viewport& viewport, const camera& camera, const vec3& p0, const vec3& p1, const vec3& p2, const color& color);
+		void render_world_triangle(const viewport& viewport, const camera& camera, const vec3& p0, const uv& uv0, const vec3& p1, const uv& uv1, const vec3& p2, const uv& uv2, const color& color);
 	};
 
 }
