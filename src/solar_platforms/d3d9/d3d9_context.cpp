@@ -161,7 +161,7 @@ namespace solar {
 	}
 
 	void d3d9_context::remove_device_event_handler(d3d9_device_event_handler* handler) {
-		if (attempt_find_and_erase(_event_handlers, handler)) {
+		if (try_find_and_erase(_event_handlers, handler)) {
 			if (_IDirect3DDevice9 != nullptr) {
 				handler->on_device_lost(_IDirect3DDevice9);
 				handler->on_device_released(_IDirect3DDevice9);

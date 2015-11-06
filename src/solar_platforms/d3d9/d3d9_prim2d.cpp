@@ -167,20 +167,6 @@ namespace solar {
 		_buffered_tris.emplace_back(v0, v1, v2, color);
 	}
 
-	void d3d9_prim2d::render_indexed_triangles(const vec2* vertices, unsigned int vertex_count, const unsigned short* indices, unsigned int index_count, const color& color) {
-		auto lr = lock_buffers_and_render_if_needed(vertex_count, index_count);
-
-		for (unsigned int i_vertex = 0; i_vertex < vertex_count; ++i_vertex) {
-			lr._vertices[i_vertex].set(vertices[i_vertex], color, uv());
-		}
-
-		for (unsigned int i_index = 0; i_index < index_count; ++i_index) {
-			lr._indices[i_index] = indices[i_index];
-		}
-
-		unlock_buffers_and_render();
-	}
-
 	void d3d9_prim2d::flush_all() {
 		flush_rects();
 		flush_tris();

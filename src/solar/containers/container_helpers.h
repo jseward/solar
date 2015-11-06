@@ -43,7 +43,7 @@ namespace solar {
 		dst.erase(dst.begin() + index);
 	}
 
-	template<typename Con> bool attempt_find_and_erase(Con& dst, const typename Con::value_type& v) {
+	template<typename Con> bool try_find_and_erase(Con& dst, const typename Con::value_type& v) {
 		auto iter = std::find(dst.begin(), dst.end(), v);
 		if (iter != dst.end()) {
 			dst.erase(iter);

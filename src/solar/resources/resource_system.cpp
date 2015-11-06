@@ -115,7 +115,7 @@ namespace solar {
 	}
 
 	void resource_system::close_stream(stream* stream) {
-		if (attempt_find_and_erase(_open_file_system_streams, stream)) {
+		if (try_find_and_erase(_open_file_system_streams, stream)) {
 			auto fs = static_cast<file_stream*>(stream);
 			_file_system.close_file_stream(fs);
 		}

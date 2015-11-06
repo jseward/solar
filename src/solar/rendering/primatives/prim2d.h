@@ -30,7 +30,6 @@ namespace solar {
 		virtual void set_texture(texture& texture) = 0;
 		virtual void render_rect(const vec2& top_left, const vec2& top_right, const vec2& bottom_right, const vec2& bottom_left, const color& color, const simple_rect_uvs& uvs) = 0;
 		virtual void render_triangle(const vec2& v0, const vec2& v1, const vec2& v2, const color& color) = 0;
-		virtual void render_indexed_triangles(const vec2* vertices, unsigned int vertex_count, const unsigned short* indices, unsigned int index_count, const color& color) = 0;
 
 	public:
 		void render_rect(const rect& area, const color& color);
@@ -47,7 +46,6 @@ namespace solar {
 		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color);
 		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad);
 		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad, unsigned int segment_count);
-		void render_world_indexed_triangles(const viewport& viewport, const camera& camera, const vec3* vertices, unsigned int vertex_count, const unsigned short* indices, unsigned int index_count, const color& color);
 		void render_world_triangle(const viewport& viewport, const camera& camera, const vec3& p0, const vec3& p1, const vec3& p2, const color& color);
 	};
 

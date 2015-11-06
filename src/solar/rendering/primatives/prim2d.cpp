@@ -134,13 +134,6 @@ namespace solar {
 		}
 	}
 
-	void prim2d::render_world_indexed_triangles(const viewport& viewport, const camera& camera, const vec3* vertices, unsigned int vertex_count, const unsigned short* indices, unsigned int index_count, const color& color) {
-		auto screen_points = _world_projection_buffer.project_points(viewport, camera, vertices, vertex_count);
-		if (!screen_points.empty()) {
-			render_indexed_triangles(screen_points.data(), screen_points.size(), indices, index_count, color);
-		}
-	}
-
 	void prim2d::render_world_triangle(const viewport& viewport, const camera& camera, const vec3& p0, const vec3& p1, const vec3& p2, const color& color) {
 		vec2 screen_p0;
 		vec2 screen_p1;

@@ -13,8 +13,8 @@ namespace solar {
 		_sz = 0.f;
 		_rhw = 1.f;
 		_color = color.to_argb32();
-		_tu = uv.u();
-		_tv = uv.v();
+		_tu = uv._u;
+		_tv = uv._v;
 	}
 
 }

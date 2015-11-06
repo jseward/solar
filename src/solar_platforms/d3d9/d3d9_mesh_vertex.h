@@ -35,8 +35,8 @@ namespace solar {
 			_nx = rhs._normal._x;
 			_ny = rhs._normal._y;
 			_nz = rhs._normal._z;
-			_u_0 = rhs._uv.u();
-			_v_0 = rhs._uv.v();
+			_u_0 = rhs._uv._u;
+			_v_0 = rhs._uv._v;
 			_tx = rhs._tangent._x;
 			_ty = rhs._tangent._y;
 			_tz = rhs._tangent._z;

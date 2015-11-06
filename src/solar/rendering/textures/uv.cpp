@@ -14,14 +14,6 @@ namespace solar {
 		, _v(v) {
 	}
 
-	float uv::u() const {
-		return _u;
-	}
-
-	float uv::v() const {
-		return _v;
-	}
-
 	bool uv::operator==(const uv& rhs) const {
 		return 
 			_u == rhs._u && 
