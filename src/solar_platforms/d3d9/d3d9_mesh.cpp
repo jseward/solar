@@ -123,7 +123,7 @@ namespace solar {
 	}
 
 	void d3d9_mesh::release_device_mesh() {
-		_attribute_table.release();
+		_attribute_table.reset();
 		_attribute_table_size = 0;
 		d3d9_release_com_object(_vertex_buffer);
 		d3d9_release_com_object(_index_buffer);

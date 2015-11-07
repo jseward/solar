@@ -33,7 +33,7 @@ namespace solar {
 		_is_locked = false;
 		_needed_buffer_size = 0;
 
-		_dynamic_buffer.release();
+		_dynamic_buffer.reset();
 		_dynamic_buffer_size = 0;
 	}
 

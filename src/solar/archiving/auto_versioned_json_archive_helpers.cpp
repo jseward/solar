@@ -27,7 +27,7 @@ namespace solar {
 			if (file_version != version) {
 				TRACE("auto_versioned_json_archive version does not match {{ expected_version:{} , found_version:{} , file:'{}' }}", version, file_version, path);
 				
-				reader.release();
+				reader.reset();
 				file_system.close_file_stream(fs);
 				fs = nullptr;
 

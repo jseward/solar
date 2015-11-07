@@ -2,6 +2,7 @@
 
 #include <string>
 #include "solar/math/vec3.h"
+#include "solar/math/size.h"
 #include "solar/utility/assert.h"
 
 namespace solar {
@@ -26,6 +27,7 @@ namespace solar {
 		checksum& add_string(const std::string& v);
 		checksum& add_float(float v);
 		checksum& add_vec3(const vec3& v);
+		checksum& add_size(const size& v);
 		checksum& add_checksum(const checksum& checksum);
 		checksum& add_checksum_at_index(int index, const checksum& checksum_at_index);
 		template<typename Enum> checksum& add_enum(Enum v);

@@ -71,7 +71,7 @@ namespace enetpp {
 			if (_thread != nullptr) {
 				_should_exit_thread = true;
 				_thread->join();
-				_thread.release();
+				_thread.reset();
 			}
 
 			destroy_all_queued_packets();

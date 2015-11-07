@@ -6,6 +6,7 @@ namespace solar {
 		BOOL,
 		INT,
 		ENUM,
+		SIZE
 	};
 
 }

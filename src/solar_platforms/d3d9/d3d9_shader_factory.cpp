@@ -132,7 +132,7 @@ namespace solar {
 	void d3d9_shader_factory::release_default_states_shader() {
 		_default_states_shader->on_device_lost(_context.get_device());
 		_default_states_shader->on_device_released(_context.get_device());
-		_default_states_shader.release();
+		_default_states_shader.reset();
 	}
 
 	void d3d9_shader_factory::set_render_states_to_defaults() {

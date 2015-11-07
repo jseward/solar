@@ -78,6 +78,7 @@ namespace solar {
 			_win32_windowed_app.get_hwnd(),
 			solar::d3d9_user_settings()
 				.set_window_type(_engine_settings._window_type->get_current_value())
+				.set_backbuffer_size(_engine_settings._window_size->get_current_value())
 			)) {
 
 			return false;

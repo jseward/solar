@@ -4,3 +4,4 @@
 #include "solar/settings/bool_setting.cpp"
 #include "solar/settings/int_setting.cpp"
 #include "solar/settings/float_setting.cpp"
+#include "solar/settings/size_setting.cpp"

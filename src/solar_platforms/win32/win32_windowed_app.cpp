@@ -32,6 +32,12 @@ namespace solar {
 		, _hwnd(nullptr) {
 	}
 
+	win32_windowed_app::~win32_windowed_app() {
+		//NOTE: have to explicitely release the log_file here so that the implicit destructor isn't called. If that happens
+		//then using log_file will crash (== <invalid_ptr>). This happens if logging is a side effect of destructing the app.
+		_log_file.reset();
+	}
+
 	bool win32_windowed_app::setup(const win32_windowed_app_setup_params& params) {
 
 		set_assert_failed_handler([&](const char* file_name, int line_number, const char* expression) {

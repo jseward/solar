@@ -65,7 +65,7 @@ namespace solar {
 			VERIFY(::PostQueuedCompletionStatus(_h_iocp.get(), 0, 0, NULL) != 0);
 
 			_reading_thread->join();
-			_reading_thread.release();
+			_reading_thread.reset();
 		}
 
 		_h_dir.close();

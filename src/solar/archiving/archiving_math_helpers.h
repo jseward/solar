@@ -6,6 +6,7 @@
 #include "solar/math/pointf.h"
 #include "solar/math/vec2.h"
 #include "solar/math/vec3.h"
+#include "archivable.h"
 #include "archiving_helpers.h"
 
 namespace solar {

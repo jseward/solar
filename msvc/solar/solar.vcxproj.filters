@@ -166,6 +166,18 @@
     <Filter Include="src\solar\windows\event_params">
       <UniqueIdentifier>{04f9ba8f-a831-4f92-80ea-d35cee31a090}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\solar_dependencies\bgfx">
+      <UniqueIdentifier>{501fef75-82fb-48b6-b45d-3be94ae5aad4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\solar_dependencies\bgfx\include">
+      <UniqueIdentifier>{afaaa62f-b961-4f44-a90e-2aa0053b2585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\solar_dependencies\bgfx\include\bgfx">
+      <UniqueIdentifier>{115e1736-9314-4634-82ff-817a462df76c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\solar_platforms\bgfx">
+      <UniqueIdentifier>{47e8ff78-39fd-49ee-9ae6-0279c705fff9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\solar\utility\assert.h">
@@ -1413,12 +1425,63 @@
     <ClInclude Include="..\..\src\solar\windows\event_params\window_key_event_params.h">
       <Filter>src\solar\windows\event_params</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\include\bgfx\bgfxplatform.h">
+      <Filter>src\solar_dependencies\bgfx\include\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\include\bgfx\bgfx.h">
+      <Filter>src\solar_dependencies\bgfx\include\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\include\bgfx\bgfxdefines.h">
+      <Filter>src\solar_dependencies\bgfx\include\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_engines\win32_bgfx_engine_settings.h">
+      <Filter>src\solar_engines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_engines\win32_bgfx_engine.h">
+      <Filter>src\solar_engines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_lines.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_factory.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_texture_factory.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_cursor.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon_factory.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_mesh_factory.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_mesh.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_texture.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_win32_render_device.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\settings\size_setting.h">
+      <Filter>src\solar\settings</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
-      <Filter>bulkbuild</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_d3d9.cpp">
       <Filter>bulkbuild</Filter>
     </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_win32.cpp">
@@ -1970,9 +2033,6 @@
     <ClCompile Include="..\..\src\solar\math\vec4.cpp">
       <Filter>src\solar\math</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies_all.cpp">
-      <Filter>bulkbuild</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies_format.cpp">
       <Filter>bulkbuild</Filter>
     </ClCompile>
@@ -2107,6 +2167,60 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\math\unit_convert.cpp">
       <Filter>src\solar\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies_bgfx.cpp">
+      <Filter>bulkbuild</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_platforms_d3d9.cpp">
+      <Filter>bulkbuild</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_platforms_bgfx.cpp">
+      <Filter>bulkbuild</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_engines\win32_bgfx_engine_settings.cpp">
+      <Filter>src\solar_engines</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_engines\win32_bgfx_engine.cpp">
+      <Filter>src\solar_engines</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_lines.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_shader_factory.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_texture_factory.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_cursor.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon_factory.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_mesh_factory.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_mesh.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_shader.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_texture.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_win32_render_device.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\settings\size_setting.cpp">
+      <Filter>src\solar\settings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

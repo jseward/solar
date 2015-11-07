@@ -42,6 +42,7 @@ namespace solar{
 
 	public:
 		win32_windowed_app(file_system& _file_system);
+		~win32_windowed_app();
 
 		bool setup(const win32_windowed_app_setup_params& params);
 		int run();

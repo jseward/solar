@@ -44,7 +44,7 @@ namespace solar {
 		_context.remove_device_event_handler(this);
 		_cursor.remove_icon();
 		_icons.clear();
-		_empty_icon.release();
+		_empty_icon.reset();
 		_caching_context.increment();
 	}
 

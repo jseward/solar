@@ -49,6 +49,12 @@ namespace solar {
 		return *this;
 	}
 
+	checksum& checksum::add_size(const size& v) {
+		add_checksum_at_index(0, v._width);
+		add_checksum_at_index(1, v._height);
+		return *this;
+	}
+
 	checksum& checksum::add_string(const char* v) {
 		_value += get_string_hash_code(v);
 		return *this;
