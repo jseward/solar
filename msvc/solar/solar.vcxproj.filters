@@ -178,6 +178,12 @@
     <Filter Include="src\solar_platforms\bgfx">
       <UniqueIdentifier>{47e8ff78-39fd-49ee-9ae6-0279c705fff9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\solar_platforms\bgfx\platforms">
+      <UniqueIdentifier>{9e2fb3f4-75e5-4bcb-96b0-2ee9b9017984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\solar_dependencies\bgfx\src">
+      <UniqueIdentifier>{82e643e9-d328-4bbf-ab6a-49728381afbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\solar\utility\assert.h">
@@ -1473,11 +1479,131 @@
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_texture.h">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_win32_render_device.h">
-      <Filter>src\solar_platforms\bgfx</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\settings\size_setting.h">
       <Filter>src\solar\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_render_device.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_context.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\platforms\win32_bgfx_context.h">
+      <Filter>src\solar_platforms\bgfx\platforms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_window_type.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_user_settings.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\config.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear0.bin.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear1.bin.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear2.bin.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear3.bin.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear4.bin.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear5.bin.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear6.bin.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear7.bin.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_debugfont.bin.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glcontext_eagl.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glcontext_egl.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glcontext_glx.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glcontext_nsgl.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glcontext_ppapi.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glcontext_wgl.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glimports.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\image.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\ovr.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderdoc.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d9.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d11.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d12.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer_gl.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer_mtl.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\shader_dx9bc.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\shader_dxbc.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\shader_spirv.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\vertexdecl.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\vs_clear.bin.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\vs_debugfont.bin.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\bgfx_p.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\charset.h">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_callback.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2216,11 +2342,80 @@
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_texture.cpp">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_win32_render_device.cpp">
-      <Filter>src\solar_platforms\bgfx</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar\settings\size_setting.cpp">
       <Filter>src\solar\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_render_device.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\platforms\win32_bgfx_context.cpp">
+      <Filter>src\solar_platforms\bgfx\platforms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_window_type.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_user_settings.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\amalgamated.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\bgfx.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\glcontext_egl.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\glcontext_glx.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\glcontext_ppapi.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\glcontext_wgl.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\image.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\ovr.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderdoc.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d9.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d11.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d12.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderer_gl.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderer_null.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderer_vk.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\shader_dx9bc.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\shader_dxbc.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\shader_spirv.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\vertexdecl.cpp">
+      <Filter>src\solar_dependencies\bgfx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_callback.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

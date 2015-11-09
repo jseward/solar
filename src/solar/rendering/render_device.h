@@ -17,6 +17,7 @@ namespace solar {
 		virtual void clear(const color& color) = 0;
 		virtual void toggle_virtual_fullscreen() = 0;
 		virtual viewport set_viewport(const viewport& new_viewport) = 0;
+		virtual size get_backbuffer_size() const = 0;
 	};
 
 }

@@ -55,7 +55,7 @@ namespace solar{
 		void idle();
 		bool handle_assert_failed(const char* file_name, int line_number, const char* expression);
 		bool handle_alert(const char* file_name, int line_number, const char* message);
-		void handle_trace(const char* file_name, int line_number, const char* message);
+		void handle_trace(const char* file_name, int line_number, bool add_newline, const char* message);
 		void print(const char* string);
 
 	private:

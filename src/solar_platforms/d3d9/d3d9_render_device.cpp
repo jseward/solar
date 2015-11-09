@@ -26,7 +26,6 @@ namespace solar {
 
 	void d3d9_render_device::add_event_handler(render_device_event_handler* handler) {
 		push_back_and_verify_not_found(_event_handlers, handler);
-		handler->on_render_device_surface_size_changed(_context.get_backbuffer_size());
 	}
 
 	void d3d9_render_device::remove_event_handler(render_device_event_handler* handler) {
@@ -66,6 +65,10 @@ namespace solar {
 		return old_viewport;
 	}
 
+	size d3d9_render_device::get_backbuffer_size() const {
+		return _context.get_backbuffer_size();
+	}
+
 	void d3d9_render_device::on_device_created(IDirect3DDevice9* device) {
 		UNUSED_PARAMETER(device);
 	}
@@ -77,7 +80,7 @@ namespace solar {
 	void d3d9_render_device::on_device_reset(IDirect3DDevice9* device) {
 		UNUSED_PARAMETER(device);
 		for (auto event_handler : _event_handlers) {
-			event_handler->on_render_device_surface_size_changed(_context.get_backbuffer_size());
+			event_handler->on_render_device_backbuffer_size_changed(_context.get_backbuffer_size());
 		}
 	}
 

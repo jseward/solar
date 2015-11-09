@@ -77,57 +77,57 @@ namespace solar {
 			ASSERT(_hwnd == hwnd);
 
 			switch (message) {
-			case WM_SIZE: {
-				_is_window_minimized = (wparam == SIZE_MINIMIZED);
-				if (!_is_window_minimized) {
-					check_if_window_size_changed();
+				case WM_SIZE: {
+					_is_window_minimized = (wparam == SIZE_MINIMIZED);
+					if (!_is_window_minimized) {
+						check_if_window_size_changed();
+					}
+					handled = true;
+					break;
 				}
-				handled = true;
-				break;
-			}
 
-			case WM_ENTERSIZEMOVE: {
-				_is_window_in_size_move = true;
-				handled = true;
-				break;
-			}
+				case WM_ENTERSIZEMOVE: {
+					_is_window_in_size_move = true;
+					handled = true;
+					break;
+				}
 
-			case WM_EXITSIZEMOVE: {
-				_is_window_in_size_move = false;
-				check_if_window_size_changed();
-				handled = true;
-				break;
-			}
+				case WM_EXITSIZEMOVE: {
+					_is_window_in_size_move = false;
+					check_if_window_size_changed();
+					handled = true;
+					break;
+				}
 
-			case WM_ENTERMENULOOP: {
-				_is_window_in_menu_loop = true;
-				handled = true;
-				break;
-			}
+				case WM_ENTERMENULOOP: {
+					_is_window_in_menu_loop = true;
+					handled = true;
+					break;
+				}
 
-			case WM_EXITMENULOOP: {
-				_is_window_in_menu_loop = false;
-				handled = true;
-				break;
-			}
+				case WM_EXITMENULOOP: {
+					_is_window_in_menu_loop = false;
+					handled = true;
+					break;
+				}
 
-			case WM_ACTIVATEAPP: {
-				_is_window_active = (wparam == TRUE);
-				attempt_clip_cursor();
-				handled = true;
-				break;
-			}
+				case WM_ACTIVATEAPP: {
+					_is_window_active = (wparam == TRUE);
+					attempt_clip_cursor();
+					handled = true;
+					break;
+				}
 
-			case WM_SETCURSOR: {
-				handled = attempt_set_cursor();
-				break;
-			}
+				case WM_SETCURSOR: {
+					handled = attempt_set_cursor();
+					break;
+				}
 
-			case WM_MOVE: {
-				attempt_clip_cursor();
-				handled = true;
-				break;
-			}
+				case WM_MOVE: {
+					attempt_clip_cursor();
+					handled = true;
+					break;
+				}
 			}
 		}
 
@@ -177,10 +177,7 @@ namespace solar {
 				_is_window_in_size_move ||
 				_is_window_in_menu_loop ||
 				is_changing_device();
-			if (is_paused) {
-				::Sleep(50);
-			}
-			else {
+			if (!is_paused) {
 				if (_is_device_lost) {
 					HRESULT hr = _IDirect3DDevice9->TestCooperativeLevel();
 					if (hr != D3DERR_DEVICELOST) {
@@ -210,8 +207,8 @@ namespace solar {
 		if (_device_params.get_window_type() == d3d9_window_type::VIRTUAL_FULLSCREEN) {
 			auto new_params = _device_params;
 			new_params.set_window_type(d3d9_window_type::RESIZABLE_WINDOW);
-			new_params.get_present_parameters().BackBufferWidth = _toggle_from_fullscreen_backbuffer_size._width;
-			new_params.get_present_parameters().BackBufferHeight = _toggle_from_fullscreen_backbuffer_size._height;
+			new_params.get_present_parameters().BackBufferWidth = _exit_fullscreen_backbuffer_size._width;
+			new_params.get_present_parameters().BackBufferHeight = _exit_fullscreen_backbuffer_size._height;
 			change_device(new_params);
 		}
 		else if (_device_params.get_window_type() == d3d9_window_type::RESIZABLE_WINDOW) {
@@ -248,7 +245,7 @@ namespace solar {
 		}
 
 		_is_cursor_clipped = user_settings.get_is_cursor_clipped();
-		_toggle_from_fullscreen_backbuffer_size = user_settings.get_backbuffer_size();
+		_exit_fullscreen_backbuffer_size = user_settings.get_backbuffer_size();
 
 		return change_device(build_device_params(user_settings, enumerator_device_info));
 	}
@@ -335,6 +332,9 @@ namespace solar {
 				}
 				else if (_device_params.get_window_type() == d3d9_window_type::EXCLUSIVE_FULLSCREEN) {
 					new_style = WS_POPUP | WS_SYSMENU;
+				}
+				else {
+					ASSERT(false); //unknown window type
 				}
 
 				TRACE("d3d9_window_type is changing GWL_STYLE {{ old_window_type:{} , new_window_type:{} }}"

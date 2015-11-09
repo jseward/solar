@@ -12,7 +12,8 @@ namespace solar {
 		: _win32_windowed_app(_win32_file_system)
 		, _file_change_watcher(_win32_directory_change_watcher)
 		, _resource_system(_win32_file_system, _file_change_watcher)
-		, _bgfx_win32_render_device()
+		, _bgfx_context()
+		, _bgfx_render_device(_bgfx_context)
 		, _bgfx_cursor()
 		, _bgfx_texture_factory(_resource_system)
 		, _bgfx_shader_factory(_resource_system)
@@ -38,7 +39,7 @@ namespace solar {
 	bool win32_bgfx_engine::setup(const win32_bgfx_engine_setup_params& params) {
 
 		win32_windowed_app_setup_params adjusted_wasp = params.get_windowed_app_setup_params();
-		adjusted_wasp.get_wnd_proc_handlers().push_back([&](HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) { return _bgfx_win32_render_device.handle_wnd_proc(hwnd, message, wparam, lparam); });
+		adjusted_wasp.get_wnd_proc_handlers().push_back([&](HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) { return _bgfx_context.handle_wnd_proc(hwnd, message, wparam, lparam); });
 		adjusted_wasp.get_wnd_proc_handlers().push_back([&](HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) { return _win32_mouse_device.handle_wnd_proc(hwnd, message, wparam, lparam); });
 		adjusted_wasp.get_wnd_proc_handlers().push_back([&](HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) { return _win32_keyboard_device.handle_wnd_proc(hwnd, message, wparam, lparam); });
 		adjusted_wasp.set_is_visible_by_default(true);
@@ -73,7 +74,7 @@ namespace solar {
 			.set_is_watching_enabled(true)
 			.add_provider(resource_provider().build_as_file_system(_win32_file_system, bin_root_path)));
 
-		if (!_bgfx_win32_render_device.setup(_win32_windowed_app.get_hwnd())) {
+		if (!_bgfx_context.setup(_win32_windowed_app.get_hwnd(), bgfx_user_settings())) {
 			return false;
 		}
 
@@ -88,13 +89,15 @@ namespace solar {
 	}
 
 	void win32_bgfx_engine::teardown() {
+		
 		_bgfx_prim2d_lines.teardown();
 		_bgfx_prim2d.teardown();
 		_bgfx_cursor_icon_factory.teardown();
 		_bgfx_mesh_factory.teardown();
 		_bgfx_texture_factory.teardown();
 		_bgfx_shader_factory.teardown();
-		_bgfx_win32_render_device.teardown();
+		_bgfx_context.teardown();
+
 		_setting_registry.teardown();
 		_file_change_watcher.teardown();
 		_resource_system.teardown();

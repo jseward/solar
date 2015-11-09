@@ -22,10 +22,16 @@ namespace solar {
 		return !(*this == rhs);
 	}
 
-	size size::operator*(float rhs) const {
+	size operator*(const size& lhs, float rhs) {
 		return size(
-			static_cast<int>(_width * rhs),
-			static_cast<int>(_height * rhs));
+			static_cast<int>(lhs._width * rhs),
+			static_cast<int>(lhs._height * rhs));
+	}
+
+	size operator-(const size& lhs, const size& rhs) {
+		return size(
+			lhs._width - rhs._width,
+			lhs._height - rhs._height);
 	}
 
 	std::ostream& operator<<(std::ostream& os, const size& s) {

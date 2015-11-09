@@ -48,8 +48,8 @@ namespace solar {
 			return handle_alert(file_name, line_number, message);
 		});
 
-		set_trace_handler([&](const char* file_name, int line_number, const char* message) {
-			handle_trace(file_name, line_number, message);
+		set_trace_handler([&](const char* file_name, int line_number, bool add_newline, const char* message) {
+			handle_trace(file_name, line_number, add_newline, message);
 		});
 
 		TRACE("win32_windowed_app setup...");
@@ -221,10 +221,10 @@ namespace solar {
 		return (result == win32_error_dialog_result::BREAK);
 	}
 
-	void win32_windowed_app::handle_trace(const char* file_name, int line_number, const char* message) {
+	void win32_windowed_app::handle_trace(const char* file_name, int line_number, bool add_newline, const char* message) {
 		UNUSED_PARAMETER(file_name);
 		UNUSED_PARAMETER(line_number);
-		print(build_string("[{}] {}\n", time_span().build_from_seconds(get_real_time_in_seconds()).to_hours_minutes_seconds_string(), message).c_str());
+		print(build_string("[{}] {}{}", time_span().build_from_seconds(get_real_time_in_seconds()).to_hours_minutes_seconds_string(), message, add_newline ? "\n" : "").c_str());
 	}
 
 	void win32_windowed_app::open_log_file(const std::string& path) {

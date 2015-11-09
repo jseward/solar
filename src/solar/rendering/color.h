@@ -26,6 +26,7 @@ namespace solar {
 		float get_a() const;
 
 		uint32_t to_argb32() const;
+		uint32_t to_rgba32() const;
 		std::string to_string() const;
 		std::array<float, 3> to_hsv() const;
 

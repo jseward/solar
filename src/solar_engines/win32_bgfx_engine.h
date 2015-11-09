@@ -10,7 +10,8 @@
 #include "solar_platforms/win32/win32_mouse_device.h"
 #include "solar_platforms/win32/win32_keyboard_device.h"
 #include "solar_platforms/win32/win32_clipboard.h"
-#include "solar_platforms/bgfx/bgfx_win32_render_device.h"
+#include "solar_platforms/bgfx/platforms/win32_bgfx_context.h"
+#include "solar_platforms/bgfx/bgfx_render_device.h"
 #include "solar_platforms/bgfx/bgfx_cursor.h"
 #include "solar_platforms/bgfx/bgfx_prim2d.h"
 #include "solar_platforms/bgfx/bgfx_prim2d_lines.h"
@@ -36,8 +37,9 @@ namespace solar {
 		win32_mouse_device _win32_mouse_device;
 		win32_keyboard_device _win32_keyboard_device;
 		file_change_watcher _file_change_watcher;
-		resource_system _resource_system; //needed by many d3d9 components
-		bgfx_win32_render_device _bgfx_win32_render_device;
+		resource_system _resource_system;
+		win32_bgfx_context _bgfx_context;
+		bgfx_render_device _bgfx_render_device;
 		bgfx_cursor _bgfx_cursor;
 		bgfx_texture_factory _bgfx_texture_factory;
 		bgfx_shader_factory _bgfx_shader_factory;

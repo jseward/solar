@@ -59,6 +59,14 @@ namespace solar {
 			(convert_to_byte(_b) << 0);
 	};
 
+	uint32_t color::to_rgba32() const {
+		return
+			(convert_to_byte(_r) << 24) |
+			(convert_to_byte(_g) << 16) |
+			(convert_to_byte(_b) << 8) |
+			(convert_to_byte(_a) << 0);
+	};
+
 	uint8_t color::convert_to_byte(float v) const {
 		return static_cast<uint8_t>(clamp(0.f, 1.f, v) * 255.0f + 0.5f);
 	}

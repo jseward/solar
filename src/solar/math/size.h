@@ -18,9 +18,10 @@ namespace solar {
 
 		bool operator==(const size& rhs) const;
 		bool operator!=(const size& rhs) const;
-		size operator*(float rhs) const;
 
 	public:
+		friend size operator*(const size& lhs, float rhs);
+		friend size operator-(const size& lhs, const size& rhs);
 		friend std::ostream& operator<<(std::ostream& os, const size& s);
 	};
 

@@ -30,7 +30,7 @@ namespace solar {
 		std::vector<d3d9_device_event_handler*> _event_handlers;
 		bool _are_device_objects_created;
 		bool _are_device_objects_reset;
-		size _toggle_from_fullscreen_backbuffer_size;
+		size _exit_fullscreen_backbuffer_size;
 		d3d9_cursor_icon* _active_cursor_icon;
 
 	public:
