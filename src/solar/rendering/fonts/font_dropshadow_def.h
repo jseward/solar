@@ -2,7 +2,7 @@
 
 #include "solar/archiving/archivable.h"
 #include "solar/math/pointf.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 
 namespace solar {
 

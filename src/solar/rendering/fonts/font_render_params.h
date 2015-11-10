@@ -1,8 +1,8 @@
 #pragma once
 
 #include "solar/math/rect.h"
-#include "solar/rendering/color.h"
-#include "solar/rendering/colors.h"
+#include "solar/colors/color.h"
+#include "solar/colors/colors.h"
 #include "font.h"
 #include "font_alignment.h"
 #include "font_dropshadow_def.h"

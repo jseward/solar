@@ -1,7 +1,7 @@
 #include "window_helpers.h"
 
 #include "window.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 #include "solar/math/size.h"
 #include "solar/utility/type_convert.h"
 

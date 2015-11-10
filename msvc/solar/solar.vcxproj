@@ -27,6 +27,8 @@
     <ClInclude Include="..\..\src\solar\archiving\json_archive_reader.h" />
     <ClInclude Include="..\..\src\solar\archiving\json_archive_writer.h" />
     <ClInclude Include="..\..\src\solar\archiving\single_value_archivable.h" />
+    <ClInclude Include="..\..\src\solar\colors\color.h" />
+    <ClInclude Include="..\..\src\solar\colors\colors.h" />
     <ClInclude Include="..\..\src\solar\containers\container_helpers.h" />
     <ClInclude Include="..\..\src\solar\containers\dynamic_array.h" />
     <ClInclude Include="..\..\src\solar\containers\enum_array.h" />
@@ -108,8 +110,6 @@
     <ClInclude Include="..\..\src\solar\rendering\cameras\camera_cached_value.h" />
     <ClInclude Include="..\..\src\solar\rendering\cameras\camera_frustrum.h" />
     <ClInclude Include="..\..\src\solar\rendering\cameras\camera_projection_type.h" />
-    <ClInclude Include="..\..\src\solar\rendering\color.h" />
-    <ClInclude Include="..\..\src\solar\rendering\colors.h" />
     <ClInclude Include="..\..\src\solar\rendering\cursors\cursor.h" />
     <ClInclude Include="..\..\src\solar\rendering\cursors\cursor_icon.h" />
     <ClInclude Include="..\..\src\solar\rendering\cursors\cursor_icon_factory.h" />
@@ -599,6 +599,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_colors.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_platforms_bgfx.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -699,6 +703,8 @@
     <ClCompile Include="..\..\src\solar\archiving\bitstream_archive_writer.cpp" />
     <ClCompile Include="..\..\src\solar\archiving\json_archive_reader.cpp" />
     <ClCompile Include="..\..\src\solar\archiving\json_archive_writer.cpp" />
+    <ClCompile Include="..\..\src\solar\colors\color.cpp" />
+    <ClCompile Include="..\..\src\solar\colors\colors.cpp" />
     <ClCompile Include="..\..\src\solar\input\input_mapping.cpp" />
     <ClCompile Include="..\..\src\solar\input\input_mappings.cpp" />
     <ClCompile Include="..\..\src\solar\input\input_mapping_binding.cpp" />
@@ -747,8 +753,6 @@
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush_stretch_margins.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\cameras\camera.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\cameras\camera_frustrum.cpp" />
-    <ClCompile Include="..\..\src\solar\rendering\color.cpp" />
-    <ClCompile Include="..\..\src\solar\rendering\colors.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\cursors\cursor_icon_id.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\fonts\bm_font_reader.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\fonts\font.cpp" />

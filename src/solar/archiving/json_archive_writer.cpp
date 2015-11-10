@@ -2,7 +2,7 @@
 
 #include "solar/utility/assert.h"
 #include "solar/utility/unused_parameter.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 #include "archivable.h"
 #include "single_value_archivable.h"
 

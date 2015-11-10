@@ -1,5 +1,3 @@
-#include "solar/rendering/color.cpp"
-#include "solar/rendering/colors.cpp"
 #include "solar/rendering/viewport.cpp"
 
 #include "solar/rendering/primatives/prim2d.cpp"

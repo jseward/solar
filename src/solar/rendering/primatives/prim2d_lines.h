@@ -3,7 +3,7 @@
 #include <vector>
 #include "solar/math/vec2.h"
 #include "solar/math/vec3.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 #include "prim2d_world_projection_buffer.h"
 
 namespace solar {

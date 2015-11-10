@@ -3,7 +3,7 @@
 #include "solar/utility/assert.h"
 #include "solar/utility/unused_parameter.h"
 #include "solar/rendering/shaders/shader.h"
-#include "solar/rendering/colors.h"
+#include "solar/colors/colors.h"
 #include "d3d9_shader_factory.h"
 
 namespace solar {

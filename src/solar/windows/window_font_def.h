@@ -1,7 +1,7 @@
 #pragma once
 
 #include "solar/archiving/archivable.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 #include "solar/rendering/fonts/font_id.h"
 #include "solar/rendering/fonts/font_alignment.h"
 #include "solar/rendering/fonts/font_dropshadow_def.h"

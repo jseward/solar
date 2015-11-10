@@ -2,7 +2,7 @@
 
 #include "solar/rendering/brushes/brush_render_mode.h"
 #include "solar/rendering/shaders/shader_id.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 #include "solar/windows/window_font_def.h"
 #include "window_renderer_def.h"
 

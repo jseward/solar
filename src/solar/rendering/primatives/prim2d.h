@@ -4,7 +4,7 @@
 #include "solar/math/rect.h"
 #include "solar/math/rectf.h"
 #include "solar/math/vec2.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 #include "solar/rendering/textures/simple_rect_uvs.h"
 #include "prim2d_world_projection_buffer.h"
 

@@ -6,7 +6,7 @@
 #include "solar/windows/window_font_def.h"
 #include "solar/windows/rendering/window_render_state_brush_collection.h"
 #include "solar/rendering/brushes/brush_id.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 
 namespace solar {
 

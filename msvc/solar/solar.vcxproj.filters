@@ -184,6 +184,9 @@
     <Filter Include="src\solar_dependencies\bgfx\src">
       <UniqueIdentifier>{82e643e9-d328-4bbf-ab6a-49728381afbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\solar\colors">
+      <UniqueIdentifier>{24be899e-dd75-4e76-924c-a65d18cc4dd3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\solar\utility\assert.h">
@@ -453,17 +456,11 @@
     <ClInclude Include="..\..\src\solar\rendering\render_device.h">
       <Filter>src\solar\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\color.h">
-      <Filter>src\solar\rendering</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\math\clamp.h">
       <Filter>src\solar\math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar\time\fixed_time_ticker.h">
       <Filter>src\solar\time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\colors.h">
-      <Filter>src\solar\rendering</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar\strings\string_helpers.h">
       <Filter>src\solar\strings</Filter>
@@ -1605,6 +1602,12 @@
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_callback.h">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\colors\color.h">
+      <Filter>src\solar\colors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\colors\colors.h">
+      <Filter>src\solar\colors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1637,14 +1640,8 @@
     <ClCompile Include="..\..\src\solar\math\rect.cpp">
       <Filter>src\solar\math</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar\rendering\color.cpp">
-      <Filter>src\solar\rendering</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar\time\fixed_time_ticker.cpp">
       <Filter>src\solar\time</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\rendering\colors.cpp">
-      <Filter>src\solar\rendering</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar\rendering\primatives\prim2d.cpp">
       <Filter>src\solar\rendering\primatives</Filter>
@@ -2416,6 +2413,15 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_callback.cpp">
       <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_colors.cpp">
+      <Filter>bulkbuild</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\colors\color.cpp">
+      <Filter>src\solar\colors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\colors\colors.cpp">
+      <Filter>src\solar\colors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

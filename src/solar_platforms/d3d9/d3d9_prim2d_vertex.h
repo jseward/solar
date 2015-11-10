@@ -2,7 +2,7 @@
 
 #include "d3d9_headers.h"
 #include "solar/math/vec2.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 #include "solar/rendering/textures/uv.h"
 
 namespace solar {

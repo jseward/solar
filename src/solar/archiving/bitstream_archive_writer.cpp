@@ -6,7 +6,7 @@
 #include "solar/utility/trace.h"
 #include "solar/utility/unused_parameter.h"
 #include "solar/archiving/archivable.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 
 namespace solar {
 

@@ -5,7 +5,7 @@
 #include "font_renderer_def.h"
 #include "font_renderer_line_builder.h"
 #include "solar/math/rect.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 
 namespace solar {
 
