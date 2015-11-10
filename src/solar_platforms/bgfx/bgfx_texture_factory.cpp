@@ -63,8 +63,8 @@ namespace solar {
 		//	texture_pool = texture_pool_iter->second.get();
 		//}
 		
-		auto address = _resource_system.resolve_address("texture", "textures", ".tga;.dds", id.c_str(), id_source_description.c_str());
-		bgfx_texture* new_texture = new bgfx_texture(address);
+		auto address = _resource_system.resolve_address("texture", "textures", ".dds", id.c_str(), id_source_description.c_str());
+		bgfx_texture* new_texture = new bgfx_texture(*this, address);
 		_textures[id] = std::unique_ptr<bgfx_texture>(new_texture);
 
 		return new_texture;
@@ -72,6 +72,10 @@ namespace solar {
 
 	const resource_factory_caching_context& bgfx_texture_factory::get_caching_context() const {
 		return _caching_context;
+	}
+
+	resource_system& bgfx_texture_factory::get_resource_system() {
+		return _resource_system;
 	}
 
 }
