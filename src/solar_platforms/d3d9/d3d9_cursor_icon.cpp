@@ -52,7 +52,7 @@ namespace solar {
 	}
 
 	void d3d9_cursor_icon::create_device_surface(IDirect3DDevice9* device) {
-		auto texture_address = _factory.get_resource_system().resolve_address("d3d9_cursor_icon_texture", "textures", ".tga", _def._texture_name.c_str(), _def_address.to_string().c_str());
+		auto texture_address = _factory.get_resource_system().resolve_address("d3d9_cursor_icon_texture", "textures", ".dds", _def._texture_name.c_str(), _def_address.to_string().c_str());
 
 		if (!_def._texture_name.empty()) {
 			auto& resource_mapped_memory = _factory.get_resource_mapped_memory();

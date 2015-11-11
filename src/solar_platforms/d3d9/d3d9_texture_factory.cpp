@@ -73,7 +73,7 @@ namespace solar {
 			texture_pool = texture_pool_iter->second.get();
 		}
 		
-		auto address = _resource_system.resolve_address("texture", "textures", ".tga;.dds", id.c_str(), id_source_description.c_str());
+		auto address = _resource_system.resolve_address("texture", "textures", ".dds", id.c_str(), id_source_description.c_str());
 		d3d9_texture* new_texture = new d3d9_texture(*this, *texture_pool, address);
 		_textures[id] = std::unique_ptr<d3d9_texture>(new_texture);
 
