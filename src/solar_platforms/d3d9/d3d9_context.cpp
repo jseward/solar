@@ -10,7 +10,7 @@
 #include "d3d9_release_com_object.h"
 #include "d3d9_verify.h"
 #include "d3d9_error.h"
-#include "d3d9_render_state_group.h"
+#include "d3d9_render_state_block.h"
 
 namespace solar {
 
@@ -610,17 +610,17 @@ namespace solar {
 		}
 	}
 
-	render_state_group* d3d9_context::create_render_state_group(const render_state_group_def& def) {
-		return new d3d9_render_state_group(def);
+	render_state_block* d3d9_context::create_render_state_block(const render_state_block_def& def) {
+		return new d3d9_render_state_block(def);
 	}
 
-	void d3d9_context::release_render_state_group(render_state_group* group) {
-		delete group;
+	void d3d9_context::release_render_state_block(render_state_block* block) {
+		delete block;
 	}
 
-	void d3d9_context::apply_render_state_group(render_state_group* group) {
-		auto d3d9_group = static_cast<d3d9_render_state_group*>(group);
-		auto result = d3d9_group->apply(_IDirect3DDevice9, _current_render_state_flags);
+	void d3d9_context::apply_render_state_block(render_state_block* block) {
+		auto d3d9_block = static_cast<d3d9_render_state_block*>(block);
+		auto result = d3d9_block->apply(_IDirect3DDevice9, _current_render_state_flags);
 		_current_render_state_flags = result._new_flags;
 		if (result._new_alpha_ref.has_value()) {
 			//todo - something, set predefined uniform simular to bgfx?

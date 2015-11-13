@@ -52,16 +52,16 @@ namespace solar {
 		_context.toggle_virtual_fullscreen();
 	}
 
-	render_state_group* d3d9_render_device::create_render_state_group(const render_state_group_def& def) {
-		return _context.create_render_state_group(def);
+	render_state_block* d3d9_render_device::create_render_state_block(const render_state_block_def& def) {
+		return _context.create_render_state_block(def);
 	}
 
-	void d3d9_render_device::release_render_state_group(render_state_group* group) {
-		_context.release_render_state_group(group);
+	void d3d9_render_device::release_render_state_block(render_state_block* block) {
+		_context.release_render_state_block(block);
 	}
 
-	void d3d9_render_device::apply_render_state_group(render_state_group* group) {
-		_context.apply_render_state_group(group);
+	void d3d9_render_device::apply_render_state_block(render_state_block* block) {
+		_context.apply_render_state_block(block);
 	}
 
 	viewport d3d9_render_device::set_viewport(const viewport& new_viewport) {

@@ -21,11 +21,11 @@ namespace solar {
 		UNUSED_PARAMETER(viewport_area);
 	}
 
-	void bgfx_prim2d::begin_rendering(const rect& viewport_area, shader& shader, render_state_group* rs_group) {
+	void bgfx_prim2d::begin_rendering(const rect& viewport_area, shader& shader, render_state_block* rs_block) {
 		//todo
 		UNUSED_PARAMETER(viewport_area);
 		UNUSED_PARAMETER(shader);
-		UNUSED_PARAMETER(rs_group);
+		UNUSED_PARAMETER(rs_block);
 		ASSERT(false);
 	}
 

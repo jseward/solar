@@ -78,7 +78,7 @@ namespace solar {
 		ASSERT(_default_shader == nullptr);
 		_default_shader = _shader_factory.create_embeded_code_shader(DEFAULT_SHADER_STRING);
 
-		_default_rs_group = _context.create_render_state_group(render_state_group_def()
+		_default_rs_block = _context.create_render_state_block(render_state_block_def()
 			.set_depth_write(render_state_depth_write::DISABLED)
 			.set_depth_compare_func(render_state_compare_func::NONE)
 			.set_blend(render_state_blend_type::SRC_ALPHA, render_state_blend_type::INV_SRC_ALPHA));
@@ -90,20 +90,20 @@ namespace solar {
 		_shader_factory.release_embeded_code_shader(_default_shader);
 		_default_shader = nullptr;
 		
-		_context.release_render_state_group(_default_rs_group);
-		_default_rs_group = nullptr;
+		_context.release_render_state_block(_default_rs_block);
+		_default_rs_block = nullptr;
 
 		_context.remove_device_event_handler(this);
 	}
 
 	void d3d9_prim2d::begin_rendering(const rect& viewport_area) {
 		ASSERT(_default_shader != nullptr);
-		begin_rendering(viewport_area, *_default_shader, _default_rs_group);
+		begin_rendering(viewport_area, *_default_shader, _default_rs_block);
 	}
 
-	void d3d9_prim2d::begin_rendering(const rect& viewport_area, shader& shader, render_state_group* rs_group) {
+	void d3d9_prim2d::begin_rendering(const rect& viewport_area, shader& shader, render_state_block* rs_block) {
 		UNUSED_PARAMETER(viewport_area);
-		ASSERT(rs_group != nullptr);
+		ASSERT(rs_block != nullptr);
 		ASSERT(!_is_rendering);
 		ASSERT(_shader == nullptr);
 		ASSERT(_texture == nullptr);
@@ -111,7 +111,7 @@ namespace solar {
 		_shader = &shader;
 		_shader->set_platform_texture(shader_param_names::TEXTURE, _white_texture.get());
 		_shader->start("render");
-		_context.apply_render_state_group(rs_group);
+		_context.apply_render_state_block(rs_block);
 	}
 
 	void d3d9_prim2d::end_rendering() {

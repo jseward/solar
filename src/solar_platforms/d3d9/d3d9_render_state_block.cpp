@@ -1,4 +1,4 @@
-#include "d3d9_render_state_group.h"
+#include "d3d9_render_state_block.h"
 
 #include "solar/utility/assert.h"
 #include "solar/math/math_helpers.h"
@@ -7,7 +7,7 @@
 
 namespace solar {
 
-	d3d9_render_state_group::d3d9_render_state_group(const render_state_group_def& def) 
+	d3d9_render_state_block::d3d9_render_state_block(const render_state_block_def& def) 
 		: _def(def)
 		, _flags(0) {
 
@@ -68,7 +68,7 @@ namespace solar {
 		}
 	}
 
-	uint64_t d3d9_render_state_group::blend_type_to_state_define(render_state_blend_type bt) {
+	uint64_t d3d9_render_state_block::blend_type_to_state_define(render_state_blend_type bt) {
 		switch (bt) {
 			case render_state_blend_type::ZERO: return D3D9_STATE_BLEND_ZERO;
 			case render_state_blend_type::ONE: return D3D9_STATE_BLEND_ONE;
@@ -85,7 +85,7 @@ namespace solar {
 		return 0;
 	}
 
-	d3d9_render_state_group::apply_result d3d9_render_state_group::apply(IDirect3DDevice9* device, uint64_t device_flags) {
+	d3d9_render_state_block::apply_result d3d9_render_state_block::apply(IDirect3DDevice9* device, uint64_t device_flags) {
 		apply_result result;
 		result._new_flags = _flags;
 		
@@ -163,7 +163,7 @@ namespace solar {
 		return result;
 	}
 
-	D3DCULL d3d9_render_state_group::get_cull_mode(uint32_t cull) {
+	D3DCULL d3d9_render_state_block::get_cull_mode(uint32_t cull) {
 		switch (cull) {
 			case 0: return D3DCULL_NONE;
 			case 1: return D3DCULL_CW;
@@ -173,7 +173,7 @@ namespace solar {
 		return D3DCULL_NONE;
 	}
 
-	D3DCMPFUNC d3d9_render_state_group::get_compare_func(uint32_t func) {
+	D3DCMPFUNC d3d9_render_state_block::get_compare_func(uint32_t func) {
 		switch (func) {
 			case 0: return static_cast<D3DCMPFUNC>(0);
 			case 1: return D3DCMP_LESS;
@@ -189,7 +189,7 @@ namespace solar {
 		return static_cast<D3DCMPFUNC>(0);
 	}
 
-	D3DBLENDOP d3d9_render_state_group::get_blend_op(uint32_t op) {
+	D3DBLENDOP d3d9_render_state_block::get_blend_op(uint32_t op) {
 		switch (op) {
 			case 0: return D3DBLENDOP_ADD;
 			case 1: return D3DBLENDOP_SUBTRACT;
@@ -201,7 +201,7 @@ namespace solar {
 		return static_cast<D3DBLENDOP>(0);
 	}
 
-	D3DBLEND d3d9_render_state_group::get_blend(uint32_t b) {
+	D3DBLEND d3d9_render_state_block::get_blend(uint32_t b) {
 		switch (b) {
 			case 1: return D3DBLEND_ZERO;
 			case 2: return D3DBLEND_ONE;

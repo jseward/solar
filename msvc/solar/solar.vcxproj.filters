@@ -1617,17 +1617,17 @@
     <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_enums.h">
       <Filter>src\solar\rendering\render_states</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_group.h">
+    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_block.h">
       <Filter>src\solar\rendering\render_states</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_group_def.h">
+    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_block_def.h">
       <Filter>src\solar\rendering\render_states</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_group.h">
+    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_block_ptr.h">
+      <Filter>src\solar\rendering\render_states</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_block.h">
       <Filter>src\solar_platforms\d3d9</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_group_ptr.h">
-      <Filter>src\solar\rendering\render_states</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2444,10 +2444,10 @@
     <ClCompile Include="..\..\src\solar\colors\colors.cpp">
       <Filter>src\solar\colors</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar\rendering\render_states\render_state_group_def.cpp">
+    <ClCompile Include="..\..\src\solar\rendering\render_states\render_state_block_def.cpp">
       <Filter>src\solar\rendering\render_states</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_group.cpp">
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_block.cpp">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClCompile>
   </ItemGroup>

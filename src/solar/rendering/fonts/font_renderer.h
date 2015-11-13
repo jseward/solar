@@ -6,7 +6,7 @@
 #include "font_renderer_line_builder.h"
 #include "solar/math/rect.h"
 #include "solar/colors/color.h"
-#include "solar/rendering/render_states/render_state_group_ptr.h"
+#include "solar/rendering/render_states/render_state_block_ptr.h"
 
 namespace solar {
 
@@ -20,7 +20,7 @@ namespace solar {
 		render_device& _render_device;
 
 		font_renderer_def _def;
-		render_state_group_ptr _render_state_group;
+		render_state_block_ptr _render_state_block;
 		font_renderer_line_builder _line_builder;
 
 	public:

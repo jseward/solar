@@ -28,7 +28,7 @@ namespace solar {
 		render_device& _render_device;
 
 		window_renderer_def _def;
-		render_state_group_ptr _render_state_group;
+		render_state_block_ptr _render_state_block;
 
 	public:
 		window_renderer(render_device& render_device, resource_system& resource_system, prim2d& prim2d, prim2d_lines& prim2d_lines, font_renderer& font_renderer, brush_renderer& brush_renderer);

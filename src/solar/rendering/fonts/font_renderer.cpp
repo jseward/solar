@@ -35,18 +35,18 @@ namespace solar {
 			_resource_system.read_object_as_json(_def, address);
 		}
 
-		_render_state_group = make_render_state_group_ptr(_render_device, render_state_group_def()
+		_render_state_block = make_render_state_block_ptr(_render_device, render_state_block_def()
 			.set_depth_write(render_state_depth_write::DISABLED)
 			.set_depth_compare_func(render_state_compare_func::NONE)
 			.set_blend(render_state_blend_type::SRC_ALPHA, render_state_blend_type::INV_SRC_ALPHA));
 	}
 
 	void font_renderer::teardown() {
-		_render_state_group.reset();
+		_render_state_block.reset();
 	}
 
 	void font_renderer::begin_rendering(const rect& viewport_area) {
-		_prim2d.begin_rendering(viewport_area, _def._normal_shader_id.get(), _render_state_group.get());
+		_prim2d.begin_rendering(viewport_area, _def._normal_shader_id.get(), _render_state_block.get());
 	}
 
 	void font_renderer::end_rendering() {

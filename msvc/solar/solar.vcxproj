@@ -143,10 +143,10 @@
     <ClInclude Include="..\..\src\solar\rendering\render_scene_functor.h" />
     <ClInclude Include="..\..\src\solar\rendering\render_device.h" />
     <ClInclude Include="..\..\src\solar\rendering\render_device_event_handler.h" />
-    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_group.h" />
-    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_group_def.h" />
+    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_block.h" />
+    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_block_def.h" />
     <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_enums.h" />
-    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_group_ptr.h" />
+    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_block_ptr.h" />
     <ClInclude Include="..\..\src\solar\rendering\shaders\shader.h" />
     <ClInclude Include="..\..\src\solar\rendering\shaders\shader_factory.h" />
     <ClInclude Include="..\..\src\solar\rendering\shaders\shader_id.h" />
@@ -561,7 +561,7 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_vertex.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_release_com_object.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_render_device.h" />
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_group.h" />
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_block.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_defines.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_shader.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_shader_factory.h" />
@@ -780,7 +780,7 @@
     <ClCompile Include="..\..\src\solar\rendering\primatives\prim2d.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\primatives\prim2d_lines.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\primatives\prim2d_world_projection_buffer.cpp" />
-    <ClCompile Include="..\..\src\solar\rendering\render_states\render_state_group_def.cpp" />
+    <ClCompile Include="..\..\src\solar\rendering\render_states\render_state_block_def.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\shaders\shader_id.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\textures\simple_rect_uvs.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\textures\uv.cpp" />
@@ -974,7 +974,7 @@
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_lines.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_prim2d_vertex.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_render_device.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_group.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_block.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_shader.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_shader_factory.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_solid_color_texture.cpp" />

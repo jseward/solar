@@ -41,7 +41,7 @@ namespace solar {
 		std::vector<d3d9_prim2d_rect> _buffered_rects;
 		std::vector<d3d9_prim2d_tri> _buffered_tris;
 		d3d9_shader* _default_shader;
-		render_state_group* _default_rs_group;
+		render_state_block* _default_rs_block;
 		d3d9_solid_color_texture _white_texture;
 		bool _is_rendering;
 		shader* _shader;
@@ -57,7 +57,7 @@ namespace solar {
 		void teardown();
 		
 		virtual void begin_rendering(const rect& viewport_area) override;
-		virtual void begin_rendering(const rect& viewport_area, shader& shader, render_state_group* rs_group) override;
+		virtual void begin_rendering(const rect& viewport_area, shader& shader, render_state_block* rs_block) override;
 		virtual void end_rendering() override;
 		virtual void set_shader(shader& shader) override;
 		virtual void set_texture(texture& texture) override;

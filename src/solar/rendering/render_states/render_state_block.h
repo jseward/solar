@@ -2,7 +2,7 @@
 
 namespace solar {
 
-	class render_state_group {
+	class render_state_block {
 	};
 
 }

@@ -2,7 +2,7 @@
 
 #include "solar/archiving/archivable.h"
 #include "solar/rendering/shaders/shader_id.h"
-#include "solar/rendering/render_states/render_state_group_ptr.h"
+#include "solar/rendering/render_states/render_state_block_ptr.h"
 #include "solar/containers/enum_array.h"
 
 namespace solar {

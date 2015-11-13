@@ -6,7 +6,7 @@
 #include "solar_platforms/d3d9/d3d9_window_type.cpp"
 #include "solar_platforms/d3d9/d3d9_format_helpers.cpp"
 #include "solar_platforms/d3d9/d3d9_render_device.cpp"
-#include "solar_platforms/d3d9/d3d9_render_state_group.cpp"
+#include "solar_platforms/d3d9/d3d9_render_state_block.cpp"
 #include "solar_platforms/d3d9/d3d9_prim2d.cpp"
 #include "solar_platforms/d3d9/d3d9_prim2d_vertex.cpp"
 #include "solar_platforms/d3d9/d3d9_prim2d_lines.cpp"

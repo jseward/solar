@@ -8,8 +8,8 @@
 #include "d3d9_cursor_icon.h"
 #include "solar/math/rect.h"
 #include "solar/rendering/render_scene_functor.h"
-#include "solar/rendering/render_states/render_state_group.h"
-#include "solar/rendering/render_states/render_state_group_def.h"
+#include "solar/rendering/render_states/render_state_block.h"
+#include "solar/rendering/render_states/render_state_block_def.h"
 
 namespace solar {
 	
@@ -52,9 +52,9 @@ namespace solar {
 		void add_device_event_handler(d3d9_device_event_handler* handler);
 		void remove_device_event_handler(d3d9_device_event_handler* handler);
 
-		render_state_group* create_render_state_group(const render_state_group_def& def);
-		void release_render_state_group(render_state_group* group);
-		void apply_render_state_group(render_state_group* group);
+		render_state_block* create_render_state_block(const render_state_block_def& def);
+		void release_render_state_block(render_state_block* block);
+		void apply_render_state_block(render_state_block* block);
 
 		IDirect3DDevice9* get_device();
 

@@ -1,15 +1,15 @@
 #pragma once
 
 #include <stdint.h>
-#include "solar/rendering/render_states/render_state_group.h"
-#include "solar/rendering/render_states/render_state_group_def.h"
+#include "solar/rendering/render_states/render_state_block.h"
+#include "solar/rendering/render_states/render_state_block_def.h"
 #include "solar/utility/optional.h"
 #include "d3d9_headers.h"
 #include "d3d9_render_state_defines.h"
 
 namespace solar {
 
-	class d3d9_render_state_group : public render_state_group {
+	class d3d9_render_state_block : public render_state_block {
 	public:
 		class apply_result {
 		public:
@@ -18,11 +18,11 @@ namespace solar {
 		};
 
 	private:
-		const render_state_group_def _def;
+		const render_state_block_def _def;
 		uint64_t _flags;
 
 	public:
-		d3d9_render_state_group(const render_state_group_def& def);
+		d3d9_render_state_block(const render_state_block_def& def);
 
 		apply_result apply(IDirect3DDevice9* device, uint64_t device_flags);
 
