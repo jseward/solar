@@ -32,7 +32,7 @@ namespace solar {
 		const resource_address& get_resource_address() const;
 		const char* get_embeded_code() const;
 
-		virtual void start(const char* technique) override;
+		virtual void start() override;
 		virtual void stop() override;
 		virtual void commit_param_changes() override;
 		virtual void forget_param_changes() override;
@@ -48,7 +48,7 @@ namespace solar {
 		void on_device_reset(IDirect3DDevice9* device);
 		void on_device_lost(IDirect3DDevice9* device);
 
-		void start_with_flags(const char* technique, DWORD flags);
+		void start_with_flags(DWORD flags);
 
 	private:
 		void map_technique_handles();

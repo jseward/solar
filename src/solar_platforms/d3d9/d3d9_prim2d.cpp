@@ -110,7 +110,7 @@ namespace solar {
 		_is_rendering = true;
 		_shader = &shader;
 		_shader->set_platform_texture(shader_param_names::TEXTURE, _white_texture.get());
-		_shader->start("render");
+		_shader->start();
 		_context.apply_render_state_block(rs_block);
 	}
 
@@ -137,7 +137,7 @@ namespace solar {
 			else {
 				_shader->set_platform_texture(shader_param_names::TEXTURE, _white_texture.get());
 			}
-			_shader->start("render");
+			_shader->start();
 		}
 	}
 

@@ -48,18 +48,10 @@ namespace solar {
 		return _embeded_code;
 	}
 	
-	void d3d9_shader::start_with_flags(const char* technique, DWORD flags) {
+	void d3d9_shader::start_with_flags(DWORD flags) {
 		IF_VERIFY(_ID3DXEffect != nullptr) { //D3DXCreateEffect can fail
 			ASSERT(!_is_started);
 			_is_started = true;
-
-			auto iter = _technique_handles.find(technique);
-			if (iter == _technique_handles.end()) {
-				ALERT("d3d9_shader technique not found.\n\nshader: {}\ntechnique: {}", _resource_address.to_string(), technique);
-			}
-			else {
-				D3D9_VERIFY(_ID3DXEffect->SetTechnique(iter->second));
-			}
 
 			UINT pass_count = 0;
 			D3D9_VERIFY(_ID3DXEffect->Begin(&pass_count, flags));
@@ -73,8 +65,8 @@ namespace solar {
 		}
 	}
 
-	void d3d9_shader::start(const char* technique) {
-		start_with_flags(technique, 0);
+	void d3d9_shader::start() {
+		start_with_flags(0);
 	}
 
 	void d3d9_shader::stop() {

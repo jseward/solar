@@ -15,9 +15,8 @@ namespace solar {
 		return _resource_address;
 	}
 
-	void bgfx_shader::start(const char* technique) {
+	void bgfx_shader::start() {
 		//todo
-		UNUSED_PARAMETER(technique);
 	}
 
 	void bgfx_shader::stop() {

@@ -7,7 +7,7 @@ namespace solar {
 
 	class shader {
 	public:
-		virtual void start(const char* technique) = 0;
+		virtual void start() = 0;
 		virtual void stop() = 0;
 		virtual void commit_param_changes() = 0;
 		virtual void forget_param_changes() = 0;

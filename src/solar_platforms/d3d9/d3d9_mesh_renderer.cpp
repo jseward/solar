@@ -48,7 +48,7 @@ namespace solar {
 		_shader = &shader;
 		_camera = &camera;
 		D3D9_VERIFY(_context.get_device()->SetVertexDeclaration(_vertex_declaration));
-		_shader->start("render");
+		_shader->start();
 	}
 
 	void d3d9_mesh_renderer::end_rendering() {

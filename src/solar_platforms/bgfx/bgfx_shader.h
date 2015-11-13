@@ -15,7 +15,7 @@ namespace solar {
 
 		const resource_address& get_resource_address() const;
 
-		virtual void start(const char* technique) override;
+		virtual void start() override;
 		virtual void stop() override;
 		virtual void commit_param_changes() override;
 		virtual void forget_param_changes() override;
