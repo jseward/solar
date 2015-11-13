@@ -19,7 +19,7 @@ namespace solar {
 	private:
 		resource_system& _resource_system;
 		bool _is_setup;
-		resource_factory_caching_context _caching_context;
+		resource_factory_caching_context _shader_caching_context;
 		std::unordered_map<std::string, std::unique_ptr<bgfx_shader>> _shaders;
 
 	public:
@@ -30,7 +30,7 @@ namespace solar {
 		void teardown();
 
 		virtual shader* get_shader(const std::string& id, const std::string& id_source_description) override;
-		virtual const resource_factory_caching_context& get_caching_context() const override;
+		virtual const resource_factory_caching_context& get_shader_caching_context() const override;
 
 	private:
 		void remove_all_shaders();

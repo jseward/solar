@@ -1,8 +1,10 @@
 #include "d3d9_shader_factory.h"
+
 #include "solar/utility/assert.h"
 #include "solar/utility/alert.h"
 #include "solar/resources/resource_system.h"
 #include "solar/containers/container_helpers.h"
+#include "solar/strings/string_helpers.h"
 #include "d3d9_verify.h"
 #include "d3d9_release_com_object.h"
 #include "d3d9_string_convert.h"
@@ -74,7 +76,7 @@ namespace solar {
 			iter.second->on_device_released(_context.get_device());
 		}
 		_shaders.clear();
-		_caching_context.increment();
+		_shader_caching_context.increment();
 	}
 
 	shader* d3d9_shader_factory::get_shader(const std::string& id, const std::string& id_source_description) {
@@ -102,8 +104,8 @@ namespace solar {
 		return new_shader;
 	}
 
-	const resource_factory_caching_context& d3d9_shader_factory::get_caching_context() const {
-		return _caching_context;
+	const resource_factory_caching_context& d3d9_shader_factory::get_shader_caching_context() const {
+		return _shader_caching_context;
 	}
 
 	void d3d9_shader_factory::on_device_created(IDirect3DDevice9* device) {

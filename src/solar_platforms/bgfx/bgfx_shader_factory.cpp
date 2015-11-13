@@ -1,6 +1,7 @@
 #include "bgfx_shader_factory.h"
 
 #include "solar/utility/assert.h"
+#include "solar/utility/unused_parameter.h"
 #include "solar/resources/resource_system.h"
 
 namespace solar {
@@ -28,7 +29,7 @@ namespace solar {
 	void bgfx_shader_factory::remove_all_shaders() {
 		_resource_system.end_watching_resources(this);
 		_shaders.clear();
-		_caching_context.increment();
+		_shader_caching_context.increment();
 	}
 
 	shader* bgfx_shader_factory::get_shader(const std::string& id, const std::string& id_source_description) {
@@ -54,8 +55,8 @@ namespace solar {
 		return new_shader;
 	}
 
-	const resource_factory_caching_context& bgfx_shader_factory::get_caching_context() const {
-		return _caching_context;
+	const resource_factory_caching_context& bgfx_shader_factory::get_shader_caching_context() const {
+		return _shader_caching_context;
 	}
 
 	void bgfx_shader_factory::on_file_changed(const std::string& path, void* data) {
