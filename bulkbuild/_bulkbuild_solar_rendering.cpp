@@ -1,5 +1,7 @@
 #include "solar/rendering/viewport.cpp"
 
+#include "solar/rendering/render_states/render_state_group_def.cpp"
+
 #include "solar/rendering/primatives/prim2d.cpp"
 #include "solar/rendering/primatives/prim2d_lines.cpp"
 #include "solar/rendering/primatives/prim2d_world_projection_buffer.cpp"

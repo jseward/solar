@@ -25,6 +25,9 @@ namespace solar {
 		virtual void toggle_virtual_fullscreen();
 		virtual viewport set_viewport(const viewport& new_viewport) override;
 		virtual size get_backbuffer_size() const override;
+		virtual render_state_group* create_render_state_group(const render_state_group_def& def) override;
+		virtual void release_render_state_group(render_state_group* object) override;
+		virtual void apply_render_state_group(render_state_group* object) override;
 	};
 
 }

@@ -1,6 +1,5 @@
 #include "math_helpers.h"
 
-#include "solar/utility/assert.h"
 #include "solar/utility/verify.h"
 #include "solar/math/math_constants.h"
 
@@ -33,17 +32,6 @@ namespace solar {
 		return (abs(x - y) <= tolerance);
 	}
 
-	float constrain(float lower_bound, float upper_bound, float x) {
-		ASSERT(lower_bound <= upper_bound);
-		if (x < lower_bound) {
-			return lower_bound;
-		}
-		else if (x > upper_bound) {
-			return upper_bound;
-		}
-		return x;
-	}
-
 	int int_wrap(int lower, int upper, int x) {
 		int range = upper - lower + 1;
 		ASSERT(range > 0);
@@ -63,14 +51,6 @@ namespace solar {
 		const vec2 v2 = c2 * ((-3.f * t3) + (4.f * t2) + t);
 		const vec2 v3 = c3 * (t3 - t2);
 		return ((v0 + v1 + v2 + v3) / 2.f);
-	}
-
-	bool is_within_inclusive(float lower_bound, float upper_bound, float x) {
-		return (x >= lower_bound && x <= upper_bound);
-	}
-
-	bool is_within_exclusive(float lower_bound, float upper_bound, float x) {
-		return (x > lower_bound && x < upper_bound);
 	}
 
 	float lerp(float v0, float v1, float t) {

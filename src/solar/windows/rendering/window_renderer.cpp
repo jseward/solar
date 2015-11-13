@@ -10,12 +10,13 @@
 
 namespace solar {
 
-	window_renderer::window_renderer(resource_system& resource_system, prim2d& prim2d, prim2d_lines& prim2d_lines, font_renderer& font_renderer, brush_renderer& brush_renderer)
+	window_renderer::window_renderer(render_device& render_device, resource_system& resource_system, prim2d& prim2d, prim2d_lines& prim2d_lines, font_renderer& font_renderer, brush_renderer& brush_renderer)
 		: _resource_system(resource_system)
 		, _prim2d(prim2d)
 		, _prim2d_lines(prim2d_lines)
 		, _font_renderer(font_renderer)
-		, _brush_renderer(brush_renderer) {
+		, _brush_renderer(brush_renderer) 
+		, _render_device(render_device) {
 	}
 
 	window_renderer::~window_renderer() {
@@ -26,9 +27,15 @@ namespace solar {
 		if (!address.empty()) {
 			_resource_system.read_object_as_json(_def, address);
 		}
+
+		_render_state_group = make_render_state_group_ptr(_render_device, render_state_group_def()
+			.set_depth_write(render_state_depth_write::DISABLED)
+			.set_depth_compare_func(render_state_compare_func::NONE)
+			.set_blend(render_state_blend_type::SRC_ALPHA, render_state_blend_type::INV_SRC_ALPHA));
 	}
 
 	void window_renderer::teardown() {
+		_render_state_group.reset();
 	}
 
 	prim2d& window_renderer::get_prim2d() {
@@ -48,7 +55,7 @@ namespace solar {
 	}
 
 	void window_renderer::begin_brush_rendering() {
-		_brush_renderer.begin_rendering(root_window::get().get_area(), _def._brush_shader.get());
+		_brush_renderer.begin_rendering(root_window::get().get_area(), _def._brush_shader.get(), _render_state_group.get());
 	}
 
 	void window_renderer::end_brush_rendering() {

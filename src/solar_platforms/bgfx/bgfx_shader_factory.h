@@ -29,7 +29,6 @@ namespace solar {
 		void setup();
 		void teardown();
 
-		virtual void set_render_states_to_defaults() override;
 		virtual shader* get_shader(const std::string& id, const std::string& id_source_description) override;
 		virtual const resource_factory_caching_context& get_caching_context() const override;
 

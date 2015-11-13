@@ -8,11 +8,12 @@
 #include "d3d9_cursor_icon.h"
 #include "solar/math/rect.h"
 #include "solar/rendering/render_scene_functor.h"
+#include "solar/rendering/render_states/render_state_group.h"
+#include "solar/rendering/render_states/render_state_group_def.h"
 
 namespace solar {
 	
 	class d3d9_context {
-
 	private:
 		HWND _hwnd;
 		IDirect3D9* _IDirect3D9;
@@ -32,6 +33,7 @@ namespace solar {
 		bool _are_device_objects_reset;
 		size _exit_fullscreen_backbuffer_size;
 		d3d9_cursor_icon* _active_cursor_icon;
+		uint64_t _current_render_state_flags;
 
 	public:
 		d3d9_context();
@@ -49,6 +51,10 @@ namespace solar {
 
 		void add_device_event_handler(d3d9_device_event_handler* handler);
 		void remove_device_event_handler(d3d9_device_event_handler* handler);
+
+		render_state_group* create_render_state_group(const render_state_group_def& def);
+		void release_render_state_group(render_state_group* group);
+		void apply_render_state_group(render_state_group* group);
 
 		IDirect3DDevice9* get_device();
 

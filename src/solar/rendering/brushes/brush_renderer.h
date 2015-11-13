@@ -9,6 +9,7 @@ namespace solar {
 	class rect;
 	class color;
 	class shader;
+	class render_state_group;
 
 	class brush_renderer {
 	private:
@@ -20,7 +21,7 @@ namespace solar {
 		brush_renderer& operator=(const brush_renderer&) = delete;
 		~brush_renderer();
 
-		void begin_rendering(const rect& render_area, shader& shader);
+		void begin_rendering(const rect& render_area, shader& shader, render_state_group* rs_group);
 		void end_rendering();
 
 		void render_brush(

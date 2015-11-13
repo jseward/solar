@@ -14,6 +14,7 @@ namespace solar {
 	class texture;
 	class viewport;
 	class camera;
+	class render_state_group;
 
 	class prim2d {
 	private:
@@ -24,7 +25,7 @@ namespace solar {
 
 	public:
 		virtual void begin_rendering(const rect& viewport_area) = 0;
-		virtual void begin_rendering(const rect& viewport_area, shader& shader) = 0;
+		virtual void begin_rendering(const rect& viewport_area, shader& shader, render_state_group* rs_group) = 0;
 		virtual void end_rendering() = 0;
 		virtual void set_shader(shader& shader) = 0;
 		virtual void set_texture(texture& texture) = 0;

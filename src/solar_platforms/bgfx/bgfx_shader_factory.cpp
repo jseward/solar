@@ -31,10 +31,6 @@ namespace solar {
 		_caching_context.increment();
 	}
 
-	void bgfx_shader_factory::set_render_states_to_defaults() {
-		//todo
-	}
-
 	shader* bgfx_shader_factory::get_shader(const std::string& id, const std::string& id_source_description) {
 		ASSERT(_is_setup);
 

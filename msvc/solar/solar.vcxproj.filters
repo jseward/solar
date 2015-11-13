@@ -187,6 +187,9 @@
     <Filter Include="src\solar\colors">
       <UniqueIdentifier>{24be899e-dd75-4e76-924c-a65d18cc4dd3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\solar\rendering\render_states">
+      <UniqueIdentifier>{d5d895ea-19de-4fe2-bf9d-d138af23d738}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\solar\utility\assert.h">
@@ -1608,6 +1611,24 @@
     <ClInclude Include="..\..\src\solar\colors\colors.h">
       <Filter>src\solar\colors</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_defines.h">
+      <Filter>src\solar_platforms\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_enums.h">
+      <Filter>src\solar\rendering\render_states</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_group.h">
+      <Filter>src\solar\rendering\render_states</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_group_def.h">
+      <Filter>src\solar\rendering\render_states</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_group.h">
+      <Filter>src\solar_platforms\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\rendering\render_states\render_state_group_ptr.h">
+      <Filter>src\solar\rendering\render_states</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -2422,6 +2443,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\colors\colors.cpp">
       <Filter>src\solar\colors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\rendering\render_states\render_state_group_def.cpp">
+      <Filter>src\solar\rendering\render_states</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_group.cpp">
+      <Filter>src\solar_platforms\d3d9</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

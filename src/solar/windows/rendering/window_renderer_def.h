@@ -2,9 +2,12 @@
 
 #include "solar/archiving/archivable.h"
 #include "solar/rendering/shaders/shader_id.h"
+#include "solar/rendering/render_states/render_state_group_ptr.h"
 #include "solar/containers/enum_array.h"
 
 namespace solar {
+
+	class render_device;
 
 	class window_renderer_def : public archivable {
 	public:
@@ -12,7 +15,6 @@ namespace solar {
 
 	public:
 		window_renderer_def();
-
 		virtual void read_from_archive(archive_reader& reader) override;
 		virtual void write_to_archive(archive_writer& writer) const override;
 	};

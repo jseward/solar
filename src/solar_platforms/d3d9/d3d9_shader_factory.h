@@ -21,7 +21,6 @@ namespace solar {
 
 	private:
 		static const char* FALLBACK_SHADER_CODE;
-		static const char* DEFAULT_STATES_SHADER_CODE;
 
 	private:
 		d3d9_context& _context;
@@ -29,7 +28,6 @@ namespace solar {
 		bool _is_setup;
 		resource_factory_caching_context _caching_context;
 		bool _is_debug_shaders_enabled;
-		std::unique_ptr<d3d9_shader> _default_states_shader;
 		std::unordered_map<std::string, std::unique_ptr<d3d9_shader>> _shaders;
 		std::vector<d3d9_shader*> _embeded_code_shaders;
 		ID3DXEffectPool* _ID3DXEffectPool;
@@ -42,7 +40,6 @@ namespace solar {
 		void setup();
 		void teardown();
 
-		virtual void set_render_states_to_defaults() override;
 		virtual shader* get_shader(const std::string& id, const std::string& id_source_description) override;
 		virtual const resource_factory_caching_context& get_caching_context() const override;
 
@@ -55,8 +52,6 @@ namespace solar {
 		resource_mapped_memory& get_resource_mapped_memory();
 
 	private:
-		void create_default_states_shader();
-		void release_default_states_shader();
 		void remove_all_shaders();
 
 		virtual void on_device_created(IDirect3DDevice9* device) override;

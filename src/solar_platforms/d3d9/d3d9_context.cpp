@@ -1,8 +1,5 @@
 #include "d3d9_context.h"
 
-#include "d3d9_release_com_object.h"
-#include "d3d9_verify.h"
-#include "d3d9_error.h"
 #include "solar/utility/assert.h"
 #include "solar/utility/alert.h"
 #include "solar/utility/trace.h"
@@ -10,6 +7,10 @@
 #include "solar/containers/container_helpers.h"
 #include "solar/utility/unused_parameter.h"
 #include "solar/math/rect.h"
+#include "d3d9_release_com_object.h"
+#include "d3d9_verify.h"
+#include "d3d9_error.h"
+#include "d3d9_render_state_group.h"
 
 namespace solar {
 
@@ -26,7 +27,8 @@ namespace solar {
 		, _is_window_in_menu_loop(false)
 		, _are_device_objects_created(false)
 		, _are_device_objects_reset(false)
-		, _active_cursor_icon(nullptr) {
+		, _active_cursor_icon(nullptr) 
+		, _current_render_state_flags(0) {
 
 		::ZeroMemory(&_backbuffer_desc, sizeof(D3DSURFACE_DESC));
 	}
@@ -605,6 +607,24 @@ namespace solar {
 		}
 		else {
 			::ClipCursor(NULL);
+		}
+	}
+
+	render_state_group* d3d9_context::create_render_state_group(const render_state_group_def& def) {
+		return new d3d9_render_state_group(def);
+	}
+
+	void d3d9_context::release_render_state_group(render_state_group* group) {
+		delete group;
+	}
+
+	void d3d9_context::apply_render_state_group(render_state_group* group) {
+		auto d3d9_group = static_cast<d3d9_render_state_group*>(group);
+		auto result = d3d9_group->apply(_IDirect3DDevice9, _current_render_state_flags);
+		_current_render_state_flags = result._new_flags;
+		if (result._new_alpha_ref.has_value()) {
+			//todo - something, set predefined uniform simular to bgfx?
+			ASSERT(false);
 		}
 	}
 

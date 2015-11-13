@@ -25,11 +25,13 @@ namespace solar {
 		prim2d_lines& _prim2d_lines;
 		font_renderer& _font_renderer;
 		brush_renderer& _brush_renderer;
+		render_device& _render_device;
 
 		window_renderer_def _def;
+		render_state_group_ptr _render_state_group;
 
 	public:
-		window_renderer(resource_system& resource_system, prim2d& prim2d, prim2d_lines& prim2d_lines, font_renderer& font_renderer, brush_renderer& brush_renderer);
+		window_renderer(render_device& render_device, resource_system& resource_system, prim2d& prim2d, prim2d_lines& prim2d_lines, font_renderer& font_renderer, brush_renderer& brush_renderer);
 		window_renderer(const window_renderer&) = delete;
 		window_renderer& operator=(const window_renderer&) = delete;
 		~window_renderer();

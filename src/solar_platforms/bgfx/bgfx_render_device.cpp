@@ -71,4 +71,20 @@ namespace solar {
 		return _context.get_backbuffer_size();
 	}
 
+	render_state_group* bgfx_render_device::create_render_state_group(const render_state_group_def& def) {
+		ASSERT(false);
+		UNUSED_PARAMETER(def);
+		return nullptr;
+	}
+
+	void bgfx_render_device::release_render_state_group(render_state_group* group) {
+		ASSERT(false);
+		UNUSED_PARAMETER(group);
+	}
+
+	void bgfx_render_device::apply_render_state_group(render_state_group* group) {
+		ASSERT(false);
+		UNUSED_PARAMETER(group);
+	}
+
 }

@@ -6,6 +6,7 @@
 #include "font_renderer_line_builder.h"
 #include "solar/math/rect.h"
 #include "solar/colors/color.h"
+#include "solar/rendering/render_states/render_state_group_ptr.h"
 
 namespace solar {
 
@@ -16,12 +17,14 @@ namespace solar {
 	private:
 		resource_system& _resource_system;
 		prim2d& _prim2d;
+		render_device& _render_device;
 
 		font_renderer_def _def;
+		render_state_group_ptr _render_state_group;
 		font_renderer_line_builder _line_builder;
 
 	public:
-		font_renderer(resource_system& resource_system, prim2d& prim2d);
+		font_renderer(render_device& render_device, resource_system& resource_system, prim2d& prim2d);
 		font_renderer(const font_renderer&) = delete;
 		font_renderer& operator=(const font_renderer&) = delete;
 		~font_renderer();
