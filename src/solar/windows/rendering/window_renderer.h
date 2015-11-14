@@ -1,7 +1,7 @@
 #pragma once
 
 #include "solar/rendering/brushes/brush_render_mode.h"
-#include "solar/rendering/shaders/shader_id.h"
+#include "solar/rendering/shaders/shader_program_id.h"
 #include "solar/colors/color.h"
 #include "solar/windows/window_font_def.h"
 #include "window_renderer_def.h"
@@ -42,7 +42,7 @@ namespace solar {
 		prim2d& get_prim2d();
 		prim2d_lines& get_prim2d_lines();
 		brush_renderer& get_brush_renderer();
-		shader& get_brush_shader();
+		shader_program& get_brush_shader_program();
 
 		void begin_brush_rendering();
 		void end_brush_rendering();

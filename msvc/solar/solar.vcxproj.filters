@@ -681,15 +681,6 @@
     <ClInclude Include="..\..\src\solar\archiving\single_value_archivable.h">
       <Filter>src\solar\archiving</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\shaders\shader_factory.h">
-      <Filter>src\solar\rendering\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\shaders\shader_id.h">
-      <Filter>src\solar\rendering\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\shaders\shader.h">
-      <Filter>src\solar\rendering\shaders</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\resources\resource_system.h">
       <Filter>src\solar\resources</Filter>
     </ClInclude>
@@ -844,12 +835,6 @@
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_render_device.h">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_shader.h">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_shader_factory.h">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_solid_color_texture.h">
@@ -1452,9 +1437,6 @@
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_lines.h">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_factory.h">
-      <Filter>src\solar_platforms\bgfx</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_texture_factory.h">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClInclude>
@@ -1471,9 +1453,6 @@
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_mesh.h">
-      <Filter>src\solar_platforms\bgfx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader.h">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_texture.h">
@@ -1629,6 +1608,27 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_block.h">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\rendering\shaders\shader_program.h">
+      <Filter>src\solar\rendering\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\rendering\shaders\shader_program_factory.h">
+      <Filter>src\solar\rendering\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\rendering\shaders\shader_program_id.h">
+      <Filter>src\solar\rendering\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_shader_program.h">
+      <Filter>src\solar_platforms\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_shader_program_factory.h">
+      <Filter>src\solar_platforms\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program_factory.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1757,9 +1757,6 @@
     <ClCompile Include="..\..\src\solar\archiving\json_archive_writer.cpp">
       <Filter>src\solar\archiving</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar\rendering\shaders\shader_id.cpp">
-      <Filter>src\solar\rendering\shaders</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar\resources\resource_system.cpp">
       <Filter>src\solar\resources</Filter>
     </ClCompile>
@@ -1866,12 +1863,6 @@
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_render_device.cpp">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_shader.cpp">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_shader_factory.cpp">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_solid_color_texture.cpp">
@@ -2333,9 +2324,6 @@
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_lines.cpp">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_shader_factory.cpp">
-      <Filter>src\solar_platforms\bgfx</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_texture_factory.cpp">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClCompile>
@@ -2352,9 +2340,6 @@
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_mesh.cpp">
-      <Filter>src\solar_platforms\bgfx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_shader.cpp">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_texture.cpp">
@@ -2449,6 +2434,21 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_render_state_block.cpp">
       <Filter>src\solar_platforms\d3d9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\rendering\shaders\shader_program_id.cpp">
+      <Filter>src\solar\rendering\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_shader_program.cpp">
+      <Filter>src\solar_platforms\d3d9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_shader_program_factory.cpp">
+      <Filter>src\solar_platforms\d3d9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program_factory.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

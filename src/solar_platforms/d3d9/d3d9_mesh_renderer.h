@@ -24,7 +24,7 @@ namespace solar {
 		IDirect3DVertexDeclaration9* _vertex_declaration;
 		bool _is_rendering;
 		bool _is_rendering_mesh;
-		shader* _shader;
+		shader_program* _shader_program;
 		const camera* _camera;
 
 	public:
@@ -34,7 +34,7 @@ namespace solar {
 		void setup();
 		void teardown();
 
-		virtual void begin_rendering(const camera& camera, shader& shader) override;
+		virtual void begin_rendering(const camera& camera, shader_program& shader_program) override;
 		virtual void end_rendering() override;
 		virtual void begin_rendering_sub_mesh(const mesh& mesh, int sub_mesh_index, const mat44& world_transform) override;
 		virtual void end_rendering_sub_mesh(const mesh& mesh, int sub_mesh_index) override;

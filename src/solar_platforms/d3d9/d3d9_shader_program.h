@@ -2,18 +2,18 @@
 
 #include <string>
 #include <unordered_map>
-#include "solar/rendering/shaders/shader.h"
+#include "solar/rendering/shaders/shader_program.h"
 #include "solar/resources/resource_address.h"
 #include "d3d9_headers.h"
 
 namespace solar {
 
-	class d3d9_shader_factory;
+	class d3d9_shader_program_factory;
 
-	class d3d9_shader : public shader {
+	class d3d9_shader_program : public shader_program {
 
 	private:
-		d3d9_shader_factory& _factory;
+		d3d9_shader_program_factory& _factory;
 		resource_address _resource_address;
 		const char* _embeded_code;
 		ID3DXEffect* _ID3DXEffect;
@@ -25,9 +25,9 @@ namespace solar {
 		bool _has_changes_to_commit;
 
 	public:
-		d3d9_shader(d3d9_shader_factory& factory, const resource_address& resource_address);
-		d3d9_shader(d3d9_shader_factory& factory, const char* embeded_code);
-		virtual ~d3d9_shader();
+		d3d9_shader_program(d3d9_shader_program_factory& factory, const resource_address& resource_address);
+		d3d9_shader_program(d3d9_shader_program_factory& factory, const char* embeded_code);
+		virtual ~d3d9_shader_program();
 
 		const resource_address& get_resource_address() const;
 		const char* get_embeded_code() const;

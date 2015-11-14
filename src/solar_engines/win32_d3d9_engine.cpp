@@ -1,7 +1,7 @@
 #include "win32_d3d9_engine.h"
 
 #include "solar/containers/container_helpers.h"
-#include "solar/rendering/shaders/shader_id.h"
+#include "solar/rendering/shaders/shader_program_id.h"
 #include "solar/rendering/textures/texture_id.h"
 #include "solar/rendering/meshes/mesh_id.h"
 #include "solar/rendering/cursors/cursor_icon_id.h"
@@ -15,22 +15,22 @@ namespace solar {
 		, _d3d9_render_device(_d3d9_context)
 		, _d3d9_cursor(_d3d9_context)
 		, _d3d9_texture_factory(_d3d9_context, _resource_system)
-		, _d3d9_shader_factory(_d3d9_context, _resource_system)
+		, _d3d9_shader_program_factory(_d3d9_context, _resource_system)
 		, _d3d9_mesh_factory(_d3d9_context, _resource_system)
 		, _d3d9_mesh_renderer(_d3d9_context)
 		, _d3d9_cursor_icon_factory(_d3d9_context, _d3d9_cursor, _resource_system)
-		, _d3d9_prim2d(_d3d9_context, _d3d9_shader_factory)
+		, _d3d9_prim2d(_d3d9_context, _d3d9_shader_program_factory)
 		, _d3d9_prim2d_lines(_d3d9_context)
 		, _setting_registry(_win32_file_system, _file_change_watcher) {
 
-		shader_id::set_factory(&_d3d9_shader_factory);
+		shader_program_id::set_factory(&_d3d9_shader_program_factory);
 		texture_id::set_factory(&_d3d9_texture_factory);
 		mesh_id::set_factory(&_d3d9_mesh_factory);
 		cursor_icon_id::set_factory(&_d3d9_cursor_icon_factory);
 	}
 
 	win32_d3d9_engine::~win32_d3d9_engine() {
-		shader_id::set_factory(nullptr);
+		shader_program_id::set_factory(nullptr);
 		texture_id::set_factory(nullptr);
 		mesh_id::set_factory(nullptr);
 		cursor_icon_id::set_factory(nullptr);
@@ -85,7 +85,7 @@ namespace solar {
 		}
 
 		_d3d9_render_device.setup();
-		_d3d9_shader_factory.setup();
+		_d3d9_shader_program_factory.setup();
 		_d3d9_texture_factory.setup();
 		_d3d9_mesh_factory.setup();
 		_d3d9_mesh_renderer.setup();
@@ -103,7 +103,7 @@ namespace solar {
 		_d3d9_mesh_renderer.teardown();
 		_d3d9_mesh_factory.teardown();
 		_d3d9_texture_factory.teardown();
-		_d3d9_shader_factory.teardown();
+		_d3d9_shader_program_factory.teardown();
 		_d3d9_render_device.teardown();
 		_d3d9_context.teardown();
 		_setting_registry.teardown();

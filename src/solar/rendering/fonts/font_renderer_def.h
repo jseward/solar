@@ -1,14 +1,14 @@
 #pragma once
 
 #include "solar/archiving/archivable.h"
-#include "solar/rendering/shaders/shader_id.h"
+#include "solar/rendering/shaders/shader_program_id.h"
 
 namespace solar {
 
 	class font_renderer_def : public archivable {
 	public:
-		shader_id _normal_shader_id;
-		shader_id _dropshadow_shader_id;
+		shader_program_id _normal_shader_program;
+		shader_program_id _dropshadow_shader_program;
 
 	public:
 		font_renderer_def();

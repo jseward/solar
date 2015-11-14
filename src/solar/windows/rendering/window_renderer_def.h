@@ -1,7 +1,7 @@
 #pragma once
 
 #include "solar/archiving/archivable.h"
-#include "solar/rendering/shaders/shader_id.h"
+#include "solar/rendering/shaders/shader_program_id.h"
 #include "solar/rendering/render_states/render_state_block_ptr.h"
 #include "solar/containers/enum_array.h"
 
@@ -11,7 +11,7 @@ namespace solar {
 
 	class window_renderer_def : public archivable {
 	public:
-		shader_id _brush_shader;
+		shader_program_id _brush_shader_program;
 
 	public:
 		window_renderer_def();

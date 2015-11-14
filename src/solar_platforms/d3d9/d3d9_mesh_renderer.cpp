@@ -3,7 +3,7 @@
 #include "solar/utility/assert.h"
 #include "solar/utility/verify.h"
 #include "solar/utility/unused_parameter.h"
-#include "solar/rendering/shaders/shader.h"
+#include "solar/rendering/shaders/shader_program.h"
 #include "solar/rendering/cameras/camera.h"
 #include "d3d9_release_com_object.h"
 #include "d3d9_mesh.h"
@@ -23,14 +23,14 @@ namespace solar {
 		: _context(context)
 		, _vertex_declaration(nullptr)
 		, _is_rendering(false)
-		, _shader(nullptr)
+		, _shader_program(nullptr)
 		, _camera(nullptr) {
 	}
 
 	d3d9_mesh_renderer::~d3d9_mesh_renderer() {
 		ASSERT(_vertex_declaration == nullptr);
 		ASSERT(!_is_rendering);
-		ASSERT(_shader == nullptr);
+		ASSERT(_shader_program == nullptr);
 		ASSERT(_camera == nullptr);
 	}
 
@@ -42,19 +42,19 @@ namespace solar {
 		_context.remove_device_event_handler(this);
 	}
 
-	void d3d9_mesh_renderer::begin_rendering(const camera& camera, shader& shader) {
+	void d3d9_mesh_renderer::begin_rendering(const camera& camera, shader_program& shader_program) {
 		ASSERT(!_is_rendering);
 		_is_rendering = true;
-		_shader = &shader;
+		_shader_program = &shader_program;
 		_camera = &camera;
 		D3D9_VERIFY(_context.get_device()->SetVertexDeclaration(_vertex_declaration));
-		_shader->start();
+		_shader_program->start();
 	}
 
 	void d3d9_mesh_renderer::end_rendering() {
-		_shader->stop();
+		_shader_program->stop();
 		_is_rendering = false;
-		_shader = nullptr;
+		_shader_program = nullptr;
 		_camera = nullptr;
 	}
 
@@ -68,13 +68,13 @@ namespace solar {
 		ASSERT(sub_mesh_index >= 0);
 		ASSERT(sub_mesh_index < static_cast<int>(mesh._attribute_table_size));
 		auto material_index = mesh._attribute_table[sub_mesh_index].AttribId;
-		VERIFY(_shader->set_texture(shader_param_names::DIFFUSE_MAP, mesh._materials.at(material_index)->_diffuse_map.get()));
-		VERIFY(_shader->set_texture(shader_param_names::NORMAL_MAP, mesh._materials.at(material_index)->_normal_map.get()));
+		VERIFY(_shader_program->set_texture(shader_param_names::DIFFUSE_MAP, mesh._materials.at(material_index)->_diffuse_map.get()));
+		VERIFY(_shader_program->set_texture(shader_param_names::NORMAL_MAP, mesh._materials.at(material_index)->_normal_map.get()));
 
-		VERIFY(_shader->set_mat44(shader_param_names::WORLD_TRANSFORM, world_transform));
-		VERIFY(_shader->set_mat44(shader_param_names::WORLD_VIEW_PROJECTION_TRANSFORM, _camera->build_world_view_projection_transform(world_transform)));
+		VERIFY(_shader_program->set_mat44(shader_param_names::WORLD_TRANSFORM, world_transform));
+		VERIFY(_shader_program->set_mat44(shader_param_names::WORLD_VIEW_PROJECTION_TRANSFORM, _camera->build_world_view_projection_transform(world_transform)));
 
-		_shader->commit_param_changes();
+		_shader_program->commit_param_changes();
 	}
 
 	void d3d9_mesh_renderer::end_rendering_sub_mesh(const mesh& mesh, int sub_mesh_index) {		

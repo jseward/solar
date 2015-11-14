@@ -1,17 +1,17 @@
 #pragma once
 
-#include "solar/rendering/shaders/shader.h"
+#include "solar/rendering/shaders/shader_program.h"
 #include "solar/resources/resource_address.h"
 
 namespace solar {
 
-	class bgfx_shader : public shader {
+	class bgfx_shader_program : public shader_program {
 	private:
 		resource_address _resource_address;
 
 	public:
-		bgfx_shader(const resource_address& resource_address);
-		virtual ~bgfx_shader();
+		bgfx_shader_program(const resource_address& resource_address);
+		virtual ~bgfx_shader_program();
 
 		const resource_address& get_resource_address() const;
 

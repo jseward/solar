@@ -15,8 +15,8 @@ namespace solar {
 	brush_renderer::~brush_renderer() {
 	}
 
-	void brush_renderer::begin_rendering(const rect& render_area, shader& shader, render_state_block* rs_block) {
-		_prim2d.begin_rendering(render_area, shader, rs_block);
+	void brush_renderer::begin_rendering(const rect& render_area, shader_program& shader_program, render_state_block* rs_block) {
+		_prim2d.begin_rendering(render_area, shader_program, rs_block);
 	}
 
 	void brush_renderer::end_rendering() {

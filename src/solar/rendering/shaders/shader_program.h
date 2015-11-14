@@ -5,7 +5,7 @@ namespace solar {
 	class mat44;
 	class texture;
 
-	class shader {
+	class shader_program {
 	public:
 		virtual void start() = 0;
 		virtual void stop() = 0;

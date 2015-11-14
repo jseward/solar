@@ -10,7 +10,7 @@
 #include "solar/rendering/textures/simple_rect_uvs.cpp"
 #include "solar/rendering/textures/texture_id.cpp"
 
-#include "solar/rendering/shaders/shader_id.cpp"
+#include "solar/rendering/shaders/shader_program_id.cpp"
 
 #include "solar/rendering/meshes/mesh_id.cpp"
 

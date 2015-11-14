@@ -16,7 +16,7 @@
 #include "solar_platforms/bgfx/bgfx_prim2d.h"
 #include "solar_platforms/bgfx/bgfx_prim2d_lines.h"
 #include "solar_platforms/bgfx/bgfx_texture_factory.h"
-#include "solar_platforms/bgfx/bgfx_shader_factory.h"
+#include "solar_platforms/bgfx/bgfx_shader_program_factory.h"
 #include "solar_platforms/bgfx/bgfx_mesh_factory.h"
 #include "solar_platforms/bgfx/bgfx_cursor_icon_factory.h"
 #include "win32_bgfx_engine_settings.h"
@@ -42,7 +42,7 @@ namespace solar {
 		bgfx_render_device _bgfx_render_device;
 		bgfx_cursor _bgfx_cursor;
 		bgfx_texture_factory _bgfx_texture_factory;
-		bgfx_shader_factory _bgfx_shader_factory;
+		bgfx_shader_program_factory _bgfx_shader_program_factory;
 		bgfx_mesh_factory _bgfx_mesh_factory;
 		bgfx_cursor_icon_factory _bgfx_cursor_icon_factory;
 		bgfx_prim2d _bgfx_prim2d;

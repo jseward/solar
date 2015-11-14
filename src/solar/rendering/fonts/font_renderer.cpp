@@ -46,7 +46,7 @@ namespace solar {
 	}
 
 	void font_renderer::begin_rendering(const rect& viewport_area) {
-		_prim2d.begin_rendering(viewport_area, _def._normal_shader_id.get(), _render_state_block.get());
+		_prim2d.begin_rendering(viewport_area, _def._normal_shader_program.get(), _render_state_block.get());
 	}
 
 	void font_renderer::end_rendering() {
@@ -120,22 +120,26 @@ namespace solar {
 	}
 
 	void font_renderer::set_dropshadow_shader(const font_render_params& params) {
-		auto pixel_size = params._font.get_page_texture_pixel_size();
-		_def._dropshadow_shader_id->set_float(font_renderer_impl::shader_param_names::TEXTURE_PIXEL_WIDTH, pixel_size._width);
-		_def._dropshadow_shader_id->set_float(font_renderer_impl::shader_param_names::TEXTURE_PIXEL_HEIGHT, pixel_size._height);
-		_def._dropshadow_shader_id->set_float_array(font_renderer_impl::shader_param_names::DROPSHADOW_OFFSET, params._dropshadow_def._offset.as_raw_float_array(), 2);
-		_def._dropshadow_shader_id->set_float(font_renderer_impl::shader_param_names::DROPSHADOW_MIN_DISTANCE, params._dropshadow_def._min_distance);
-		_def._dropshadow_shader_id->set_float(font_renderer_impl::shader_param_names::DROPSHADOW_MAX_DISTANCE, params._dropshadow_def._max_distance);
-		_def._dropshadow_shader_id->commit_param_changes();
+		auto& program = _def._dropshadow_shader_program.get();
 
-		_prim2d.set_shader(_def._dropshadow_shader_id.get());
+		auto pixel_size = params._font.get_page_texture_pixel_size();
+		program.set_float(font_renderer_impl::shader_param_names::TEXTURE_PIXEL_WIDTH, pixel_size._width);
+		program.set_float(font_renderer_impl::shader_param_names::TEXTURE_PIXEL_HEIGHT, pixel_size._height);
+		program.set_float_array(font_renderer_impl::shader_param_names::DROPSHADOW_OFFSET, params._dropshadow_def._offset.as_raw_float_array(), 2);
+		program.set_float(font_renderer_impl::shader_param_names::DROPSHADOW_MIN_DISTANCE, params._dropshadow_def._min_distance);
+		program.set_float(font_renderer_impl::shader_param_names::DROPSHADOW_MAX_DISTANCE, params._dropshadow_def._max_distance);
+		program.commit_param_changes();
+
+		_prim2d.set_shader_program(program);
 	}
 
 	void font_renderer::set_normal_shader(const font_render_params& params) {
-		_def._normal_shader_id->set_float(font_renderer_impl::shader_param_names::FONT_SCALE, params._font.get_scale(params._font_size));
-		_def._normal_shader_id->commit_param_changes();
+		auto& program = _def._normal_shader_program.get();
 
-		_prim2d.set_shader(_def._normal_shader_id.get());
+		program.set_float(font_renderer_impl::shader_param_names::FONT_SCALE, params._font.get_scale(params._font_size));
+		program.commit_param_changes();
+
+		_prim2d.set_shader_program(program);
 	}
 
 }

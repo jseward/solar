@@ -2,15 +2,15 @@
 
 #include "solar/utility/assert.h"
 #include "solar/utility/unused_parameter.h"
-#include "solar/rendering/shaders/shader.h"
+#include "solar/rendering/shaders/shader_program.h"
 #include "solar/colors/colors.h"
-#include "d3d9_shader_factory.h"
+#include "d3d9_shader_program_factory.h"
 
 namespace solar {
 
 	const char* d3d9_prim2d::shader_param_names::TEXTURE = "diffuse_texture";
 
-	const char* d3d9_prim2d::DEFAULT_SHADER_STRING =
+	const char* d3d9_prim2d::DEFAULT_SHADER_PROGRAM_STRING =
 		"texture diffuse_texture;\r\n"
 		"sampler diffuse_sampler = sampler_state{\r\n"
 		"	Texture = <diffuse_texture>;\r\n"
@@ -51,20 +51,20 @@ namespace solar {
 		"	PixelShader = compile ps_2_0 ps_render();\r\n"
 		"}}\r\n";
 
-	d3d9_prim2d::d3d9_prim2d(d3d9_context& context, d3d9_shader_factory& shader_factory)
+	d3d9_prim2d::d3d9_prim2d(d3d9_context& context, d3d9_shader_program_factory& shader_program_factory)
 		: _context(context)
-		, _shader_factory(shader_factory)
-		, _default_shader(nullptr)
+		, _shader_program_factory(shader_program_factory)
+		, _default_shader_program(nullptr)
 		, _white_texture(colors::WHITE)
 		, _is_rendering(false)
-		, _shader(nullptr) {
+		, _shader_program(nullptr) {
 	}
 
 	d3d9_prim2d::~d3d9_prim2d() {
 		ASSERT(!_is_rendering);
 		ASSERT(_buffered_rects.empty());
 		ASSERT(_buffered_tris.empty());
-		ASSERT(_default_shader == nullptr);
+		ASSERT(_default_shader_program == nullptr);
 	}
 
 	void d3d9_prim2d::setup(const d3d9_prim2d_setup_params& params) {
@@ -75,8 +75,8 @@ namespace solar {
 		_buffered_rects.reserve(params.get_max_buffered_rect_count());
 		_buffered_tris.reserve(params.get_max_buffered_tri_count());
 
-		ASSERT(_default_shader == nullptr);
-		_default_shader = _shader_factory.create_embeded_code_shader(DEFAULT_SHADER_STRING);
+		ASSERT(_default_shader_program == nullptr);
+		_default_shader_program = _shader_program_factory.create_embeded_code_shader_program(DEFAULT_SHADER_PROGRAM_STRING);
 
 		_default_rs_block = _context.create_render_state_block(render_state_block_def()
 			.set_depth_write(render_state_depth_write::DISABLED)
@@ -87,8 +87,8 @@ namespace solar {
 	}
 
 	void d3d9_prim2d::teardown() {
-		_shader_factory.release_embeded_code_shader(_default_shader);
-		_default_shader = nullptr;
+		_shader_program_factory.release_embeded_code_shader_program(_default_shader_program);
+		_default_shader_program = nullptr;
 		
 		_context.release_render_state_block(_default_rs_block);
 		_default_rs_block = nullptr;
@@ -97,47 +97,47 @@ namespace solar {
 	}
 
 	void d3d9_prim2d::begin_rendering(const rect& viewport_area) {
-		ASSERT(_default_shader != nullptr);
-		begin_rendering(viewport_area, *_default_shader, _default_rs_block);
+		ASSERT(_default_shader_program != nullptr);
+		begin_rendering(viewport_area, *_default_shader_program, _default_rs_block);
 	}
 
-	void d3d9_prim2d::begin_rendering(const rect& viewport_area, shader& shader, render_state_block* rs_block) {
+	void d3d9_prim2d::begin_rendering(const rect& viewport_area, shader_program& shader_program, render_state_block* rs_block) {
 		UNUSED_PARAMETER(viewport_area);
 		ASSERT(rs_block != nullptr);
 		ASSERT(!_is_rendering);
-		ASSERT(_shader == nullptr);
+		ASSERT(_shader_program == nullptr);
 		ASSERT(_texture == nullptr);
 		_is_rendering = true;
-		_shader = &shader;
-		_shader->set_platform_texture(shader_param_names::TEXTURE, _white_texture.get());
-		_shader->start();
+		_shader_program = &shader_program;
+		_shader_program->set_platform_texture(shader_param_names::TEXTURE, _white_texture.get());
+		_shader_program->start();
 		_context.apply_render_state_block(rs_block);
 	}
 
 	void d3d9_prim2d::end_rendering() {
 		flush_all();
 
-		_shader->stop();
-		_shader = nullptr;
+		_shader_program->stop();
+		_shader_program = nullptr;
 		_texture = nullptr;
 
 		ASSERT(_is_rendering);
 		_is_rendering = false;
 	}
 
-	void d3d9_prim2d::set_shader(shader& shader) {
+	void d3d9_prim2d::set_shader_program(shader_program& shader_program) {
 		ASSERT(_is_rendering);
-		if (_shader != &shader) {
+		if (_shader_program != &shader_program) {
 			flush_all();
-			_shader->stop();
-			_shader = &shader;
+			_shader_program->stop();
+			_shader_program = &shader_program;
 			if (_texture != nullptr) {
-				_shader->set_texture(shader_param_names::TEXTURE, *_texture);
+				_shader_program->set_texture(shader_param_names::TEXTURE, *_texture);
 			}
 			else {
-				_shader->set_platform_texture(shader_param_names::TEXTURE, _white_texture.get());
+				_shader_program->set_platform_texture(shader_param_names::TEXTURE, _white_texture.get());
 			}
-			_shader->start();
+			_shader_program->start();
 		}
 	}
 
@@ -145,8 +145,8 @@ namespace solar {
 		ASSERT(_is_rendering);
 		if (_texture != &texture) {
 			flush_all();
-			_shader->set_texture(shader_param_names::TEXTURE, texture);
-			_shader->commit_param_changes();
+			_shader_program->set_texture(shader_param_names::TEXTURE, texture);
+			_shader_program->commit_param_changes();
 			_texture = &texture;
 		}
 	}

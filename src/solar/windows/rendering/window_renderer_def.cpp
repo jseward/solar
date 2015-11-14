@@ -8,11 +8,11 @@ namespace solar {
 	}
 
 	void window_renderer_def::read_from_archive(archive_reader& reader) {
-		read_object(reader, "brush_shader", _brush_shader);
+		read_object(reader, "brush_shader_program", _brush_shader_program);
 	}
 
 	void window_renderer_def::write_to_archive(archive_writer& writer) const {
-		write_object(writer, "brush_shader", _brush_shader);
+		write_object(writer, "brush_shader_program", _brush_shader_program);
 	}
 
 }

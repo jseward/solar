@@ -1,4 +1,4 @@
-#include "d3d9_shader.h"
+#include "d3d9_shader_program.h"
 
 #include "solar/utility/assert.h"
 #include "solar/utility/verify.h"
@@ -6,13 +6,13 @@
 #include "solar/resources/resource_system.h"
 #include "d3d9_verify.h"
 #include "d3d9_texture.h"
-#include "d3d9_shader_factory.h"
+#include "d3d9_shader_program_factory.h"
 #include "d3d9_release_com_object.h"
 #include "d3d9_string_convert.h"
 
 namespace solar {
 
-	d3d9_shader::d3d9_shader(d3d9_shader_factory& factory, const resource_address& resource_address)
+	d3d9_shader_program::d3d9_shader_program(d3d9_shader_program_factory& factory, const resource_address& resource_address)
 		: _factory(factory)
 		, _resource_address(resource_address)
 		, _embeded_code(nullptr) 
@@ -24,7 +24,7 @@ namespace solar {
 		ASSERT(!resource_address.empty());
 	}
 
-	d3d9_shader::d3d9_shader(d3d9_shader_factory& factory, const char* embeded_code)
+	d3d9_shader_program::d3d9_shader_program(d3d9_shader_program_factory& factory, const char* embeded_code)
 		: _factory(factory) 
 		, _resource_address()
 		, _embeded_code(embeded_code) 
@@ -34,21 +34,21 @@ namespace solar {
 		, _has_changes_to_commit(false) {
 	}
 
-	d3d9_shader::~d3d9_shader() {
+	d3d9_shader_program::~d3d9_shader_program() {
 		ASSERT(_ID3DXEffect == nullptr);
 		ASSERT(!_is_started);
 		ASSERT(!_is_within_pass);
 	}
 
-	const resource_address& d3d9_shader::get_resource_address() const {
+	const resource_address& d3d9_shader_program::get_resource_address() const {
 		return _resource_address;
 	}
 
-	const char* d3d9_shader::get_embeded_code() const {
+	const char* d3d9_shader_program::get_embeded_code() const {
 		return _embeded_code;
 	}
 	
-	void d3d9_shader::start_with_flags(DWORD flags) {
+	void d3d9_shader_program::start_with_flags(DWORD flags) {
 		IF_VERIFY(_ID3DXEffect != nullptr) { //D3DXCreateEffect can fail
 			ASSERT(!_is_started);
 			_is_started = true;
@@ -65,11 +65,11 @@ namespace solar {
 		}
 	}
 
-	void d3d9_shader::start() {
+	void d3d9_shader_program::start() {
 		start_with_flags(0);
 	}
 
-	void d3d9_shader::stop() {
+	void d3d9_shader_program::stop() {
 		IF_VERIFY(_ID3DXEffect != nullptr) { //D3DXCreateEffect can fail
 			ASSERT(_is_started);
 			_is_started = false;
@@ -80,30 +80,30 @@ namespace solar {
 		}
 	}
 
-	void d3d9_shader::begin_pass(unsigned int pass) {
+	void d3d9_shader_program::begin_pass(unsigned int pass) {
 		ASSERT(!_is_within_pass);
 		_is_within_pass = true;
 		D3D9_VERIFY(_ID3DXEffect->BeginPass(pass));
 	}
 
-	void d3d9_shader::end_pass() {
+	void d3d9_shader_program::end_pass() {
 		ASSERT(_is_within_pass);
 		_is_within_pass = false;
 		D3D9_VERIFY(_ID3DXEffect->EndPass());
 	}
 
-	void d3d9_shader::commit_param_changes() {
+	void d3d9_shader_program::commit_param_changes() {
 		if (_has_changes_to_commit) {
 			D3D9_VERIFY(_ID3DXEffect->CommitChanges());
 			_has_changes_to_commit = false;
 		}
 	}
 
-	void d3d9_shader::forget_param_changes() {
+	void d3d9_shader_program::forget_param_changes() {
 		_has_changes_to_commit = false;
 	}
 
-	bool d3d9_shader::set_bool(const char* name, bool value) {
+	bool d3d9_shader_program::set_bool(const char* name, bool value) {
 		D3DXHANDLE handle = get_param_to_change(name);
 		if (handle != nullptr) {
 			D3D9_VERIFY(_ID3DXEffect->SetBool(handle, value));
@@ -113,7 +113,7 @@ namespace solar {
 		return false;
 	}
 
-	bool d3d9_shader::set_float(const char* name, float value) {
+	bool d3d9_shader_program::set_float(const char* name, float value) {
 		D3DXHANDLE handle = get_param_to_change(name);
 		if (handle != nullptr) {
 			D3D9_VERIFY(_ID3DXEffect->SetFloat(handle, value));
@@ -123,7 +123,7 @@ namespace solar {
 		return false;
 	}
 
-	bool d3d9_shader::set_float_array(const char* name, const float* values, unsigned int count) {
+	bool d3d9_shader_program::set_float_array(const char* name, const float* values, unsigned int count) {
 		UNUSED_PARAMETER(count);
 		D3DXHANDLE handle = get_param_to_change(name);
 		if (handle != nullptr) {
@@ -134,7 +134,7 @@ namespace solar {
 		return false;
 	}
 
-	bool d3d9_shader::set_mat44(const char* name, const mat44& value) {
+	bool d3d9_shader_program::set_mat44(const char* name, const mat44& value) {
 		D3DXHANDLE handle = get_param_to_change(name);
 		if (handle != nullptr) {
 			D3D9_VERIFY(_ID3DXEffect->SetMatrix(handle, reinterpret_cast<const D3DXMATRIX*>(&value)));
@@ -144,7 +144,7 @@ namespace solar {
 		return false;
 	}
 
-	bool d3d9_shader::set_texture(const char* name, texture& texture) {
+	bool d3d9_shader_program::set_texture(const char* name, texture& texture) {
 		D3DXHANDLE handle = get_param_to_change(name);
 		if (handle != nullptr) {
 			D3D9_VERIFY(_ID3DXEffect->SetTexture(handle, static_cast<d3d9_texture&>(texture).request_IDirect3DTexture9()));
@@ -154,7 +154,7 @@ namespace solar {
 		return false;
 	}
 
-	bool d3d9_shader::set_platform_texture(const char* name, void* texture) {
+	bool d3d9_shader_program::set_platform_texture(const char* name, void* texture) {
 		D3DXHANDLE handle = get_param_to_change(name);
 		if (handle != nullptr) {
 			D3D9_VERIFY(_ID3DXEffect->SetTexture(handle, static_cast<IDirect3DBaseTexture9*>(texture)));
@@ -164,7 +164,7 @@ namespace solar {
 		return false;
 	}
 
-	void d3d9_shader::map_technique_handles() {
+	void d3d9_shader_program::map_technique_handles() {
 		ASSERT(_technique_handles.empty());
 		for (UINT i = 0; i < _desc.Techniques; ++i) {
 			D3DXHANDLE handle = _ID3DXEffect->GetTechnique(i);
@@ -176,7 +176,7 @@ namespace solar {
 		}
 	}
 
-	void d3d9_shader::map_param_handles() {
+	void d3d9_shader_program::map_param_handles() {
 		ASSERT(_param_handles.empty());
 		for (UINT i = 0; i < _desc.Parameters; ++i) {
 			D3DXHANDLE handle = _ID3DXEffect->GetParameter(NULL, i);
@@ -188,7 +188,7 @@ namespace solar {
 		}
 	}
 
-	D3DXHANDLE d3d9_shader::get_param_to_change(const char* name) {
+	D3DXHANDLE d3d9_shader_program::get_param_to_change(const char* name) {
 		auto iter = _param_handles.find(name);
 		if (iter != _param_handles.end()) {
 			return iter->second;
@@ -196,7 +196,7 @@ namespace solar {
 		return nullptr;
 	}
 
-	void d3d9_shader::on_device_created(IDirect3DDevice9* device) {
+	void d3d9_shader_program::on_device_created(IDirect3DDevice9* device) {
 		ASSERT(_ID3DXEffect == nullptr);
 
 		if (_embeded_code != nullptr) {
@@ -243,21 +243,21 @@ namespace solar {
 		map_param_handles();
 	}
 
-	void d3d9_shader::on_device_released(IDirect3DDevice9* device) {
+	void d3d9_shader_program::on_device_released(IDirect3DDevice9* device) {
 		UNUSED_PARAMETER(device);
 		_technique_handles.clear();
 		_param_handles.clear();
 		d3d9_release_com_object(_ID3DXEffect);
 	}
 
-	void d3d9_shader::on_device_reset(IDirect3DDevice9* device) {
+	void d3d9_shader_program::on_device_reset(IDirect3DDevice9* device) {
 		UNUSED_PARAMETER(device);
 		if (_ID3DXEffect != nullptr) {
 			_ID3DXEffect->OnResetDevice();
 		}
 	}
 
-	void d3d9_shader::on_device_lost(IDirect3DDevice9* device) {
+	void d3d9_shader_program::on_device_lost(IDirect3DDevice9* device) {
 		UNUSED_PARAMETER(device);
 		if (_ID3DXEffect != nullptr) {
 			_ID3DXEffect->OnLostDevice();

@@ -1,7 +1,7 @@
 #include "win32_bgfx_engine.h"
 
 #include "solar/utility/unused_parameter.h"
-#include "solar/rendering/shaders/shader_id.h"
+#include "solar/rendering/shaders/shader_program_id.h"
 #include "solar/rendering/textures/texture_id.h"
 #include "solar/rendering/meshes/mesh_id.h"
 #include "solar/rendering/cursors/cursor_icon_id.h"
@@ -16,21 +16,21 @@ namespace solar {
 		, _bgfx_render_device(_bgfx_context)
 		, _bgfx_cursor()
 		, _bgfx_texture_factory(_resource_system)
-		, _bgfx_shader_factory(_resource_system)
+		, _bgfx_shader_program_factory(_resource_system)
 		, _bgfx_mesh_factory(_resource_system)
 		, _bgfx_cursor_icon_factory(_bgfx_cursor, _resource_system)
 		, _bgfx_prim2d()
 		, _bgfx_prim2d_lines() 
 		, _setting_registry(_win32_file_system, _file_change_watcher) {
 
-		shader_id::set_factory(&_bgfx_shader_factory);
+		shader_program_id::set_factory(&_bgfx_shader_program_factory);
 		texture_id::set_factory(&_bgfx_texture_factory);
 		mesh_id::set_factory(&_bgfx_mesh_factory);
 		cursor_icon_id::set_factory(&_bgfx_cursor_icon_factory);
 	}
 
 	win32_bgfx_engine::~win32_bgfx_engine() {
-		shader_id::set_factory(nullptr);
+		shader_program_id::set_factory(nullptr);
 		texture_id::set_factory(nullptr);
 		mesh_id::set_factory(nullptr);
 		cursor_icon_id::set_factory(nullptr);
@@ -78,7 +78,7 @@ namespace solar {
 			return false;
 		}
 
-		_bgfx_shader_factory.setup();
+		_bgfx_shader_program_factory.setup();
 		_bgfx_texture_factory.setup();
 		_bgfx_mesh_factory.setup();
 		_bgfx_cursor_icon_factory.setup();
@@ -95,7 +95,8 @@ namespace solar {
 		_bgfx_cursor_icon_factory.teardown();
 		_bgfx_mesh_factory.teardown();
 		_bgfx_texture_factory.teardown();
-		_bgfx_shader_factory.teardown();
+		_bgfx_shader_program_factory.teardown();
+
 		_bgfx_context.teardown();
 
 		_setting_registry.teardown();
