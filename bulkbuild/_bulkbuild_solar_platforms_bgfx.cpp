@@ -10,6 +10,7 @@
 #include "solar_platforms/bgfx/bgfx_texture.cpp"
 #include "solar_platforms/bgfx/bgfx_texture_factory.cpp"
 #include "solar_platforms/bgfx/bgfx_render_device.cpp"
+#include "solar_platforms/bgfx/bgfx_render_state_block.cpp"
 #include "solar_platforms/bgfx/bgfx_user_settings.cpp"
 #include "solar_platforms/bgfx/bgfx_window_type.cpp"
 #include "solar_platforms/bgfx/bgfx_callback.cpp"

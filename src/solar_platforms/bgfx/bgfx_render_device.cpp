@@ -4,6 +4,7 @@
 #include "solar/utility/assert.h"
 #include "solar/containers/container_helpers.h"
 #include "solar/utility/unused_parameter.h"
+#include "bgfx_render_state_block.h"
 
 namespace solar {
 
@@ -72,14 +73,11 @@ namespace solar {
 	}
 
 	render_state_block* bgfx_render_device::create_render_state_block(const render_state_block_def& def) {
-		ASSERT(false);
-		UNUSED_PARAMETER(def);
-		return nullptr;
+		return new bgfx_render_state_block(def);
 	}
 
 	void bgfx_render_device::release_render_state_block(render_state_block* block) {
-		ASSERT(false);
-		UNUSED_PARAMETER(block);
+		delete block;
 	}
 
 }
