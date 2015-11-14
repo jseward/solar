@@ -33,7 +33,6 @@ namespace solar {
 		virtual size get_backbuffer_size() const override;
 		virtual render_state_block* create_render_state_block(const render_state_block_def& def) override;
 		virtual void release_render_state_block(render_state_block* block) override;
-		virtual void apply_render_state_block(render_state_block* block) override;
 
 	private:
 		virtual void on_device_created(IDirect3DDevice9* device) override;

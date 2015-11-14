@@ -82,9 +82,4 @@ namespace solar {
 		UNUSED_PARAMETER(block);
 	}
 
-	void bgfx_render_device::apply_render_state_block(render_state_block* block) {
-		ASSERT(false);
-		UNUSED_PARAMETER(block);
-	}
-
 }

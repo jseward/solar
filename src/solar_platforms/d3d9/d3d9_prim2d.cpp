@@ -111,7 +111,7 @@ namespace solar {
 		_shader_program = &shader_program;
 		_shader_program->set_platform_texture(shader_param_names::TEXTURE, _white_texture.get());
 		_shader_program->start();
-		_context.apply_render_state_block(rs_block);
+		rs_block->commit();
 	}
 
 	void d3d9_prim2d::end_rendering() {

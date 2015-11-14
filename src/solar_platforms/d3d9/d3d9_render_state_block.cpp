@@ -1,14 +1,17 @@
 #include "d3d9_render_state_block.h"
 
 #include "solar/utility/assert.h"
+#include "solar/utility/verify.h"
 #include "solar/math/math_helpers.h"
+#include "d3d9_context.h"
 #include "d3d9_render_state_defines.h"
 #include "d3d9_verify.h"
 
 namespace solar {
 
-	d3d9_render_state_block::d3d9_render_state_block(const render_state_block_def& def) 
-		: _def(def)
+	d3d9_render_state_block::d3d9_render_state_block(d3d9_context& context, const render_state_block_def& def) 
+		: _context(context)
+		, _def(def)
 		, _flags(0) {
 
 		switch (def._color_write) {
@@ -68,6 +71,9 @@ namespace solar {
 		}
 	}
 
+	d3d9_render_state_block::~d3d9_render_state_block() {
+	}
+
 	uint64_t d3d9_render_state_block::blend_type_to_state_define(render_state_blend_type bt) {
 		switch (bt) {
 			case render_state_blend_type::ZERO: return D3D9_STATE_BLEND_ZERO;
@@ -85,82 +91,85 @@ namespace solar {
 		return 0;
 	}
 
-	d3d9_render_state_block::apply_result d3d9_render_state_block::apply(IDirect3DDevice9* device, uint64_t device_flags) {
-		apply_result result;
-		result._new_flags = _flags;
+	void d3d9_render_state_block::commit() {
+		auto device = _context.get_device();
+		IF_VERIFY(device != nullptr) {
 		
-		auto changed_flags = device_flags ^ _flags;
-		if (changed_flags != 0) {
+			auto old_flags = _context.get_set_current_render_state_flags(_flags);
 
-			if (D3D9_STATE_CULL_MASK & changed_flags) {
-				uint32_t cull = (_flags & D3D9_STATE_CULL_MASK) >> D3D9_STATE_CULL_SHIFT;
-				D3D9_VERIFY(device->SetRenderState(D3DRS_CULLMODE, get_cull_mode(cull)));
-			}
+			auto changed_flags = old_flags ^ _flags;
+			if (changed_flags != 0) {
 
-			if (D3D9_STATE_DEPTH_WRITE & changed_flags) {
-				D3D9_VERIFY(device->SetRenderState(D3DRS_ZWRITEENABLE, !!(D3D9_STATE_DEPTH_WRITE & _flags)));
-			}
-
-			if (D3D9_STATE_DEPTH_TEST_MASK & changed_flags) {
-				uint32_t func = (_flags & D3D9_STATE_DEPTH_TEST_MASK) >> D3D9_STATE_DEPTH_TEST_SHIFT;
-				D3D9_VERIFY(device->SetRenderState(D3DRS_ZENABLE, 0 != func));
-				if (0 != func) {
-					D3D9_VERIFY(device->SetRenderState(D3DRS_ZFUNC, get_compare_func(func)));
+				if (D3D9_STATE_CULL_MASK & changed_flags) {
+					uint32_t cull = (_flags & D3D9_STATE_CULL_MASK) >> D3D9_STATE_CULL_SHIFT;
+					D3D9_VERIFY(device->SetRenderState(D3DRS_CULLMODE, get_cull_mode(cull)));
 				}
-			}
 
-			if (D3D9_STATE_ALPHA_REF_MASK & changed_flags) {
-				uint32_t ref = (_flags & D3D9_STATE_ALPHA_REF_MASK) >> D3D9_STATE_ALPHA_REF_SHIFT;
-				result._new_alpha_ref = static_cast<float>(ref) / 255.f;
-			}
+				if (D3D9_STATE_DEPTH_WRITE & changed_flags) {
+					D3D9_VERIFY(device->SetRenderState(D3DRS_ZWRITEENABLE, !!(D3D9_STATE_DEPTH_WRITE & _flags)));
+				}
 
-			if (D3D9_STATE_MSAA & changed_flags) {
-				D3D9_VERIFY(device->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, (_flags & D3D9_STATE_MSAA) == D3D9_STATE_MSAA));
-			}
-
-			if ((D3D9_STATE_ALPHA_WRITE | D3D9_STATE_RGB_WRITE) & changed_flags) {
-				uint32_t write_enable = (_flags & D3D9_STATE_ALPHA_WRITE) ? D3DCOLORWRITEENABLE_ALPHA : 0;
-				write_enable |= (_flags & D3D9_STATE_RGB_WRITE) ? D3DCOLORWRITEENABLE_RED | D3DCOLORWRITEENABLE_GREEN | D3DCOLORWRITEENABLE_BLUE : 0;
-				D3D9_VERIFY(device->SetRenderState(D3DRS_COLORWRITEENABLE, write_enable));
-			}
-
-			if ((D3D9_STATE_BLEND_MASK | D3D9_STATE_BLEND_EQUATION_MASK) & changed_flags) {
-				
-				bool enabled = !!(D3D9_STATE_BLEND_MASK & _flags);
-				D3D9_VERIFY(device->SetRenderState(D3DRS_ALPHABLENDENABLE, enabled));
-
-				if (enabled) {
-					const uint32_t blend = static_cast<uint32_t>((_flags & D3D9_STATE_BLEND_MASK) >> D3D9_STATE_BLEND_SHIFT);
-					const uint32_t equation = static_cast<uint32_t>((_flags & D3D9_STATE_BLEND_EQUATION_MASK) >> D3D9_STATE_BLEND_EQUATION_SHIFT);
-
-					const uint32_t src_rgb = (blend) & 0xf;
-					const uint32_t dst_rgb = (blend >> 4) & 0xf;
-					const uint32_t src_a = (blend >> 8) & 0xf;
-					const uint32_t dst_a = (blend >> 12) & 0xf;
-					const uint32_t equ_rgb = (equation) & 0x7;
-					const uint32_t equ_a = (equation >> 3) & 0x7;
-
-					D3D9_VERIFY(device->SetRenderState(D3DRS_SRCBLEND, get_blend(src_rgb)));
-					D3D9_VERIFY(device->SetRenderState(D3DRS_DESTBLEND, get_blend(dst_rgb)));
-					D3D9_VERIFY(device->SetRenderState(D3DRS_BLENDOP, get_blend_op(equ_rgb)));
-
-					const bool separate = 
-						(src_rgb != src_a) || 
-						(dst_rgb != dst_a) || 
-						(equ_rgb != equ_a);
-
-					D3D9_VERIFY(device->SetRenderState(D3DRS_SEPARATEALPHABLENDENABLE, separate));
-					if (separate) {
-						D3D9_VERIFY(device->SetRenderState(D3DRS_SRCBLENDALPHA, get_blend(src_a)));
-						D3D9_VERIFY(device->SetRenderState(D3DRS_DESTBLENDALPHA, get_blend(dst_a)));
-						D3D9_VERIFY(device->SetRenderState(D3DRS_BLENDOPALPHA, get_blend_op(equ_a)));
+				if (D3D9_STATE_DEPTH_TEST_MASK & changed_flags) {
+					uint32_t func = (_flags & D3D9_STATE_DEPTH_TEST_MASK) >> D3D9_STATE_DEPTH_TEST_SHIFT;
+					D3D9_VERIFY(device->SetRenderState(D3DRS_ZENABLE, 0 != func));
+					if (0 != func) {
+						D3D9_VERIFY(device->SetRenderState(D3DRS_ZFUNC, get_compare_func(func)));
 					}
 				}
+
+				if (D3D9_STATE_ALPHA_REF_MASK & changed_flags) {
+					//uint32_t ref = (_flags & D3D9_STATE_ALPHA_REF_MASK) >> D3D9_STATE_ALPHA_REF_SHIFT;
+					//float new_alpha_ref = static_cast<float>(ref) / 255.f;
+					//todo - something, set predefined uniform simular to bgfx?
+					ASSERT(false);
+				}
+
+				if (D3D9_STATE_MSAA & changed_flags) {
+					D3D9_VERIFY(device->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, (_flags & D3D9_STATE_MSAA) == D3D9_STATE_MSAA));
+				}
+
+				if ((D3D9_STATE_ALPHA_WRITE | D3D9_STATE_RGB_WRITE) & changed_flags) {
+					uint32_t write_enable = (_flags & D3D9_STATE_ALPHA_WRITE) ? D3DCOLORWRITEENABLE_ALPHA : 0;
+					write_enable |= (_flags & D3D9_STATE_RGB_WRITE) ? D3DCOLORWRITEENABLE_RED | D3DCOLORWRITEENABLE_GREEN | D3DCOLORWRITEENABLE_BLUE : 0;
+					D3D9_VERIFY(device->SetRenderState(D3DRS_COLORWRITEENABLE, write_enable));
+				}
+
+				if ((D3D9_STATE_BLEND_MASK | D3D9_STATE_BLEND_EQUATION_MASK) & changed_flags) {
+
+					bool enabled = !!(D3D9_STATE_BLEND_MASK & _flags);
+					D3D9_VERIFY(device->SetRenderState(D3DRS_ALPHABLENDENABLE, enabled));
+
+					if (enabled) {
+						const uint32_t blend = static_cast<uint32_t>((_flags & D3D9_STATE_BLEND_MASK) >> D3D9_STATE_BLEND_SHIFT);
+						const uint32_t equation = static_cast<uint32_t>((_flags & D3D9_STATE_BLEND_EQUATION_MASK) >> D3D9_STATE_BLEND_EQUATION_SHIFT);
+
+						const uint32_t src_rgb = (blend)& 0xf;
+						const uint32_t dst_rgb = (blend >> 4) & 0xf;
+						const uint32_t src_a = (blend >> 8) & 0xf;
+						const uint32_t dst_a = (blend >> 12) & 0xf;
+						const uint32_t equ_rgb = (equation)& 0x7;
+						const uint32_t equ_a = (equation >> 3) & 0x7;
+
+						D3D9_VERIFY(device->SetRenderState(D3DRS_SRCBLEND, get_blend(src_rgb)));
+						D3D9_VERIFY(device->SetRenderState(D3DRS_DESTBLEND, get_blend(dst_rgb)));
+						D3D9_VERIFY(device->SetRenderState(D3DRS_BLENDOP, get_blend_op(equ_rgb)));
+
+						const bool separate =
+							(src_rgb != src_a) ||
+							(dst_rgb != dst_a) ||
+							(equ_rgb != equ_a);
+
+						D3D9_VERIFY(device->SetRenderState(D3DRS_SEPARATEALPHABLENDENABLE, separate));
+						if (separate) {
+							D3D9_VERIFY(device->SetRenderState(D3DRS_SRCBLENDALPHA, get_blend(src_a)));
+							D3D9_VERIFY(device->SetRenderState(D3DRS_DESTBLENDALPHA, get_blend(dst_a)));
+							D3D9_VERIFY(device->SetRenderState(D3DRS_BLENDOPALPHA, get_blend_op(equ_a)));
+						}
+					}
+				}
+
 			}
-
 		}
-
-		return result;
 	}
 
 	D3DCULL d3d9_render_state_block::get_cull_mode(uint32_t cull) {

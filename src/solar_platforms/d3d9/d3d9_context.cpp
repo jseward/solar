@@ -611,21 +611,17 @@ namespace solar {
 	}
 
 	render_state_block* d3d9_context::create_render_state_block(const render_state_block_def& def) {
-		return new d3d9_render_state_block(def);
+		return new d3d9_render_state_block(*this, def);
 	}
 
 	void d3d9_context::release_render_state_block(render_state_block* block) {
 		delete block;
 	}
 
-	void d3d9_context::apply_render_state_block(render_state_block* block) {
-		auto d3d9_block = static_cast<d3d9_render_state_block*>(block);
-		auto result = d3d9_block->apply(_IDirect3DDevice9, _current_render_state_flags);
-		_current_render_state_flags = result._new_flags;
-		if (result._new_alpha_ref.has_value()) {
-			//todo - something, set predefined uniform simular to bgfx?
-			ASSERT(false);
-		}
+	uint64_t d3d9_context::get_set_current_render_state_flags(uint64_t new_flags) {
+		auto old_flags = _current_render_state_flags;
+		_current_render_state_flags = new_flags;
+		return old_flags;
 	}
 
 }

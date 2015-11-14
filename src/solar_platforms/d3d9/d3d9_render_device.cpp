@@ -60,10 +60,6 @@ namespace solar {
 		_context.release_render_state_block(block);
 	}
 
-	void d3d9_render_device::apply_render_state_block(render_state_block* block) {
-		_context.apply_render_state_block(block);
-	}
-
 	viewport d3d9_render_device::set_viewport(const viewport& new_viewport) {
 		ASSERT(new_viewport._min_z >= 0.f);
 		ASSERT(new_viewport._max_z <= 1.f);

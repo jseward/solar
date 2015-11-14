@@ -54,7 +54,8 @@ namespace solar {
 
 		render_state_block* create_render_state_block(const render_state_block_def& def);
 		void release_render_state_block(render_state_block* block);
-		void apply_render_state_block(render_state_block* block);
+
+		uint64_t get_set_current_render_state_flags(uint64_t new_flags);
 
 		IDirect3DDevice9* get_device();
 

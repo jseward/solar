@@ -9,22 +9,19 @@
 
 namespace solar {
 
-	class d3d9_render_state_block : public render_state_block {
-	public:
-		class apply_result {
-		public:
-			uint64_t _new_flags;
-			optional<float> _new_alpha_ref;
-		};
+	class d3d9_context;
 
+	class d3d9_render_state_block : public render_state_block {
 	private:
+		d3d9_context& _context;
 		const render_state_block_def _def;
 		uint64_t _flags;
 
 	public:
-		d3d9_render_state_block(const render_state_block_def& def);
+		d3d9_render_state_block(d3d9_context& context, const render_state_block_def& def);
+		virtual ~d3d9_render_state_block();
 
-		apply_result apply(IDirect3DDevice9* device, uint64_t device_flags);
+		virtual void commit() override;
 
 	private:
 		static uint64_t blend_type_to_state_define(render_state_blend_type bt);
