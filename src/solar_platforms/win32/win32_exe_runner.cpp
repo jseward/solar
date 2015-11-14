@@ -62,16 +62,19 @@ namespace solar {
 			std::string read() {
 				close_write();
 
+				size_t buffer_size = 2048;
+				auto buffer = std::unique_ptr<char[]>(new char[buffer_size]);
+
 				std::string s;
 				for (;;) {
-					char buffer[1024];
 					DWORD read_count = 0;
-					BOOL read_success = ::ReadFile(_read, buffer, sizeof(buffer) / sizeof(char), &read_count, 0);
+					BOOL read_success = ::ReadFile(_read, buffer.get(), buffer_size, &read_count, 0);
 					if (!read_success || read_count == 0) {
 						break;
 					}
-					buffer[read_count] = '\0';
-					s.append(buffer);
+					//std::min in case full buffer_size has been read in!
+					buffer.get()[std::min(buffer_size - 1, static_cast<size_t>(read_count))] = '\0';
+					s.append(buffer.get());
 				}
 				return s;
 			}
