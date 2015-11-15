@@ -4,6 +4,7 @@
 #include "solar/utility/type_convert.h"
 #include "solar/resources/resource_system.h"
 #include "solar/rendering/primatives/prim2d.h"
+#include "solar/rendering/shaders/shader_program.h"
 #include "solar/strings/string_marshal.h"
 #include "solar/math/rectf.h"
 
@@ -20,21 +21,17 @@ namespace solar {
 		}
 	}
 
-	font_renderer::font_renderer(render_device& render_device, resource_system& resource_system, prim2d& prim2d)
+	font_renderer::font_renderer(render_device& render_device, resource_system& resource_system, prim2d& prim2d, font_renderer_shader_program_provider& shader_program_provider)
 		: _resource_system(resource_system)
 		, _prim2d(prim2d) 
-		, _render_device(render_device) {
+		, _render_device(render_device) 
+		, _shader_program_provider(shader_program_provider) {
 	}
 
 	font_renderer::~font_renderer() {
 	}
 
 	void font_renderer::setup() {
-		auto address = _resource_system.resolve_address("font_renderer_def", "fonts", ".font_renderer", "_font_renderer", "font_renderer::setup()");
-		if (!address.empty()) {
-			_resource_system.read_object_as_json(_def, address);
-		}
-
 		_render_state_block = make_render_state_block_ptr(_render_device, render_state_block_def()
 			.set_depth_write(render_state_depth_write::DISABLED)
 			.set_depth_compare_func(render_state_compare_func::NONE)
@@ -46,7 +43,7 @@ namespace solar {
 	}
 
 	void font_renderer::begin_rendering(const rect& viewport_area) {
-		_prim2d.begin_rendering(viewport_area, _def._normal_shader_program.get(), _render_state_block.get());
+		_prim2d.begin_rendering(viewport_area, _shader_program_provider.get_normal_shader_program(), _render_state_block.get());
 	}
 
 	void font_renderer::end_rendering() {
@@ -120,7 +117,7 @@ namespace solar {
 	}
 
 	void font_renderer::set_dropshadow_shader(const font_render_params& params) {
-		auto& program = _def._dropshadow_shader_program.get();
+		auto& program = _shader_program_provider.get_dropshadow_shader_program();
 
 		auto pixel_size = params._font.get_page_texture_pixel_size();
 		program.set_float(font_renderer_impl::shader_param_names::TEXTURE_PIXEL_WIDTH, pixel_size._width);
@@ -134,7 +131,7 @@ namespace solar {
 	}
 
 	void font_renderer::set_normal_shader(const font_render_params& params) {
-		auto& program = _def._normal_shader_program.get();
+		auto& program = _shader_program_provider.get_normal_shader_program();
 
 		program.set_float(font_renderer_impl::shader_param_names::FONT_SCALE, params._font.get_scale(params._font_size));
 		program.commit_param_changes();

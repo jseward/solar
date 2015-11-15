@@ -6,8 +6,9 @@
 
 namespace solar {
 
-	bgfx_shader_program_factory::bgfx_shader_program_factory(resource_system& resource_system)
-		: _resource_system(resource_system)
+	bgfx_shader_program_factory::bgfx_shader_program_factory(bgfx_context& context, resource_system& resource_system)
+		: _context(context)
+		, _resource_system(resource_system)
 		, _is_setup(false) {
 	}
 
@@ -52,6 +53,10 @@ namespace solar {
 
 	const resource_factory_caching_context& bgfx_shader_program_factory::get_shader_program_caching_context() const {
 		return _shader_program_caching_context;
+	}
+
+	bgfx_context& bgfx_shader_program_factory::get_bgfx_context() {
+		return _context;
 	}
 
 	resource_system& bgfx_shader_program_factory::get_resource_system() {

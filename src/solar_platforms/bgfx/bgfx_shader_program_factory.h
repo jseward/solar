@@ -17,13 +17,14 @@ namespace solar {
 		, public file_change_handler {
 
 	private:
+		bgfx_context& _context;
 		resource_system& _resource_system;
 		bool _is_setup;
 		resource_factory_caching_context _shader_program_caching_context;
 		std::unordered_map<std::string, std::unique_ptr<bgfx_shader_program>> _shader_programs;
 
 	public:
-		bgfx_shader_program_factory(resource_system& resource_system);
+		bgfx_shader_program_factory(bgfx_context& context, resource_system& resource_system);
 		virtual ~bgfx_shader_program_factory();
 
 		void setup();
@@ -32,6 +33,7 @@ namespace solar {
 		virtual shader_program* get_shader_program(const std::string& id, const std::string& id_source_description) override;
 		virtual const resource_factory_caching_context& get_shader_program_caching_context() const override;
 
+		bgfx_context& get_bgfx_context();
 		resource_system& get_resource_system();
 
 	private:

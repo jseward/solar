@@ -16,6 +16,7 @@ namespace solar {
 		, _d3d9_cursor(_d3d9_context)
 		, _d3d9_texture_factory(_d3d9_context, _resource_system)
 		, _d3d9_shader_program_factory(_d3d9_context, _resource_system)
+		, _d3d9_font_renderer_shader_program_provider(_d3d9_shader_program_factory)
 		, _d3d9_mesh_factory(_d3d9_context, _resource_system)
 		, _d3d9_mesh_renderer(_d3d9_context)
 		, _d3d9_cursor_icon_factory(_d3d9_context, _d3d9_cursor, _resource_system)
@@ -86,6 +87,7 @@ namespace solar {
 
 		_d3d9_render_device.setup();
 		_d3d9_shader_program_factory.setup();
+		_d3d9_font_renderer_shader_program_provider.setup();
 		_d3d9_texture_factory.setup();
 		_d3d9_mesh_factory.setup();
 		_d3d9_mesh_renderer.setup();
@@ -103,6 +105,7 @@ namespace solar {
 		_d3d9_mesh_renderer.teardown();
 		_d3d9_mesh_factory.teardown();
 		_d3d9_texture_factory.teardown();
+		_d3d9_font_renderer_shader_program_provider.teardown();
 		_d3d9_shader_program_factory.teardown();
 		_d3d9_render_device.teardown();
 		_d3d9_context.teardown();

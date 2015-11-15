@@ -5,51 +5,11 @@
 #include "solar/rendering/shaders/shader_program.h"
 #include "solar/colors/colors.h"
 #include "d3d9_shader_program_factory.h"
+#include "./shaders/prim2d_embedded_code.h"
 
 namespace solar {
 
 	const char* d3d9_prim2d::shader_param_names::TEXTURE = "diffuse_texture";
-
-	const char* d3d9_prim2d::DEFAULT_SHADER_PROGRAM_STRING =
-		"texture diffuse_texture;\r\n"
-		"sampler diffuse_sampler = sampler_state{\r\n"
-		"	Texture = <diffuse_texture>;\r\n"
-		"	MipFilter = LINEAR;\r\n"
-		"	MinFilter = LINEAR;\r\n"
-		"	MagFilter = LINEAR;\r\n"
-		"	AddressU = CLAMP;\r\n"
-		"	AddressV = CLAMP;\r\n"
-		"	SRGBTexture = FALSE;\r\n"
-		"};\r\n"
-		"\r\n"
-		"struct vs_input {\r\n"
-		"	float4 position : POSITION;\r\n"
-		"	float4 color : COLOR0;\r\n"
-		"	float2 tex_coord : TEXCOORD0;\r\n"
-		"};\r\n"
-		"\r\n"
-		"struct ps_input {\r\n"
-		"	float4 position : POSITION;\r\n"
-		"	float4 color : COLOR0;\r\n"
-		"	float2 tex_coord : TEXCOORD0;\r\n"
-		"};\r\n"
-		"\r\n"
-		"ps_input vs_render(vs_input input) {\r\n"
-		"	ps_input output;\r\n"
-		"	output.position = input.position;\r\n"
-		"	output.color = input.color;\r\n"
-		"	output.tex_coord = input.tex_coord;\r\n"
-		"	return output;\r\n"
-		"}\r\n"
-		"\r\n"
-		"float4 ps_render(ps_input input) : COLOR{\r\n"
-		"	return tex2D(diffuse_sampler, input.tex_coord) * input.color;\r\n"
-		"}\r\n"
-		"\r\n"
-		"technique render{ pass pass_0{\r\n"
-		"	VertexShader = compile vs_2_0 vs_render();\r\n"
-		"	PixelShader = compile ps_2_0 ps_render();\r\n"
-		"}}\r\n";
 
 	d3d9_prim2d::d3d9_prim2d(d3d9_context& context, d3d9_shader_program_factory& shader_program_factory)
 		: _context(context)
@@ -76,7 +36,7 @@ namespace solar {
 		_buffered_tris.reserve(params.get_max_buffered_tri_count());
 
 		ASSERT(_default_shader_program == nullptr);
-		_default_shader_program = _shader_program_factory.create_embeded_code_shader_program(DEFAULT_SHADER_PROGRAM_STRING);
+		_default_shader_program = _shader_program_factory.create_embeded_code_shader_program(PRIM2D_EMBEDDED_CODE);
 
 		_default_rs_block = _context.create_render_state_block(render_state_block_def()
 			.set_depth_write(render_state_depth_write::DISABLED)

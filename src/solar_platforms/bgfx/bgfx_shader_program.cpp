@@ -4,6 +4,7 @@
 #include "solar/utility/unused_parameter.h"
 #include "solar/strings/string_build.h"
 #include "solar/resources/resource_system.h"
+#include "bgfx_context.h"
 #include "bgfx_shader_program_factory.h"
 
 namespace solar {
@@ -90,6 +91,7 @@ namespace solar {
 	}
 
 	void bgfx_shader_program::stop() {
+		bgfx::submit(_factory.get_bgfx_context().get_current_view_id(), _program_handle);
 	}
 
 	void bgfx_shader_program::commit_param_changes() {

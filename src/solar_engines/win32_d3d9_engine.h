@@ -20,6 +20,7 @@
 #include "solar_platforms/d3d9/d3d9_mesh_factory.h"
 #include "solar_platforms/d3d9/d3d9_mesh_renderer.h"
 #include "solar_platforms/d3d9/d3d9_cursor_icon_factory.h"
+#include "solar_platforms/d3d9/d3d9_font_renderer_shader_program_provider.h"
 #include "win32_d3d9_engine_settings.h"
 
 namespace solar {
@@ -45,6 +46,7 @@ namespace solar {
 		d3d9_cursor _d3d9_cursor;
 		d3d9_texture_factory _d3d9_texture_factory;
 		d3d9_shader_program_factory _d3d9_shader_program_factory;
+		d3d9_font_renderer_shader_program_provider _d3d9_font_renderer_shader_program_provider;
 		d3d9_mesh_factory _d3d9_mesh_factory;
 		d3d9_mesh_renderer _d3d9_mesh_renderer;
 		d3d9_cursor_icon_factory _d3d9_cursor_icon_factory;

@@ -24,6 +24,7 @@ namespace solar {
 		bgfx_user_settings _user_settings;
 		size _backbuffer_size;
 		std::vector<backbuffer_size_changed_callback> _backbuffer_size_changed_callbacks;
+		uint8_t _current_view_id;
 
 	public:
 		win32_bgfx_context();
@@ -38,6 +39,7 @@ namespace solar {
 		virtual void toggle_virtual_fullscreen() override;
 		virtual size get_backbuffer_size() const override;
 		virtual void attempt_render_scene(render_scene_functor& func) override;
+		virtual uint8_t get_current_view_id() const override;
 
 	private:
 		size get_desktop_size() const;

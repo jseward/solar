@@ -2,8 +2,8 @@
 
 #include "font.h"
 #include "font_render_params.h"
-#include "font_renderer_def.h"
 #include "font_renderer_line_builder.h"
+#include "font_renderer_shader_program_provider.h"
 #include "solar/math/rect.h"
 #include "solar/colors/color.h"
 #include "solar/rendering/render_states/render_state_block_ptr.h"
@@ -18,13 +18,13 @@ namespace solar {
 		resource_system& _resource_system;
 		prim2d& _prim2d;
 		render_device& _render_device;
+		font_renderer_shader_program_provider& _shader_program_provider;
 
-		font_renderer_def _def;
 		render_state_block_ptr _render_state_block;
 		font_renderer_line_builder _line_builder;
 
 	public:
-		font_renderer(render_device& render_device, resource_system& resource_system, prim2d& prim2d);
+		font_renderer(render_device& render_device, resource_system& resource_system, prim2d& prim2d, font_renderer_shader_program_provider& shader_program_provider);
 		font_renderer(const font_renderer&) = delete;
 		font_renderer& operator=(const font_renderer&) = delete;
 		~font_renderer();

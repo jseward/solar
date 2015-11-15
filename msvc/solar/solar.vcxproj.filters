@@ -190,6 +190,12 @@
     <Filter Include="src\solar\rendering\render_states">
       <UniqueIdentifier>{d5d895ea-19de-4fe2-bf9d-d138af23d738}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\solar_platforms\bgfx\shaders">
+      <UniqueIdentifier>{8d3f9cce-b1a7-4533-8825-6761e3232e8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\solar_platforms\d3d9\shaders">
+      <UniqueIdentifier>{2a82c5fa-ab24-4276-8daf-6a60bd8bd8f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\solar\utility\assert.h">
@@ -993,9 +999,6 @@
     <ClInclude Include="..\..\src\solar\rendering\fonts\font_alignment.h">
       <Filter>src\solar\rendering\fonts</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\fonts\font_renderer_def.h">
-      <Filter>src\solar\rendering\fonts</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\math\pointf.h">
       <Filter>src\solar\math</Filter>
     </ClInclude>
@@ -1638,6 +1641,21 @@
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_type.h">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\shaders\prim2d_embedded_code.h">
+      <Filter>src\solar_platforms\d3d9\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\rendering\fonts\font_renderer_shader_program_provider.h">
+      <Filter>src\solar\rendering\fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_font_renderer_shader_program_provider.h">
+      <Filter>src\solar_platforms\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\shaders\font_dropshadow_embedded_code.h">
+      <Filter>src\solar_platforms\d3d9\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\shaders\font_normal_embedded_code.h">
+      <Filter>src\solar_platforms\d3d9\shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1983,9 +2001,6 @@
       <Filter>src\solar\rendering\fonts</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar\rendering\fonts\font_renderer.cpp">
-      <Filter>src\solar\rendering\fonts</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\rendering\fonts\font_renderer_def.cpp">
       <Filter>src\solar\rendering\fonts</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar\rendering\fonts\font_alignment.cpp">
@@ -2465,6 +2480,21 @@
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program_def.cpp">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\prim2d_embedded_code.cpp">
+      <Filter>src\solar_platforms\d3d9\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\rendering\fonts\font_renderer_shader_program_provider.cpp">
+      <Filter>src\solar\rendering\fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_font_renderer_shader_program_provider.cpp">
+      <Filter>src\solar_platforms\d3d9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\font_normal_embedded_code.cpp">
+      <Filter>src\solar_platforms\d3d9\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\font_dropshadow_embedded_code.cpp">
+      <Filter>src\solar_platforms\d3d9\shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\readme.md" />
@@ -2495,6 +2525,12 @@
     <None Include="..\..\readme.html" />
     <None Include="..\..\src\solar\windows\readme.md">
       <Filter>src\solar\windows</Filter>
+    </None>
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.vs_sc">
+      <Filter>src\solar_platforms\bgfx\shaders</Filter>
+    </None>
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.fs_sc">
+      <Filter>src\solar_platforms\bgfx\shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

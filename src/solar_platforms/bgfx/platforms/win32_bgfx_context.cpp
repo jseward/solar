@@ -16,7 +16,8 @@ namespace solar {
 		, _is_window_active(false)
 		, _is_window_minimized(false)
 		, _is_window_in_size_move(false) 
-		, _is_window_in_menu_loop(false) {
+		, _is_window_in_menu_loop(false) 
+		, _current_view_id(0) {
 	}
 
 	win32_bgfx_context::~win32_bgfx_context() {
@@ -114,6 +115,10 @@ namespace solar {
 		if (!is_paused) {
 			func.render_scene();
 		}
+	}
+
+	uint8_t win32_bgfx_context::get_current_view_id() const {
+		return _current_view_id;
 	}
 
 	void win32_bgfx_context::reset_bgfx(const size& new_backbuffer_size) {

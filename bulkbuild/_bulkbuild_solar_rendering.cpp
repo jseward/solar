@@ -26,7 +26,6 @@
 #include "solar/rendering/fonts/font.cpp"
 #include "solar/rendering/fonts/font_renderer.cpp"
 #include "solar/rendering/fonts/font_renderer_line_builder.cpp"
-#include "solar/rendering/fonts/font_renderer_def.cpp"
 #include "solar/rendering/fonts/font_alignment.cpp"
 #include "solar/rendering/fonts/font_dropshadow_def.cpp"
 #include "solar/rendering/fonts/bm_font_reader.cpp"

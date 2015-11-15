@@ -17,6 +17,7 @@ namespace solar {
 		virtual void toggle_virtual_fullscreen() = 0;
 		virtual size get_backbuffer_size() const = 0;
 		virtual void attempt_render_scene(render_scene_functor& func) = 0;
+		virtual uint8_t get_current_view_id() const = 0;
 	};
 
 }

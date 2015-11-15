@@ -32,9 +32,6 @@ namespace solar {
 		};
 
 	private:
-		static const char* DEFAULT_SHADER_PROGRAM_STRING;
-
-	private:
 		d3d9_context& _context;
 		d3d9_shader_program_factory& _shader_program_factory;
 		d3d9_prim2d_setup_params _setup_params;

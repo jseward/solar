@@ -122,9 +122,9 @@
     <ClInclude Include="..\..\src\solar\rendering\fonts\font_glyph.h" />
     <ClInclude Include="..\..\src\solar\rendering\fonts\font_id.h" />
     <ClInclude Include="..\..\src\solar\rendering\fonts\font_renderer.h" />
-    <ClInclude Include="..\..\src\solar\rendering\fonts\font_renderer_def.h" />
     <ClInclude Include="..\..\src\solar\rendering\fonts\font_renderer_line.h" />
     <ClInclude Include="..\..\src\solar\rendering\fonts\font_renderer_line_builder.h" />
+    <ClInclude Include="..\..\src\solar\rendering\fonts\font_renderer_shader_program_provider.h" />
     <ClInclude Include="..\..\src\solar\rendering\fonts\font_render_params.h" />
     <ClInclude Include="..\..\src\solar\rendering\meshes\mesh.h" />
     <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_constants.h" />
@@ -549,6 +549,7 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_dynamic_vertex_buffer.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_enumerator.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_error.h" />
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_font_renderer_shader_program_provider.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_format_helpers.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_headers.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_mesh.h" />
@@ -578,6 +579,9 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_verify.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_vertex_declaration.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_window_type.h" />
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\shaders\font_dropshadow_embedded_code.h" />
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\shaders\font_normal_embedded_code.h" />
+    <ClInclude Include="..\..\src\solar_platforms\d3d9\shaders\prim2d_embedded_code.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_clipboard.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_cli_app.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_cli_app_error_behavoir.h" />
@@ -770,8 +774,8 @@
     <ClCompile Include="..\..\src\solar\rendering\fonts\font_factory.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\fonts\font_id.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\fonts\font_renderer.cpp" />
-    <ClCompile Include="..\..\src\solar\rendering\fonts\font_renderer_def.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\fonts\font_renderer_line_builder.cpp" />
+    <ClCompile Include="..\..\src\solar\rendering\fonts\font_renderer_shader_program_provider.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\meshes\mesh_constants.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\meshes\mesh_def.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\meshes\mesh_id.cpp" />
@@ -971,6 +975,7 @@
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_device_params.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_enumerator.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_error.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_font_renderer_shader_program_provider.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_format_helpers.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_mesh.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_mesh_factory.cpp" />
@@ -989,6 +994,9 @@
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_texture_pool.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_user_settings.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_window_type.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\font_dropshadow_embedded_code.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\font_normal_embedded_code.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\prim2d_embedded_code.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_clipboard.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_cli_app.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_debugging.cpp" />
@@ -1025,6 +1033,8 @@
     <None Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xnamathmatrix.inl" />
     <None Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xnamathmisc.inl" />
     <None Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xnamathvector.inl" />
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.fs_sc" />
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.vs_sc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{03FA803B-DEB3-4256-9C37-E85BFCAE0B9D}</ProjectGuid>

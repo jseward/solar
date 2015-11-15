@@ -24,3 +24,8 @@
 #include "solar_platforms/d3d9/d3d9_cursor_icon.cpp"
 #include "solar_platforms/d3d9/d3d9_cursor_icon_def.cpp"
 #include "solar_platforms/d3d9/d3d9_cursor_icon_factory.cpp"
+#include "solar_platforms/d3d9/d3d9_font_renderer_shader_program_provider.cpp"
+
+#include "solar_platforms/d3d9/shaders/prim2d_embedded_code.cpp"
+#include "solar_platforms/d3d9/shaders/font_normal_embedded_code.cpp"
+#include "solar_platforms/d3d9/shaders/font_dropshadow_embedded_code.cpp"

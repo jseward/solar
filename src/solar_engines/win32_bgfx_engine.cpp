@@ -16,7 +16,7 @@ namespace solar {
 		, _bgfx_render_device(_bgfx_context)
 		, _bgfx_cursor()
 		, _bgfx_texture_factory(_resource_system)
-		, _bgfx_shader_program_factory(_resource_system)
+		, _bgfx_shader_program_factory(_bgfx_context, _resource_system)
 		, _bgfx_mesh_factory(_resource_system)
 		, _bgfx_cursor_icon_factory(_bgfx_cursor, _resource_system)
 		, _bgfx_prim2d()
