@@ -1,6 +1,7 @@
 #include "window_renderer_def.h"
 
 #include "solar/archiving/archiving_helpers.h"
+#include "solar/utility/unused_parameter.h"
 
 namespace solar {
 
@@ -8,11 +9,11 @@ namespace solar {
 	}
 
 	void window_renderer_def::read_from_archive(archive_reader& reader) {
-		read_object(reader, "brush_shader_program", _brush_shader_program);
+		UNUSED_PARAMETER(reader);
 	}
 
 	void window_renderer_def::write_to_archive(archive_writer& writer) const {
-		write_object(writer, "brush_shader_program", _brush_shader_program);
+		UNUSED_PARAMETER(writer);
 	}
 
 }

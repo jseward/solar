@@ -42,7 +42,6 @@ namespace solar {
 		prim2d& get_prim2d();
 		prim2d_lines& get_prim2d_lines();
 		brush_renderer& get_brush_renderer();
-		shader_program& get_brush_shader_program();
 
 		void begin_brush_rendering();
 		void end_brush_rendering();

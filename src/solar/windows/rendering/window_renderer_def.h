@@ -11,7 +11,7 @@ namespace solar {
 
 	class window_renderer_def : public archivable {
 	public:
-		shader_program_id _brush_shader_program;
+		//nothing here anymore, but if custom shaders or other stuff is required this is where they would go
 
 	public:
 		window_renderer_def();
