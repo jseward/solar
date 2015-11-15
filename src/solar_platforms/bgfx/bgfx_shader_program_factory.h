@@ -32,6 +32,8 @@ namespace solar {
 		virtual shader_program* get_shader_program(const std::string& id, const std::string& id_source_description) override;
 		virtual const resource_factory_caching_context& get_shader_program_caching_context() const override;
 
+		resource_system& get_resource_system();
+
 	private:
 		void remove_all_shaders();
 		

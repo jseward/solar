@@ -19,7 +19,7 @@ namespace solar {
 		return _path.c_str();
 	}
 
-	unsigned int win32_file_stream::get_file_size() const {
+	unsigned int win32_file_stream::get_size() const {
 		ASSERT(::ftell(_handle) == 0);
 		VERIFY(::fseek(_handle, 0, SEEK_END) == 0);
 		unsigned int size = ::ftell(_handle);

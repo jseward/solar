@@ -35,6 +35,10 @@ namespace solar {
 		return false;
 	}
 
+	unsigned int memory_stream::get_size() const {
+		return _memory_size;
+	}
+
 	void memory_stream::seek(stream_seek_anchor anchor, long offset) {
 		UNUSED_PARAMETER(anchor);
 		UNUSED_PARAMETER(offset);

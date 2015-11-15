@@ -129,7 +129,7 @@ namespace solar {
 			if (address.get_provider_type() == resource_provider_type::FILE_SYSTEM) {
 				auto fs = _file_system.open_file_stream(address.get_file_path(), file_mode::OPEN_READ);
 				if (fs != nullptr) {
-					auto buffer_size = fs->get_file_size();
+					auto buffer_size = fs->get_size();
 					char* buffer = mapped_memory.allocate_buffer(buffer_size, address.to_string().c_str());
 					auto read_size = fs->read_bytes(buffer, buffer_size);
 					ASSERT(read_size == buffer_size);

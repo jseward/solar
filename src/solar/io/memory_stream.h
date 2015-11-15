@@ -15,6 +15,7 @@ namespace solar {
 		virtual ~memory_stream();
 
 		virtual bool can_have_BOM() const override;
+		virtual unsigned int get_size() const override;
 		virtual void seek(stream_seek_anchor anchor, long offset) override;
 		virtual unsigned int read_bytes(char* buffer, unsigned int max_count) override;
 		virtual void write_bytes(const char* bytes, unsigned int count) override;

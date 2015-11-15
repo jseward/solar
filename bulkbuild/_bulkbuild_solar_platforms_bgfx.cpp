@@ -6,6 +6,7 @@
 #include "solar_platforms/bgfx/bgfx_prim2d.cpp"
 #include "solar_platforms/bgfx/bgfx_prim2d_lines.cpp"
 #include "solar_platforms/bgfx/bgfx_shader_program.cpp"
+#include "solar_platforms/bgfx/bgfx_shader_program_def.cpp"
 #include "solar_platforms/bgfx/bgfx_shader_program_factory.cpp"
 #include "solar_platforms/bgfx/bgfx_texture.cpp"
 #include "solar_platforms/bgfx/bgfx_texture_factory.cpp"

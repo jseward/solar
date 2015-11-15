@@ -1632,6 +1632,12 @@
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_render_state_block.h">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program_def.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_type.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -2454,6 +2460,9 @@
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_render_state_block.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program_def.cpp">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClCompile>
   </ItemGroup>
