@@ -5,6 +5,7 @@
 #include "solar/resources/resource_address.h"
 #include "bgfx_shader_program_def.h"
 #include "bgfx_shader_type.h"
+#include "bgfx_shader_embedded_code.h"
 
 namespace solar {
 
@@ -15,17 +16,21 @@ namespace solar {
 	private:
 		bgfx_shader_program_factory& _factory;
 		const resource_address _resource_address;
-		
+		bgfx_shader_embedded_code _vs_embedded_code;
+		bgfx_shader_embedded_code _fs_embedded_code;
+
 		bgfx_shader_program_def _program_def;
 		bgfx::ProgramHandle _program_handle;
 
 	public:
 		bgfx_shader_program(bgfx_shader_program_factory& factory, const resource_address& resource_address);
+		bgfx_shader_program(bgfx_shader_program_factory& factory, bgfx_shader_embedded_code vs_embedded_code, bgfx_shader_embedded_code fs_embedded_code);
 		virtual ~bgfx_shader_program();
 
 		const resource_address& get_resource_address() const;
 
 		void load();
+		void create_embedded();
 
 		virtual void start() override;
 		virtual void stop() override;

@@ -1,5 +1,6 @@
 #include "bgfx_shader_program.h"
 
+#include "solar/utility/assert.h"
 #include "solar/utility/verify.h"
 #include "solar/utility/unused_parameter.h"
 #include "solar/strings/string_build.h"
@@ -12,7 +13,15 @@ namespace solar {
 	bgfx_shader_program::bgfx_shader_program(bgfx_shader_program_factory& factory, const resource_address& resource_address)
 		: _factory(factory)
 		, _resource_address(resource_address) 
-		, _program_def()
+
+		, _program_handle(BGFX_INVALID_HANDLE) {
+	}
+
+	bgfx_shader_program::bgfx_shader_program(bgfx_shader_program_factory& factory, bgfx_shader_embedded_code vs_embedded_code, bgfx_shader_embedded_code fs_embedded_code)
+		: _factory(factory)
+		, _vs_embedded_code(vs_embedded_code)
+		, _fs_embedded_code(fs_embedded_code)
+
 		, _program_handle(BGFX_INVALID_HANDLE) {
 	}
 
@@ -40,6 +49,16 @@ namespace solar {
 			auto vsh = load_shader(_factory.get_resource_system(), _resource_address, bgfx_shader_type::VERTEX, _program_def._vertex_shader_name);
 			auto fsh = load_shader(_factory.get_resource_system(), _resource_address, bgfx_shader_type::FRAGMENT, _program_def._fragment_shader_name);
 
+			_program_handle = bgfx::createProgram(vsh, fsh, true);
+		}
+	}
+
+	void bgfx_shader_program::create_embedded() {
+		IF_VERIFY(_vs_embedded_code._data != nullptr && _fs_embedded_code._data != nullptr) {
+			auto vsh = bgfx::createShader(bgfx::makeRef(_vs_embedded_code._data, _vs_embedded_code._data_size));
+			auto fsh = bgfx::createShader(bgfx::makeRef(_fs_embedded_code._data, _fs_embedded_code._data_size));
+
+			ASSERT(!isValid(_program_handle))
 			_program_handle = bgfx::createProgram(vsh, fsh, true);
 		}
 	}

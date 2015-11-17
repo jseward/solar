@@ -19,6 +19,7 @@
 #include "solar_platforms/bgfx/bgfx_shader_program_factory.h"
 #include "solar_platforms/bgfx/bgfx_mesh_factory.h"
 #include "solar_platforms/bgfx/bgfx_cursor_icon_factory.h"
+#include "solar_platforms/bgfx/bgfx_font_renderer_shader_program_provider.h"
 #include "win32_bgfx_engine_settings.h"
 
 namespace solar {
@@ -43,6 +44,7 @@ namespace solar {
 		bgfx_cursor _bgfx_cursor;
 		bgfx_texture_factory _bgfx_texture_factory;
 		bgfx_shader_program_factory _bgfx_shader_program_factory;
+		bgfx_font_renderer_shader_program_provider _bgfx_font_renderer_shader_program_provider;
 		bgfx_mesh_factory _bgfx_mesh_factory;
 		bgfx_cursor_icon_factory _bgfx_cursor_icon_factory;
 		bgfx_prim2d _bgfx_prim2d;

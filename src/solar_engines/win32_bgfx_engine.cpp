@@ -17,6 +17,7 @@ namespace solar {
 		, _bgfx_cursor()
 		, _bgfx_texture_factory(_resource_system)
 		, _bgfx_shader_program_factory(_bgfx_context, _resource_system)
+		, _bgfx_font_renderer_shader_program_provider(_bgfx_shader_program_factory)
 		, _bgfx_mesh_factory(_resource_system)
 		, _bgfx_cursor_icon_factory(_bgfx_cursor, _resource_system)
 		, _bgfx_prim2d()
@@ -79,6 +80,7 @@ namespace solar {
 		}
 
 		_bgfx_shader_program_factory.setup();
+		_bgfx_font_renderer_shader_program_provider.setup();
 		_bgfx_texture_factory.setup();
 		_bgfx_mesh_factory.setup();
 		_bgfx_cursor_icon_factory.setup();
@@ -95,6 +97,7 @@ namespace solar {
 		_bgfx_cursor_icon_factory.teardown();
 		_bgfx_mesh_factory.teardown();
 		_bgfx_texture_factory.teardown();
+		_bgfx_font_renderer_shader_program_provider.teardown();
 		_bgfx_shader_program_factory.teardown();
 
 		_bgfx_context.teardown();

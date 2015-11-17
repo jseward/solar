@@ -523,12 +523,14 @@
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_cursor.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon_factory.h" />
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_font_renderer_shader_program_provider.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_mesh.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_mesh_factory.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_lines.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_render_device.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_render_state_block.h" />
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_embedded_code.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program_def.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program_factory.h" />
@@ -538,6 +540,8 @@
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_user_settings.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_window_type.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\platforms\win32_bgfx_context.h" />
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\shaders\font_shaders_embedded_code.h" />
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\shaders\prim2d_shaders_embedded_code.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_context.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_cursor.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon.h" />
@@ -953,6 +957,7 @@
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_cursor.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon_factory.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_font_renderer_shader_program_provider.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_mesh.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_mesh_factory.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d.cpp" />
@@ -967,6 +972,8 @@
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_user_settings.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_window_type.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\platforms\win32_bgfx_context.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\shaders\font_shaders_embedded_code.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\shaders\prim2d_shaders_embedded_code.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_context.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_cursor.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon.cpp" />
@@ -1033,8 +1040,12 @@
     <None Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xnamathmatrix.inl" />
     <None Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xnamathmisc.inl" />
     <None Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xnamathvector.inl" />
-    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.fs_sc" />
-    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.vs_sc" />
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\font_dropshadow.fsc" />
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\font_dropshadow.vsc" />
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\font_normal.fsc" />
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\font_normal.vsc" />
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.fsc" />
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.vsc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{03FA803B-DEB3-4256-9C37-E85BFCAE0B9D}</ProjectGuid>

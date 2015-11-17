@@ -1,5 +1,6 @@
 #include "bgfx_shader_program_factory.h"
 
+#include "solar/containers/container_helpers.h"
 #include "solar/utility/assert.h"
 #include "solar/utility/unused_parameter.h"
 #include "solar/resources/resource_system.h"
@@ -15,6 +16,7 @@ namespace solar {
 	bgfx_shader_program_factory::~bgfx_shader_program_factory() {
 		ASSERT(!_is_setup);
 		ASSERT(_shader_programs.empty());
+		ASSERT(_embeded_code_shader_programs.empty());
 	}
 
 	void bgfx_shader_program_factory::setup() {
@@ -61,6 +63,20 @@ namespace solar {
 
 	resource_system& bgfx_shader_program_factory::get_resource_system() {
 		return _resource_system;
+	}
+
+	bgfx_shader_program* bgfx_shader_program_factory::create_embeded_code_shader_program(bgfx_shader_embedded_code vs_embedded_code, bgfx_shader_embedded_code fs_embedded_code) {
+		auto shader_program = new bgfx_shader_program(*this, vs_embedded_code, fs_embedded_code);
+		shader_program->create_embedded();
+		_embeded_code_shader_programs.push_back(shader_program);
+		return shader_program;
+	}
+
+	void bgfx_shader_program_factory::release_embeded_code_shader_program(bgfx_shader_program* program) {
+		if (program != nullptr) {
+			find_and_erase(_embeded_code_shader_programs, program);
+			delete program;
+		}
 	}
 
 	void bgfx_shader_program_factory::on_file_changed(const std::string& path, void* data) {

@@ -1656,6 +1656,18 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\shaders\font_normal_embedded_code.h">
       <Filter>src\solar_platforms\d3d9\shaders</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_font_renderer_shader_program_provider.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\shaders\prim2d_shaders_embedded_code.h">
+      <Filter>src\solar_platforms\bgfx\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\shaders\font_shaders_embedded_code.h">
+      <Filter>src\solar_platforms\bgfx\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_embedded_code.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -2495,6 +2507,15 @@
     <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\font_dropshadow_embedded_code.cpp">
       <Filter>src\solar_platforms\d3d9\shaders</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_font_renderer_shader_program_provider.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\shaders\prim2d_shaders_embedded_code.cpp">
+      <Filter>src\solar_platforms\bgfx\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\shaders\font_shaders_embedded_code.cpp">
+      <Filter>src\solar_platforms\bgfx\shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\readme.md" />
@@ -2526,10 +2547,22 @@
     <None Include="..\..\src\solar\windows\readme.md">
       <Filter>src\solar\windows</Filter>
     </None>
-    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.vs_sc">
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.fsc">
       <Filter>src\solar_platforms\bgfx\shaders</Filter>
     </None>
-    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.fs_sc">
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.vsc">
+      <Filter>src\solar_platforms\bgfx\shaders</Filter>
+    </None>
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\font_normal.fsc">
+      <Filter>src\solar_platforms\bgfx\shaders</Filter>
+    </None>
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\font_dropshadow.vsc">
+      <Filter>src\solar_platforms\bgfx\shaders</Filter>
+    </None>
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\font_normal.vsc">
+      <Filter>src\solar_platforms\bgfx\shaders</Filter>
+    </None>
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\font_dropshadow.fsc">
       <Filter>src\solar_platforms\bgfx\shaders</Filter>
     </None>
   </ItemGroup>

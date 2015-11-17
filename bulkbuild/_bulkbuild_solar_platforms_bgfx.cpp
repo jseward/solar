@@ -15,6 +15,10 @@
 #include "solar_platforms/bgfx/bgfx_user_settings.cpp"
 #include "solar_platforms/bgfx/bgfx_window_type.cpp"
 #include "solar_platforms/bgfx/bgfx_callback.cpp"
+#include "solar_platforms/bgfx/bgfx_font_renderer_shader_program_provider.cpp"
+
+#include "solar_platforms/bgfx/shaders/prim2d_shaders_embedded_code.cpp"
+#include "solar_platforms/bgfx/shaders/font_shaders_embedded_code.cpp"
 
 #ifdef _WIN32
 #include "solar_platforms/bgfx/platforms/win32_bgfx_context.cpp"
