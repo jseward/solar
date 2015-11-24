@@ -26,7 +26,6 @@ namespace solar {
 
 	void d3d9_render_device::add_event_handler(render_device_event_handler* handler) {
 		push_back_and_verify_not_found(_event_handlers, handler);
-		handler->on_render_device_surface_size_changed(_context.get_backbuffer_size());
 	}
 
 	void d3d9_render_device::remove_event_handler(render_device_event_handler* handler) {
@@ -53,6 +52,14 @@ namespace solar {
 		_context.toggle_virtual_fullscreen();
 	}
 
+	render_state_block* d3d9_render_device::create_render_state_block(const render_state_block_def& def) {
+		return _context.create_render_state_block(def);
+	}
+
+	void d3d9_render_device::release_render_state_block(render_state_block* block) {
+		_context.release_render_state_block(block);
+	}
+
 	viewport d3d9_render_device::set_viewport(const viewport& new_viewport) {
 		ASSERT(new_viewport._min_z >= 0.f);
 		ASSERT(new_viewport._max_z <= 1.f);
@@ -66,6 +73,10 @@ namespace solar {
 		return old_viewport;
 	}
 
+	size d3d9_render_device::get_backbuffer_size() const {
+		return _context.get_backbuffer_size();
+	}
+
 	void d3d9_render_device::on_device_created(IDirect3DDevice9* device) {
 		UNUSED_PARAMETER(device);
 	}
@@ -77,7 +88,7 @@ namespace solar {
 	void d3d9_render_device::on_device_reset(IDirect3DDevice9* device) {
 		UNUSED_PARAMETER(device);
 		for (auto event_handler : _event_handlers) {
-			event_handler->on_render_device_surface_size_changed(_context.get_backbuffer_size());
+			event_handler->on_render_device_backbuffer_size_changed(_context.get_backbuffer_size());
 		}
 	}
 

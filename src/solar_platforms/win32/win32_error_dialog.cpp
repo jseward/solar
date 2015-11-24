@@ -152,8 +152,8 @@ namespace solar {
 	BOOL win32_error_dialog::on_wm_getminmaxinfo(HWND hdlg, WPARAM wparam, LPARAM lparam) {
 		UNUSED_PARAMETER(hdlg);
 		UNUSED_PARAMETER(wparam);
-		reinterpret_cast<MINMAXINFO*>(lparam)->ptMinTrackSize.x = _min_track_size.get_width();
-		reinterpret_cast<MINMAXINFO*>(lparam)->ptMinTrackSize.y = _min_track_size.get_height();
+		reinterpret_cast<MINMAXINFO*>(lparam)->ptMinTrackSize.x = _min_track_size._width;
+		reinterpret_cast<MINMAXINFO*>(lparam)->ptMinTrackSize.y = _min_track_size._height;
 		return TRUE;
 	}
 

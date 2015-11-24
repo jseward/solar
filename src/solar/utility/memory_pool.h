@@ -31,7 +31,9 @@ namespace solar {
 		void allocate_memory(size_t max_object_size, size_t max_object_count);
 		void deallocate_memory();
 
-		template<typename T, typename...Args> T* create_object(const Args&... args);
+		unsigned int get_created_object_count() const;
+
+		template<typename T, typename...Args> T* create_object(Args&&... args);
 		template<typename T> void release_object(T* obj);
 
 	private:
@@ -42,7 +44,7 @@ namespace solar {
 		void on_max_object_count_exceeded();
 	};
 
-	template<typename T, typename...Args> T* memory_pool::create_object(const Args&... args) {
+	template<typename T, typename...Args> T* memory_pool::create_object(Args&&... args) {
 		char* object_buffer = create_object_buffer(sizeof(T));
 		return new(object_buffer) T(args...);
 	}

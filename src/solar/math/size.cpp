@@ -14,22 +14,6 @@ namespace solar {
 		, _height(h) {
 	}
 
-	int size::get_width() const {
-		return _width;
-	}
-
-	void size::set_width(int w) {
-		_width = w;
-	}
-
-	int size::get_height() const {
-		return _height;
-	}
-
-	void size::set_height(int h) {
-		_height = h;
-	}
-
 	bool size::operator==(const size& rhs) const {
 		return (_width == rhs._width && _height == rhs._height);
 	}
@@ -38,10 +22,16 @@ namespace solar {
 		return !(*this == rhs);
 	}
 
-	size size::operator*(float rhs) const {
+	size operator*(const size& lhs, float rhs) {
 		return size(
-			static_cast<int>(_width * rhs),
-			static_cast<int>(_height * rhs));
+			static_cast<int>(lhs._width * rhs),
+			static_cast<int>(lhs._height * rhs));
+	}
+
+	size operator-(const size& lhs, const size& rhs) {
+		return size(
+			lhs._width - rhs._width,
+			lhs._height - rhs._height);
 	}
 
 	std::ostream& operator<<(std::ostream& os, const size& s) {

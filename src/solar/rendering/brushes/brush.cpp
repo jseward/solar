@@ -8,6 +8,10 @@ namespace solar {
 		: _texture_id(texture_pool_name) {
 	}
 
+	bool brush::is_id_empty() const {
+		return _id.empty();
+	}
+
 	const std::string& brush::get_id() const {
 		return _id;
 	}
@@ -37,8 +41,8 @@ namespace solar {
 		if (
 			_texel_box.get_left() < 0 || 
 			_texel_box.get_top() < 0 ||
-			_texel_box.get_right() > texture_size.get_width() ||
-			_texel_box.get_bottom() > texture_size.get_height() ) {
+			_texel_box.get_right() > texture_size._width ||
+			_texel_box.get_bottom() > texture_size._height ) {
 			
 			ALERT("brush texel_box not valid for texture size.\n\nbrush_id : {}\ntexture_size : {}\ntexel_box : {}", _id, texture_size, _texel_box);
 		}

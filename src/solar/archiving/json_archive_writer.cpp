@@ -1,6 +1,8 @@
 #include "json_archive_writer.h"
 
 #include "solar/utility/assert.h"
+#include "solar/utility/unused_parameter.h"
+#include "solar/colors/color.h"
 #include "archivable.h"
 #include "single_value_archivable.h"
 
@@ -52,32 +54,63 @@ namespace solar {
 		_writer.write_bool(name, value);
 	}
 
-	void json_archive_writer::write_ushort(const char* name, unsigned short value) {
+	void json_archive_writer::write_uint16(const char* name, uint16_t value) {
 		ASSERT(_is_writing);
-		_writer.write_ushort(name, value);
+		_writer.write_uint16(name, value);
 	}
 
-	void json_archive_writer::write_ushorts(const char* name, const unsigned short* begin, unsigned int count) {
+	void json_archive_writer::write_uint16s_dynamic(const char* name, unsigned int size, std::function<uint16_t(unsigned int)> get_value_at_func) {
 		ASSERT(_is_writing);
 		_writer.begin_array(name);
-		for (unsigned int i = 0; i < count; ++i) {
-			_writer.write_ushort(begin[i]);
+		for (unsigned int i = 0; i < size; ++i) {
+			_writer.write_uint16(get_value_at_func(i));
 		}
 		_writer.end_array();
 	}
 
-	void json_archive_writer::write_int(const char* name, int value) {
+	void json_archive_writer::write_uint16s_fixed(const char* name, unsigned int size, const uint16_t* values_begin) {
+		ASSERT(_is_writing);
+		_writer.begin_array(name);
+		for (unsigned int i = 0; i < size; ++i) {
+			_writer.write_uint16(values_begin[i]);
+		}
+		_writer.end_array();
+	}
+
+	void json_archive_writer::write_int(const char* name, int value, const archive_int_compression& compression) {
+		UNUSED_PARAMETER(compression);
 		ASSERT(_is_writing);
 		_writer.write_int(name, value);
 	}
 
-	void json_archive_writer::write_ints(const char* name, const int* begin, unsigned int count) {
+	void json_archive_writer::write_ints_dynamic(const char* name, unsigned int size, std::function<int(unsigned int)> get_value_at_func) {
 		ASSERT(_is_writing);
 		_writer.begin_array(name);
-		for (unsigned int i = 0; i < count; ++i) {
-			_writer.write_int(begin[i]);
+		for (unsigned int i = 0; i < size; ++i) {
+			_writer.write_int(get_value_at_func(i));
 		}
 		_writer.end_array();
+	}
+
+	void json_archive_writer::write_ints_fixed(const char* name, unsigned int size, const int* values_begin) {
+		ASSERT(_is_writing);
+		_writer.begin_array(name);
+		for (unsigned int i = 0; i < size; ++i) {
+			_writer.write_int(values_begin[i]);
+		}
+		_writer.end_array();
+	}
+
+	void json_archive_writer::write_optional_int(const char* name, const optional<int>& value) {
+		ASSERT(_is_writing);
+		if (value.has_value()) {
+			_writer.write_int(name, value.get_value());
+		}
+	}
+
+	void json_archive_writer::write_int64(const char* name, int64_t value) {
+		ASSERT(_is_writing);
+		_writer.write_int64(name, value);
 	}
 
 	void json_archive_writer::write_uint(const char* name, unsigned int value) {
@@ -90,11 +123,20 @@ namespace solar {
 		_writer.write_float(name, value);
 	}
 
-	void json_archive_writer::write_floats(const char* name, const float* begin, unsigned int count) {
+	void json_archive_writer::write_floats_dynamic(const char* name, unsigned int size, std::function<float(unsigned int)> get_value_at_func) {
 		ASSERT(_is_writing);
 		_writer.begin_array(name);
-		for (unsigned int i = 0; i < count; ++i) {
-			_writer.write_float(begin[i]);
+		for (unsigned int i = 0; i < size; ++i) {
+			_writer.write_float(get_value_at_func(i));
+		}
+		_writer.end_array();
+	}
+
+	void json_archive_writer::write_floats_fixed(const char* name, unsigned int size, const float* values_begin) {
+		ASSERT(_is_writing);
+		_writer.begin_array(name);
+		for (unsigned int i = 0; i < size; ++i) {
+			_writer.write_float(values_begin[i]);
 		}
 		_writer.end_array();
 	}
@@ -102,6 +144,11 @@ namespace solar {
 	void json_archive_writer::write_string(const char* name, const std::string& value) {
 		ASSERT(_is_writing);
 		_writer.write_string(name, value);
+	}
+
+	void json_archive_writer::write_color(const char* name, const color& value) {
+		ASSERT(_is_writing);
+		_writer.write_string(name, value.to_string());
 	}
 
 }

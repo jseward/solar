@@ -20,8 +20,8 @@ namespace solar {
 
 		int get_display_mode_difference_score(const d3d9_user_settings& user_settings, const D3DDISPLAYMODE& display_mode) {
 			return
-				std::abs(static_cast<int>(display_mode.Width) - user_settings.get_backbuffer_size().get_width()) +
-				std::abs(static_cast<int>(display_mode.Height) - user_settings.get_backbuffer_size().get_height()) +
+				std::abs(static_cast<int>(display_mode.Width) - user_settings.get_backbuffer_size()._width) +
+				std::abs(static_cast<int>(display_mode.Height) - user_settings.get_backbuffer_size()._height) +
 				std::abs(static_cast<int>(display_mode.RefreshRate) - static_cast<int>(user_settings.get_fullscreen_refresh_rate()));
 		}
 
@@ -68,7 +68,7 @@ namespace solar {
 						if (combo._is_windowed && combo._adapter_format != adapter_desktop_display_mode.Format) {
 							//skip this combo, doesn't match desktop
 						}
-						else if (combo._is_windowed != d3d9_window_type_details::is_device_windowed(user_settings.get_window_type())) {
+						else if (combo._is_windowed != d3d9_window_type_is_device_windowed(user_settings.get_window_type())) {
 							//skip this combo, doesn't match is_windowed
 						}
 						else {
@@ -344,7 +344,7 @@ namespace solar {
 
 		int desired_bits = get_color_channel_bit_count(desired_format);
 		int actual_bits = get_color_channel_bit_count(actual_format);
-		int bits_diff = abs(desired_bits - actual_bits);
+		int bits_diff = std::abs(desired_bits - actual_bits);
 		return max_weight * std::max(0.f, (0.9f - ((float)bits_diff / (float)desired_bits)));
 	}
 
@@ -366,8 +366,8 @@ namespace solar {
 		pp.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;
 		if (device_combo._is_windowed)
 		{
-			pp.BackBufferWidth = user_settings.get_backbuffer_size().get_width();
-			pp.BackBufferHeight = user_settings.get_backbuffer_size().get_height();
+			pp.BackBufferWidth = user_settings.get_backbuffer_size()._width;
+			pp.BackBufferHeight = user_settings.get_backbuffer_size()._height;
 		}
 		else
 		{

@@ -1,12 +1,12 @@
 #pragma once
 
 #include "solar/containers/enum_array.h"
-#include "solar/windows/window_render_state.h"
+#include "solar/windows/rendering/window_render_state.h"
 #include "solar/windows/window_font_def.h"
 #include "solar/windows/layout/window_layout.h"
 #include "solar/windows/styling/window_style.h"
 #include "solar/windows/styling/window_style_id.h"
-#include "solar/rendering/brushes/brush_id.h"
+#include "solar/windows/rendering/window_render_state_brush_collection.h"
 
 namespace solar {
 
@@ -16,7 +16,7 @@ namespace solar {
 
 	public:
 		window_layout _icon_layout;
-		brush_id _underlay;
+		window_render_state_brush_collection _underlay_brushes;
 		window_font_def _font_def;
 
 	public:

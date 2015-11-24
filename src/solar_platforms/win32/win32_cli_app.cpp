@@ -30,8 +30,8 @@ namespace solar {
 			return handle_alert(file_name, line_number, message);
 		});
 
-		set_trace_handler([&](const char* file_name, int line_number, const char* message) {
-			handle_trace(file_name, line_number, message);
+		set_trace_handler([&](const char* file_name, int line_number, bool add_newline, const char* message) {
+			handle_trace(file_name, line_number, add_newline, message);
 		});
 	}
 	
@@ -80,13 +80,15 @@ namespace solar {
 		return false;
 	}
 
-	void win32_cli_app::handle_trace(const char* file_name, int line_number, const char* message) {
+	void win32_cli_app::handle_trace(const char* file_name, int line_number, bool add_newline, const char* message) {
 		UNUSED_PARAMETER(file_name);
 		UNUSED_PARAMETER(line_number);
 		::WriteConsoleA(_output_handle, message, get_string_length(message), nullptr, nullptr);
 		::WriteConsoleA(_output_handle, "\n", 1, nullptr, nullptr);
 		print_to_debug_output(message);
-		print_to_debug_output("\n");
+		if (add_newline) {
+			print_to_debug_output("\n");
+		}
 	}
 
 	void win32_cli_app::write_to_error_console(const std::string& message) {

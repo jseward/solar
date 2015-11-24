@@ -1,6 +1,9 @@
 #include "root_window.h"
+
 #include "solar/utility/assert.h"
+#include "solar/utility/trace.h"
 #include "solar/rendering/render_device.h"
+#include "solar/containers/container_helpers.h"
 
 namespace solar {
 
@@ -22,10 +25,58 @@ namespace solar {
 
 	root_window::~root_window() {
 		ASSERT(_window_under_cursor_while_rendering == nullptr);
+		ASSERT(_focus_controllers.empty());
+	}
+
+	void root_window::move_focus_controller_to_front(window_focus_controller* fc) {
+		TRACE("moving focus controller to front : {}", fc->get_this_window().get_id());
+		find_and_erase(_focus_controllers, fc);
+		_focus_controllers.insert(_focus_controllers.begin(), fc);
+	}
+
+	window_focus_controller* root_window::get_active_focus_controller() const {
+		for (auto fc : _focus_controllers) {
+			if (
+				fc->get_this_window().is_enabled() &&
+				fc->get_this_window().is_visible_recursive()) {
+				return fc;
+			}
+		}
+		return nullptr;
+	}
+
+	void root_window::on_child_added(window* child) {
+		add_focus_controller_recursive(child);
+	}
+
+	void root_window::on_child_removed(window* child) {
+		remove_focus_controller_recursive(child);
+	}
+
+	void root_window::add_focus_controller_recursive(window* window) {
+		if (window->as_focus_controller() != nullptr) {
+			push_back_and_verify_not_found(_focus_controllers, window->as_focus_controller());
+			window->as_focus_controller()->set_root_window(this);
+		}
+
+		for (auto c : window->get_children()) {
+			add_focus_controller_recursive(c);
+		}
+	}
+
+	void root_window::remove_focus_controller_recursive(window* window) {
+		if (window->as_focus_controller() != nullptr) {
+			window->as_focus_controller()->set_root_window(nullptr);
+			find_and_erase(_focus_controllers, window->as_focus_controller());
+		}
+
+		for (auto c : window->get_children()) {
+			remove_focus_controller_recursive(c);
+		}
 	}
 
 	void root_window::render_all(const window_render_params& params) {
-		_window_under_cursor_while_rendering = get_window_under_cursor_recursive(params.get_cursor_pos(), *this);
+		_window_under_cursor_while_rendering = get_window_under_cursor_recursive(params._cursor_pos, *this);
 		render_recursive(params, *this, *this);
 		_window_under_cursor_while_rendering = nullptr;
 	}
@@ -49,7 +100,8 @@ namespace solar {
 		bool is_trapped = false;
 
 		if (!is_trapped_externally) {
-			//NOTE: not checking is_enabled here, windows do that internally so they can trap the event
+			//NOTE: not checking is_enabled here, windows do that internally so they can trap the event EVEN when disabled 
+			//(ex. button still blocks mouse button presses even when disabled)
 			auto filter = [&params](window& w) { return w.is_visible() && w.get_area().is_point_within(params._cursor_pos); };
 			auto handler = [&params](window& w) { return w.on_mouse_button_up(params); };
 			if (handle_event_recursive(filter, handler, *this)) {
@@ -66,6 +118,43 @@ namespace solar {
 		}
 
 		return is_trapped;
+	}
+
+	bool root_window::root_on_mouse_wheel_moved(const window_mouse_wheel_event_params& params) {
+		bool is_trapped = false;
+
+		auto handler = [&params](window& w) { return w.on_mouse_wheel_moved(params); };
+		if (handle_event_focus_only(handler)) {
+			is_trapped = true;
+		}
+
+		return is_trapped;
+	}
+
+	bool root_window::root_on_key_down(const window_key_event_params& params, bool is_trapped_externally) {
+		bool is_trapped = false;
+
+		if (!is_trapped_externally) {
+			auto handler = [&params](window& w) { return w.on_key_down(params); };
+			if (handle_event_focus_only(handler)) {
+				is_trapped = true;
+			}
+		}
+
+		if (!is_trapped) {
+			auto anywhere_filter = [](window&) { return true; };
+			auto anywhere_handler = [&params](window& w) { return w.on_key_down_anywhere(params); };
+			if (handle_event_recursive(anywhere_filter, anywhere_handler, *this)) {
+				is_trapped = true;
+			}
+		}
+
+		return is_trapped;
+	}
+
+	bool root_window::root_on_char_received(const window_char_event_params& params) {
+		auto handler = [&params](window& w) { return w.on_char_received(params); };
+		return handle_event_focus_only(handler);
 	}
 
 	window* root_window::get_window_under_cursor_recursive(const point& cursor_pos, window& current_window) {
@@ -92,9 +181,9 @@ namespace solar {
 			}
 			else {
 				auto safe_viewport_area = make_rect_constrained_within(root_window.get_area(), current_window.get_area());
-				auto old_viewport = params.get_render_device().set_viewport(viewport().set_area(safe_viewport_area));
+				auto old_viewport = params._render_device.set_viewport(viewport().set_area(safe_viewport_area));
 				render_recursive_within_viewport(params, root_window, current_window);
-				params.get_render_device().set_viewport(old_viewport);
+				params._render_device.set_viewport(old_viewport);
 			}
 		}
 	}

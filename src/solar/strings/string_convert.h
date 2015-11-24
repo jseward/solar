@@ -9,5 +9,6 @@ namespace solar {
 	std::string hex_value_to_string(uint8_t hex_value);
 	bool try_parse_hex_value_from_string(unsigned int& v, const char* s);
 	unsigned int parse_hex_value_from_string(const char* s);
-
+	bool try_parse_int_from_string(int& v, const char* s);
+	bool try_parse_float_from_string(float& v, const char* s);
 }

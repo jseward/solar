@@ -1,7 +1,7 @@
 #pragma once
 
 #include "solar/math/vec2.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 #include "solar/rendering/textures/simple_rect_uvs.h"
 
 namespace solar {
@@ -26,7 +26,15 @@ namespace solar {
 			const vec2& bottom_right, 
 			const vec2& bottom_left, 
 			const color& color, 
-			const simple_rect_uvs& uvs);
+			const simple_rect_uvs& uvs)
+
+			: _top_left(top_left)
+			, _top_right(top_right)
+			, _bottom_right(bottom_right)
+			, _bottom_left(bottom_left)
+			, _color(color)
+			, _uvs(uvs) {
+		}
 	};
 
 }

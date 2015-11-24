@@ -8,11 +8,12 @@
 #include "d3d9_cursor_icon.h"
 #include "solar/math/rect.h"
 #include "solar/rendering/render_scene_functor.h"
+#include "solar/rendering/render_states/render_state_block.h"
+#include "solar/rendering/render_states/render_state_block_def.h"
 
 namespace solar {
 	
 	class d3d9_context {
-
 	private:
 		HWND _hwnd;
 		IDirect3D9* _IDirect3D9;
@@ -30,8 +31,9 @@ namespace solar {
 		std::vector<d3d9_device_event_handler*> _event_handlers;
 		bool _are_device_objects_created;
 		bool _are_device_objects_reset;
-		size _toggle_from_fullscreen_backbuffer_size;
+		size _exit_fullscreen_backbuffer_size;
 		d3d9_cursor_icon* _active_cursor_icon;
+		uint64_t _current_render_state_flags;
 
 	public:
 		d3d9_context();
@@ -49,6 +51,11 @@ namespace solar {
 
 		void add_device_event_handler(d3d9_device_event_handler* handler);
 		void remove_device_event_handler(d3d9_device_event_handler* handler);
+
+		render_state_block* create_render_state_block(const render_state_block_def& def);
+		void release_render_state_block(render_state_block* block);
+
+		uint64_t get_set_current_render_state_flags(uint64_t new_flags);
 
 		IDirect3DDevice9* get_device();
 
@@ -73,7 +80,6 @@ namespace solar {
 		point get_window_top_left() const;
 		void attempt_clip_cursor();
 		bool attempt_set_cursor();
-		void set_is_minimized(bool is_minimized);
 		void check_if_window_size_changed();
 		void adjust_device_params_back_buffer(d3d9_device_params& device_params) const;
 	};

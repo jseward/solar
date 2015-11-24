@@ -8,7 +8,8 @@ namespace solar {
 	class brush;
 	class rect;
 	class color;
-	class shader;
+	class shader_program;
+	class render_state_block;
 
 	class brush_renderer {
 	private:
@@ -20,10 +21,22 @@ namespace solar {
 		brush_renderer& operator=(const brush_renderer&) = delete;
 		~brush_renderer();
 
-		void begin_rendering(const rect& render_area, shader& shader);
+		void begin_rendering(const rect& render_area);
+		void begin_rendering(const rect& render_area, shader_program& shader_program, render_state_block* rs_block);
 		void end_rendering();
 
-		void render_brush(const brush& brush, brush_render_mode render_mode, const rect& area, float area_scale, const color& color);
+		void render_brush(
+			const brush& brush, 
+			brush_render_mode render_mode, 
+			const rect& area, 
+			float area_scale, 
+			const color& color);
+
+		void render_brush_with_angle(
+			const brush& brush, 
+			const rect& area, 
+			const color& color, 
+			float angle);
 
 	private:
 		void render_brush_stretched(const brush& brush, const rect& area, float area_scale, const color& color);

@@ -72,18 +72,43 @@ namespace solar {
 		}
 
 		void push_back(const ValueT& new_value) {
-			push_back_unitialized() = new_value;
+			push_back_no_construct() = new_value;
 		}
 
-		ValueT& push_back_unitialized()
-		{
+		ValueT& push_back_no_construct() {
 			ASSERT(_size < MAX_SIZE);
 			_size++;
 			return _values[_size - 1];
 		}
 
 		void clear() {
+			for (unsigned int i = 0; i < _size; ++i) {
+				_values[i].~value_type();
+			}
 			_size = 0;
+		}
+
+		void clear_fast_no_destruct() {
+			//check std::is_trivially_destructible<ValueT>? need more research as can't get it to compile to pick correct clear call based on that trait...
+			_size = 0;
+		}
+
+		iterator erase(const iterator& position) {
+			ASSERT(_size > 0);
+			//shift all the elements down on top of the element we want to erase.
+			for (iterator i = position; i != (_values + (_size - 1)); ++i) {
+				*i = *(i + 1);
+			}
+			_size--;
+			return position;
+		}
+
+		iterator fast_erase_order_not_preserved(const iterator& position) {
+			ASSERT(_size > 0);
+			//copy last element on top of element we want to erase
+			*position = *(_values + (_size - 1));
+			_size--;
+			return position;
 		}
 	};
 

@@ -7,9 +7,8 @@
 
 namespace solar {
 
-	window_registry_window_collection::window_registry_window_collection(resource_system& resource_system, window* w)
-		: _resource_system(resource_system)
-		, _id(w->get_id()) {
+	window_registry_window_collection::window_registry_window_collection(window* w)
+		: _id(w->get_id()) {
 
 		_windows.push_back(w);
 	}
@@ -33,13 +32,12 @@ namespace solar {
 		find_and_erase(_windows, window);
 	}
 
-	void window_registry_window_collection::load() {
+	void window_registry_window_collection::load(resource_system& resource_system, const resource_address& address) {
 		ASSERT(!_windows.empty());
 
-		auto address = _resource_system.resolve_address("window", "windows", ".window", _id.c_str(), "");
 		if (!address.empty()) {
 			auto first_window = *_windows.begin();
-			if (_resource_system.read_object_as_json(*first_window, address)) {
+			if (resource_system.read_object_as_json(*first_window, address)) {
 				handle_loaded_recursive(*first_window);
 
 				//clone other windows from the first window
@@ -58,13 +56,6 @@ namespace solar {
 		window.on_loaded();
 		for (auto& child : window.get_children()) {
 			handle_loaded_recursive(*child);
-		}
-	}
-
-	void window_registry_window_collection::save() {
-		auto address = _resource_system.resolve_address("window", "windows", ".window", _id.c_str(), "");
-		if (!address.empty()) {
-			_resource_system.write_object_as_json(**_windows.begin(), address);
 		}
 	}
 

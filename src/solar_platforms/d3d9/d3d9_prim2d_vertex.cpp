@@ -8,13 +8,13 @@ namespace solar {
 	void d3d9_prim2d_vertex::set(const vec2& pos, const color& color, const uv& uv) {
 		//Have to fix up sx and sy so that they are pixel accurate in Direct3D.
 		//See Directly Mapping Texels to Pixels in docs.
-		_sx = pos.get_x() - 0.5f;
-		_sy = pos.get_y() - 0.5f;
+		_sx = pos._x - 0.5f;
+		_sy = pos._y - 0.5f;
 		_sz = 0.f;
 		_rhw = 1.f;
 		_color = color.to_argb32();
-		_tu = uv.u();
-		_tv = uv.v();
+		_tu = uv._u;
+		_tv = uv._v;
 	}
 
 }

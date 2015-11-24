@@ -23,38 +23,44 @@ namespace solar {
 		, _v20(v20), _v21(v21), _v22(v22) {
 	}
 
-	vec3 mat33::transform_vec3(const vec3& in) const {
+	vec2 operator*(const vec2& vec, const mat33& mat) {
+		return vec2(
+			(vec._x * mat._v00) + (vec._y * mat._v10),
+			(vec._x * mat._v01) + (vec._y * mat._v11));
+	}
+
+	vec3 operator*(const vec3& vec, const mat33& mat) {
 		return vec3(
-			(in.x() * _v00) + (in.y() * _v10) + (in.z() * _v20),
-			(in.x() * _v01) + (in.y() * _v11) + (in.z() * _v21),
-			(in.x() * _v02) + (in.y() * _v12) + (in.z() * _v22));
+			(vec._x * mat._v00) + (vec._y * mat._v10) + (vec._z * mat._v20),
+			(vec._x * mat._v01) + (vec._y * mat._v11) + (vec._z * mat._v21),
+			(vec._x * mat._v02) + (vec._y * mat._v12) + (vec._z * mat._v22));
 	}
 
 	mat33 make_mat33_identity() {
 		return mat33(); //default constructor = identity, this function makes intent of clients clearer though.
 	}
 
-	mat33 make_mat33_rotation_on_x(deg angle) {
-		float c = cos(angle);
-		float s = sin(angle);
+	mat33 make_mat33_rotation_on_x(float radians) {
+		float c = cos(radians);
+		float s = sin(radians);
 		return mat33(
 			1.f, 0.f, 0.f,
 			0.f, c, s,
 			0.f, -s, c);
 	}
 
-	mat33 make_mat33_rotation_on_y(deg angle) {
-		float c = cos(angle);
-		float s = sin(angle);
+	mat33 make_mat33_rotation_on_y(float radians) {
+		float c = cos(radians);
+		float s = sin(radians);
 		return mat33(
 			c, 0.f, -s,
 			0.f, 1.f, 0.f,
 			s, 0.f, c);
 	}
 
-	mat33 make_mat33_rotation_on_z(deg angle) {
-		float c = cos(angle);
-		float s = sin(angle);
+	mat33 make_mat33_rotation_on_z(float radians) {
+		float c = cos(radians);
+		float s = sin(radians);
 		return mat33(
 			c, s, 0.f,
 			-s, c, 0.f,
@@ -71,7 +77,7 @@ namespace solar {
 		out_up = normalize(up);
 		if (are_collinear(out_forward, out_up)) {
 			vec3 bad_up = out_up;
-			out_up = vec3(-bad_up.y(), bad_up.x(), bad_up.z());
+			out_up = vec3(-bad_up._y, bad_up._x, bad_up._z);
 		}
 		out_cross = normalize(cross(out_up, out_forward));
 		out_up = cross(out_forward, out_cross);

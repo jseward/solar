@@ -13,11 +13,25 @@ namespace solar {
 		typedef EnumT enum_type;
 
 	public:
+		bool is_enum_valid(EnumT e) const {
+			return 
+				(static_cast<size_t>(e) >= 0) && 
+				(static_cast<size_t>(e) < static_cast<size_t>(EnumT::count));
+		}
+
 		ValueT& at(EnumT e) {
 			return array::at(static_cast<size_t>(e));
 		}
 
 		const ValueT& at(EnumT e) const {
+			return array::at(static_cast<size_t>(e));
+		}
+
+		ValueT& operator[](EnumT e) {
+			return array::at(static_cast<size_t>(e));
+		}
+
+		const ValueT& operator[](EnumT e) const {
 			return array::at(static_cast<size_t>(e));
 		}
 	};

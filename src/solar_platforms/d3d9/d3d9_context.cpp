@@ -1,8 +1,5 @@
 #include "d3d9_context.h"
 
-#include "d3d9_release_com_object.h"
-#include "d3d9_verify.h"
-#include "d3d9_error.h"
 #include "solar/utility/assert.h"
 #include "solar/utility/alert.h"
 #include "solar/utility/trace.h"
@@ -10,6 +7,10 @@
 #include "solar/containers/container_helpers.h"
 #include "solar/utility/unused_parameter.h"
 #include "solar/math/rect.h"
+#include "d3d9_release_com_object.h"
+#include "d3d9_verify.h"
+#include "d3d9_error.h"
+#include "d3d9_render_state_block.h"
 
 namespace solar {
 
@@ -26,7 +27,8 @@ namespace solar {
 		, _is_window_in_menu_loop(false)
 		, _are_device_objects_created(false)
 		, _are_device_objects_reset(false)
-		, _active_cursor_icon(nullptr) {
+		, _active_cursor_icon(nullptr) 
+		, _current_render_state_flags(0) {
 
 		::ZeroMemory(&_backbuffer_desc, sizeof(D3DSURFACE_DESC));
 	}
@@ -77,57 +79,57 @@ namespace solar {
 			ASSERT(_hwnd == hwnd);
 
 			switch (message) {
-			case WM_SIZE: {
-				_is_window_minimized = (wparam == SIZE_MINIMIZED);
-				if (!_is_window_minimized) {
-					check_if_window_size_changed();
+				case WM_SIZE: {
+					_is_window_minimized = (wparam == SIZE_MINIMIZED);
+					if (!_is_window_minimized) {
+						check_if_window_size_changed();
+					}
+					handled = true;
+					break;
 				}
-				handled = true;
-				break;
-			}
 
-			case WM_ENTERSIZEMOVE: {
-				_is_window_in_size_move = true;
-				handled = true;
-				break;
-			}
+				case WM_ENTERSIZEMOVE: {
+					_is_window_in_size_move = true;
+					handled = true;
+					break;
+				}
 
-			case WM_EXITSIZEMOVE: {
-				_is_window_in_size_move = false;
-				check_if_window_size_changed();
-				handled = true;
-				break;
-			}
+				case WM_EXITSIZEMOVE: {
+					_is_window_in_size_move = false;
+					check_if_window_size_changed();
+					handled = true;
+					break;
+				}
 
-			case WM_ENTERMENULOOP: {
-				_is_window_in_menu_loop = true;
-				handled = true;
-				break;
-			}
+				case WM_ENTERMENULOOP: {
+					_is_window_in_menu_loop = true;
+					handled = true;
+					break;
+				}
 
-			case WM_EXITMENULOOP: {
-				_is_window_in_menu_loop = false;
-				handled = true;
-				break;
-			}
+				case WM_EXITMENULOOP: {
+					_is_window_in_menu_loop = false;
+					handled = true;
+					break;
+				}
 
-			case WM_ACTIVATEAPP: {
-				_is_window_active = (wparam == TRUE);
-				attempt_clip_cursor();
-				handled = true;
-				break;
-			}
+				case WM_ACTIVATEAPP: {
+					_is_window_active = (wparam == TRUE);
+					attempt_clip_cursor();
+					handled = true;
+					break;
+				}
 
-			case WM_SETCURSOR: {
-				handled = attempt_set_cursor();
-				break;
-			}
+				case WM_SETCURSOR: {
+					handled = attempt_set_cursor();
+					break;
+				}
 
-			case WM_MOVE: {
-				attempt_clip_cursor();
-				handled = true;
-				break;
-			}
+				case WM_MOVE: {
+					attempt_clip_cursor();
+					handled = true;
+					break;
+				}
 			}
 		}
 
@@ -145,8 +147,8 @@ namespace solar {
 			if (get_window_client_size() != _device_params.get_backbuffer_size()) {
 				d3d9_device_params adjusted_device_params = _device_params;
 				adjusted_device_params.set_window_top_left(get_window_top_left());
-				adjusted_device_params.get_present_parameters_for_change().BackBufferWidth = get_window_client_size().get_width();
-				adjusted_device_params.get_present_parameters_for_change().BackBufferHeight = get_window_client_size().get_height();
+				adjusted_device_params.get_present_parameters().BackBufferWidth = get_window_client_size()._width;
+				adjusted_device_params.get_present_parameters().BackBufferHeight = get_window_client_size()._height;
 				change_device(adjusted_device_params);
 			}
 		}
@@ -161,7 +163,7 @@ namespace solar {
 	}
 
 	void d3d9_context::remove_device_event_handler(d3d9_device_event_handler* handler) {
-		if (attempt_find_and_erase(_event_handlers, handler)) {
+		if (try_find_and_erase(_event_handlers, handler)) {
 			if (_IDirect3DDevice9 != nullptr) {
 				handler->on_device_lost(_IDirect3DDevice9);
 				handler->on_device_released(_IDirect3DDevice9);
@@ -177,10 +179,7 @@ namespace solar {
 				_is_window_in_size_move ||
 				_is_window_in_menu_loop ||
 				is_changing_device();
-			if (is_paused) {
-				::Sleep(50);
-			}
-			else {
+			if (!is_paused) {
 				if (_is_device_lost) {
 					HRESULT hr = _IDirect3DDevice9->TestCooperativeLevel();
 					if (hr != D3DERR_DEVICELOST) {
@@ -210,8 +209,8 @@ namespace solar {
 		if (_device_params.get_window_type() == d3d9_window_type::VIRTUAL_FULLSCREEN) {
 			auto new_params = _device_params;
 			new_params.set_window_type(d3d9_window_type::RESIZABLE_WINDOW);
-			new_params.get_present_parameters_for_change().BackBufferWidth = _toggle_from_fullscreen_backbuffer_size.get_width();
-			new_params.get_present_parameters_for_change().BackBufferHeight = _toggle_from_fullscreen_backbuffer_size.get_height();
+			new_params.get_present_parameters().BackBufferWidth = _exit_fullscreen_backbuffer_size._width;
+			new_params.get_present_parameters().BackBufferHeight = _exit_fullscreen_backbuffer_size._height;
 			change_device(new_params);
 		}
 		else if (_device_params.get_window_type() == d3d9_window_type::RESIZABLE_WINDOW) {
@@ -221,7 +220,7 @@ namespace solar {
 			change_device(new_params);
 		}
 		else {
-			TRACE("ignoring toggle_virtual_fullscreen due to current window_type being unsupported : {}", d3d9_window_type_details::get_string(_device_params.get_window_type()));
+			TRACE("ignoring toggle_virtual_fullscreen due to current window_type being unsupported : {}", to_string(_device_params.get_window_type()));
 		}
 	}
 
@@ -248,7 +247,7 @@ namespace solar {
 		}
 
 		_is_cursor_clipped = user_settings.get_is_cursor_clipped();
-		_toggle_from_fullscreen_backbuffer_size = user_settings.get_backbuffer_size();
+		_exit_fullscreen_backbuffer_size = user_settings.get_backbuffer_size();
 
 		return change_device(build_device_params(user_settings, enumerator_device_info));
 	}
@@ -271,16 +270,16 @@ namespace solar {
 	}
 
 	void d3d9_context::adjust_device_params_back_buffer(d3d9_device_params& device_params) const {
-		auto& pp = device_params.get_present_parameters_for_change();
+		auto& pp = device_params.get_present_parameters();
 
 		if (device_params.get_window_type() == d3d9_window_type::VIRTUAL_FULLSCREEN) {
-			pp.BackBufferWidth = get_desktop_size().get_width();
-			pp.BackBufferHeight = get_desktop_size().get_height();
+			pp.BackBufferWidth = get_desktop_size()._width;
+			pp.BackBufferHeight = get_desktop_size()._height;
 		}
 		else if (device_params.get_window_type() == d3d9_window_type::RESIZABLE_WINDOW) {
 			if (is_window_maximized()) {
-				pp.BackBufferWidth = get_window_client_size().get_width();
-				pp.BackBufferHeight = get_window_client_size().get_height();
+				pp.BackBufferWidth = get_window_client_size()._width;
+				pp.BackBufferHeight = get_window_client_size()._height;
 			}
 		}
 	}
@@ -301,7 +300,7 @@ namespace solar {
 		d3d9_device_params old_device_params = _device_params;
 
 		_device_params = params;
-		_device_params.get_present_parameters_for_change().hDeviceWindow = _hwnd;
+		_device_params.get_present_parameters().hDeviceWindow = _hwnd;
 
 		bool success = false;
 		if (process_hwnd_before_device_change(old_device_params)) {
@@ -336,10 +335,13 @@ namespace solar {
 				else if (_device_params.get_window_type() == d3d9_window_type::EXCLUSIVE_FULLSCREEN) {
 					new_style = WS_POPUP | WS_SYSMENU;
 				}
+				else {
+					ASSERT(false); //unknown window type
+				}
 
 				TRACE("d3d9_window_type is changing GWL_STYLE {{ old_window_type:{} , new_window_type:{} }}"
-					, d3d9_window_type_details::get_string(old_device_params.get_window_type())
-					, d3d9_window_type_details::get_string(_device_params.get_window_type()));
+					, to_string(old_device_params.get_window_type())
+					, to_string(_device_params.get_window_type()));
 
 				::ShowWindow(_hwnd, SW_HIDE);
 				::ShowWindow(_hwnd, SW_RESTORE);
@@ -394,8 +396,8 @@ namespace solar {
 				if (!is_window_maximized()) {
 
 					RECT new_window_size = { 0 };
-					new_window_size.right = _device_params.get_backbuffer_size().get_width();
-					new_window_size.bottom = _device_params.get_backbuffer_size().get_height();
+					new_window_size.right = _device_params.get_backbuffer_size()._width;
+					new_window_size.bottom = _device_params.get_backbuffer_size()._height;
 					VERIFY(::AdjustWindowRect(&new_window_size, GetWindowLong(_hwnd, GWL_STYLE), FALSE) == TRUE);
 
 					point new_window_top_left = point(0, 0);
@@ -426,8 +428,8 @@ namespace solar {
 
 						d3d9_device_params adjusted_device_params = _device_params;
 						adjusted_device_params.set_window_top_left(new_window_rect.get_top_left());
-						adjusted_device_params.get_present_parameters_for_change().BackBufferWidth = get_window_client_size().get_width();
-						adjusted_device_params.get_present_parameters_for_change().BackBufferHeight = get_window_client_size().get_height();
+						adjusted_device_params.get_present_parameters().BackBufferWidth = get_window_client_size()._width;
+						adjusted_device_params.get_present_parameters().BackBufferHeight = get_window_client_size()._height;
 
 						success = change_device(adjusted_device_params);
 					}
@@ -491,7 +493,7 @@ namespace solar {
 			_device_params.get_device_type(),
 			_hwnd,
 			_device_params.get_behavior_flags(),
-			&_device_params.get_present_parameters_for_change(),
+			&_device_params.get_present_parameters(),
 			&_IDirect3DDevice9);
 		if (hr == D3DERR_DEVICELOST) {
 			_is_device_lost = true;
@@ -529,7 +531,7 @@ namespace solar {
 		TRACE("d3d9 reset_device : begin");
 
 		handle_device_lost();
-		HRESULT hr = _IDirect3DDevice9->Reset(&_device_params.get_present_parameters_for_change());
+		HRESULT hr = _IDirect3DDevice9->Reset(&_device_params.get_present_parameters());
 		if (SUCCEEDED(hr)) {
 			sync_backbuffer_desc_to_device();
 			handle_device_reset();
@@ -606,6 +608,20 @@ namespace solar {
 		else {
 			::ClipCursor(NULL);
 		}
+	}
+
+	render_state_block* d3d9_context::create_render_state_block(const render_state_block_def& def) {
+		return new d3d9_render_state_block(*this, def);
+	}
+
+	void d3d9_context::release_render_state_block(render_state_block* block) {
+		delete block;
+	}
+
+	uint64_t d3d9_context::get_set_current_render_state_flags(uint64_t new_flags) {
+		auto old_flags = _current_render_state_flags;
+		_current_render_state_flags = new_flags;
+		return old_flags;
 	}
 
 }

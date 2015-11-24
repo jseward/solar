@@ -24,6 +24,7 @@ namespace solar {
 	public:
 		brush(const char* texture_pool_name);
 
+		bool is_id_empty() const;
 		const std::string& get_id() const;
 		const brush_stretch_margins& get_stretch_margins() const;
 		texture& get_texture() const;

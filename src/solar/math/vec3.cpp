@@ -1,5 +1,6 @@
 #include "vec3.h"
 
+#include "solar/utility/assert.h"
 #include "solar/math/math_helpers.h"
 
 namespace solar {
@@ -35,8 +36,17 @@ namespace solar {
 		return (_x * _x) + (_y * _y) + (_z * _z);
 	}
 
-	vec3 operator/(const vec3& lhs, float rhs) {
-		return vec3(lhs._x / rhs, lhs._y / rhs, lhs._z / rhs);
+	vec3 operator*(const vec3& v, float k) {
+		return vec3(v._x * k, v._y * k, v._z * k);
+	}
+
+	vec3 operator/(const vec3& v, float k) {
+		ASSERT(!is_approx(k, 0.f, 0.001f));
+		return vec3(v._x / k, v._y / k, v._z / k);
+	}
+
+	vec3 operator+(const vec3& lhs, const vec3& rhs) {
+		return vec3(lhs._x + rhs._x, lhs._y + rhs._y, lhs._z + rhs._z);
 	}
 
 	vec3 operator-(const vec3& lhs, const vec3& rhs) {
@@ -65,6 +75,10 @@ namespace solar {
 	bool are_collinear(const vec3& u, const vec3& v) {
 		float d = abs(constrain(-1.f, +1.f, dot(u, v)));
 		return is_approx(d, 1.f, 0.001f);
+	}
+
+	vec3 make_vec3_no_z(const vec2& v2) {
+		return vec3(v2._x, v2._y, 0.f);
 	}
 
 }

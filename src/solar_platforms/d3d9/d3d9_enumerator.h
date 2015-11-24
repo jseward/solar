@@ -9,20 +9,20 @@
 namespace solar {
 
 	struct d3d9_enumerator_setup_params {
-		PROPERTY_BY_COPY(d3d9_enumerator_setup_params, IDirect3D9*, IDirect3D9, nullptr);
-		PROPERTY_BY_COPY(d3d9_enumerator_setup_params, UINT, min_display_mode_width, 640);
-		PROPERTY_BY_COPY(d3d9_enumerator_setup_params, UINT, min_display_mode_height, 480);
-		PROPERTY_BY_COPY(d3d9_enumerator_setup_params, bool, is_post_pixelshader_blending_required, true);
+		MAKE_PROPERTY_AS_COPY(d3d9_enumerator_setup_params, IDirect3D9*, IDirect3D9, nullptr);
+		MAKE_PROPERTY(d3d9_enumerator_setup_params, UINT, min_display_mode_width, 640);
+		MAKE_PROPERTY(d3d9_enumerator_setup_params, UINT, min_display_mode_height, 480);
+		MAKE_PROPERTY(d3d9_enumerator_setup_params, bool, is_post_pixelshader_blending_required, true);
 	};
 
 	struct d3d9_enumerator_device_info {
-		PROPERTY_BY_COPY(d3d9_enumerator_device_info, bool, is_valid, false);
-		PROPERTY_BY_COPY(d3d9_enumerator_device_info, float, ranking, 0.f);
-		PROPERTY_BY_COPY(d3d9_enumerator_device_info, D3DDEVTYPE, device_type, D3DDEVTYPE_HAL);
-		PROPERTY_BY_COPY(d3d9_enumerator_device_info, UINT, adapter_ordinal, D3DADAPTER_DEFAULT);
-		PROPERTY_BY_COPY(d3d9_enumerator_device_info, D3DFORMAT, adapter_format, D3DFMT_R8G8B8);
-		PROPERTY_BY_COPY(d3d9_enumerator_device_info, DWORD, behavior_flags, D3DCREATE_SOFTWARE_VERTEXPROCESSING);
-		PROPERTY_BY_REF(d3d9_enumerator_device_info, D3DPRESENT_PARAMETERS, present_parameters, D3DPRESENT_PARAMETERS());
+		MAKE_PROPERTY(d3d9_enumerator_device_info, bool, is_valid, false);
+		MAKE_PROPERTY(d3d9_enumerator_device_info, float, ranking, 0.f);
+		MAKE_PROPERTY(d3d9_enumerator_device_info, D3DDEVTYPE, device_type, D3DDEVTYPE_HAL);
+		MAKE_PROPERTY(d3d9_enumerator_device_info, UINT, adapter_ordinal, D3DADAPTER_DEFAULT);
+		MAKE_PROPERTY(d3d9_enumerator_device_info, D3DFORMAT, adapter_format, D3DFMT_R8G8B8);
+		MAKE_PROPERTY(d3d9_enumerator_device_info, DWORD, behavior_flags, D3DCREATE_SOFTWARE_VERTEXPROCESSING);
+		MAKE_PROPERTY(d3d9_enumerator_device_info, D3DPRESENT_PARAMETERS, present_parameters, D3DPRESENT_PARAMETERS());
 	};
 
 	class d3d9_enumerator {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "d3d9_headers.h"
-#include "solar/rendering/color.h"
+#include "solar/colors/color.h"
 
 namespace solar {
 

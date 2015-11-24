@@ -154,6 +154,7 @@ namespace solar {
 	template<typename T, typename NodeFactoryT>
 	class linked_list {
 	public:
+		typedef T value_type;
 		typedef size_t size_type;
 		typedef linked_list_iterator<T> iterator;
 		typedef linked_list_const_iterator<T> const_iterator;
@@ -163,7 +164,7 @@ namespace solar {
 		static NodeFactoryT* _s_node_factory;
 
 	public:
-		void set_node_factory(NodeFactoryT* node_factory) {
+		static void set_node_factory(NodeFactoryT* node_factory) {
 			_s_node_factory = node_factory;
 		}
 
@@ -185,6 +186,10 @@ namespace solar {
 			clear();
 		}
 		
+		bool empty() const {
+			return _size == 0;
+		}
+
 		size_type size() const {
 			return _size;
 		}
@@ -244,6 +249,40 @@ namespace solar {
 				erase(temp);
 			}
 			return iterator(last.get_node(), _iterator_snapshot);
+		}
+
+		void push_back(const T& value) {
+			insert(end(), value);
+		}
+
+		iterator insert(const_iterator position, const T& value) {
+			auto new_node = create_node();
+			new_node->_data = value;
+
+			auto position_node = position.get_node();
+			if (position_node != nullptr) {
+				new_node->_next = position_node;
+				new_node->_prev = position_node->_prev;
+				if (position_node->_prev != nullptr) {
+					position_node->_prev->_next = new_node;
+				}
+				position_node->_prev = new_node;
+			}
+			else {
+				if (_last != nullptr) {
+					ASSERT(_last->_next == nullptr);
+					_last->_next = new_node;
+					new_node->_prev = _last;
+				}
+				_last = new_node;
+			}
+
+			if (_first == position_node) {
+				_first = new_node;
+			}
+
+			_iterator_snapshot++;
+			return iterator(new_node, _iterator_snapshot);
 		}
 
 	private:

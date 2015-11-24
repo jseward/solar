@@ -8,7 +8,7 @@ namespace solar {
 	class archive_writer;
 
 	class size {
-	private:
+	public:
 		int _width;
 		int _height;
 
@@ -16,17 +16,12 @@ namespace solar {
 		size();
 		size(int w, int h);
 
-		int get_width() const;
-		void set_width(int x);
-
-		int get_height() const;
-		void set_height(int y);
-
 		bool operator==(const size& rhs) const;
 		bool operator!=(const size& rhs) const;
-		size operator*(float rhs) const;
 
 	public:
+		friend size operator*(const size& lhs, float rhs);
+		friend size operator-(const size& lhs, const size& rhs);
 		friend std::ostream& operator<<(std::ostream& os, const size& s);
 	};
 

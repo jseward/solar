@@ -25,10 +25,10 @@ namespace solar {
 	}
 
 	void text_factory::teardown() {
-		_resource_system.end_watching_resource(this);
+		_resource_system.end_watching_resources(this);
 		_language = "";
 		_text_map.clear();
-		_caching_context++;
+		_caching_context.increment();
 	}
 
 	void text_factory::load_from_address(const resource_address& address) {
@@ -37,10 +37,10 @@ namespace solar {
 			_text_map.load_from_stream(*stream);
 			_resource_system.close_stream(stream);
 		}
-		_caching_context++;
+		_caching_context.increment();
 	}
 
-	int text_factory::get_text_caching_context() const {
+	const resource_factory_caching_context& text_factory::get_caching_context() const {
 		return _caching_context;
 	}
 
@@ -57,9 +57,10 @@ namespace solar {
 		return _empty_text.get();
 	}
 
-	void text_factory::on_resource_changed(const resource_address& address) {
-		ASSERT(address == _language_address);
-		load_from_address(address);
+	void text_factory::on_file_changed(const std::string& path, void* data) {
+		ASSERT(data == nullptr);
+		ASSERT(path == _language_address.get_file_path());
+		load_from_address(_language_address);
 	}
 
 }

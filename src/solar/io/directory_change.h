@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <ostream>
 #include "directory_change_type.h"
 
 namespace solar {
@@ -26,6 +27,11 @@ namespace solar {
 
 		const std::string& get_path() const {
 			return _path;
+		}
+
+	public:
+		friend std::ostream& operator<<(std::ostream& os, const directory_change& dc) {
+			return os << dc.get_path() << " (" << dc._change_type << ")";
 		}
 	};
 

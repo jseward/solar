@@ -26,6 +26,8 @@ namespace solar {
 		ASSERT(max_object_size > sizeof(node));
 		ASSERT(max_object_count > 0);
 
+		TRACE("memory_pool - {} : allocate_memory : object_size={} * object_count={} -> bytes={}", _id, max_object_size, max_object_count, max_object_size * max_object_count);
+
 		_max_object_size = max_object_size;
 		_max_object_count = max_object_count;
 		if (max_object_count) {
@@ -51,6 +53,10 @@ namespace solar {
 			_max_object_count = 0;
 			_next_free_node = nullptr;
 		}
+	}
+
+	unsigned int memory_pool::get_created_object_count() const {
+		return _created_object_count;
 	}
 
 	memory_pool::node* memory_pool::get_node_ptr_at(size_t i) {

@@ -1,7 +1,7 @@
 #include "resource_mapped_memory.h"
 #include "solar/utility/assert.h"
 #include "solar/utility/trace.h"
-#include "solar/utility/unit_convert.h"
+#include "solar/math/unit_convert.h"
 
 namespace solar {
 
@@ -33,7 +33,7 @@ namespace solar {
 		_is_locked = false;
 		_needed_buffer_size = 0;
 
-		_dynamic_buffer.release();
+		_dynamic_buffer.reset();
 		_dynamic_buffer_size = 0;
 	}
 

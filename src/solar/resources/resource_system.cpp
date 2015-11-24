@@ -11,12 +11,14 @@
 #include "solar/archiving/json_archive_writer.h"
 #include "solar/io/file_system.h"
 #include "solar/io/file_path_helpers.h"
+#include "solar/io/file_change_watcher.h"
+#include "solar/io/file_change_handler.h"
 
 namespace solar {
 
-	resource_system::resource_system(file_system& file_system, directory_change_watcher& directory_change_watcher)
+	resource_system::resource_system(file_system& file_system, file_change_watcher& file_change_watcher)
 		: _file_system(file_system)
-		, _resource_change_watcher(directory_change_watcher) {
+		, _file_change_watcher(file_change_watcher) {
 	}
 
 	resource_system::~resource_system() {
@@ -25,19 +27,24 @@ namespace solar {
 
 	void resource_system::setup(const resource_system_params& params) {
 		TRACE("resource_system setup {{ provider_count:{} , is_watching_enabled:{} }}", params._providers.size(), bool_to_string(params._is_watching_enabled));
-		for (auto& provider : params._providers) {
+		for (const auto& provider : params._providers) {
 			TRACE("resource_system provider : {}", provider.get_description());
 		}
 
 		_providers = params._providers;
-
-		if (params._is_watching_enabled) {
-			_resource_change_watcher.setup(params._providers);
-		}
 	}
 
 	void resource_system::teardown() {
-		_resource_change_watcher.teardown();
+	}
+
+	std::vector<std::string> resource_system::get_all_file_system_provider_dir_paths() const {
+		std::vector<std::string> dir_paths;
+		for (const auto& provider : _providers) {
+			if (provider.get_type() == resource_provider_type::FILE_SYSTEM) {
+				dir_paths.push_back(provider.get_root_path());
+			}
+		}
+		return dir_paths;
 	}
 
 	resource_address resource_system::resolve_address(const char* resource_type_name, const char* folder, const char* extensions, const char* id, const char* id_source_description) {
@@ -108,7 +115,7 @@ namespace solar {
 	}
 
 	void resource_system::close_stream(stream* stream) {
-		if (attempt_find_and_erase(_open_file_system_streams, stream)) {
+		if (try_find_and_erase(_open_file_system_streams, stream)) {
 			auto fs = static_cast<file_stream*>(stream);
 			_file_system.close_file_stream(fs);
 		}
@@ -122,7 +129,7 @@ namespace solar {
 			if (address.get_provider_type() == resource_provider_type::FILE_SYSTEM) {
 				auto fs = _file_system.open_file_stream(address.get_file_path(), file_mode::OPEN_READ);
 				if (fs != nullptr) {
-					auto buffer_size = fs->get_file_size();
+					auto buffer_size = fs->get_size();
 					char* buffer = mapped_memory.allocate_buffer(buffer_size, address.to_string().c_str());
 					auto read_size = fs->read_bytes(buffer, buffer_size);
 					ASSERT(read_size == buffer_size);
@@ -189,16 +196,22 @@ namespace solar {
 		return d;
 	}
 
-	void resource_system::try_handle_any_watcher_change() {
-		_resource_change_watcher.try_handle_any_change();
+	void resource_system::begin_watching_resource(file_change_handler* handler, const resource_address& address) {
+		begin_watching_resource(handler, address, nullptr);
 	}
 
-	void resource_system::begin_watching_resource(resource_change_handler* handler, const resource_address& address) {
-		_resource_change_watcher.begin_watching_resource(handler, address);
+	void resource_system::begin_watching_resource(file_change_handler* handler, const resource_address& address, void* data) {
+		if (address.get_provider_type() == resource_provider_type::FILE_SYSTEM) {
+			_file_change_watcher.begin_watching_file(handler, address.get_file_path(), data);
+		}
 	}
 
-	void resource_system::end_watching_resource(resource_change_handler* handler) {
-		_resource_change_watcher.end_watching_resource(handler);
+	void resource_system::end_watching_resource(file_change_handler* handler, void* data) {
+		_file_change_watcher.end_watching_file(handler, data);
+	}
+
+	void resource_system::end_watching_resources(file_change_handler* handler) {
+		_file_change_watcher.end_watching_files(handler);
 	}
 
 }

@@ -21,20 +21,30 @@ namespace solar {
 		return static_cast<float>(v);
 	}
 
-	inline unsigned short int_to_ushort(int v) {
+	inline uint8_t int32_to_uint8(int32_t v) {
 		ASSERT(v >= 0);
-		ASSERT(v <= std::numeric_limits<unsigned short>::max());
-		return static_cast<unsigned short>(v);
+		ASSERT(v <= std::numeric_limits<uint8_t>::max());
+		return static_cast<uint8_t>(v);
 	}
 
-	inline unsigned short uint_to_ushort(unsigned int v) {
-		ASSERT(v >= 0);
-		ASSERT(v <= std::numeric_limits<unsigned short>::max());
-		return static_cast<unsigned short>(v);
+	inline int32_t uint32_to_int32(uint32_t v) {
+		ASSERT(v <= static_cast<uint32_t>(std::numeric_limits<int32_t>::max()));
+		return static_cast<int32_t>(v);
 	}
 
-	inline unsigned char ushort_to_uchar(unsigned short v) {
-		ASSERT(v <= std::numeric_limits<unsigned char>::max());
-		return static_cast<unsigned char>(v);
+	//alias for when explicit int size not necessary in client code
+	inline int uint_to_int(unsigned int v) {
+		return uint32_to_int32(v);
 	}
+
+	inline uint8_t uint32_to_uint8(uint32_t v) {
+		ASSERT(v <= std::numeric_limits<uint8_t>::max());
+		return static_cast<uint8_t>(v);
+	}
+
+	inline uint16_t uint32_to_uint16(uint32_t v) {
+		ASSERT(v <= std::numeric_limits<uint16_t>::max());
+		return static_cast<uint16_t>(v);
+	}
+
 }

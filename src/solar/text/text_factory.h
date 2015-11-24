@@ -1,19 +1,21 @@
 #pragma once
 
 #include <memory>
+#include "solar/io/file_change_handler.h"
+#include "solar/resources/resource_factory_caching_context.h"
+#include "solar/resources/resource_address.h"
 #include "text.h"
 #include "text_map.h"
-#include "solar/resources/resource_change_handler.h"
 
 namespace solar {
 
 	class resource_system;
 
-	class text_factory : resource_change_handler {
+	class text_factory : file_change_handler {
 	private:
 		resource_system& _resource_system;
 
-		int _caching_context;
+		resource_factory_caching_context _caching_context;
 		std::string _language;
 		resource_address _language_address;
 		text_map _text_map;
@@ -25,11 +27,11 @@ namespace solar {
 		void setup(const char* language);
 		void teardown();
 
-		int get_text_caching_context() const;
+		const resource_factory_caching_context& get_caching_context() const;
 		text* get_text(const std::string& id, const std::string& id_source_description);
 
 	private:
-		virtual void on_resource_changed(const resource_address& address) override;
+		virtual void on_file_changed(const std::string& path, void* data) override;
 
 	private:
 		void load_from_address(const resource_address& address);

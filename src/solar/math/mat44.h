@@ -1,6 +1,8 @@
 #pragma once
 
 #include "vec2.h"
+#include "vec3.h"
+#include "vec4.h"
 #include "mat33.h"
 
 namespace solar {
@@ -27,6 +29,7 @@ namespace solar {
 			float v10, float v11, float v12, float v13,
 			float v20, float v21, float v22, float v23,
 			float v30, float v31, float v32, float v33);
+		mat44(const mat33& mat33);
 
 		float& at(int row, int column);
 		float at(int row, int column) const;
@@ -34,12 +37,22 @@ namespace solar {
 	public:
 		friend mat44& operator*=(mat44& lhs, const mat44& rhs);
 		friend mat44 operator*(const mat44& lhs, const mat44& rhs);
+		friend vec2 operator*(const vec2& vec, const mat44& mat);
+		friend vec3 operator*(const vec3& vec, const mat44& mat);
+		friend vec4 operator*(const vec4& vec, const mat44& mat);
+		friend mat44& operator/=(mat44& mat, float k);
 
 	public:
 		friend mat44 make_mat44_identity();
 		friend mat44 make_mat44_camera_view(const vec3& position, const mat33& rotation);
-		friend mat44 make_mat44_perspective_fov(deg fov_y, float aspect_ratio, float near_plane, float far_plane);
+		friend mat44 make_mat44_perspective_fov(float fov_y_radians, float aspect_ratio, float near_plane, float far_plane);
 		friend mat44 make_mat44_orthographic(float width, float height, float near_plane, float far_plane);
+		friend mat44 make_mat44_inverted(const mat44& in);
+		friend mat44 make_mat44_rotation_on_x(float radians);
+		friend mat44 make_mat44_rotation_on_y(float radians);
+		friend mat44 make_mat44_rotation_on_z(float radians);
+		friend mat44 make_mat44_translation(const vec3& t);
+		friend mat44 make_mat44_translation(float x, float y, float z);
 	};
 
 	inline float& mat44::at(int row, int column) {

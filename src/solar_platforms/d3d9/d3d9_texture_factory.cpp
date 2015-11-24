@@ -1,7 +1,7 @@
 #include "d3d9_texture_factory.h"
 #include "solar/utility/assert.h"
 #include "solar/utility/alert.h"
-#include "solar/utility/unit_convert.h"
+#include "solar/math/unit_convert.h"
 #include "solar/resources/resource_system.h"
 #include "d3d9_context.h"
 #include "d3d9_texture.h"
@@ -12,8 +12,7 @@ namespace solar {
 	d3d9_texture_factory::d3d9_texture_factory(d3d9_context& context, resource_system& resource_system)
 		: _context(context)
 		, _resource_system(resource_system)
-		, _is_setup(false)
-		, _texture_caching_context(0) {
+		, _is_setup(false) {
 
 		_resource_mapped_memory = std::make_unique<resource_mapped_memory>();
 		_resource_mapped_memory->set_fixed_buffer_size_in_mb(1.f);
@@ -50,7 +49,7 @@ namespace solar {
 			iter.second->on_device_released(_context.get_device());
 		}
 		_textures.clear();
-		_texture_caching_context++;
+		_caching_context.increment();
 	}
 
 	texture* d3d9_texture_factory::get_texture(const char* texture_pool_name, const std::string& id, const std::string& id_source_description) {
@@ -74,15 +73,15 @@ namespace solar {
 			texture_pool = texture_pool_iter->second.get();
 		}
 		
-		auto address = _resource_system.resolve_address("texture", "textures", ".tga;.dds", id.c_str(), id_source_description.c_str());
+		auto address = _resource_system.resolve_address("texture", "textures", ".dds", id.c_str(), id_source_description.c_str());
 		d3d9_texture* new_texture = new d3d9_texture(*this, *texture_pool, address);
 		_textures[id] = std::unique_ptr<d3d9_texture>(new_texture);
 
 		return new_texture;
 	}
 
-	int d3d9_texture_factory::get_texture_caching_context() const {
-		return _texture_caching_context;
+	const resource_factory_caching_context& d3d9_texture_factory::get_caching_context() const {
+		return _caching_context;
 	}
 
 	void d3d9_texture_factory::on_device_created(IDirect3DDevice9* device) {

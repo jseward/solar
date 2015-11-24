@@ -5,30 +5,32 @@
 #include "resource_address.h"
 #include "resource_provider.h"
 #include "resource_mapped_memory.h"
-#include "resource_change_watcher.h"
-#include "resource_change_handler.h"
 #include "resource_system_params.h"
 
 namespace solar {
 
 	class archivable;
 	class file_system;
+	class file_change_watcher;
+	class file_change_handler;
 	enum class file_mode;
 
 	class resource_system {
 
 	private:
 		file_system& _file_system;
+		file_change_watcher& _file_change_watcher;
 		std::vector<resource_provider> _providers;
 		std::vector<stream*> _open_file_system_streams;
-		resource_change_watcher _resource_change_watcher;
 
 	public:
-		resource_system(file_system& file_system, directory_change_watcher& directory_change_watcher);
+		resource_system(file_system& file_system, file_change_watcher& file_change_watcher);
 		~resource_system();
 
 		void setup(const resource_system_params& params);
 		void teardown();
+
+		std::vector<std::string> get_all_file_system_provider_dir_paths() const;
 
 		resource_address resolve_address(
 			const char* resource_type_name, 
@@ -46,9 +48,10 @@ namespace solar {
 		bool read_object_as_json(archivable& object, const resource_address& address);
 		void write_object_as_json(const archivable& object, const resource_address& address);
 
-		void try_handle_any_watcher_change();
-		void begin_watching_resource(resource_change_handler* handler, const resource_address& address);
-		void end_watching_resource(resource_change_handler* handler);
+		void begin_watching_resource(file_change_handler* handler, const resource_address& address);
+		void begin_watching_resource(file_change_handler* handler, const resource_address& address, void* data);
+		void end_watching_resource(file_change_handler* handler, void* data);
+		void end_watching_resources(file_change_handler* handler);
 
 	private:
 		resource_address resolve_address_with_provider(const resource_provider& provider, const char* folder, const char* extensions, const char* id);

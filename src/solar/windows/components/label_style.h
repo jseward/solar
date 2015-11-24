@@ -1,9 +1,9 @@
 #pragma once
 
-#include "solar/utility/property.h"
 #include "solar/windows/layout/window_layout.h"
 #include "solar/windows/styling/window_style.h"
 #include "solar/windows/styling/window_style_id.h"
+#include "solar/windows/window_font_def.h"
 
 namespace solar {
 
@@ -12,6 +12,7 @@ namespace solar {
 		static const char* TYPE_NAME;
 
 	public:
+		window_font_def _font_def;
 
 	public:
 		virtual std::unique_ptr<window_style> clone() const override;

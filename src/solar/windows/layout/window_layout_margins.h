@@ -1,6 +1,7 @@
 #pragma once
 
 #include "solar/archiving/single_value_archivable.h"
+#include "solar/math/rect.h"
 
 namespace solar {
 
@@ -21,6 +22,8 @@ namespace solar {
 		int get_bottom() const;
 
 		window_layout_margins operator*(float rhs) const;
+
+		rect transform_area(const rect& in_area, float in_area_scale) const;
 
 	private:
 		virtual void read_from_archive(archive_reader& reader, const char* name) override;

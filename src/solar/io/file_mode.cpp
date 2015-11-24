@@ -4,13 +4,17 @@
 
 namespace solar {
 
-	const char* file_mode_details::get_string(file_mode e) {
-		switch (e) {
+	const char* to_string(file_mode mode) {
+		switch (mode) {
 			RETURN_ENUM_STRING(file_mode, OPEN_READ);
 			RETURN_ENUM_STRING(file_mode, CREATE_WRITE);
 			RETURN_ENUM_STRING(file_mode, APPEND_WRITE);
-			END_ENUM_STRINGS();
+			END_ENUM_STRINGS(mode);
 		}
 	};
+
+	std::ostream& operator<<(std::ostream& os, file_mode mode) {
+		return os << to_string(mode);
+	}
 
 }

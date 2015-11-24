@@ -3,17 +3,20 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
-#include "window_style.h"
 #include "solar/archiving/archivable.h"
 #include "solar/utility/verify.h"
+#include "solar/utility/alert.h"
 #include "solar/windows/window.h"
 #include "solar/windows/window_helpers.h"
+#include "solar/resources/resource_factory_caching_context.h"
+#include "solar/io/file_change_handler.h"
+#include "window_style.h"
 
 namespace solar {
 
 	class resource_system;
 
-	class window_style_factory {
+	class window_style_factory : public file_change_handler {
 	private:
 		class window_style_type_info : public archivable {
 		private:
@@ -30,35 +33,44 @@ namespace solar {
 	private:
 		resource_system& _resource_system;
 
-		int _window_style_caching_context;
+		resource_factory_caching_context _caching_context;
 		std::unordered_map<std::string, std::unique_ptr<window_style_type_info>> _window_style_type_infos;
+		bool _is_loaded;
 
 	public:
 		window_style_factory(resource_system& resource_system);
 		~window_style_factory();
 		
-		template<typename StyleT> void add_window_style_type();
-		template<typename StyleT> void remove_window_style_type();
+		void add_all_common_types();
+		void remove_all_common_types();
+
+		template<typename StyleT> void add_type();
+		template<typename StyleT> void remove_type();
 
 		template<typename StyleT> StyleT* get_window_style(const window& owner_window, StyleT& fallback_style, const std::string& id, const std::string& id_source_description);
 
-		void load();
+		void load_all();
+		void unload_all();
 
+		const resource_factory_caching_context& get_caching_context() const;
 		window_style* get_window_style(const char* window_style_typename, const std::string& id, const std::string& id_source_description);
-		int get_window_style_caching_context() const;
+
+	private:
+		virtual void on_file_changed(const std::string& path, void* data) override;
 	};
 
-	template<typename StyleT> void window_style_factory::add_window_style_type() {
+	template<typename StyleT> void window_style_factory::add_type() {
 		ASSERT(_window_style_type_infos.find(StyleT::TYPE_NAME) == _window_style_type_infos.end());
 		_window_style_type_infos[StyleT::TYPE_NAME] = std::make_unique<window_style_type_info>(std::make_unique<StyleT>());
-		_window_style_caching_context++;
+		_caching_context.increment();
 
 		window_style_id<StyleT>::set_factory(this);
 	}
 
-	template<typename StyleT> void window_style_factory::remove_window_style_type() {
+	template<typename StyleT> void window_style_factory::remove_type() {
+		ASSERT(!_is_loaded); //must make sure resource_system isn't watching infos.
 		_window_style_type_infos.erase(StyleT::TYPE_NAME);
-		_window_style_caching_context++;
+		_caching_context.increment();
 
 		window_style_id<StyleT>::set_factory(nullptr);
 	}

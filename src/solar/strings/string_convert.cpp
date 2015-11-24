@@ -24,4 +24,14 @@ namespace solar {
 		return v;
 	}
 
+	bool try_parse_int_from_string(int& v, const char* s) {
+		int scanf_result = ::sscanf_s(s, "%d", &v);
+		return (scanf_result == 1);
+	}
+
+	bool try_parse_float_from_string(float& v, const char* s) {
+		int scanf_result = ::sscanf_s(s, "%f", &v);
+		return (scanf_result == 1);
+	}
+
 }

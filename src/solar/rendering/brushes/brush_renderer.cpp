@@ -1,6 +1,7 @@
 #include "brush_renderer.h"
 #include "brush.h"
 #include "solar/utility/assert.h"
+#include "solar/utility/trace.h"
 #include "solar/containers/container_helpers.h"
 #include "solar/utility/unused_parameter.h"
 #include "solar/rendering/primatives/prim2d.h"
@@ -14,15 +15,25 @@ namespace solar {
 	brush_renderer::~brush_renderer() {
 	}
 
-	void brush_renderer::begin_rendering(const rect& render_area, shader& shader) {
-		_prim2d.begin_rendering(render_area, shader);
+	void brush_renderer::begin_rendering(const rect& render_area) {
+		_prim2d.begin_rendering(render_area);
+	}
+
+	void brush_renderer::begin_rendering(const rect& render_area, shader_program& shader_program, render_state_block* rs_block) {
+		_prim2d.begin_rendering(render_area, shader_program, rs_block);
 	}
 
 	void brush_renderer::end_rendering() {
 		_prim2d.end_rendering();
 	}
 
-	void brush_renderer::render_brush(const brush& brush, brush_render_mode render_mode, const rect& area, float area_scale, const color& color) {
+	void brush_renderer::render_brush(
+		const brush& brush, 
+		brush_render_mode render_mode, 
+		const rect& area, 
+		float area_scale, 
+		const color& color) {
+
 		switch (render_mode) {
 			case brush_render_mode::STRETCHED:
 				render_brush_stretched(brush, area, area_scale, color);
@@ -57,6 +68,20 @@ namespace solar {
 				}
 			}
 		}
+	}
+
+	void brush_renderer::render_brush_with_angle(const brush& brush, const rect& area, const color& color, float angle) {
+		_prim2d.set_texture(brush.get_texture());
+
+		if (brush.get_stretch_margins().has_any()) {
+			static bool has_alerted_warning = false;
+			if (!has_alerted_warning) {
+				ALERT("WARNING : brushes with stretch margines not supported when rendering with angle. brush:{}", brush.get_id());
+				has_alerted_warning = true;
+			}
+		}
+
+		_prim2d.render_rect_with_angle(area, color, brush.get_uvs(brush_stretch_region::CENTER), angle);
 	}
 
 	void brush_renderer::render_brush_tiled(const brush& brush, const rect& area, float area_scale, const color& color) {

@@ -8,7 +8,9 @@ namespace solar {
 	class stream {
 	public:
 		virtual bool can_have_BOM() const = 0;
+		virtual unsigned int get_size() const = 0;
 		virtual void seek(stream_seek_anchor anchor, long offset) = 0;
+		//todo - change buffer type to be uint8_t (so size of byte is explicit)
 		virtual unsigned int read_bytes(char* buffer, unsigned int max_count) = 0;
 		virtual void write_bytes(const char* bytes, unsigned int count) = 0;
 		virtual void flush() = 0;

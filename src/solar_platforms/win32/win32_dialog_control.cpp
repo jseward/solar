@@ -48,15 +48,15 @@ namespace solar {
 				::GetDlgItem(hdlg, _resource_id),
 				_initial_area_in_dlg_space.get_left(),
 				_initial_area_in_dlg_space.get_top(),
-				new_dlg_size.get_width() - (_initial_dlg_size.get_width() - _initial_area_in_dlg_space.get_width()),
-				new_dlg_size.get_height() - (_initial_dlg_size.get_height() - _initial_area_in_dlg_space.get_height()),
+				new_dlg_size._width - (_initial_dlg_size._width - _initial_area_in_dlg_space.get_width()),
+				new_dlg_size._height - (_initial_dlg_size._height - _initial_area_in_dlg_space.get_height()),
 				FALSE);
 		}
 		else if (_anchor == win32_dialog_control_anchor::BOTTOM_RIGHT) {
 			::MoveWindow(
 				::GetDlgItem(hdlg, _resource_id),
-				new_dlg_size.get_width() - (_initial_dlg_size.get_width() - _initial_area_in_dlg_space.get_left()),
-				new_dlg_size.get_height() - (_initial_dlg_size.get_height() - _initial_area_in_dlg_space.get_top()),
+				new_dlg_size._width - (_initial_dlg_size._width - _initial_area_in_dlg_space.get_left()),
+				new_dlg_size._height - (_initial_dlg_size._height - _initial_area_in_dlg_space.get_top()),
 				_initial_area_in_dlg_space.get_width(),
 				_initial_area_in_dlg_space.get_height(),
 				FALSE);

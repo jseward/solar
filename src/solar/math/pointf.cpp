@@ -12,22 +12,6 @@ namespace solar {
 		, _y(y) {
 	}
 
-	float pointf::get_x() const {
-		return _x;
-	}
-
-	void pointf::set_x(float x) {
-		_x = x;
-	}
-
-	float pointf::get_y() const {
-		return _y;
-	}
-
-	void pointf::set_y(float y) {
-		_y = y;
-	}
-
 	const float* pointf::as_raw_float_array() const {
 		return &_x;
 	}

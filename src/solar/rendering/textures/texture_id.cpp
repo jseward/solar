@@ -8,8 +8,8 @@ namespace solar {
 		: _texture_pool_name(texture_pool_name) {
 	}
 
-	int texture_id::get_current_resource_caching_context(const texture_factory& factory) const {
-		return factory.get_texture_caching_context();
+	const resource_factory_caching_context& texture_id::get_factory_caching_context(const texture_factory& factory) const {
+		return factory.get_caching_context();
 	}
 
 	texture* texture_id::get_uncached_resource(texture_factory& factory, const std::string& id, const std::string& id_source_description) const {

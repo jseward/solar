@@ -1,9 +1,11 @@
 #pragma once
 
-#include "color.h"
+#include "solar/colors/color.h"
 #include "viewport.h"
 #include "render_scene_functor.h"
 #include "render_device_event_handler.h"
+#include "./render_states/render_state_block.h"
+#include "./render_states/render_state_block_def.h"
 
 namespace solar {
 
@@ -17,6 +19,9 @@ namespace solar {
 		virtual void clear(const color& color) = 0;
 		virtual void toggle_virtual_fullscreen() = 0;
 		virtual viewport set_viewport(const viewport& new_viewport) = 0;
+		virtual size get_backbuffer_size() const = 0;
+		virtual render_state_block* create_render_state_block(const render_state_block_def& def) = 0;
+		virtual void release_render_state_block(render_state_block* block) = 0;
 	};
 
 }

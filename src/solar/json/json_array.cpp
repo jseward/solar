@@ -52,10 +52,10 @@ namespace solar {
 		return json_object(_value[index], _error_handler);
 	}
 
-	unsigned short json_array::get_ushort(unsigned int index) {
-		unsigned short v = 0;
-		if (!try_get_ushort(v, index)) {
-			_error_handler(build_string("ushort not found at index:{}", index));
+	uint16_t json_array::get_uint16(unsigned int index) {
+		uint16_t v = 0;
+		if (!try_get_uint16(v, index)) {
+			_error_handler(build_string("uint16 not found at index:{}", index));
 		}
 		return v;
 	}
@@ -84,7 +84,7 @@ namespace solar {
 		return s;
 	}
 
-	bool json_array::try_get_ushort(unsigned short& out, unsigned int index) {
+	bool json_array::try_get_uint16(uint16_t& out, unsigned int index) {
 		if (index >= _value.Size()) {
 			return false;
 		}
@@ -94,11 +94,11 @@ namespace solar {
 			return false;
 		}
 
-		if (v.GetUint() > std::numeric_limits<unsigned short>::max()) {
+		if (v.GetUint() > std::numeric_limits<uint16_t>::max()) {
 			return false;
 		}
 
-		out = uint_to_ushort(v.GetUint());
+		out = uint32_to_uint16(v.GetUint());
 		return true;
 	}
 
@@ -122,7 +122,7 @@ namespace solar {
 		}
 
 		auto& v = _value[index];
-		if (!v.IsDouble()) {
+		if (!v.IsNumber()) {
 			return false;
 		}
 

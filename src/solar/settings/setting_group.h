@@ -10,7 +10,6 @@ namespace solar {
 	class file_system;
 
 	class setting_group : archivable {
-
 	private:
 		std::string _group_name;
 		bool _has_changes;
@@ -26,9 +25,7 @@ namespace solar {
 		void add_setting(std::shared_ptr<setting> setting);
 		void remove_setting(std::shared_ptr<setting> setting);
 
-		void load(file_system& file_system);
-
-		std::string get_file_path(file_system& file_system) const;
+		void load(file_system& file_system, const std::string& path);
 
 	private:
 		int get_archive_version() const;

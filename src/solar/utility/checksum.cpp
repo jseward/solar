@@ -43,9 +43,15 @@ namespace solar {
 	}
 
 	checksum& checksum::add_vec3(const vec3& v) {
-		add_checksum_at_index(0, calculate_fletcher_checksum_of_type<float>(v.x()));
-		add_checksum_at_index(1, calculate_fletcher_checksum_of_type<float>(v.y()));
-		add_checksum_at_index(2, calculate_fletcher_checksum_of_type<float>(v.z()));
+		add_checksum_at_index(0, calculate_fletcher_checksum_of_type<float>(v._x));
+		add_checksum_at_index(1, calculate_fletcher_checksum_of_type<float>(v._y));
+		add_checksum_at_index(2, calculate_fletcher_checksum_of_type<float>(v._z));
+		return *this;
+	}
+
+	checksum& checksum::add_size(const size& v) {
+		add_checksum_at_index(0, v._width);
+		add_checksum_at_index(1, v._height);
 		return *this;
 	}
 
@@ -78,13 +84,13 @@ namespace solar {
 		return _value;
 	}
 
-	int checksum::calculate_fletcher_checksum(const unsigned int* data_32, unsigned int data_32_count) const {
+	int checksum::calculate_fletcher_checksum(const uint32_t* data_32, unsigned int data_32_count) const {
 		//http://en.wikipedia.org/wiki/Fletcher's_checksum
 
 		unsigned int sum_a = 0xFFFF;
 		unsigned int sum_b = 0xFFFF;
 
-		const unsigned short* data_16 = reinterpret_cast<const unsigned short*>(data_32);
+		const uint16_t* data_16 = reinterpret_cast<const uint16_t*>(data_32);
 		unsigned int data_16_count = data_32_count * 2;
 		while (data_16_count != 0) {
 

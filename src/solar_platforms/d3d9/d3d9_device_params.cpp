@@ -11,7 +11,7 @@ namespace solar {
 	}
 
 	void d3d9_device_params::trace_dump() const {
-		TRACE("window_type : {}", d3d9_window_type_details::get_string(get_window_type()));
+		TRACE("window_type : {}", to_string(get_window_type()));
 		TRACE("device_type : {}", D3DDEVTYPE_to_string(get_device_type()));
 		TRACE("adapter_ordinal : {}", get_adapter_ordinal());
 		TRACE("adapter_format : {}", D3DFORMAT_to_string(get_adapter_format()));

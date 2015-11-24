@@ -1,6 +1,5 @@
 #pragma once
 
-#include "deg.h"
 #include "vec3.h"
 
 namespace solar {
@@ -30,19 +29,24 @@ namespace solar {
 			float v00, float v01, float v02,
 			float v10, float v11, float v12,
 			float v20, float v21, float v22);
-
-		vec3 transform_vec3(const vec3& in) const;
 		
 		float& at(int row, int column);
 		float at(int row, int column) const;
 		const vec3& get_row(int row) const;
 		vec3& get_row(int row);
+		const vec3& get_forward() const;
+		const vec3& get_up() const;
+		const vec3& get_cross() const;
+
+	public:
+		friend vec2 operator*(const vec2& vec, const mat33& mat);
+		friend vec3 operator*(const vec3& vec, const mat33& mat);
 
 	public:
 		friend mat33 make_mat33_identity();
-		friend mat33 make_mat33_rotation_on_x(deg angle);
-		friend mat33 make_mat33_rotation_on_y(deg angle);
-		friend mat33 make_mat33_rotation_on_z(deg angle);
+		friend mat33 make_mat33_rotation_on_x(float radians);
+		friend mat33 make_mat33_rotation_on_y(float radians);
+		friend mat33 make_mat33_rotation_on_z(float radians);
 		friend mat33 make_mat33_rotation_with_forward(const vec3& forward, const vec3& up);
 	};
 
@@ -60,6 +64,18 @@ namespace solar {
 
 	inline vec3& mat33::get_row(int row) {
 		return reinterpret_cast<vec3&>(_values[row][0]);
+	}
+
+	inline const vec3& mat33::get_forward() const {
+		return get_row(FORWARD_ROW_INDEX);
+	}
+
+	inline const vec3& mat33::get_up() const {
+		return get_row(UP_ROW_INDEX);
+	}
+
+	inline const vec3& mat33::get_cross() const {
+		return get_row(CROSS_ROW_INDEX);
 	}
 
 }

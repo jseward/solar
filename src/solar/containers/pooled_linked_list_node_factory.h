@@ -14,8 +14,8 @@ namespace solar {
 		memory_pool _pool;
 
 	public:
-		pooled_linked_list_node_factory(const char* pool_id) 
-			: _pool(pool_id) {
+		pooled_linked_list_node_factory(const char* pool_id, memory_pool_can_exceed_max_object_count can_exceed_max_object_count)
+			: _pool(pool_id, can_exceed_max_object_count) {
 		}
 
 		void allocate_memory(size_t max_node_count) {

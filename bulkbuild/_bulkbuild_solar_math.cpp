@@ -6,8 +6,16 @@
 #include "solar/math/rectf.cpp"
 #include "solar/math/vec2.cpp"
 #include "solar/math/vec3.cpp"
+#include "solar/math/vec4.cpp"
 #include "solar/math/mat33.cpp"
 #include "solar/math/mat44.cpp"
 #include "solar/math/math_constants.cpp"
 #include "solar/math/math_helpers.cpp"
 #include "solar/math/basis.cpp"
+#include "solar/math/random_stream.cpp"
+#include "solar/math/tri2.cpp"
+#include "solar/math/ray2.cpp"
+#include "solar/math/circle.cpp"
+#include "solar/math/unit_convert.cpp"
+
+

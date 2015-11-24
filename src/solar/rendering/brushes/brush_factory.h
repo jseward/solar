@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include "solar/resources/resource_factory_caching_context.h"
 #include "brush_set.h" //can't forward declare if in std::vector
 
 namespace solar {
@@ -13,15 +14,17 @@ namespace solar {
 	class brush_factory {
 	private:
 		resource_system& _resource_system;
-		int _brush_caching_context;
+		resource_factory_caching_context _caching_context;
 		std::vector<std::unique_ptr<brush_set>> _brush_sets;
 		std::unique_ptr<brush> _empty_brush;
 
 	public:
 		brush_factory(resource_system& resource_system);
+
 		void setup();
 		void teardown();
-		int get_brush_caching_context() const;
+
+		const resource_factory_caching_context& get_caching_context() const;
 		brush* get_brush(const std::string& id, const std::string& id_source_description);
 	};
 

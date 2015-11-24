@@ -18,10 +18,10 @@ namespace solar {
 		float _ty;
 		float _tz;
 		float _binormal_sign;
-		unsigned char _bone_index_0;
-		unsigned char _bone_index_1;
-		unsigned char _bone_index_2;
-		unsigned char _bone_index_3;
+		uint8_t _bone_index_0;
+		uint8_t _bone_index_1;
+		uint8_t _bone_index_2;
+		uint8_t _bone_index_3;
 		float _bone_weight_0;
 		float _bone_weight_1;
 		float _bone_weight_2;
@@ -29,17 +29,17 @@ namespace solar {
 
 	public:
 		d3d9_mesh_vertex& operator=(const mesh_vertex& rhs) {
-			_px = rhs._position.x();
-			_py = rhs._position.y();
-			_pz = rhs._position.z();
-			_nx = rhs._normal.x();
-			_ny = rhs._normal.y();
-			_nz = rhs._normal.z();
-			_u_0 = rhs._uv.u();
-			_v_0 = rhs._uv.v();
-			_tx = rhs._tangent.x();
-			_ty = rhs._tangent.y();
-			_tz = rhs._tangent.z();
+			_px = rhs._position._x;
+			_py = rhs._position._y;
+			_pz = rhs._position._z;
+			_nx = rhs._normal._x;
+			_ny = rhs._normal._y;
+			_nz = rhs._normal._z;
+			_u_0 = rhs._uv._u;
+			_v_0 = rhs._uv._v;
+			_tx = rhs._tangent._x;
+			_ty = rhs._tangent._y;
+			_tz = rhs._tangent._z;
 			_binormal_sign = rhs._binormal_sign;
 
 			copy_bone_weight(rhs, 0, _bone_index_0, _bone_weight_0);
@@ -51,9 +51,9 @@ namespace solar {
 		}
 
 	private:
-		static void copy_bone_weight(const mesh_vertex& src, unsigned int i, unsigned char& dst_bone_index, float& dst_bone_weight) {
+		static void copy_bone_weight(const mesh_vertex& src, unsigned int i, uint8_t& dst_bone_index, float& dst_bone_weight) {
 			if (src._bone_weights.size() > i) {
-				dst_bone_index = ushort_to_uchar(src._bone_weights[i]._bone_index);
+				dst_bone_index = src._bone_weights[i]._bone_index;
 				dst_bone_weight = src._bone_weights[i]._weight;
 			}
 			else {

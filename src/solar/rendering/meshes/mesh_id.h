@@ -13,7 +13,7 @@ namespace solar {
 
 	public:
 		mesh_id(const mesh_texture_params& texture_params);
-		virtual int get_current_resource_caching_context(const mesh_factory& factory) const override;
+		virtual const resource_factory_caching_context& get_factory_caching_context(const mesh_factory& factory) const override;
 		virtual mesh* get_uncached_resource(mesh_factory& factory, const std::string& id, const std::string& id_source_description) const override;
 	};
 

@@ -44,8 +44,9 @@ namespace solar {
 		F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
 	};
 
-	struct keyboard_key_details {
-		static const char* get_string(keyboard_key e);
-	};
+	extern const char* to_string(keyboard_key key);
+	extern bool is_alpha_numeric(keyboard_key key);
+	extern bool is_alpha(keyboard_key key);
+	extern bool is_numeric(keyboard_key key);
 
 }

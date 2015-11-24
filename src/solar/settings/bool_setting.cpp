@@ -7,6 +7,10 @@ namespace solar {
 		: setting_template<bool>(setting_value_type::BOOL, group_name, name, false) {
 	}
 
+	bool_setting::bool_setting(const char* group_name, const char* name, bool default_value)
+		: setting_template<bool>(setting_value_type::BOOL, group_name, name, default_value) {
+	}
+
 	checksum bool_setting::get_default_value_checksum() const {
 		return checksum().add_bool(get_default_value());
 	}

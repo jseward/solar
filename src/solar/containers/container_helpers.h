@@ -1,7 +1,9 @@
 #pragma once
 
 #include <algorithm>
+#include <numeric>
 #include "solar/utility/verify.h"
+#include "solar/utility/type_convert.h"
 
 namespace solar {
 
@@ -35,7 +37,13 @@ namespace solar {
 		}
 	}
 
-	template<typename Con> bool attempt_find_and_erase(Con& dst, const typename Con::value_type& v) {
+	template<typename Con> void erase_at_index(Con& dst, int index) {		
+		ASSERT(index >= 0);
+		ASSERT(index < uint_to_int(dst.size()));
+		dst.erase(dst.begin() + index);
+	}
+
+	template<typename Con> bool try_find_and_erase(Con& dst, const typename Con::value_type& v) {
 		auto iter = std::find(dst.begin(), dst.end(), v);
 		if (iter != dst.end()) {
 			dst.erase(iter);
@@ -52,12 +60,38 @@ namespace solar {
 		return (std::find_if(in.begin(), in.end(), predicate) != in.end());
 	}
 
+	template<typename Con, typename Pr> int count_if(const Con& in, Pr predicate) {
+		return std::count_if(in.begin(), in.end(), predicate);
+	}
+
+	template<typename Con, typename BinaryOp> int accumulate(const Con& in, int init, BinaryOp binary_op) {
+		return std::accumulate(in.begin(), in.end(), init, binary_op);
+	}
+
 	template<typename Con, typename Pr> typename Con::iterator find_if(Con& in, Pr predicate) {
 		return std::find_if(in.begin(), in.end(), predicate);
 	}
 
 	template<typename Con, typename Pr> typename Con::const_iterator find_if(const Con& in, Pr predicate) {
 		return std::find_if(in.begin(), in.end(), predicate);
+	}
+
+	template<typename Con> typename int find_index(const Con& in, const typename Con::value_type& v) {
+		for (unsigned int i = 0; i < in.size(); ++i) {
+			if (in[i] == v) {
+				return uint_to_int(i);
+			}
+		}
+		return -1;
+	}
+
+	template<typename Con, typename Pr> typename int find_index_if(const Con& in, Pr predicate) {
+		for (unsigned int i = 0; i < in.size(); ++i) {
+			if (predicate(in[i])) {
+				return uint_to_int(i);
+			}
+		}
+		return -1;
 	}
 
 	template<typename Con, typename Pr> Con copy_if(const Con& in, Pr predicate) {
@@ -84,6 +118,10 @@ namespace solar {
 	template<typename Con, typename Pr> typename void remove_and_erase_if(Con& in, Pr predicate) {
 		//http://stackoverflow.com/questions/17270837/stdvector-removing-elements-which-fulfill-some-conditions
 		in.erase(std::remove_if(in.begin(), in.end(), predicate), in.end());
+	}
+
+	template<typename Con> size_t get_data_size(const Con& in) {
+		return in.size() * sizeof(Con::value_type);
 	}
 
 }

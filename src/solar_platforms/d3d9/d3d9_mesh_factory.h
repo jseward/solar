@@ -20,7 +20,7 @@ namespace solar {
 		d3d9_context& _context;
 		resource_system& _resource_system;
 		bool _is_setup;
-		int _mesh_caching_context;
+		resource_factory_caching_context _caching_context;
 		std::unordered_map<std::string, std::unique_ptr<d3d9_mesh>> _meshs;
 
 	public:
@@ -31,7 +31,7 @@ namespace solar {
 		void teardown();
 
 		virtual mesh* get_mesh(const mesh_texture_params& texture_params, const std::string& id, const std::string& id_source_description) override;
-		virtual int get_mesh_caching_context() const override;
+		virtual const resource_factory_caching_context& get_caching_context() const override;
 
 		d3d9_context& get_d3d9_context();
 		resource_system& get_resource_system();

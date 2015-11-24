@@ -88,10 +88,10 @@ namespace solar {
 		return v;
 	}
 
-	unsigned short json_object::get_ushort(const char* name) {
-		unsigned short v = 0;
-		if (!try_get_ushort(v, name)) {
-			_error_handler(build_string("ushort not found : {}", name));
+	uint16_t json_object::get_uint16(const char* name) {
+		uint16_t v = 0;
+		if (!try_get_uint16(v, name)) {
+			_error_handler(build_string("uint16 not found : {}", name));
 		}
 		return v;
 	}
@@ -108,6 +108,14 @@ namespace solar {
 		unsigned int v = 0;
 		if (!try_get_uint(v, name)) {
 			_error_handler(build_string("uint not found : {}", name));
+		}
+		return v;
+	}
+
+	int64_t json_object::get_int64(const char* name) {
+		int64_t v = 0;
+		if (!try_get_int64(v, name)) {
+			_error_handler(build_string("int64 not found : {}", name));
 		}
 		return v;
 	}
@@ -172,7 +180,7 @@ namespace solar {
 		return true;
 	}
 
-	bool json_object::try_get_ushort(unsigned short& out, const char* name) {
+	bool json_object::try_get_uint16(uint16_t& out, const char* name) {
 		if (!_value.HasMember(name)) {
 			return false;
 		}
@@ -182,7 +190,7 @@ namespace solar {
 			return false;
 		}
 
-		if (v.GetUint() > std::numeric_limits<unsigned short>::max()) {
+		if (v.GetUint() > std::numeric_limits<uint16_t>::max()) {
 			return false;
 		}
 
@@ -227,6 +235,24 @@ namespace solar {
 		}
 
 		out = v.GetUint();
+		return true;
+	}
+
+	bool json_object::try_get_int64(int64_t& out, const char* name) {
+		if (!_value.HasMember(name)) {
+			return false;
+		}
+
+		auto& v = _value[name];
+		if (!v.IsInt64()) {
+			return false;
+		}
+
+		if (_should_track_used_values) {
+			_used_values.emplace_back(name);
+		}
+
+		out = v.GetInt64();
 		return true;
 	}
 

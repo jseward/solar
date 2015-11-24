@@ -38,12 +38,12 @@ namespace solar {
 		_writer.Bool(value);
 	}
 
-	void json_writer::write_ushort(const char* name, unsigned short value) {
+	void json_writer::write_uint16(const char* name, uint16_t value) {
 		_writer.String(name);
 		_writer.Uint(value);
 	}
 
-	void json_writer::write_ushort(unsigned short value) {
+	void json_writer::write_uint16(uint16_t value) {
 		_writer.Uint(value);
 	}
 
@@ -54,6 +54,11 @@ namespace solar {
 
 	void json_writer::write_int(int value) {
 		_writer.Int(value);
+	}
+
+	void json_writer::write_int64(const char* name, int64_t value) {
+		_writer.String(name);
+		_writer.Int64(value);
 	}
 
 	void json_writer::write_uint(const char* name, unsigned int value) {

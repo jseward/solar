@@ -1,10 +1,12 @@
 #pragma once
 
 #include "solar/rendering/meshes/mesh_renderer.h"
-#include "d3d9_context.h"
+#include "d3d9_device_event_handler.h"
 
 namespace solar {
 	
+	class d3d9_context;
+
 	class d3d9_mesh_renderer 
 		: public mesh_renderer 
 		, public d3d9_device_event_handler {
@@ -22,7 +24,7 @@ namespace solar {
 		IDirect3DVertexDeclaration9* _vertex_declaration;
 		bool _is_rendering;
 		bool _is_rendering_mesh;
-		shader* _shader;
+		shader_program* _shader_program;
 		const camera* _camera;
 
 	public:
@@ -32,7 +34,7 @@ namespace solar {
 		void setup();
 		void teardown();
 
-		virtual void begin_rendering(const camera& camera, shader& shader) override;
+		virtual void begin_rendering(const camera& camera, shader_program& shader_program) override;
 		virtual void end_rendering() override;
 		virtual void begin_rendering_sub_mesh(const mesh& mesh, int sub_mesh_index, const mat44& world_transform) override;
 		virtual void end_rendering_sub_mesh(const mesh& mesh, int sub_mesh_index) override;

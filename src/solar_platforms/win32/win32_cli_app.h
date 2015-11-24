@@ -8,8 +8,8 @@
 namespace solar{
 
 	struct win32_cli_app_setup_params {
-		PROPERTY_BY_COPY(win32_cli_app_setup_params, win32_cli_app_error_behavoir, assert_behavoir, win32_cli_app_error_behavoir::THROW);
-		PROPERTY_BY_COPY(win32_cli_app_setup_params, win32_cli_app_error_behavoir, alert_behavoir, win32_cli_app_error_behavoir::THROW);
+		MAKE_PROPERTY(win32_cli_app_setup_params, win32_cli_app_error_behavoir, assert_behavoir, win32_cli_app_error_behavoir::THROW);
+		MAKE_PROPERTY(win32_cli_app_setup_params, win32_cli_app_error_behavoir, alert_behavoir, win32_cli_app_error_behavoir::THROW);
 	};
 
 	class win32_cli_app {
@@ -29,7 +29,7 @@ namespace solar{
 	private:
 		bool handle_assert_failed(const char* file_name, int line_number, const char* expression);
 		bool handle_alert(const char* file_name, int line_number, const char* message);
-		void handle_trace(const char* file_name, int line_number, const char* message);
+		void handle_trace(const char* file_name, int line_number, bool add_newline, const char* message);
 	};
 
 }

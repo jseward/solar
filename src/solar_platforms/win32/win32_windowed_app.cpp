@@ -32,6 +32,12 @@ namespace solar {
 		, _hwnd(nullptr) {
 	}
 
+	win32_windowed_app::~win32_windowed_app() {
+		//NOTE: have to explicitely release the log_file here so that the implicit destructor isn't called. If that happens
+		//then using log_file will crash (== <invalid_ptr>). This happens if logging is a side effect of destructing the app.
+		_log_file.reset();
+	}
+
 	bool win32_windowed_app::setup(const win32_windowed_app_setup_params& params) {
 
 		set_assert_failed_handler([&](const char* file_name, int line_number, const char* expression) {
@@ -42,8 +48,8 @@ namespace solar {
 			return handle_alert(file_name, line_number, message);
 		});
 
-		set_trace_handler([&](const char* file_name, int line_number, const char* message) {
-			handle_trace(file_name, line_number, message);
+		set_trace_handler([&](const char* file_name, int line_number, bool add_newline, const char* message) {
+			handle_trace(file_name, line_number, add_newline, message);
 		});
 
 		TRACE("win32_windowed_app setup...");
@@ -53,8 +59,8 @@ namespace solar {
 		s_wnd_proc_context = this;
 
 		ASSERT(params.get_hinstance() != nullptr);
-		ASSERT(params.get_window_class_name() != nullptr);
-		ASSERT(params.get_window_caption() != nullptr);
+		ASSERT(!params.get_window_class_name().empty());
+		ASSERT(!params.get_window_caption().empty());
 		ASSERT(params.get_idle_proc() != nullptr);
 		
 		_setup_params = params;
@@ -71,8 +77,8 @@ namespace solar {
 		}
 
 		_hwnd = ::CreateWindow(
-			params.get_window_class_name(),
-			params.get_window_caption(),
+			params.get_window_class_name().c_str(),
+			params.get_window_caption().c_str(),
 			style,
 			0, 0, 0, 0,
 			nullptr,
@@ -100,7 +106,7 @@ namespace solar {
 		wc.style = CS_DBLCLKS;
 		wc.lpfnWndProc = wnd_proc;
 		wc.hInstance = params.get_hinstance();
-		wc.lpszClassName = params.get_window_class_name();
+		wc.lpszClassName = params.get_window_class_name().c_str();
 		wc.hIcon = ::LoadIcon(params.get_hinstance(), MAKEINTRESOURCE(params.get_large_icon_id()));
 		wc.hIconSm = ::LoadIcon(params.get_hinstance(), MAKEINTRESOURCE(params.get_small_icon_id()));
 
@@ -149,8 +155,8 @@ namespace solar {
 			{
 				case WM_GETMINMAXINFO: {
 					MINMAXINFO* minMaxInfo = (MINMAXINFO*)lparam;
-					minMaxInfo->ptMinTrackSize.x = s_wnd_proc_context->_setup_params.get_min_window_size().get_width();
-					minMaxInfo->ptMinTrackSize.y = s_wnd_proc_context->_setup_params.get_min_window_size().get_height();
+					minMaxInfo->ptMinTrackSize.x = s_wnd_proc_context->_setup_params.get_min_window_size()._width;
+					minMaxInfo->ptMinTrackSize.y = s_wnd_proc_context->_setup_params.get_min_window_size()._height;
 					handled = true;
 					break;
 				}
@@ -215,10 +221,10 @@ namespace solar {
 		return (result == win32_error_dialog_result::BREAK);
 	}
 
-	void win32_windowed_app::handle_trace(const char* file_name, int line_number, const char* message) {
+	void win32_windowed_app::handle_trace(const char* file_name, int line_number, bool add_newline, const char* message) {
 		UNUSED_PARAMETER(file_name);
 		UNUSED_PARAMETER(line_number);
-		print(build_string("[{}] {}\n", time_span().build_from_seconds(get_real_time_in_seconds()).to_hours_minutes_seconds_string(), message).c_str());
+		print(build_string("[{}] {}{}", time_span().build_from_seconds(get_real_time_in_seconds()).to_hours_minutes_seconds_string(), message, add_newline ? "\n" : "").c_str());
 	}
 
 	void win32_windowed_app::open_log_file(const std::string& path) {

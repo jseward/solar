@@ -20,20 +20,20 @@ namespace solar {
 	}
 
 	rect::rect(const point& top_left, const size& size)
-		: _left(top_left.get_x())
-		, _top(top_left.get_y())
-		, _right(top_left.get_x() + size.get_width())
-		, _bottom(top_left.get_y() + size.get_height()) {
+		: _left(top_left._x)
+		, _top(top_left._y)
+		, _right(top_left._x + size._width)
+		, _bottom(top_left._y + size._height) {
 
 		ASSERT(get_width() >= 0);
 		ASSERT(get_height() >= 0);
 	}
 
 	rect::rect(const point& top_left, const point& bottom_right)
-		: _left(top_left.get_x())
-		, _top(top_left.get_y())
-		, _right(bottom_right.get_x())
-		, _bottom(bottom_right.get_y()) {
+		: _left(top_left._x)
+		, _top(top_left._y)
+		, _right(bottom_right._x)
+		, _bottom(bottom_right._y) {
 
 		ASSERT(get_width() >= 0);
 		ASSERT(get_height() >= 0);
@@ -42,8 +42,8 @@ namespace solar {
 	rect::rect(const size& size)
 		: _left(0)
 		, _top(0)
-		, _right(size.get_width())
-		, _bottom(size.get_height()) {
+		, _right(size._width)
+		, _bottom(size._height) {
 
 		ASSERT(get_width() >= 0);
 		ASSERT(get_height() >= 0);
@@ -157,8 +157,8 @@ namespace solar {
 
 	bool rect::is_point_within(const point& p) const {
 		return
-			p.get_x() >= _left && p.get_x() < _right &&
-			p.get_y() >= _top && p.get_y() < _bottom;
+			p._x >= _left && p._x < _right &&
+			p._y >= _top && p._y < _bottom;
 	}
 
 	bool rect::operator == (const rect& rhs) const {
