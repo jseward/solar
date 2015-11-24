@@ -8,3 +8,4 @@
 #include "_bulkbuild_solar_settings.cpp"
 #include "_bulkbuild_solar_text.cpp"
 #include "_bulkbuild_solar_windows.cpp"
+#include "_bulkbuild_solar_cursors.cpp"

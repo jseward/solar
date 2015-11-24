@@ -118,9 +118,6 @@
     <Filter Include="src\solar\rendering\fonts">
       <UniqueIdentifier>{f57892cb-7bd0-4f8f-a2f5-eb3638fb1b13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\solar\rendering\cursors">
-      <UniqueIdentifier>{850b7aed-e6b1-4bda-8ce7-6bbff882b4af}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\solar\text">
       <UniqueIdentifier>{8dda08ea-930a-4caa-80a2-5d5d6d1ac716}</UniqueIdentifier>
     </Filter>
@@ -180,6 +177,9 @@
     </Filter>
     <Filter Include="src\solar_platforms\opengl\platforms">
       <UniqueIdentifier>{d543613f-47c6-4835-90a8-d6467eb73fc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\solar\cursors">
+      <UniqueIdentifier>{c7fff5ed-05ae-402d-b706-5db0c01c1fe8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -858,9 +858,6 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_context.h">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_cursor.h">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_device_event_handler.h">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClInclude>
@@ -1012,27 +1009,6 @@
       <Filter>src\solar\windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_error.h">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\cursors\cursor.h">
-      <Filter>src\solar\rendering\cursors</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\cursors\cursor_icon.h">
-      <Filter>src\solar\rendering\cursors</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\cursors\cursor_icon_factory.h">
-      <Filter>src\solar\rendering\cursors</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\cursors\cursor_icon_id.h">
-      <Filter>src\solar\rendering\cursors</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon_factory.h">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon.h">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon_def.h">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar\text\text_factory.h">
@@ -1485,15 +1461,6 @@
     <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_context.h">
       <Filter>src\solar_platforms\opengl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_cursor.h">
-      <Filter>src\solar_platforms\opengl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_cursor_icon.h">
-      <Filter>src\solar_platforms\opengl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_cursor_icon_factory.h">
-      <Filter>src\solar_platforms\opengl</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_font_renderer_shader_program_provider.h">
       <Filter>src\solar_platforms\opengl</Filter>
     </ClInclude>
@@ -1532,6 +1499,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_render_state_defines.h">
       <Filter>src\solar_platforms\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\cursors\cursor.h">
+      <Filter>src\solar\cursors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1793,9 +1763,6 @@
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_context.cpp">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_cursor.cpp">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_device_params.cpp">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClCompile>
@@ -1906,18 +1873,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\rendering\fonts\font_dropshadow_def.cpp">
       <Filter>src\solar\rendering\fonts</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\rendering\cursors\cursor_icon_id.cpp">
-      <Filter>src\solar\rendering\cursors</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon_factory.cpp">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon.cpp">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon_def.cpp">
-      <Filter>src\solar_platforms\d3d9</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar\text\text_id.cpp">
       <Filter>src\solar\text</Filter>
@@ -2276,15 +2231,6 @@
     <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_context.cpp">
       <Filter>src\solar_platforms\opengl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_cursor.cpp">
-      <Filter>src\solar_platforms\opengl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_cursor_icon.cpp">
-      <Filter>src\solar_platforms\opengl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_cursor_icon_factory.cpp">
-      <Filter>src\solar_platforms\opengl</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_font_renderer_shader_program_provider.cpp">
       <Filter>src\solar_platforms\opengl</Filter>
     </ClCompile>
@@ -2323,6 +2269,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\opengl\platforms\win32_opengl_context.cpp">
       <Filter>src\solar_platforms\opengl\platforms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\cursors\cursor.cpp">
+      <Filter>src\solar\cursors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_cursors.cpp">
+      <Filter>bulkbuild</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

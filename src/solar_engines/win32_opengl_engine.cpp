@@ -4,7 +4,6 @@
 #include "solar/rendering/shaders/shader_program_id.h"
 #include "solar/rendering/textures/texture_id.h"
 #include "solar/rendering/meshes/mesh_id.h"
-#include "solar/rendering/cursors/cursor_icon_id.h"
 
 namespace solar {
 
@@ -14,12 +13,10 @@ namespace solar {
 		, _resource_system(_win32_file_system, _file_change_watcher)
 		, _opengl_context()
 		, _opengl_render_device(_opengl_context)
-		, _opengl_cursor()
 		, _opengl_texture_factory(_resource_system)
 		, _opengl_shader_program_factory(_opengl_context, _resource_system)
 		, _opengl_font_renderer_shader_program_provider(_opengl_shader_program_factory)
 		, _opengl_mesh_factory(_resource_system)
-		, _opengl_cursor_icon_factory(_opengl_cursor, _resource_system)
 		, _opengl_prim2d(_opengl_context, _opengl_shader_program_factory)
 		, _opengl_prim2d_lines() 
 		, _setting_registry(_win32_file_system, _file_change_watcher) {
@@ -27,14 +24,12 @@ namespace solar {
 		shader_program_id::set_factory(&_opengl_shader_program_factory);
 		texture_id::set_factory(&_opengl_texture_factory);
 		mesh_id::set_factory(&_opengl_mesh_factory);
-		cursor_icon_id::set_factory(&_opengl_cursor_icon_factory);
 	}
 
 	win32_opengl_engine::~win32_opengl_engine() {
 		shader_program_id::set_factory(nullptr);
 		texture_id::set_factory(nullptr);
 		mesh_id::set_factory(nullptr);
-		cursor_icon_id::set_factory(nullptr);
 	}
 
 	bool win32_opengl_engine::setup(const win32_opengl_engine_setup_params& params) {
@@ -83,7 +78,6 @@ namespace solar {
 		_opengl_font_renderer_shader_program_provider.setup();
 		_opengl_texture_factory.setup();
 		_opengl_mesh_factory.setup();
-		_opengl_cursor_icon_factory.setup();
 		_opengl_prim2d.setup(opengl_prim2d_setup_params());
 		_opengl_prim2d_lines.setup();
 
@@ -94,7 +88,6 @@ namespace solar {
 		
 		_opengl_prim2d_lines.teardown();
 		_opengl_prim2d.teardown();
-		_opengl_cursor_icon_factory.teardown();
 		_opengl_mesh_factory.teardown();
 		_opengl_texture_factory.teardown();
 		_opengl_font_renderer_shader_program_provider.teardown();

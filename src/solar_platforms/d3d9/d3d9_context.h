@@ -5,7 +5,6 @@
 #include "d3d9_device_params.h"
 #include "d3d9_enumerator.h"
 #include "d3d9_device_event_handler.h"
-#include "d3d9_cursor_icon.h"
 #include "solar/math/rect.h"
 #include "solar/rendering/render_scene_functor.h"
 #include "solar/rendering/render_states/render_state_block.h"
@@ -32,7 +31,6 @@ namespace solar {
 		bool _are_device_objects_created;
 		bool _are_device_objects_reset;
 		size _exit_fullscreen_backbuffer_size;
-		d3d9_cursor_icon* _active_cursor_icon;
 		uint64_t _current_render_state_flags;
 
 	public:
@@ -79,7 +77,6 @@ namespace solar {
 		size get_window_client_size() const;
 		point get_window_top_left() const;
 		void attempt_clip_cursor();
-		bool attempt_set_cursor();
 		void check_if_window_size_changed();
 		void adjust_device_params_back_buffer(d3d9_device_params& device_params) const;
 	};

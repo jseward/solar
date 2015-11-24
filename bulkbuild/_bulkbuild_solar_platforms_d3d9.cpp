@@ -20,10 +20,6 @@
 #include "solar_platforms/d3d9/d3d9_mesh_renderer.cpp"
 #include "solar_platforms/d3d9/d3d9_solid_color_texture.cpp"
 #include "solar_platforms/d3d9/d3d9_error.cpp"
-#include "solar_platforms/d3d9/d3d9_cursor.cpp"
-#include "solar_platforms/d3d9/d3d9_cursor_icon.cpp"
-#include "solar_platforms/d3d9/d3d9_cursor_icon_def.cpp"
-#include "solar_platforms/d3d9/d3d9_cursor_icon_factory.cpp"
 #include "solar_platforms/d3d9/d3d9_font_renderer_shader_program_provider.cpp"
 
 #include "solar_platforms/d3d9/shaders/prim2d_embedded_code.cpp"

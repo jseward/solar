@@ -30,8 +30,6 @@
 #include "solar/rendering/fonts/font_dropshadow_def.cpp"
 #include "solar/rendering/fonts/bm_font_reader.cpp"
 
-#include "solar/rendering/cursors/cursor_icon_id.cpp"
-
 #include "solar/rendering/meshes/mesh_def.cpp"
 #include "solar/rendering/meshes/mesh_constants.cpp"
 #include "solar/rendering/meshes/mesh_material.cpp"

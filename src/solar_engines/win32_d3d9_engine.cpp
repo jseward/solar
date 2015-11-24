@@ -4,7 +4,6 @@
 #include "solar/rendering/shaders/shader_program_id.h"
 #include "solar/rendering/textures/texture_id.h"
 #include "solar/rendering/meshes/mesh_id.h"
-#include "solar/rendering/cursors/cursor_icon_id.h"
 
 namespace solar {
 
@@ -13,13 +12,11 @@ namespace solar {
 		, _file_change_watcher(_win32_directory_change_watcher)
 		, _resource_system(_win32_file_system, _file_change_watcher)
 		, _d3d9_render_device(_d3d9_context)
-		, _d3d9_cursor(_d3d9_context)
 		, _d3d9_texture_factory(_d3d9_context, _resource_system)
 		, _d3d9_shader_program_factory(_d3d9_context, _resource_system)
 		, _d3d9_font_renderer_shader_program_provider(_d3d9_shader_program_factory)
 		, _d3d9_mesh_factory(_d3d9_context, _resource_system)
 		, _d3d9_mesh_renderer(_d3d9_context)
-		, _d3d9_cursor_icon_factory(_d3d9_context, _d3d9_cursor, _resource_system)
 		, _d3d9_prim2d(_d3d9_context, _d3d9_shader_program_factory)
 		, _d3d9_prim2d_lines(_d3d9_context)
 		, _setting_registry(_win32_file_system, _file_change_watcher) {
@@ -27,14 +24,12 @@ namespace solar {
 		shader_program_id::set_factory(&_d3d9_shader_program_factory);
 		texture_id::set_factory(&_d3d9_texture_factory);
 		mesh_id::set_factory(&_d3d9_mesh_factory);
-		cursor_icon_id::set_factory(&_d3d9_cursor_icon_factory);
 	}
 
 	win32_d3d9_engine::~win32_d3d9_engine() {
 		shader_program_id::set_factory(nullptr);
 		texture_id::set_factory(nullptr);
 		mesh_id::set_factory(nullptr);
-		cursor_icon_id::set_factory(nullptr);
 	}
 
 	bool win32_d3d9_engine::setup(const win32_d3d9_engine_setup_params& params) {
@@ -91,7 +86,6 @@ namespace solar {
 		_d3d9_texture_factory.setup();
 		_d3d9_mesh_factory.setup();
 		_d3d9_mesh_renderer.setup();
-		_d3d9_cursor_icon_factory.setup();
 		_d3d9_prim2d.setup(solar::d3d9_prim2d_setup_params());
 		_d3d9_prim2d_lines.setup();
 
@@ -101,7 +95,6 @@ namespace solar {
 	void win32_d3d9_engine::teardown() {
 		_d3d9_prim2d_lines.teardown();
 		_d3d9_prim2d.teardown();
-		_d3d9_cursor_icon_factory.teardown();
 		_d3d9_mesh_renderer.teardown();
 		_d3d9_mesh_factory.teardown();
 		_d3d9_texture_factory.teardown();

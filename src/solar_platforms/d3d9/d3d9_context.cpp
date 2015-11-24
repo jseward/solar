@@ -27,7 +27,6 @@ namespace solar {
 		, _is_window_in_menu_loop(false)
 		, _are_device_objects_created(false)
 		, _are_device_objects_reset(false)
-		, _active_cursor_icon(nullptr) 
 		, _current_render_state_flags(0) {
 
 		::ZeroMemory(&_backbuffer_desc, sizeof(D3DSURFACE_DESC));
@@ -35,7 +34,6 @@ namespace solar {
 
 	d3d9_context::~d3d9_context() {
 		ASSERT(_event_handlers.empty());
-		ASSERT(_active_cursor_icon == nullptr);
 		teardown();
 	}
 
@@ -117,11 +115,6 @@ namespace solar {
 					_is_window_active = (wparam == TRUE);
 					attempt_clip_cursor();
 					handled = true;
-					break;
-				}
-
-				case WM_SETCURSOR: {
-					handled = attempt_set_cursor();
 					break;
 				}
 
@@ -584,16 +577,6 @@ namespace solar {
 			}
 			_are_device_objects_reset = false;
 		}
-	}
-
-	bool d3d9_context::attempt_set_cursor() {
-		bool handled = false;
-		if (_IDirect3DDevice9 != nullptr) {
-			::SetCursor(NULL);
-			_IDirect3DDevice9->ShowCursor(TRUE);
-			handled = true;
-		}
-		return handled;
 	}
 
 	void d3d9_context::attempt_clip_cursor() {

@@ -1,7 +1,4 @@
 #include "solar_platforms/opengl/opengl_context.cpp"
-#include "solar_platforms/opengl/opengl_cursor.cpp"
-#include "solar_platforms/opengl/opengl_cursor_icon.cpp"
-#include "solar_platforms/opengl/opengl_cursor_icon_factory.cpp"
 #include "solar_platforms/opengl/opengl_mesh.cpp"
 #include "solar_platforms/opengl/opengl_mesh_factory.cpp"
 #include "solar_platforms/opengl/opengl_prim2d.cpp"

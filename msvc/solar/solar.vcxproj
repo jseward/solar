@@ -38,6 +38,7 @@
     <ClInclude Include="..\..\src\solar\containers\fixed_vector.h" />
     <ClInclude Include="..\..\src\solar\containers\linked_list.h" />
     <ClInclude Include="..\..\src\solar\containers\pooled_linked_list_node_factory.h" />
+    <ClInclude Include="..\..\src\solar\cursors\cursor.h" />
     <ClInclude Include="..\..\src\solar\input\input_mapping.h" />
     <ClInclude Include="..\..\src\solar\input\input_mappings.h" />
     <ClInclude Include="..\..\src\solar\input\input_mapping_binding.h" />
@@ -111,10 +112,6 @@
     <ClInclude Include="..\..\src\solar\rendering\cameras\camera_cached_value.h" />
     <ClInclude Include="..\..\src\solar\rendering\cameras\camera_frustrum.h" />
     <ClInclude Include="..\..\src\solar\rendering\cameras\camera_projection_type.h" />
-    <ClInclude Include="..\..\src\solar\rendering\cursors\cursor.h" />
-    <ClInclude Include="..\..\src\solar\rendering\cursors\cursor_icon.h" />
-    <ClInclude Include="..\..\src\solar\rendering\cursors\cursor_icon_factory.h" />
-    <ClInclude Include="..\..\src\solar\rendering\cursors\cursor_icon_id.h" />
     <ClInclude Include="..\..\src\solar\rendering\fonts\bm_font_reader.h" />
     <ClInclude Include="..\..\src\solar\rendering\fonts\font.h" />
     <ClInclude Include="..\..\src\solar\rendering\fonts\font_alignment.h" />
@@ -377,10 +374,6 @@
     <ClInclude Include="..\..\src\solar_engines\win32_d3d9_engine.h" />
     <ClInclude Include="..\..\src\solar_engines\win32_d3d9_engine_settings.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_context.h" />
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_cursor.h" />
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon.h" />
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon_def.h" />
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon_factory.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_device_event_handler.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_device_params.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_dynamic_index_buffer.h" />
@@ -421,9 +414,6 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\shaders\font_normal_embedded_code.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\shaders\prim2d_embedded_code.h" />
     <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_context.h" />
-    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_cursor.h" />
-    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_cursor_icon.h" />
-    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_cursor_icon_factory.h" />
     <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_font_renderer_shader_program_provider.h" />
     <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_mesh.h" />
     <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_mesh_factory.h" />
@@ -472,6 +462,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_colors.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_cursors.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -581,6 +575,7 @@
     <ClCompile Include="..\..\src\solar\archiving\json_archive_writer.cpp" />
     <ClCompile Include="..\..\src\solar\colors\color.cpp" />
     <ClCompile Include="..\..\src\solar\colors\colors.cpp" />
+    <ClCompile Include="..\..\src\solar\cursors\cursor.cpp" />
     <ClCompile Include="..\..\src\solar\input\input_mapping.cpp" />
     <ClCompile Include="..\..\src\solar\input\input_mappings.cpp" />
     <ClCompile Include="..\..\src\solar\input\input_mapping_binding.cpp" />
@@ -629,7 +624,6 @@
     <ClCompile Include="..\..\src\solar\rendering\brushes\brush_stretch_margins.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\cameras\camera.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\cameras\camera_frustrum.cpp" />
-    <ClCompile Include="..\..\src\solar\rendering\cursors\cursor_icon_id.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\fonts\bm_font_reader.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\fonts\font.cpp" />
     <ClCompile Include="..\..\src\solar\rendering\fonts\font_alignment.cpp" />
@@ -737,10 +731,6 @@
     <ClCompile Include="..\..\src\solar_engines\win32_d3d9_engine.cpp" />
     <ClCompile Include="..\..\src\solar_engines\win32_d3d9_engine_settings.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_context.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_cursor.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon_def.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon_factory.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_device_params.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_enumerator.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_error.cpp" />
@@ -767,9 +757,6 @@
     <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\font_normal_embedded_code.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\prim2d_embedded_code.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_context.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_cursor.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_cursor_icon.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_cursor_icon_factory.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_font_renderer_shader_program_provider.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_mesh.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_mesh_factory.cpp" />
