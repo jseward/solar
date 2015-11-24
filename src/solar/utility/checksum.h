@@ -38,7 +38,7 @@ namespace solar {
 
 	private:
 		template<typename T> int calculate_fletcher_checksum_of_type(T data);
-		int calculate_fletcher_checksum(const unsigned int* data_32, unsigned int data_32_count) const;
+		int calculate_fletcher_checksum(const uint32_t* data_32, unsigned int data_32_count) const;
 	};
 
 	template<typename Enum> checksum& checksum::add_enum(Enum v) {

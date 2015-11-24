@@ -23,8 +23,8 @@ namespace solar {
 		void end_array();
 		
 		void write_bool(const char* name, bool value);
-		void write_ushort(const char* name, unsigned short value);
-		void write_ushort(unsigned short value);
+		void write_uint16(const char* name, uint16_t value);
+		void write_uint16(uint16_t value);
 		void write_int(const char* name, int value);
 		void write_int(int value);
 		void write_int64(const char* name, int64_t value);

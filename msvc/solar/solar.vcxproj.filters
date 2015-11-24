@@ -1668,6 +1668,12 @@
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_embedded_code.h">
       <Filter>src\solar_platforms\bgfx</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_vertex.h">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\containers\dynamic_vector.h">
+      <Filter>src\solar\containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -2516,6 +2522,12 @@
     <ClCompile Include="..\..\src\solar_platforms\bgfx\shaders\font_shaders_embedded_code.cpp">
       <Filter>src\solar_platforms\bgfx\shaders</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_context.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_vertex.cpp">
+      <Filter>src\solar_platforms\bgfx</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\readme.md" />
@@ -2563,6 +2575,9 @@
       <Filter>src\solar_platforms\bgfx\shaders</Filter>
     </None>
     <None Include="..\..\src\solar_platforms\bgfx\shaders\font_dropshadow.fsc">
+      <Filter>src\solar_platforms\bgfx\shaders</Filter>
+    </None>
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\varying.def.sc">
       <Filter>src\solar_platforms\bgfx\shaders</Filter>
     </None>
   </ItemGroup>

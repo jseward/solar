@@ -54,25 +54,25 @@ namespace solar {
 		_writer.write_bool(name, value);
 	}
 
-	void json_archive_writer::write_ushort(const char* name, unsigned short value) {
+	void json_archive_writer::write_uint16(const char* name, uint16_t value) {
 		ASSERT(_is_writing);
-		_writer.write_ushort(name, value);
+		_writer.write_uint16(name, value);
 	}
 
-	void json_archive_writer::write_ushorts_dynamic(const char* name, unsigned int size, std::function<unsigned short(unsigned int)> get_value_at_func) {
+	void json_archive_writer::write_uint16s_dynamic(const char* name, unsigned int size, std::function<uint16_t(unsigned int)> get_value_at_func) {
 		ASSERT(_is_writing);
 		_writer.begin_array(name);
 		for (unsigned int i = 0; i < size; ++i) {
-			_writer.write_ushort(get_value_at_func(i));
+			_writer.write_uint16(get_value_at_func(i));
 		}
 		_writer.end_array();
 	}
 
-	void json_archive_writer::write_ushorts_fixed(const char* name, unsigned int size, const unsigned short* values_begin) {
+	void json_archive_writer::write_uint16s_fixed(const char* name, unsigned int size, const uint16_t* values_begin) {
 		ASSERT(_is_writing);
 		_writer.begin_array(name);
 		for (unsigned int i = 0; i < size; ++i) {
-			_writer.write_ushort(values_begin[i]);
+			_writer.write_uint16(values_begin[i]);
 		}
 		_writer.end_array();
 	}

@@ -1,6 +1,7 @@
 #include "d3d9_prim2d.h"
 
 #include "solar/utility/assert.h"
+#include "solar/utility/verify.h"
 #include "solar/utility/unused_parameter.h"
 #include "solar/rendering/shaders/shader_program.h"
 #include "solar/colors/colors.h"
@@ -30,8 +31,16 @@ namespace solar {
 	void d3d9_prim2d::setup(const d3d9_prim2d_setup_params& params) {
 		_setup_params = params;
 
-		_vertex_buffer.set_max_vertices(params.get_max_buffered_rect_count() * d3d9_prim2d_rect::VERTEX_COUNT);
-		_index_buffer.set_max_indices(params.get_max_buffered_rect_count() * d3d9_prim2d_rect::INDEX_COUNT);
+		auto max_vertices = std::max(
+			params.get_max_buffered_rect_count() * d3d9_prim2d_rect::VERTEX_COUNT,
+			params.get_max_buffered_tri_count() * d3d9_prim2d_tri::VERTEX_COUNT);
+		_vertex_buffer.set_max_vertices(max_vertices);
+
+		auto max_indices = std::max(
+			params.get_max_buffered_rect_count() * d3d9_prim2d_rect::INDEX_COUNT,
+			params.get_max_buffered_tri_count() * d3d9_prim2d_tri::INDEX_COUNT);
+		_index_buffer.set_max_indices(max_indices);
+
 		_buffered_rects.reserve(params.get_max_buffered_rect_count());
 		_buffered_tris.reserve(params.get_max_buffered_tri_count());
 
@@ -63,22 +72,28 @@ namespace solar {
 
 	void d3d9_prim2d::begin_rendering(const rect& viewport_area, shader_program& shader_program, render_state_block* rs_block) {
 		UNUSED_PARAMETER(viewport_area);
-		ASSERT(rs_block != nullptr);
+
 		ASSERT(!_is_rendering);
+		_is_rendering = true;
+
 		ASSERT(_shader_program == nullptr);
 		ASSERT(_texture == nullptr);
-		_is_rendering = true;
 		_shader_program = &shader_program;
 		_shader_program->set_platform_texture(shader_param_names::TEXTURE, _white_texture.get());
 		_shader_program->start();
+
+		ASSERT(rs_block != nullptr);
 		rs_block->commit();
 	}
 
 	void d3d9_prim2d::end_rendering() {
 		flush_all();
 
-		_shader_program->stop();
-		_shader_program = nullptr;
+		IF_VERIFY(_shader_program != nullptr) {
+			_shader_program->stop();
+			_shader_program = nullptr;
+		}
+
 		_texture = nullptr;
 
 		ASSERT(_is_rendering);
@@ -113,21 +128,17 @@ namespace solar {
 
 	void d3d9_prim2d::render_rect(const vec2& top_left, const vec2& top_right, const vec2& bottom_right, const vec2& bottom_left, const color& color, const simple_rect_uvs& uvs) {
 		ASSERT(_is_rendering);
-
 		if (_buffered_rects.size() >= _setup_params.get_max_buffered_rect_count()) {
 			flush_rects();
 		}
-
 		_buffered_rects.emplace_back(top_left, top_right, bottom_right, bottom_left, color, uvs);
 	}
 
 	void d3d9_prim2d::render_triangle(const vec2& p0, const uv& uv0, const vec2& p1, const uv& uv1, const vec2& p2, const uv& uv2, const color& color) {
 		ASSERT(_is_rendering);
-
 		if (_buffered_tris.size() >= _setup_params.get_max_buffered_tri_count()) {
 			flush_tris();
 		}
-
 		_buffered_tris.emplace_back(p0, uv0, p1, uv1, p2, uv2, color);
 	}
 

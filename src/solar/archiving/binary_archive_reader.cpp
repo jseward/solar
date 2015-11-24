@@ -49,27 +49,27 @@ namespace solar {
 		read_atomic_value<bool>(value);
 	}
 
-	void binary_archive_reader::read_ushort(const char* name, unsigned short& value) {
+	void binary_archive_reader::read_uint16(const char* name, uint16_t& value) {
 		UNUSED_PARAMETER(name);
-		read_atomic_value<unsigned short>(value);
+		read_atomic_value<uint16_t>(value);
 	}
 
-	void binary_archive_reader::read_ushorts_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, unsigned short)> handle_value_func) {
+	void binary_archive_reader::read_uint16s_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, uint16_t)> handle_value_func) {
 		UNUSED_PARAMETER(name);
 		unsigned int size = 0;
 		read_atomic_value<unsigned int>(size);
 		handle_size_func(size);
 		for (unsigned int i = 0; i < size; ++i) {
-			unsigned short v;
-			read_atomic_value<unsigned short>(v);
+			uint16_t v;
+			read_atomic_value<uint16_t>(v);
 			handle_value_func(i, v);
 		}
 	}
 
-	void binary_archive_reader::read_ushorts_fixed(const char* name, unsigned int size, unsigned short* values_begin) {
+	void binary_archive_reader::read_uint16s_fixed(const char* name, unsigned int size, uint16_t* values_begin) {
 		UNUSED_PARAMETER(name);
 		for (unsigned int i = 0; i < size; ++i) {
-			read_atomic_value<unsigned short>(values_begin[i]);
+			read_atomic_value<uint16_t>(values_begin[i]);
 		}
 	}
 

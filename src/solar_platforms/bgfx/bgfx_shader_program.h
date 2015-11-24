@@ -43,6 +43,8 @@ namespace solar {
 		virtual bool set_texture(const char* name, texture& texture) override;
 		virtual bool set_platform_texture(const char* name, void* texture) override;
 
+		bgfx::ProgramHandle get_program_handle() const;
+
 	private:
 		void destroy_program_handle();
 

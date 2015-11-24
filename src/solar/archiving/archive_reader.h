@@ -23,9 +23,9 @@ namespace solar {
 		virtual void read_object(const char* name, archivable& value) = 0;
 		virtual void read_objects(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(archive_reader&, unsigned int)> read_object_func) = 0;
 		virtual void read_bool(const char* name, bool& value) = 0;
-		virtual void read_ushort(const char* name, unsigned short& value) = 0;
-		virtual void read_ushorts_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, unsigned short)> handle_value_func) = 0;
-		virtual void read_ushorts_fixed(const char* name, unsigned int size, unsigned short* values_begin) = 0;
+		virtual void read_uint16(const char* name, uint16_t& value) = 0;
+		virtual void read_uint16s_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, uint16_t)> handle_value_func) = 0;
+		virtual void read_uint16s_fixed(const char* name, unsigned int size, uint16_t* values_begin) = 0;
 		virtual void read_int(const char* name, int& value, const archive_int_compression& compression) = 0;
 		virtual void read_ints_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, int)> handle_value_func) = 0;
 		virtual void read_ints_fixed(const char* name, unsigned int size, int* values_begin) = 0;

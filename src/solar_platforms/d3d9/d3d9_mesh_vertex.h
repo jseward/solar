@@ -18,10 +18,10 @@ namespace solar {
 		float _ty;
 		float _tz;
 		float _binormal_sign;
-		unsigned char _bone_index_0;
-		unsigned char _bone_index_1;
-		unsigned char _bone_index_2;
-		unsigned char _bone_index_3;
+		uint8_t _bone_index_0;
+		uint8_t _bone_index_1;
+		uint8_t _bone_index_2;
+		uint8_t _bone_index_3;
 		float _bone_weight_0;
 		float _bone_weight_1;
 		float _bone_weight_2;
@@ -51,9 +51,9 @@ namespace solar {
 		}
 
 	private:
-		static void copy_bone_weight(const mesh_vertex& src, unsigned int i, unsigned char& dst_bone_index, float& dst_bone_weight) {
+		static void copy_bone_weight(const mesh_vertex& src, unsigned int i, uint8_t& dst_bone_index, float& dst_bone_weight) {
 			if (src._bone_weights.size() > i) {
-				dst_bone_index = ushort_to_uchar(src._bone_weights[i]._bone_index);
+				dst_bone_index = src._bone_weights[i]._bone_index;
 				dst_bone_weight = src._bone_weights[i]._weight;
 			}
 			else {

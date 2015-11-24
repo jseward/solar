@@ -41,6 +41,7 @@ namespace solar {
 		// This dummy draw call is here to make sure that view 0 is cleared
 		// if no other draw calls are submitted to view 0.
 		bgfx::touch(0);
+
 		return true;
 	}
 
@@ -50,7 +51,7 @@ namespace solar {
 
 	void bgfx_render_device::clear(const color& color) {
 		bgfx::setViewClear(
-			0, 
+			_context.get_current_view_id(), 
 			BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH,
 			color.to_rgba32(),
 			1.0f,
@@ -62,7 +63,7 @@ namespace solar {
 	}
 
 	viewport bgfx_render_device::set_viewport(const viewport& new_viewport) {
-		//todo
+		//todo - needs a viewport id? - note: begin_scene calls bgfx::setViewRect
 		UNUSED_PARAMETER(new_viewport);
 		ASSERT(false);
 		return viewport();
@@ -73,11 +74,11 @@ namespace solar {
 	}
 
 	render_state_block* bgfx_render_device::create_render_state_block(const render_state_block_def& def) {
-		return new bgfx_render_state_block(def);
+		return _context.create_render_state_block(def);
 	}
 
 	void bgfx_render_device::release_render_state_block(render_state_block* block) {
-		delete block;
+		_context.release_render_state_block(block);
 	}
 
 }

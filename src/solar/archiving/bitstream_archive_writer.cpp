@@ -59,23 +59,23 @@ namespace solar {
 		write_bit(value ? 1 : 0);
 	}
 
-	void bitstream_archive_writer::write_ushort(const char* name, unsigned short value) {
+	void bitstream_archive_writer::write_uint16(const char* name, uint16_t value) {
 		UNUSED_PARAMETER(name);
-		write_atomic_value<unsigned short>(value);
+		write_atomic_value<uint16_t>(value);
 	}
 
-	void bitstream_archive_writer::write_ushorts_dynamic(const char* name, unsigned int size, std::function<unsigned short(unsigned int)> get_value_at_func) {
+	void bitstream_archive_writer::write_uint16s_dynamic(const char* name, unsigned int size, std::function<uint16_t(unsigned int)> get_value_at_func) {
 		UNUSED_PARAMETER(name);
 		write_atomic_value<unsigned int>(size);
 		for (unsigned int i = 0; i < size; ++i) {
-			write_atomic_value<unsigned short>(get_value_at_func(i));
+			write_atomic_value<uint16_t>(get_value_at_func(i));
 		}
 	}
 
-	void bitstream_archive_writer::write_ushorts_fixed(const char* name, unsigned int size, const unsigned short* values_begin) {
+	void bitstream_archive_writer::write_uint16s_fixed(const char* name, unsigned int size, const uint16_t* values_begin) {
 		UNUSED_PARAMETER(name);
 		for (unsigned int i = 0; i < size; ++i) {
-			write_atomic_value<unsigned short>(values_begin[i]);
+			write_atomic_value<uint16_t>(values_begin[i]);
 		}
 	}
 
@@ -160,8 +160,8 @@ namespace solar {
 
 	void bitstream_archive_writer::write_string(const char* name, const std::string& value) {
 		UNUSED_PARAMETER(name);
-		unsigned short string_length = uint_to_ushort(value.length());
-		write_atomic_value<unsigned short>(string_length);
+		uint16_t string_length = uint32_to_uint16(value.length());
+		write_atomic_value<uint16_t>(string_length);
 		for (unsigned short i = 0; i < string_length; ++i) {
 			write_atomic_value<char>(value[i]);
 		}

@@ -31,6 +31,7 @@
     <ClInclude Include="..\..\src\solar\colors\colors.h" />
     <ClInclude Include="..\..\src\solar\containers\container_helpers.h" />
     <ClInclude Include="..\..\src\solar\containers\dynamic_array.h" />
+    <ClInclude Include="..\..\src\solar\containers\dynamic_vector.h" />
     <ClInclude Include="..\..\src\solar\containers\enum_array.h" />
     <ClInclude Include="..\..\src\solar\containers\enum_vector.h" />
     <ClInclude Include="..\..\src\solar\containers\fixed_grid.h" />
@@ -528,6 +529,7 @@
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_mesh_factory.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_lines.h" />
+    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_vertex.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_render_device.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_render_state_block.h" />
     <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_embedded_code.h" />
@@ -954,6 +956,7 @@
     <ClCompile Include="..\..\src\solar_engines\win32_d3d9_engine.cpp" />
     <ClCompile Include="..\..\src\solar_engines\win32_d3d9_engine_settings.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_callback.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_context.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_cursor.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon_factory.cpp" />
@@ -962,6 +965,7 @@
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_mesh_factory.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_lines.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_vertex.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_render_device.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_render_state_block.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program.cpp" />
@@ -1046,6 +1050,7 @@
     <None Include="..\..\src\solar_platforms\bgfx\shaders\font_normal.vsc" />
     <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.fsc" />
     <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.vsc" />
+    <None Include="..\..\src\solar_platforms\bgfx\shaders\varying.def.sc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{03FA803B-DEB3-4256-9C37-E85BFCAE0B9D}</ProjectGuid>

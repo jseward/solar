@@ -21,9 +21,9 @@ namespace solar {
 		virtual void write_object(const char* name, const archivable& value) = 0;
 		virtual void write_objects(const char* name, unsigned int size, std::function<void(archive_writer&, unsigned int)> write_object_func) = 0;
 		virtual void write_bool(const char* name, bool value) = 0;
-		virtual void write_ushort(const char* name, unsigned short value) = 0;
-		virtual void write_ushorts_dynamic(const char* name, unsigned int size, std::function<unsigned short(unsigned int)> get_value_at_func) = 0;
-		virtual void write_ushorts_fixed(const char* name, unsigned int size, const unsigned short* values_begin) = 0;
+		virtual void write_uint16(const char* name, uint16_t value) = 0;
+		virtual void write_uint16s_dynamic(const char* name, unsigned int size, std::function<uint16_t(unsigned int)> get_value_at_func) = 0;
+		virtual void write_uint16s_fixed(const char* name, unsigned int size, const uint16_t* values_begin) = 0;
 		virtual void write_int(const char* name, int value, const archive_int_compression& compression) = 0;
 		virtual void write_ints_dynamic(const char* name, unsigned int size, std::function<int(unsigned int)> get_value_at_func) = 0;
 		virtual void write_ints_fixed(const char* name, unsigned int size, const int* values_begin) = 0;

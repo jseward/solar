@@ -24,7 +24,7 @@ namespace solar {
 	}
 
 	render_state_block_def::render_state_block_def()
-		: _color_write(render_state_color_write::ENABLED_RGBA)
+		: _color_write(render_state_color_write::ENABLED_RGB_ONLY)
 		, _depth_write(render_state_depth_write::DISABLED)
 		, _depth_compare_func(render_state_compare_func::NONE)
 		, _cull_mode(render_state_cull_mode::CCW)

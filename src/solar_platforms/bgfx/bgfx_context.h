@@ -3,6 +3,8 @@
 #include <functional>
 #include "solar/math/size.h"
 #include "solar/rendering/render_scene_functor.h"
+#include "solar/rendering/render_states/render_state_block.h"
+#include "solar/rendering/render_states/render_state_block_def.h"
 
 namespace solar {
 
@@ -18,6 +20,9 @@ namespace solar {
 		virtual size get_backbuffer_size() const = 0;
 		virtual void attempt_render_scene(render_scene_functor& func) = 0;
 		virtual uint8_t get_current_view_id() const = 0;
+
+		render_state_block* create_render_state_block(const render_state_block_def& def);
+		void release_render_state_block(render_state_block* block);
 	};
 
 }

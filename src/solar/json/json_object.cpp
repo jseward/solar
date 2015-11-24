@@ -88,10 +88,10 @@ namespace solar {
 		return v;
 	}
 
-	unsigned short json_object::get_ushort(const char* name) {
-		unsigned short v = 0;
-		if (!try_get_ushort(v, name)) {
-			_error_handler(build_string("ushort not found : {}", name));
+	uint16_t json_object::get_uint16(const char* name) {
+		uint16_t v = 0;
+		if (!try_get_uint16(v, name)) {
+			_error_handler(build_string("uint16 not found : {}", name));
 		}
 		return v;
 	}
@@ -180,7 +180,7 @@ namespace solar {
 		return true;
 	}
 
-	bool json_object::try_get_ushort(unsigned short& out, const char* name) {
+	bool json_object::try_get_uint16(uint16_t& out, const char* name) {
 		if (!_value.HasMember(name)) {
 			return false;
 		}
@@ -190,7 +190,7 @@ namespace solar {
 			return false;
 		}
 
-		if (v.GetUint() > std::numeric_limits<unsigned short>::max()) {
+		if (v.GetUint() > std::numeric_limits<uint16_t>::max()) {
 			return false;
 		}
 

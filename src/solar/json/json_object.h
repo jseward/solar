@@ -37,7 +37,7 @@ namespace solar {
 		json_object get_object(const char* name);
 		json_array get_array(const char* name);
 		bool get_bool(const char* name);
-		unsigned short get_ushort(const char* name);
+		uint16_t get_uint16(const char* name);
 		int get_int(const char* name);
 		unsigned int get_uint(const char* name);
 		int64_t get_int64(const char* name);
@@ -48,7 +48,7 @@ namespace solar {
 		bool try_get_object(json_object& out, const char* name);
 		bool try_get_array(json_array& out, const char* name);
 		bool try_get_bool(bool& out, const char* name);
-		bool try_get_ushort(unsigned short& out, const char* name);
+		bool try_get_uint16(uint16_t& out, const char* name);
 		bool try_get_int(int& out, const char* name);
 		bool try_get_uint(unsigned int& out, const char* name);
 		bool try_get_int64(int64_t& out, const char* name);

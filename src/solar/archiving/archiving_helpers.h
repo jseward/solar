@@ -21,38 +21,39 @@ namespace solar {
 		writer.write_bool(name, value);
 	}
 
-	inline void read_ushort(archive_reader& reader, const char* name, unsigned short& value) {
-		reader.read_ushort(name, value);
+	inline void read_uint16(archive_reader& reader, const char* name, uint16_t& value) {
+		reader.read_uint16(name, value);
 	}
 
-	inline void write_ushort(archive_writer& writer, const char* name, unsigned short value) {
-		writer.write_ushort(name, value);
+	inline void write_uint16(archive_writer& writer, const char* name, uint16_t value) {
+		writer.write_uint16(name, value);
 	}
 
-	inline void read_ushorts(archive_reader& reader, const char* name, unsigned short& v0, unsigned short& v1, unsigned short& v2) {
-		unsigned short values[3] = {};
-		reader.read_ushorts_fixed(name, 3, values);
+	inline void read_uint16s(archive_reader& reader, const char* name, uint16_t& v0, uint16_t& v1, uint16_t& v2) {
+		uint16_t values[3] = {};
+		reader.read_uint16s_fixed(name, 3, values);
 		v0 = values[0];
 		v1 = values[1];
 		v2 = values[2];
 	}
 
-	inline void write_ushorts(archive_writer& writer, const char* name, unsigned short v0, unsigned short v1, unsigned short v2) {
-		const unsigned short values[3] = { v0, v1, v2 };
-		writer.write_ushorts_fixed(name, 3, values);
+	inline void write_uint16s(archive_writer& writer, const char* name, uint16_t v0, uint16_t v1, uint16_t v2) {
+		const uint16_t values[3] = { v0, v1, v2 };
+		writer.write_uint16s_fixed(name, 3, values);
 	}
 
-	template<typename VectorT> void read_ushort_vector(archive_reader& reader, const char* name, VectorT& v) {
+	template<typename VectorT> void read_uint16_vector(archive_reader& reader, const char* name, VectorT& v) {
+		static_assert(sizeof(VectorT::value_type) == sizeof(uint16_t), "read_uint16_vector expects uint16");
 		v.clear();
-		reader.read_ushorts_dynamic(
+		reader.read_uint16s_dynamic(
 			name,
 			[&v](unsigned int size) { v.reserve(size); },
-			[&v](unsigned int, unsigned short value) { v.push_back(value); });
+			[&v](unsigned int, uint16_t value) { v.push_back(value); });
 	}
 
 	template<typename VectorT> 
-	void write_ushort_vector(archive_writer& writer, const char* name, const VectorT& v) {
-		writer.write_ushorts_dynamic(name, v.size(), [&v](unsigned int i) { return v[i]; });
+	void write_uint16_vector(archive_writer& writer, const char* name, const VectorT& v) {
+		writer.write_uint16s_dynamic(name, v.size(), [&v](unsigned int i) { return v[i]; });
 	}
 
 	inline void read_int(archive_reader& reader, const char* name, int& value) {
@@ -308,6 +309,7 @@ namespace solar {
 
 	template<typename FixedVectorT> void read_object_fixed_vector(archive_reader& reader, const char* name, FixedVectorT& values) {
 		values.clear();
+
 		reader.read_objects(
 			name,
 			[&](int size) {

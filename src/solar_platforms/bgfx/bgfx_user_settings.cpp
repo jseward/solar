@@ -14,7 +14,7 @@ namespace solar {
 	}
 
 	bgfx::RendererType::Enum bgfx_user_settings::get_RendererType() const {
-		return bgfx::RendererType::Direct3D9;//todo
+		return bgfx::RendererType::Direct3D11;//todo
 	}
 
 }

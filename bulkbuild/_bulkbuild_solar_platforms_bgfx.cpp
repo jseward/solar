@@ -1,3 +1,4 @@
+#include "solar_platforms/bgfx/bgfx_context.cpp"
 #include "solar_platforms/bgfx/bgfx_cursor.cpp"
 #include "solar_platforms/bgfx/bgfx_cursor_icon.cpp"
 #include "solar_platforms/bgfx/bgfx_cursor_icon_factory.cpp"
@@ -5,6 +6,7 @@
 #include "solar_platforms/bgfx/bgfx_mesh_factory.cpp"
 #include "solar_platforms/bgfx/bgfx_prim2d.cpp"
 #include "solar_platforms/bgfx/bgfx_prim2d_lines.cpp"
+#include "solar_platforms/bgfx/bgfx_prim2d_vertex.cpp"
 #include "solar_platforms/bgfx/bgfx_shader_program.cpp"
 #include "solar_platforms/bgfx/bgfx_shader_program_def.cpp"
 #include "solar_platforms/bgfx/bgfx_shader_program_factory.cpp"

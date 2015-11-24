@@ -4,7 +4,7 @@ namespace solar {
 
 	template<class ValueT>
 	class dynamic_array {
-	private:
+	public:
 		typedef ValueT value_type;
 		typedef size_t size_type;
 		typedef ValueT* iterator;
@@ -15,21 +15,37 @@ namespace solar {
 		value_type* _values;
 
 	public:
-		dynamic_array(size_t size)
-			: _size(size) {
+		dynamic_array()
+			: _size(0)
+			, _values(nullptr) {
+		}
 
+		explicit dynamic_array(size_t size)
+			: _size(size)
+			, _values(nullptr) {
+
+			ASSERT(size > 0);
 			_values = new value_type[size];
 		}
 
 		dynamic_array(size_t size, const value_type& initial_fill_value)
-			: _size(size) {
+			: _size(size)
+			, _values(nullptr) {
 
+			ASSERT(size != 0);
 			_values = new value_type[size];
 			fill(initial_fill_value);
 		}
 
 		~dynamic_array() {
 			delete [] _values;
+		}
+
+		void reserve(size_t new_size) {
+			ASSERT(_size == 0);
+			ASSERT(new_size > 0);
+			_size = new_size;
+			_values = new value_type[new_size];
 		}
 
 		size_t size() const {

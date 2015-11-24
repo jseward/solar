@@ -20,7 +20,7 @@ namespace solar {
 		, _bgfx_font_renderer_shader_program_provider(_bgfx_shader_program_factory)
 		, _bgfx_mesh_factory(_resource_system)
 		, _bgfx_cursor_icon_factory(_bgfx_cursor, _resource_system)
-		, _bgfx_prim2d()
+		, _bgfx_prim2d(_bgfx_context, _bgfx_shader_program_factory)
 		, _bgfx_prim2d_lines() 
 		, _setting_registry(_win32_file_system, _file_change_watcher) {
 
@@ -84,7 +84,7 @@ namespace solar {
 		_bgfx_texture_factory.setup();
 		_bgfx_mesh_factory.setup();
 		_bgfx_cursor_icon_factory.setup();
-		_bgfx_prim2d.setup();
+		_bgfx_prim2d.setup(bgfx_prim2d_setup_params());
 		_bgfx_prim2d_lines.setup();
 
 		return true;

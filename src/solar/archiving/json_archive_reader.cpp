@@ -78,14 +78,14 @@ namespace solar {
 		}
 	}
 
-	void json_archive_reader::read_ushort(const char* name, unsigned short& value) {
+	void json_archive_reader::read_uint16(const char* name, uint16_t& value) {
 		value = 0;
-		if (!_current_object->try_get_ushort(value, name)) {
-			raise_error(build_string("ushort not found : '{}'", name));
+		if (!_current_object->try_get_uint16(value, name)) {
+			raise_error(build_string("uint16 not found : '{}'", name));
 		}
 	}
 
-	void json_archive_reader::read_ushorts_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, unsigned short)> handle_value_func) {
+	void json_archive_reader::read_uint16s_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, uint16_t)> handle_value_func) {
 		json_array a;
 		if (!_current_object->try_get_array(a, name)) {
 			raise_error(build_string("array not found : '{}'", name));
@@ -93,17 +93,17 @@ namespace solar {
 		else {
 			handle_size_func(a.size());
 			for (unsigned int i = 0; i < a.size(); ++i) {
-				auto v = a.get_ushort(i);
+				auto v = a.get_uint16(i);
 				handle_value_func(i, v);
 			}
 		}
 	}
 
-	void json_archive_reader::read_ushorts_fixed(const char* name, unsigned int size, unsigned short* values_begin) {
+	void json_archive_reader::read_uint16s_fixed(const char* name, unsigned int size, uint16_t* values_begin) {
 		json_array a;
 		if (try_get_array_of_size(a, name, size)) {
 			for (unsigned int i = 0; i < size; ++i) {
-				values_begin[i] = a.get_ushort(i);
+				values_begin[i] = a.get_uint16(i);
 			}
 		}
 	}

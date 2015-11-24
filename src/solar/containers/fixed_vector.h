@@ -72,17 +72,24 @@ namespace solar {
 		}
 
 		void push_back(const ValueT& new_value) {
-			push_back_unitialized() = new_value;
+			push_back_no_construct() = new_value;
 		}
 
-		ValueT& push_back_unitialized()
-		{
+		ValueT& push_back_no_construct() {
 			ASSERT(_size < MAX_SIZE);
 			_size++;
 			return _values[_size - 1];
 		}
 
 		void clear() {
+			for (unsigned int i = 0; i < _size; ++i) {
+				_values[i].~value_type();
+			}
+			_size = 0;
+		}
+
+		void clear_fast_no_destruct() {
+			//check std::is_trivially_destructible<ValueT>? need more research as can't get it to compile to pick correct clear call based on that trait...
 			_size = 0;
 		}
 

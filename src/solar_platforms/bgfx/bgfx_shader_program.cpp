@@ -107,10 +107,11 @@ namespace solar {
 	}
 
 	void bgfx_shader_program::start() {
+		//null-op of bgfx
 	}
 
 	void bgfx_shader_program::stop() {
-		bgfx::submit(_factory.get_bgfx_context().get_current_view_id(), _program_handle);
+		//null-op of bgfx
 	}
 
 	void bgfx_shader_program::commit_param_changes() {
@@ -162,6 +163,10 @@ namespace solar {
 		UNUSED_PARAMETER(name);
 		UNUSED_PARAMETER(texture);
 		return false;
+	}
+
+	bgfx::ProgramHandle bgfx_shader_program::get_program_handle() const {
+		return _program_handle;
 	}
 
 }

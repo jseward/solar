@@ -120,4 +120,8 @@ namespace solar {
 		in.erase(std::remove_if(in.begin(), in.end(), predicate), in.end());
 	}
 
+	template<typename Con> size_t get_data_size(const Con& in) {
+		return in.size() * sizeof(Con::value_type);
+	}
+
 }

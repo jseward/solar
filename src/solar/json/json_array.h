@@ -28,12 +28,12 @@ namespace solar {
 		unsigned int size() const;
 		
 		json_object get_object(unsigned int index);
-		unsigned short get_ushort(unsigned int index);
+		uint16_t get_uint16(unsigned int index);
 		int get_int(unsigned int index);
 		float get_float(unsigned int index);
 		const char* get_string(unsigned int index);
 
-		bool try_get_ushort(unsigned short& out, unsigned int index);
+		bool try_get_uint16(uint16_t& out, unsigned int index);
 		bool try_get_int(int& out, unsigned int index);
 		bool try_get_float(float& out, unsigned int index);
 		bool try_get_string(const char*& out, unsigned int index);

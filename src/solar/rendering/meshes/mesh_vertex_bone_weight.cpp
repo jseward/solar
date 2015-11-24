@@ -9,12 +9,12 @@ namespace solar {
 	}
 
 	void mesh_vertex_bone_weight::read_from_archive(archive_reader& reader) {
-		read_ushort(reader, "bone_index", _bone_index);
+		read_uint16(reader, "bone_index", _bone_index);
 		read_float(reader, "weight", _weight);
 	}
 
 	void mesh_vertex_bone_weight::write_to_archive(archive_writer& writer) const {
-		write_ushort(writer, "bone_index", _bone_index);
+		write_uint16(writer, "bone_index", _bone_index);
 		write_float(writer, "weight", _weight);
 	}
 
