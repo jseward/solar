@@ -11,7 +11,7 @@ namespace solar {
 	class single_value_archivable;
 	class archive_int_compression;
 	class color;
-
+	
 	class archive_writer {
 	public:
 		virtual ~archive_writer() = 0 {};
