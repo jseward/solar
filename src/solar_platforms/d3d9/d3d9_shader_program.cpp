@@ -15,7 +15,7 @@ namespace solar {
 	d3d9_shader_program::d3d9_shader_program(d3d9_shader_program_factory& factory, const resource_address& resource_address)
 		: _factory(factory)
 		, _resource_address(resource_address)
-		, _embeded_code(nullptr) 
+		, _embedded_code(nullptr) 
 		, _ID3DXEffect(nullptr)
 		, _is_started(false)
 		, _is_within_pass(false)
@@ -24,10 +24,10 @@ namespace solar {
 		ASSERT(!resource_address.empty());
 	}
 
-	d3d9_shader_program::d3d9_shader_program(d3d9_shader_program_factory& factory, const char* embeded_code)
+	d3d9_shader_program::d3d9_shader_program(d3d9_shader_program_factory& factory, const char* embedded_code)
 		: _factory(factory) 
 		, _resource_address()
-		, _embeded_code(embeded_code) 
+		, _embedded_code(embedded_code) 
 		, _ID3DXEffect(nullptr)
 		, _is_started(false)
 		, _is_within_pass(false)
@@ -44,8 +44,8 @@ namespace solar {
 		return _resource_address;
 	}
 
-	const char* d3d9_shader_program::get_embeded_code() const {
-		return _embeded_code;
+	const char* d3d9_shader_program::get_embedded_code() const {
+		return _embedded_code;
 	}
 	
 	void d3d9_shader_program::start_with_flags(DWORD flags) {
@@ -199,11 +199,11 @@ namespace solar {
 	void d3d9_shader_program::on_device_created(IDirect3DDevice9* device) {
 		ASSERT(_ID3DXEffect == nullptr);
 
-		if (_embeded_code != nullptr) {
-			UINT size = (UINT)strlen(_embeded_code) + 1;
+		if (_embedded_code != nullptr) {
+			UINT size = (UINT)strlen(_embedded_code) + 1;
 			D3D9_VERIFY(::D3DXCreateEffect(
 				device,
-				_embeded_code,
+				_embedded_code,
 				size,
 				NULL,
 				NULL,

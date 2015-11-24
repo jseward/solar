@@ -22,7 +22,7 @@ namespace solar {
 		bool _is_setup;
 		resource_factory_caching_context _shader_program_caching_context;
 		std::unordered_map<std::string, std::unique_ptr<opengl_shader_program>> _shader_programs;
-		std::vector<opengl_shader_program*> _embeded_code_shader_programs;
+		std::vector<opengl_shader_program*> _embedded_code_shader_programs;
 
 	public:
 		opengl_shader_program_factory(opengl_context& context, resource_system& resource_system);
@@ -34,8 +34,8 @@ namespace solar {
 		virtual shader_program* get_shader_program(const std::string& id, const std::string& id_source_description) override;
 		virtual const resource_factory_caching_context& get_shader_program_caching_context() const override;
 
-		opengl_shader_program* create_embeded_code_shader_program(const char* vs_embedded_code, const char* fs_embedded_code);
-		void release_embeded_code_shader_program(opengl_shader_program* program);
+		opengl_shader_program* create_embedded_code_shader_program(const char* vs_embedded_code, const char* fs_embedded_code);
+		void release_embedded_code_shader_program(opengl_shader_program* program);
 
 		opengl_context& get_opengl_context();
 		resource_system& get_resource_system();

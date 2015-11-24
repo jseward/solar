@@ -45,7 +45,7 @@ namespace solar {
 		_buffered_tris.reserve(params.get_max_buffered_tri_count());
 
 		ASSERT(_default_shader_program == nullptr);
-		_default_shader_program = _shader_program_factory.create_embeded_code_shader_program(PRIM2D_EMBEDDED_CODE);
+		_default_shader_program = _shader_program_factory.create_embedded_code_shader_program(PRIM2D_EMBEDDED_CODE);
 
 		_default_rs_block = _context.create_render_state_block(render_state_block_def()
 			.set_depth_write(render_state_depth_write::DISABLED)
@@ -56,7 +56,7 @@ namespace solar {
 	}
 
 	void d3d9_prim2d::teardown() {
-		_shader_program_factory.release_embeded_code_shader_program(_default_shader_program);
+		_shader_program_factory.release_embedded_code_shader_program(_default_shader_program);
 		_default_shader_program = nullptr;
 		
 		_context.release_render_state_block(_default_rs_block);

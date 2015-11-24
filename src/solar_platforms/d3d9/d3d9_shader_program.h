@@ -15,7 +15,7 @@ namespace solar {
 	private:
 		d3d9_shader_program_factory& _factory;
 		resource_address _resource_address;
-		const char* _embeded_code;
+		const char* _embedded_code;
 		ID3DXEffect* _ID3DXEffect;
 		D3DXEFFECT_DESC _desc;
 		std::unordered_map<std::string, D3DXHANDLE> _technique_handles;
@@ -26,11 +26,11 @@ namespace solar {
 
 	public:
 		d3d9_shader_program(d3d9_shader_program_factory& factory, const resource_address& resource_address);
-		d3d9_shader_program(d3d9_shader_program_factory& factory, const char* embeded_code);
+		d3d9_shader_program(d3d9_shader_program_factory& factory, const char* embedded_code);
 		virtual ~d3d9_shader_program();
 
 		const resource_address& get_resource_address() const;
-		const char* get_embeded_code() const;
+		const char* get_embedded_code() const;
 
 		virtual void start() override;
 		virtual void stop() override;

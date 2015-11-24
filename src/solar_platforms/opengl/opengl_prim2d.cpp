@@ -61,7 +61,7 @@ namespace solar {
 		//_index_buffer_handle = opengl::createDynamicIndexBuffer(_max_buffered_indices, opengl_BUFFER_NONE); //16-bit indices due to lack of opengl_BUFFER_INDEX32
 		//_buffered_indices.reserve(_max_buffered_indices);
 		//
-		//_default_shader_program = _factory.create_embeded_code_shader_program(
+		//_default_shader_program = _factory.create_embedded_code_shader_program(
 		//	get_prim2d_vs_embedded_code(renderer_type),
 		//	get_prim2d_fs_embedded_code(renderer_type));
 
@@ -74,7 +74,7 @@ namespace solar {
 	void opengl_prim2d::teardown() {
 		ASSERT(false); //todo
 
-		//_factory.release_embeded_code_shader_program(_default_shader_program);
+		//_factory.release_embedded_code_shader_program(_default_shader_program);
 		//_default_shader_program = nullptr;
 
 		//_context.release_render_state_block(_default_rs_block);

@@ -35,7 +35,7 @@ namespace solar {
 	d3d9_shader_program_factory::~d3d9_shader_program_factory() {
 		ASSERT(!_is_setup);
 		ASSERT(_shader_programs.empty());
-		ASSERT(_embeded_code_shader_programs.empty());
+		ASSERT(_embedded_code_shader_programs.empty());
 		ASSERT(_ID3DXEffectPool == nullptr);
 	}
 
@@ -54,18 +54,18 @@ namespace solar {
 		_is_setup = false;
 	}
 
-	d3d9_shader_program* d3d9_shader_program_factory::create_embeded_code_shader_program(const char* embeded_code) {
-		auto new_program = new d3d9_shader_program(*this, embeded_code);
+	d3d9_shader_program* d3d9_shader_program_factory::create_embedded_code_shader_program(const char* embedded_code) {
+		auto new_program = new d3d9_shader_program(*this, embedded_code);
 		new_program->on_device_created(_context.get_device());
 		new_program->on_device_reset(_context.get_device());
-		_embeded_code_shader_programs.push_back(new_program);
+		_embedded_code_shader_programs.push_back(new_program);
 		return new_program;
 	}
 
-	void d3d9_shader_program_factory::release_embeded_code_shader_program(d3d9_shader_program* program) {
+	void d3d9_shader_program_factory::release_embedded_code_shader_program(d3d9_shader_program* program) {
 		program->on_device_lost(_context.get_device());
 		program->on_device_released(_context.get_device());
-		find_and_erase(_embeded_code_shader_programs, program);
+		find_and_erase(_embedded_code_shader_programs, program);
 		delete program;
 	}
 
@@ -113,7 +113,7 @@ namespace solar {
 			iter.second->on_device_created(device);
 		}
 
-		for (auto& program : _embeded_code_shader_programs) {
+		for (auto& program : _embedded_code_shader_programs) {
 			program->on_device_created(device);
 		}
 	}
@@ -123,7 +123,7 @@ namespace solar {
 			iter.second->on_device_released(device);
 		}
 
-		for (auto& program : _embeded_code_shader_programs) {
+		for (auto& program : _embedded_code_shader_programs) {
 			program->on_device_released(device);
 		}
 	}
@@ -133,7 +133,7 @@ namespace solar {
 			iter.second->on_device_reset(device);
 		}
 
-		for (auto& program : _embeded_code_shader_programs) {
+		for (auto& program : _embedded_code_shader_programs) {
 			program->on_device_reset(device);
 		}
 	}
@@ -143,7 +143,7 @@ namespace solar {
 			iter.second->on_device_lost(device);
 		}
 
-		for (auto& program : _embeded_code_shader_programs) {
+		for (auto& program : _embedded_code_shader_programs) {
 			program->on_device_lost(device);
 		}
 	}

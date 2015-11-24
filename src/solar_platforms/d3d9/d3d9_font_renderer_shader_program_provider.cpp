@@ -18,15 +18,15 @@ namespace solar {
 	}
 
 	void d3d9_font_renderer_shader_program_provider::setup() {
-		_normal_shader_program = _factory.create_embeded_code_shader_program(FONT_NORMAL_EMBEDDED_CODE);
-		_dropshadow_shader_program = _factory.create_embeded_code_shader_program(FONT_DROPSHADOW_EMBEDDED_CODE);
+		_normal_shader_program = _factory.create_embedded_code_shader_program(FONT_NORMAL_EMBEDDED_CODE);
+		_dropshadow_shader_program = _factory.create_embedded_code_shader_program(FONT_DROPSHADOW_EMBEDDED_CODE);
 	}
 
 	void d3d9_font_renderer_shader_program_provider::teardown() {
-		_factory.release_embeded_code_shader_program(_normal_shader_program);
+		_factory.release_embedded_code_shader_program(_normal_shader_program);
 		_normal_shader_program = nullptr;
 
-		_factory.release_embeded_code_shader_program(_dropshadow_shader_program);
+		_factory.release_embedded_code_shader_program(_dropshadow_shader_program);
 		_dropshadow_shader_program = nullptr;
 	}
 

@@ -20,21 +20,21 @@ namespace solar {
 		ASSERT(false);//todo
 		//auto renderer_type = opengl::getRendererType();
 
-		//_normal_shader_program = _factory.create_embeded_code_shader_program(
+		//_normal_shader_program = _factory.create_embedded_code_shader_program(
 		//	get_font_normal_vs_embedded_code(renderer_type), 
 		//	get_font_normal_fs_embedded_code(renderer_type));
 		//
-		//_dropshadow_shader_program = _factory.create_embeded_code_shader_program(
+		//_dropshadow_shader_program = _factory.create_embedded_code_shader_program(
 		//	get_font_dropshadow_vs_embedded_code(renderer_type), 
 		//	get_font_dropshadow_fs_embedded_code(renderer_type));
 	}
 
 	void opengl_font_renderer_shader_program_provider::teardown() {
 		ASSERT(false);//todo
-		//_factory.release_embeded_code_shader_program(_normal_shader_program);
+		//_factory.release_embedded_code_shader_program(_normal_shader_program);
 		//_normal_shader_program = nullptr;
 
-		//_factory.release_embeded_code_shader_program(_dropshadow_shader_program);
+		//_factory.release_embedded_code_shader_program(_dropshadow_shader_program);
 		//_dropshadow_shader_program = nullptr;
 	}
 

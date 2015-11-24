@@ -16,7 +16,7 @@ namespace solar {
 	opengl_shader_program_factory::~opengl_shader_program_factory() {
 		ASSERT(!_is_setup);
 		ASSERT(_shader_programs.empty());
-		ASSERT(_embeded_code_shader_programs.empty());
+		ASSERT(_embedded_code_shader_programs.empty());
 	}
 
 	void opengl_shader_program_factory::setup() {
@@ -65,16 +65,16 @@ namespace solar {
 		return _resource_system;
 	}
 
-	opengl_shader_program* opengl_shader_program_factory::create_embeded_code_shader_program(const char* vs_embedded_code, const char* fs_embedded_code) {
+	opengl_shader_program* opengl_shader_program_factory::create_embedded_code_shader_program(const char* vs_embedded_code, const char* fs_embedded_code) {
 		auto shader_program = new opengl_shader_program(*this, vs_embedded_code, fs_embedded_code);
 		shader_program->create_embedded();
-		_embeded_code_shader_programs.push_back(shader_program);
+		_embedded_code_shader_programs.push_back(shader_program);
 		return shader_program;
 	}
 
-	void opengl_shader_program_factory::release_embeded_code_shader_program(opengl_shader_program* program) {
+	void opengl_shader_program_factory::release_embedded_code_shader_program(opengl_shader_program* program) {
 		if (program != nullptr) {
-			find_and_erase(_embeded_code_shader_programs, program);
+			find_and_erase(_embedded_code_shader_programs, program);
 			delete program;
 		}
 	}
