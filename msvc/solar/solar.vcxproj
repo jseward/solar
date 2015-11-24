@@ -252,149 +252,6 @@
     <ClInclude Include="..\..\src\solar\windows\window_focus_controller.h" />
     <ClInclude Include="..\..\src\solar\windows\window_font_def.h" />
     <ClInclude Include="..\..\src\solar\windows\window_helpers.h" />
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\include\bgfx\bgfx.h" />
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\include\bgfx\bgfxdefines.h" />
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\include\bgfx\bgfxplatform.h" />
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\bgfx_p.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\charset.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\config.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear0.bin.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear1.bin.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear2.bin.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear3.bin.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear4.bin.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear5.bin.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear6.bin.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_clear7.bin.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\fs_debugfont.bin.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glcontext_eagl.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glcontext_egl.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glcontext_glx.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glcontext_nsgl.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glcontext_ppapi.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glcontext_wgl.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\glimports.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\image.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\ovr.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderdoc.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d11.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d12.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d9.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer_gl.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\renderer_mtl.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\shader_dx9bc.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\shader_dxbc.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\shader_spirv.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\vertexdecl.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\vs_clear.bin.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar_dependencies\bgfx\src\vs_debugfont.bin.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar_dependencies\cppformat\format.h" />
     <ClInclude Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\audiodefs.h" />
     <ClInclude Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\comdecl.h" />
@@ -514,36 +371,11 @@
     <ClInclude Include="..\..\src\solar_dependencies\rapidjson\include\rapidjson\reader.h" />
     <ClInclude Include="..\..\src\solar_dependencies\rapidjson\include\rapidjson\stringbuffer.h" />
     <ClInclude Include="..\..\src\solar_dependencies\rapidjson\include\rapidjson\writer.h" />
-    <ClInclude Include="..\..\src\solar_engines\win32_bgfx_engine.h" />
-    <ClInclude Include="..\..\src\solar_engines\win32_bgfx_engine_settings.h" />
+    <ClInclude Include="..\..\src\solar_engines\win32_opengl_engine.h" />
+    <ClInclude Include="..\..\src\solar_engines\win32_opengl_engine_settings.h" />
     <ClInclude Include="..\..\src\solar_engines\win32_cli_engine.h" />
     <ClInclude Include="..\..\src\solar_engines\win32_d3d9_engine.h" />
     <ClInclude Include="..\..\src\solar_engines\win32_d3d9_engine_settings.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_callback.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_context.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_cursor.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon_factory.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_font_renderer_shader_program_provider.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_mesh.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_mesh_factory.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_lines.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_vertex.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_render_device.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_render_state_block.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_embedded_code.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program_def.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program_factory.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_shader_type.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_texture.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_texture_factory.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_user_settings.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\bgfx_window_type.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\platforms\win32_bgfx_context.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\shaders\font_shaders_embedded_code.h" />
-    <ClInclude Include="..\..\src\solar_platforms\bgfx\shaders\prim2d_shaders_embedded_code.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_context.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_cursor.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon.h" />
@@ -588,6 +420,27 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\shaders\font_dropshadow_embedded_code.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\shaders\font_normal_embedded_code.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\shaders\prim2d_embedded_code.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_context.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_cursor.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_cursor_icon.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_cursor_icon_factory.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_font_renderer_shader_program_provider.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_mesh.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_mesh_factory.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_prim2d.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_prim2d_lines.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_prim2d_vertex.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_render_device.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_render_state_block.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_render_state_defines.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_shader_program.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_shader_program_def.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_shader_program_factory.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_texture.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_texture_factory.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_user_settings.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\opengl_window_type.h" />
+    <ClInclude Include="..\..\src\solar_platforms\opengl\platforms\win32_opengl_context.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_clipboard.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_cli_app.h" />
     <ClInclude Include="..\..\src\solar_platforms\win32\win32_cli_app_error_behavoir.h" />
@@ -622,7 +475,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_platforms_bgfx.cpp">
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies_opengl.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -631,10 +484,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_platforms_d3d9.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_dependencies_bgfx.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -663,6 +512,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_networking.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_platforms_opengl.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -707,6 +560,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_win32_d3d9_engine.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_win32_opengl_engine.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -864,82 +721,6 @@
     <ClCompile Include="..\..\src\solar\windows\window_focus_controller.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_font_def.cpp" />
     <ClCompile Include="..\..\src\solar\windows\window_helpers.cpp" />
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\amalgamated.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\bgfx.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\glcontext_egl.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\glcontext_glx.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\glcontext_ppapi.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\glcontext_wgl.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\image.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\ovr.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderdoc.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d11.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d12.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderer_d3d9.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderer_gl.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderer_null.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\renderer_vk.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\shader_dx9bc.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\shader_dxbc.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\shader_spirv.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_dependencies\bgfx\src\vertexdecl.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\src\solar_dependencies\cppformat\format.cc" />
     <ClCompile Include="..\..\src\solar_dependencies\enet\callbacks.c" />
     <ClCompile Include="..\..\src\solar_dependencies\enet\compress.c" />
@@ -950,34 +731,11 @@
     <ClCompile Include="..\..\src\solar_dependencies\enet\protocol.c" />
     <ClCompile Include="..\..\src\solar_dependencies\enet\unix.c" />
     <ClCompile Include="..\..\src\solar_dependencies\enet\win32.c" />
-    <ClCompile Include="..\..\src\solar_engines\win32_bgfx_engine.cpp" />
-    <ClCompile Include="..\..\src\solar_engines\win32_bgfx_engine_settings.cpp" />
+    <ClCompile Include="..\..\src\solar_engines\win32_opengl_engine.cpp" />
+    <ClCompile Include="..\..\src\solar_engines\win32_opengl_engine_settings.cpp" />
     <ClCompile Include="..\..\src\solar_engines\win32_cli_engine.cpp" />
     <ClCompile Include="..\..\src\solar_engines\win32_d3d9_engine.cpp" />
     <ClCompile Include="..\..\src\solar_engines\win32_d3d9_engine_settings.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_callback.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_context.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_cursor.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_cursor_icon_factory.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_font_renderer_shader_program_provider.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_mesh.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_mesh_factory.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_lines.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_prim2d_vertex.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_render_device.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_render_state_block.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program_def.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_shader_program_factory.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_texture.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_texture_factory.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_user_settings.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\bgfx_window_type.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\platforms\win32_bgfx_context.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\shaders\font_shaders_embedded_code.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\bgfx\shaders\prim2d_shaders_embedded_code.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_context.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_cursor.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_cursor_icon.cpp" />
@@ -1008,6 +766,26 @@
     <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\font_dropshadow_embedded_code.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\font_normal_embedded_code.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\prim2d_embedded_code.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_context.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_cursor.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_cursor_icon.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_cursor_icon_factory.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_font_renderer_shader_program_provider.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_mesh.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_mesh_factory.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_prim2d.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_prim2d_lines.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_prim2d_vertex.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_render_device.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_render_state_block.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_shader_program.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_shader_program_def.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_shader_program_factory.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_texture.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_texture_factory.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_user_settings.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\opengl_window_type.cpp" />
+    <ClCompile Include="..\..\src\solar_platforms\opengl\platforms\win32_opengl_context.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_clipboard.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_cli_app.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\win32\win32_debugging.cpp" />
@@ -1044,13 +822,6 @@
     <None Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xnamathmatrix.inl" />
     <None Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xnamathmisc.inl" />
     <None Include="..\..\src\solar_dependencies\directxsdk_june_2010\include\xnamathvector.inl" />
-    <None Include="..\..\src\solar_platforms\bgfx\shaders\font_dropshadow.fsc" />
-    <None Include="..\..\src\solar_platforms\bgfx\shaders\font_dropshadow.vsc" />
-    <None Include="..\..\src\solar_platforms\bgfx\shaders\font_normal.fsc" />
-    <None Include="..\..\src\solar_platforms\bgfx\shaders\font_normal.vsc" />
-    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.fsc" />
-    <None Include="..\..\src\solar_platforms\bgfx\shaders\prim2d.vsc" />
-    <None Include="..\..\src\solar_platforms\bgfx\shaders\varying.def.sc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{03FA803B-DEB3-4256-9C37-E85BFCAE0B9D}</ProjectGuid>
