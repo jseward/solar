@@ -113,7 +113,7 @@ namespace solar {
 					_materials.reserve(mesh_def._materials.size());
 					for (const auto& material : mesh_def._materials) {
 						_materials.push_back(std::make_unique<d3d9_mesh_material>(
-							_resource_address.get_file_path(), _texture_params, material));
+							_resource_address.get_path(), _texture_params, material));
 					}
 				}
 			}

@@ -15,7 +15,7 @@ namespace solar {
 		manifest.load(_resource_system, "font_manifest", "fonts", ".font_manifest", "_font_manifest", "font_factory");
 
 		for (auto id : manifest.get_ids()) {
-			auto address = _resource_system.resolve_address("font", "fonts", ".font", id.c_str(), manifest.get_address().to_string().c_str());
+			auto address = _resource_system.resolve_address_to_file("font", "fonts", ".font", id.c_str(), manifest.get_address().to_string().c_str());
 			_fonts[id] = std::make_unique<font>(address);
 		}
 

@@ -32,11 +32,17 @@ namespace solar {
 
 		std::vector<std::string> get_all_file_system_provider_dir_paths() const;
 
-		resource_address resolve_address(
+		resource_address resolve_address_to_file(
 			const char* resource_type_name, 
 			const char* folder, 
 			const char* extensions, 
 			const char* id, 
+			const char* id_source_description);
+
+		resource_address resolve_address_to_directory(
+			const char* resource_type_name,
+			const char* folder,
+			const char* id,
 			const char* id_source_description);
 
 		stream* open_stream_to_read(const resource_address& address);
@@ -54,8 +60,9 @@ namespace solar {
 		void end_watching_resources(file_change_handler* handler);
 
 	private:
-		resource_address resolve_address_with_provider(const resource_provider& provider, const char* folder, const char* extensions, const char* id);
-		resource_address resolve_address_with_file_system(const std::string& root_path, const char* folder, const char* extensions, const char* id);
+		resource_address resolve_address(bool is_file, const char* resource_type_name, const char* folder, const char* extensions, const char* id, const char* id_source_description);
+		resource_address resolve_address_with_provider(bool is_file, const char* folder, const char* extensions, const char* id, const resource_provider& provider);
+		resource_address resolve_address_with_file_system(bool is_file, const char* folder, const char* extensions, const char* id, const std::string& root_path);
 
 		bool does_id_have_bad_chars(const char* id) const;
 

@@ -62,7 +62,7 @@ namespace solar {
 
 	void window_style_factory::load_all() {
 		for (auto& info : _window_style_type_infos) {
-			auto address = _resource_system.resolve_address("window_style", "windows", ".window_style", info.first.c_str(), "window_style_factory::load()");
+			auto address = _resource_system.resolve_address_to_file("window_style", "windows", ".window_style", info.first.c_str(), "window_style_factory::load()");
 			if (!address.empty()) {
 				_resource_system.read_object_as_json(*info.second.get(), address);
 				_resource_system.begin_watching_resource(this, address, info.second.get());

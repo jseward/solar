@@ -60,7 +60,7 @@ namespace solar {
 	}
 
 	resource_address window_registry::resolve_window_collection_address(const window_registry_window_collection& collection) {
-		return _resource_system.resolve_address("window", "windows", ".window", collection.get_id().c_str(), "");
+		return _resource_system.resolve_address_to_file("window", "windows", ".window", collection.get_id().c_str(), "");
 	}
 
 	void window_registry::on_file_changed(const std::string& path, void* data) {

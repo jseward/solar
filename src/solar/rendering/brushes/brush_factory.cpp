@@ -19,7 +19,7 @@ namespace solar {
 		manifest.load(_resource_system, "brush_manifest", "brushes", ".brush_manifest", "_brush_manifest", "brush_factory");
 
 		for (auto id : manifest.get_ids()) {
-			auto address = _resource_system.resolve_address("brush", "brushes", ".brush", id.c_str(), manifest.get_address().to_string().c_str());
+			auto address = _resource_system.resolve_address_to_file("brush", "brushes", ".brush", id.c_str(), manifest.get_address().to_string().c_str());
 			if (!address.empty()) {
 				_brush_sets.push_back(std::make_unique<brush_set>(address));
 			}

@@ -43,7 +43,7 @@ namespace solar {
 			return iter->second.get();
 		}
 
-		auto address = _resource_system.resolve_address("shader_program", "shaders", ".shader_program", id.c_str(), id_source_description.c_str());
+		auto address = _resource_system.resolve_address_to_file("shader_program", "shaders", ".shader_program", id.c_str(), id_source_description.c_str());
 		opengl_shader_program* new_program = new opengl_shader_program(*this, address);
 		if (!address.empty()) {
 			new_program->load();
@@ -81,7 +81,7 @@ namespace solar {
 
 	void opengl_shader_program_factory::on_file_changed(const std::string& path, void* data) {
 		opengl_shader_program* program = reinterpret_cast<opengl_shader_program*>(data);
-		ASSERT(program->get_resource_address().get_file_path() == path);
+		ASSERT(program->get_resource_address().get_path() == path);
 		program->load();
 	}
 

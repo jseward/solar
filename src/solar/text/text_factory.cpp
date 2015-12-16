@@ -17,7 +17,7 @@ namespace solar {
 		ASSERT(_text_map.empty());
 
 		_language = language;
-		_language_address = _resource_system.resolve_address("text", "text", ".text", language, "text_factory::setup");
+		_language_address = _resource_system.resolve_address_to_file("text", "text", ".text", language, "text_factory::setup");
 		if (!_language_address.empty()) {
 			load_from_address(_language_address);
 			_resource_system.begin_watching_resource(this, _language_address);
@@ -59,7 +59,7 @@ namespace solar {
 
 	void text_factory::on_file_changed(const std::string& path, void* data) {
 		ASSERT(data == nullptr);
-		ASSERT(path == _language_address.get_file_path());
+		ASSERT(path == _language_address.get_path());
 		load_from_address(_language_address);
 	}
 

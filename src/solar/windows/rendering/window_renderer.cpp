@@ -23,7 +23,7 @@ namespace solar {
 	}
 
 	void window_renderer::setup() {
-		auto address = _resource_system.resolve_address("window_renderer_def", "windows", ".window_renderer", "_window_renderer", "window_renderer::setup()");
+		auto address = _resource_system.resolve_address_to_file("window_renderer_def", "windows", ".window_renderer", "_window_renderer", "window_renderer::setup()");
 		if (!address.empty()) {
 			_resource_system.read_object_as_json(_def, address);
 		}

@@ -47,31 +47,57 @@ namespace solar {
 		return dir_paths;
 	}
 
-	resource_address resource_system::resolve_address(const char* resource_type_name, const char* folder, const char* extensions, const char* id, const char* id_source_description) {
+	resource_address resource_system::resolve_address_to_file(
+		const char* resource_type_name,
+		const char* folder,
+		const char* extensions,
+		const char* id,
+		const char* id_source_description) {
+
+		return resolve_address(true, resource_type_name, folder, extensions, id, id_source_description);
+	}
+
+	resource_address resource_system::resolve_address_to_directory(
+		const char* resource_type_name,
+		const char* folder,
+		const char* id,
+		const char* id_source_description) {
+
+		return resolve_address(false, resource_type_name, folder, "", id, id_source_description);
+	}
+
+	resource_address resource_system::resolve_address(
+		bool is_file, 
+		const char* resource_type_name, 
+		const char* folder, 
+		const char* extensions, 
+		const char* id, 
+		const char* id_source_description) {
+
 		if (is_string_empty(id)) {
-			ALERT("resource id is empty.\n\nresource_type_name: {}\nid_source: {}", resource_type_name, id_source_description);
+			ALERT("resource_id is empty.\n\nresource_type: {}\nid_source: {}", resource_type_name, id_source_description);
 			return resource_address();
 		}
 
 		if (does_id_have_bad_chars(id)) {
-			ALERT("resource id can only contain lowercase alphanumeric chars and _. extensions should not be specified in the name.\n\nresource_type_name: '{}'\nid: '{}'\nid_source: {}", resource_type_name, id, id_source_description);
+			ALERT("resource_id can only contain lowercase alphanumeric chars and _.\n\nresource_type: '{}'\nresource_id: '{}'\nid_source: {}", resource_type_name, id, id_source_description);
 			return resource_address();
 		}
 
 		for (auto& provider : _providers) {
-			auto address = resolve_address_with_provider(provider, folder, extensions, id);
+			auto address = resolve_address_with_provider(is_file, folder, extensions, id, provider);
 			if (!address.empty()) {
 				return address;
 			}
 		}
 
-		ALERT("resource not found : {}{}\n\nresource_type_name: {}\nfolder: {}\nid_source: {}\n\nproviders: {}", id, extensions, resource_type_name, folder, id_source_description, build_newline_seperated_providers_description());
+		ALERT("resource not found : {}{}\n\nresource_type: {}\nfolder: {}\nid_source: {}\n\nproviders: {}", id, extensions, resource_type_name, folder, id_source_description, build_newline_seperated_providers_description());
 		return resource_address();
 	}
 
-	resource_address resource_system::resolve_address_with_provider(const resource_provider& provider, const char* folder, const char* extensions, const char* id) {
+	resource_address resource_system::resolve_address_with_provider(bool is_file, const char* folder, const char* extensions, const char* id, const resource_provider& provider) {
 		if (provider.get_type() == resource_provider_type::FILE_SYSTEM) {
-			return resolve_address_with_file_system(provider.get_root_path(), folder, extensions, id);
+			return resolve_address_with_file_system(is_file, folder, extensions, id, provider.get_root_path());
 		}
 		else {
 			ASSERT(false);
@@ -79,12 +105,21 @@ namespace solar {
 		return resource_address();
 	}
 
-	resource_address resource_system::resolve_address_with_file_system(const std::string& root_path, const char* folder, const char* extensions, const char* id) {
-		for (auto& ext : split_string(extensions, ";")) {
-			auto file_name = std::string(id) + ext;
-			auto file_path = make_file_path(root_path, folder, file_name);
-			if (_file_system.does_file_exist(file_path)) {
-				return make_resource_address_with_file_system_provider(file_path);
+	resource_address resource_system::resolve_address_with_file_system(bool is_file, const char* folder, const char* extensions, const char* id, const std::string& root_path) {
+		if (is_file) {
+			for (auto& ext : split_string(extensions, ";")) {
+				auto file_name = std::string(id) + ext;
+				auto file_path = make_file_path(root_path, folder, file_name);
+				if (_file_system.does_file_exist(file_path)) {
+					return make_resource_address_with_file_system_provider(file_path);
+				}
+			}
+		}
+		else {
+			ASSERT(is_string_empty(extensions));
+			auto dir_path = make_file_path(root_path, folder, id);
+			if (_file_system.does_directory_exist(dir_path)) {
+				return make_resource_address_with_file_system_provider(dir_path);
 			}
 		}
 		return resource_address();
@@ -101,7 +136,7 @@ namespace solar {
 	stream* resource_system::open_stream(const resource_address& address, file_mode file_mode) {
 		IF_VERIFY(!address.empty()) {
 			if (address.get_provider_type() == resource_provider_type::FILE_SYSTEM) {
-				auto fs = _file_system.open_file_stream(address.get_file_path(), file_mode);
+				auto fs = _file_system.open_file_stream(address.get_path(), file_mode);
 				if (fs != nullptr) {
 					_open_file_system_streams.push_back(fs);
 					return fs;
@@ -127,7 +162,7 @@ namespace solar {
 	bool resource_system::read_to_mapped_memory(resource_mapped_memory& mapped_memory, const resource_address& address) {
 		IF_VERIFY(!address.empty()) {
 			if (address.get_provider_type() == resource_provider_type::FILE_SYSTEM) {
-				auto fs = _file_system.open_file_stream(address.get_file_path(), file_mode::OPEN_READ);
+				auto fs = _file_system.open_file_stream(address.get_path(), file_mode::OPEN_READ);
 				if (fs != nullptr) {
 					auto buffer_size = fs->get_size();
 					char* buffer = mapped_memory.allocate_buffer(buffer_size, address.to_string().c_str());
@@ -202,7 +237,7 @@ namespace solar {
 
 	void resource_system::begin_watching_resource(file_change_handler* handler, const resource_address& address, void* data) {
 		if (address.get_provider_type() == resource_provider_type::FILE_SYSTEM) {
-			_file_change_watcher.begin_watching_file(handler, address.get_file_path(), data);
+			_file_change_watcher.begin_watching_file(handler, address.get_path(), data);
 		}
 	}
 

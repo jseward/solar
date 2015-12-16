@@ -43,7 +43,7 @@ namespace solar {
 			return iter->second.get();
 		}
 
-		auto address = _resource_system.resolve_address("mesh", "meshes", RESOLVE_ADDRESS_MESH_EXTENSIONS, id.c_str(), id_source_description.c_str());
+		auto address = _resource_system.resolve_address_to_file("mesh", "meshes", RESOLVE_ADDRESS_MESH_EXTENSIONS, id.c_str(), id_source_description.c_str());
 		opengl_mesh* new_mesh = new opengl_mesh(texture_params, address);
 		_meshs[id] = std::unique_ptr<opengl_mesh>(new_mesh);
 

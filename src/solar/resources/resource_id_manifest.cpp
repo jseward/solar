@@ -1,5 +1,7 @@
 #include "resource_id_manifest.h"
+
 #include "resource_system.h"
+
 #include "solar/utility/assert.h"
 #include "solar/utility/alert.h"
 #include "solar/json/json_document.h"
@@ -14,7 +16,7 @@ namespace solar {
 		ASSERT(_address.empty());
 		ASSERT(_ids.empty());
 
-		_address = resource_system.resolve_address(resource_type_name, folder, extension, manifest_id, source_description);
+		_address = resource_system.resolve_address_to_file(resource_type_name, folder, extension, manifest_id, source_description);
 		if (!_address.empty()) {
 			auto stream = resource_system.open_stream_to_read(_address);
 			if (stream != nullptr) {
