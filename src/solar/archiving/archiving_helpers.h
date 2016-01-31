@@ -177,13 +177,13 @@ namespace solar {
 		writer.write_string(name, value);
 	}
 
-	inline void read_string(archive_reader& reader, const char* name, std::wstring& value) {
+	inline void read_wstring(archive_reader& reader, const char* name, std::wstring& value) {
 		std::string utf8_value;
 		reader.read_string(name, utf8_value);
 		value = utf8_to_utf16(utf8_value);
 	}
 
-	inline void write_string(archive_writer& writer, const char* name, const std::wstring& value) {
+	inline void write_wstring(archive_writer& writer, const char* name, const std::wstring& value) {
 		auto utf8_value = utf16_to_utf8(value);
 		writer.write_string(name, utf8_value);
 	}

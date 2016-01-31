@@ -6,11 +6,13 @@
 namespace solar {
 
 	resource_address::resource_address()
-		: _provider_type(resource_provider_type::invalid) {
+		: _is_file(false)
+		, _provider_type(resource_provider_type::invalid) {
 	}
 
 	bool resource_address::operator==(const resource_address& rhs) const {
 		return
+			_is_file == rhs._is_file &&
 			_provider_type == rhs._provider_type &&
 			_path == rhs._path;
 	}
@@ -19,9 +21,10 @@ namespace solar {
 		return !(*this == rhs);
 	}
 
-	resource_address make_resource_address_with_file_system_provider(const std::string& path) {
+	resource_address make_resource_address_with_file_system_provider(bool is_file, const std::string& path) {
 		ASSERT(!path.empty());
 		resource_address address;
+		address._is_file = is_file;
 		address._provider_type = resource_provider_type::FILE_SYSTEM;
 		address._path = path;
 		return address;
@@ -29,6 +32,14 @@ namespace solar {
 
 	bool resource_address::empty() const {
 		return (_provider_type == resource_provider_type::invalid);
+	}
+
+	bool resource_address::is_file() const {
+		return _is_file;
+	}
+
+	bool resource_address::is_directory() const {
+		return !_is_file;
 	}
 
 	resource_provider_type resource_address::get_provider_type() const {
@@ -40,6 +51,7 @@ namespace solar {
 	}
 
 	std::string resource_address::get_file_extension() const {
+		ASSERT(_is_file);
 		return solar::get_file_extension(_path);
 	}
 

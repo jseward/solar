@@ -111,7 +111,7 @@ namespace solar {
 				auto file_name = std::string(id) + ext;
 				auto file_path = make_file_path(root_path, folder, file_name);
 				if (_file_system.does_file_exist(file_path)) {
-					return make_resource_address_with_file_system_provider(file_path);
+					return make_resource_address_with_file_system_provider(true, file_path);
 				}
 			}
 		}
@@ -119,11 +119,33 @@ namespace solar {
 			ASSERT(is_string_empty(extensions));
 			auto dir_path = make_file_path(root_path, folder, id);
 			if (_file_system.does_directory_exist(dir_path)) {
-				return make_resource_address_with_file_system_provider(dir_path);
+				return make_resource_address_with_file_system_provider(false, dir_path);
 			}
 		}
 		return resource_address();
 	}
+
+	resource_address resource_system::resolve_address_to_file_in_directory(
+		const char* resource_type_name,
+		const resource_address& dir_address,
+		const char* extensions,
+		const char* id) {
+
+		ASSERT(dir_address.is_directory());
+		ASSERT(dir_address.get_provider_type() == resource_provider_type::FILE_SYSTEM);
+
+		for (auto& ext : split_string(extensions, ";")) {
+			auto file_name = std::string(id) + ext;
+			auto file_path = make_file_path(dir_address.get_path(), file_name);
+			if (_file_system.does_file_exist(file_path)) {
+				return make_resource_address_with_file_system_provider(true, file_path);
+			}
+		}
+
+		ALERT("resource not found : {}{}\n\nresource_type: {}\ndirectory: {}", id, extensions, resource_type_name, dir_address.get_path());
+		return resource_address();
+	}
+
 
 	stream* resource_system::open_stream_to_read(const resource_address& address) {
 		return open_stream(address, file_mode::OPEN_READ);

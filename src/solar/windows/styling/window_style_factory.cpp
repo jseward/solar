@@ -83,7 +83,7 @@ namespace solar {
 
 	void window_style_factory::on_file_changed(const std::string& path, void* data) {
 		window_style_type_info* info = reinterpret_cast<window_style_type_info*>(data);
-		_resource_system.read_object_as_json(*info, make_resource_address_with_file_system_provider(path));
+		_resource_system.read_object_as_json(*info, make_resource_address_with_file_system_provider(true, path));
 		_caching_context.increment();
 	}
 

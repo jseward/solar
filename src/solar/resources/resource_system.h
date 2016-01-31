@@ -45,6 +45,12 @@ namespace solar {
 			const char* id,
 			const char* id_source_description);
 
+		resource_address resolve_address_to_file_in_directory(
+			const char* resource_type_name,
+			const resource_address& dir_address,
+			const char* extensions,
+			const char* id);
+
 		stream* open_stream_to_read(const resource_address& address);
 		stream* open_stream_to_write(const resource_address& address);
 		void close_stream(stream* stream);
