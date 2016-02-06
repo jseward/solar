@@ -11,8 +11,9 @@
 namespace solar {
 
 	template<typename T> void read_enum(archive_reader& reader, const char* name, typename T& value) {
+		reader.read_name(name);
 		int value_as_int = 0;
-		reader.read_int(name, value_as_int, make_archive_int_compression_range(0, static_cast<int>(T::count) - 1));
+		reader.read_int(value_as_int, make_archive_int_compression_range(0, static_cast<int>(T::count) - 1));
 		if (value_as_int < 0 || value_as_int >= static_cast<int>(T::count)) {
 			reader.raise_error(build_string("Enum is out of range : \"{}\"", value_as_int));
 			value = T::invalid;
@@ -21,20 +22,23 @@ namespace solar {
 	}
 
 	template<typename T> void write_enum(archive_writer& writer, const char* name, typename const T& value) {
+		writer.write_name(name);
 		const int value_as_int = static_cast<int>(value);
-		writer.write_int(name, value_as_int, make_archive_int_compression_range(0, static_cast<int>(T::count) - 1));
+		writer.write_int(value_as_int, make_archive_int_compression_range(0, static_cast<int>(T::count) - 1));
 	}
 
 	template<typename T> void read_enum_as_string(archive_reader& reader, const char* name, typename T& value) {
+		reader.read_name(name);
 		std::string value_as_string;
-		reader.read_string(name, value_as_string);
+		reader.read_string(value_as_string);
 		if (!try_parse_enum<T>(value, value_as_string)) {
 			reader.raise_error(build_string("Failed to parse enum from string : \"{}\"", value_as_string));
 		}
 	}
 
 	template<typename T> void write_enum_as_string(archive_writer& writer, const char* name, typename T value) {
-		writer.write_string(name, to_string(value));
+		writer.write_name(name);
+		writer.write_string(to_string(value));
 	}
 
 	namespace archiving_enum_helpers_impl {
@@ -89,7 +93,7 @@ namespace solar {
 			read_object(reader, name, value);
 		};
 		archiving_enum_helpers_impl::archivable_enum_array<ArrayT> archivable_array(arr, read_function);
-		reader.read_object(array_name, archivable_array);
+		read_object(reader, array_name, archivable_array);
 	}
 
 	template<typename ArrayT> void write_enum_array_of_objects(archive_writer& writer, const char* array_name, typename const ArrayT& arr) {
@@ -97,17 +101,17 @@ namespace solar {
 			write_object(writer, name, value);
 		};
 		archiving_enum_helpers_impl::archivable_enum_array<ArrayT> archivable_array(arr, write_function);
-		writer.write_object(array_name, archivable_array);
+		write_object(writer, array_name, archivable_array);
 	}
 
 	template<typename ArrayT> void read_enum_array_of_colors(archive_reader& reader, const char* array_name, typename ArrayT& arr) {
 		archiving_enum_helpers_impl::archivable_enum_array<ArrayT> archivable_array(arr, read_color);
-		reader.read_object(array_name, archivable_array);
+		read_object(reader, array_name, archivable_array);
 	}
 
 	template<typename ArrayT> void write_enum_array_of_colors(archive_writer& writer, const char* array_name, typename const ArrayT& arr) {
 		archiving_enum_helpers_impl::archivable_enum_array<ArrayT> archivable_array(arr, write_color);
-		writer.write_object(array_name, archivable_array);
+		write_object(writer, array_name, archivable_array);
 	}
 
 }

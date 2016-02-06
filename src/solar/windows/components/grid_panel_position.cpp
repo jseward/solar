@@ -10,13 +10,13 @@ namespace solar {
 	}
 
 	void grid_panel_position::read_from_archive(archive_reader& reader) {
-		read_optional_int(reader, "row", _row);
-		read_optional_int(reader, "column", _column);
+		read_optional_int(reader, "has_row", "row", _row);
+		read_optional_int(reader, "has_column", "column", _column);
 	}
 
 	void grid_panel_position::write_to_archive(archive_writer& writer) const {
-		write_optional_int(writer, "row", _row);
-		write_optional_int(writer, "column", _column);
+		write_optional_int(writer, "has_row", "row", _row);
+		write_optional_int(writer, "has_column", "column", _column);
 	}
 
 }

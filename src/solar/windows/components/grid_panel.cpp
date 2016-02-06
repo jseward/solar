@@ -12,11 +12,11 @@ namespace solar {
 	}
 
 	void grid_panel::row_column::read_from_archive(archive_reader& reader) {
-		read_optional_int(reader, "size", _size);
+		read_optional_int(reader, "has_size", "size", _size);
 	}
 
 	void grid_panel::row_column::write_to_archive(archive_writer& writer) const {
-		write_optional_int(writer, "size", _size);
+		write_optional_int(writer, "has_size", "size", _size);
 	}
 
 	grid_panel::grid_panel(const char* id)

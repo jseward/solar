@@ -17,19 +17,25 @@ namespace solar {
 	}
 
 	void window_style_factory::window_style_type_info::read_from_archive(archive_reader& reader) {
-		_styles.clear();
-		reader.read_objects(
-			"styles",
-			[&](int) {},
-			[&](archive_reader& reader, unsigned int) {
-				std::string id;
-				read_string(reader, "id", id);
-				if (_styles.find(id) != _styles.end()) {
-					reader.raise_error(build_string("duplicate window_style found: {}", id));
-				}
-				auto style = _style_def->clone();
-				style->read_from_archive(reader);
-				_styles[id] = std::move(style);
+		reader.read_name("styles");
+		reader.read_array(
+			[this](archive_reader&, unsigned int size) {
+				_styles.clear();
+				_styles.reserve(size);
+				return true;
+			},
+			[this](archive_reader& reader, unsigned int) {
+				reader.read_object(
+					[this](archive_reader& reader) {
+						std::string id;
+						read_string(reader, "id", id);
+						if (_styles.find(id) != _styles.end()) {
+							reader.raise_error(build_string("duplicate window_style found: {}", id));
+						}
+						auto style = _style_def->clone();
+						style->read_from_archive(reader);
+						_styles[id] = std::move(style);
+					});
 			});
 	}
 

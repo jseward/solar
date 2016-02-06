@@ -28,15 +28,24 @@ namespace solar {
 		unsigned int size() const;
 		
 		json_object get_object(unsigned int index);
-		uint16_t get_uint16(unsigned int index);
-		int get_int(unsigned int index);
-		float get_float(unsigned int index);
-		const char* get_string(unsigned int index);
+		json_array get_array(unsigned int index);
+		bool get_bool(unsigned int index) const;
+		uint16_t get_uint16(unsigned int index) const;
+		int get_int(unsigned int index) const;
+		unsigned int get_uint(unsigned int index) const;
+		int64_t get_int64(unsigned int index) const;
+		float get_float(unsigned int index) const;
+		std::string get_string(unsigned int index) const;
 
-		bool try_get_uint16(uint16_t& out, unsigned int index);
-		bool try_get_int(int& out, unsigned int index);
-		bool try_get_float(float& out, unsigned int index);
-		bool try_get_string(const char*& out, unsigned int index);
+		bool try_get_object(json_object& out, unsigned int index);
+		bool try_get_array(json_array& out, unsigned int index);
+		bool try_get_bool(bool& out, unsigned int index) const;
+		bool try_get_uint16(uint16_t& out, unsigned int index) const;
+		bool try_get_int(int& out, unsigned int index) const;
+		bool try_get_uint(unsigned int& out, unsigned int index) const;
+		bool try_get_int64(int64_t& out, unsigned int index) const;
+		bool try_get_float(float& out, unsigned int index) const;
+		bool try_get_string(std::string& out, unsigned int index) const;
 	};
 
 }

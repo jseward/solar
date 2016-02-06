@@ -1503,6 +1503,9 @@
     <ClInclude Include="..\..\src\solar\cursors\cursor.h">
       <Filter>src\solar\cursors</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\archiving\archive_context_stack.h">
+      <Filter>src\solar\archiving</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -2275,6 +2278,9 @@
     </ClCompile>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_cursors.cpp">
       <Filter>bulkbuild</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\solar\archiving\archive_context_stack.cpp">
+      <Filter>src\solar\archiving</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

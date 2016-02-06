@@ -11,8 +11,12 @@ namespace solar {
 	json_archive_reader::json_archive_reader(stream& stream)
 		: _stream(stream)
 		, _document(stream, [this](const std::string& msg) { raise_error(msg); })
-		, _current_object(new json_object(convert_json_document_to_json_object(_document))) 
-		, _current_object_name(nullptr) {
+		, _root_object(convert_json_document_to_json_object(_document))
+		, _current_object(nullptr) 
+		, _current_array(nullptr)
+		, _context_stack() {
+
+		_current_object = &_root_object;
 
 		#ifndef SOLAR__JSON_ARCHIVE_READER_NO_ALERT_UNUSED_VALUES
 		_current_object->set_should_track_used_values();
@@ -20,16 +24,13 @@ namespace solar {
 	}
 
 	json_archive_reader::~json_archive_reader() {
-		
-		//note: do nothing involving stream here. no guarantee it still exists and is probably unowned memory.
+		//NOTE: do nothing involving stream here. no guarantee it still exists and is probably unowned memory.
 		//ex. do not raise errors!
-
-		delete _current_object;
 	}
 
 	void json_archive_reader::attempt_raise_error_for_unused_values() const {
 		#ifndef SOLAR__JSON_ARCHIVE_READER_NO_ALERT_UNUSED_VALUES
-		_current_object->raise_error_for_unused_values("root");
+		_current_object->raise_error_for_unused_values();
 		#endif
 	}
 
@@ -37,214 +38,149 @@ namespace solar {
 		return _stream.get_description();
 	}
 
-	void json_archive_reader::raise_error(const std::string& error_message) {
-		ALERT("json_archive_reader error : {}\nstream : {}\nobject : {}", error_message, _stream.get_description(), _current_object_name != nullptr ? _current_object_name : "root");
+	void json_archive_reader::raise_error(const std::string& error_message) const {
+		ALERT("json_archive_reader error : {}\nstream : {}\ncontext : {}", error_message, _stream.get_description(), _context_stack.to_string());
 	}
 
 	unsigned int json_archive_reader::get_read_position() const {
 		return 0; //not supported
 	}
 
-	void json_archive_reader::read_object(const char* name, archivable& value) {
-		json_object o;
-		if (!_current_object->try_get_object(o, name)) {
-			raise_error(build_string("object not found : '{}'", name));
+	void json_archive_reader::read_name(const char* name) {
+		_context_stack.push_object_member(name);
+	}
+
+	void json_archive_reader::read_array(
+		std::function<bool(archive_reader&, unsigned int)> handle_size_func, 
+		std::function<void(archive_reader&, unsigned int)> read_element_func) {
+
+		//NOTE: has to handle read_array being called recursively (array of arrays)
+		auto frame = _context_stack.pop();
+		if (frame.is_array_element()) {
+			ASSERT(_current_array != nullptr);
+			json_array a = _current_array->get_array(frame._array_index);
+			read_array_internal(handle_size_func, read_element_func, a);
 		}
 		else {
-			temp_swap_current_object swap(this, name, &o);
-			value.read_from_archive(*this);
+			ASSERT(frame.is_object_member());
+			ASSERT(_current_object != nullptr);
+			json_array a = _current_object->get_array(frame._member_name);
+			read_array_internal(handle_size_func, read_element_func, a);
 		}
 	}
 
-	void json_archive_reader::read_objects(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(archive_reader&, unsigned int)> read_object_func) {
-		json_array a;
-		if (!_current_object->try_get_array(a, name)) {
-			raise_error(build_string("array not found : '{}'", name));
-		}
-		else {
-			handle_size_func(a.size());
-			for (unsigned int i = 0; i < a.size(); ++i) {
-				auto i_object = a.get_object(i);
-				temp_swap_current_object swap(this, name, &i_object);
-				read_object_func(*this, i);
-			}
-		}
-	}
+	void json_archive_reader::read_array_internal(
+		std::function<bool(archive_reader&, unsigned int)> handle_size_func, 
+		std::function<void(archive_reader&, unsigned int)> read_element_func, json_array& new_array) {
 
-	void json_archive_reader::read_bool(const char* name, bool& value) {
-		value = false;
-		if (!_current_object->try_get_bool(value, name)) {
-			raise_error(build_string("bool not found : '{}'", name));
-		}
-	}
+		json_array* old_array = _current_array;
+		_current_array = &new_array;
 
-	void json_archive_reader::read_uint16(const char* name, uint16_t& value) {
-		value = 0;
-		if (!_current_object->try_get_uint16(value, name)) {
-			raise_error(build_string("uint16 not found : '{}'", name));
-		}
-	}
-
-	void json_archive_reader::read_uint16s_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, uint16_t)> handle_value_func) {
-		json_array a;
-		if (!_current_object->try_get_array(a, name)) {
-			raise_error(build_string("array not found : '{}'", name));
-		}
-		else {
-			handle_size_func(a.size());
-			for (unsigned int i = 0; i < a.size(); ++i) {
-				auto v = a.get_uint16(i);
-				handle_value_func(i, v);
-			}
-		}
-	}
-
-	void json_archive_reader::read_uint16s_fixed(const char* name, unsigned int size, uint16_t* values_begin) {
-		json_array a;
-		if (try_get_array_of_size(a, name, size)) {
+		auto size = _current_array->size();
+		if (handle_size_func(*this, size)) {
 			for (unsigned int i = 0; i < size; ++i) {
-				values_begin[i] = a.get_uint16(i);
+				_context_stack.push_array_element(i);
+				read_element_func(*this, i);
 			}
+		}
+
+		_current_array = old_array;
+	}
+
+	void json_archive_reader::read_object(std::function<void(archive_reader&)> read_object_func) {
+		auto frame = _context_stack.pop();
+		if (frame.is_array_element()) {
+			ASSERT(_current_array != nullptr);
+			json_object o = _current_array->get_object(frame._array_index);
+			read_object_internal(read_object_func, o);
+		}
+		else {
+			ASSERT(frame.is_object_member());
+			ASSERT(_current_object != nullptr);
+			json_object o = _current_object->get_object(frame._member_name);
+			read_object_internal(read_object_func, o);
 		}
 	}
 
-	void json_archive_reader::read_int(const char* name, int& value, const archive_int_compression& compression) {
+	void json_archive_reader::read_object_internal(
+		std::function<void(archive_reader&)> read_object_func, 
+		json_object& new_object) {
+
+		json_object* old_object = _current_object;
+		_current_object = &new_object;
+
+		#ifndef SOLAR__JSON_ARCHIVE_READER_NO_ALERT_UNUSED_VALUES
+		new_object.set_should_track_used_values();
+		#endif
+
+		read_object_func(*this);
+
+		#ifndef SOLAR__JSON_ARCHIVE_READER_NO_ALERT_UNUSED_VALUES
+		new_object.raise_error_for_unused_values();
+		#endif
+
+		_current_object = old_object;
+	}
+
+
+	void json_archive_reader::read_bool(bool& value) {
+		read_atomic_value<bool>(
+			value,
+			[](const json_array& a, unsigned int i) { return a.get_bool(i); },
+			[](const json_object& o, const char* n) { return o.get_bool(n); });
+	}
+
+	void json_archive_reader::read_uint16(uint16_t& value) {
+		read_atomic_value<uint16_t>(
+			value,
+			[](const json_array& a, unsigned int i) { return a.get_uint16(i); },
+			[](const json_object& o, const char* n) { return o.get_uint16(n); });
+	}
+
+	void json_archive_reader::read_int(int& value, const archive_int_compression& compression) {
 		UNUSED_PARAMETER(compression);
-		if (!_current_object->try_get_int(value, name)) {
-			raise_error(build_string("int not found : '{}'", name));
-		}
+		read_atomic_value<int>(
+			value,
+			[](const json_array& a, unsigned int i) { return a.get_int(i); },
+			[](const json_object& o, const char* n) { return o.get_int(n); });
 	}
 
-	void json_archive_reader::read_ints_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, int)> handle_value_func) {
-		json_array a;
-		if (!_current_object->try_get_array(a, name)) {
-			raise_error(build_string("array not found : '{}'", name));
-		}
-		else {
-			handle_size_func(a.size());
-			for (unsigned int i = 0; i < a.size(); ++i) {
-				auto v = a.get_int(i);
-				handle_value_func(i, v);
-			}
-		}
+	void json_archive_reader::read_int64(int64_t& value) {
+		read_atomic_value<int64_t>(
+			value,
+			[](const json_array& a, unsigned int i) { return a.get_int64(i); },
+			[](const json_object& o, const char* n) { return o.get_int64(n); });
 	}
 
-	void json_archive_reader::read_ints_fixed(const char* name, unsigned int size, int* values_begin) {
-		json_array a;
-		if (try_get_array_of_size(a, name, size)) {
-			for (unsigned int i = 0; i < size; ++i) {
-				values_begin[i] = a.get_int(i);
-			}
-		}
+	void json_archive_reader::read_uint(unsigned int& value) {
+		read_atomic_value<unsigned int>(
+			value,
+			[](const json_array& a, unsigned int i) { return a.get_uint(i); },
+			[](const json_object& o, const char* n) { return o.get_uint(n); });
 	}
 
-	void json_archive_reader::read_optional_int(const char* name, optional<int>& value) {
-		int read_value = 0;
-		if (_current_object->try_get_int(read_value, name)) {
-			value = read_value;
-		}
-		else {
-			value.clear();
-		}
+	void json_archive_reader::read_float(float& value) {
+		read_atomic_value<float>(
+			value,
+			[](const json_array& a, unsigned int i) { return a.get_float(i); },
+			[](const json_object& o, const char* n) { return o.get_float(n); });
 	}
 
-	void json_archive_reader::read_int64(const char* name, int64_t& value) {
-		value = 0;
-		if (!_current_object->try_get_int64(value, name)) {
-			raise_error(build_string("int64 not found : '{}'", name));
-		}
+	void json_archive_reader::read_string(std::string& value) {
+		read_atomic_value<std::string>(
+			value,
+			[](const json_array& a, unsigned int i) { return a.get_string(i); },
+			[](const json_object& o, const char* n) { return o.get_string(n); });
 	}
 
-	void json_archive_reader::read_uint(const char* name, unsigned int& value) {
-		if (!_current_object->try_get_uint(value, name)) {
-			raise_error(build_string("uint not found : '{}'", name));
-		}
-	}
-
-	void json_archive_reader::read_float(const char* name, float& value) {
-		if (!_current_object->try_get_float(value, name)) {
-			raise_error(build_string("float not found : '{}'", name));
-		}
-	}
-
-	void json_archive_reader::read_floats_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) {
-		json_array a;
-		if (!_current_object->try_get_array(a, name)) {
-			raise_error(build_string("array not found : '{}'", name));
-		}
-		else {
-			handle_size_func(a.size());
-			for (unsigned int i = 0; i < a.size(); ++i) {
-				auto v = a.get_float(i);
-				handle_value_func(i, v);
-			}
-		}
-	}
-
-	void json_archive_reader::read_floats_fixed(const char* name, unsigned int size, float* values_begin) {
-		json_array a;
-		if (try_get_array_of_size(a, name, size)) {
-			for (unsigned int i = 0; i < size; ++i) {
-				values_begin[i] = a.get_float(i);
-			}
-		}
-	}
-
-	void json_archive_reader::read_string(const char* name, std::string& value) {
-		if (!_current_object->try_get_string(value, name)) {
-			raise_error(build_string("string not found : '{}'", name));
-		}
-	}
-
-	void json_archive_reader::read_color(const char* name, color& value) {
+	void json_archive_reader::read_color(color& value) {
 		std::string s;
-		if (!_current_object->try_get_string(s, name)) {
-			raise_error(build_string("color not found : '{}'", name));
-		}
-		else {
+		read_string(s);
+		if (!s.empty()) {
 			if (!try_make_color_from_string(value, s.c_str())) {
-				raise_error(build_string("color could not be parsed : '{}'", name));
+				raise_error(build_string("color could not be parsed from '{}'", s.c_str()));
 			}
 		}
-	}
-
-	bool json_archive_reader::try_get_array_of_size(json_array& out, const char* name, unsigned int required_size) {
-		if (!_current_object->try_get_array(out, name)) {
-			raise_error(build_string("array not found : '{}'", name));
-			return false;
-		}
-
-		if (out.size() != required_size) {
-			raise_error(build_string("array size != {} : '{}'", required_size, name));
-			return false;
-		}
-
-		return true;
-	}
-
-	json_archive_reader::temp_swap_current_object::temp_swap_current_object(json_archive_reader* reader, const char* name, json_object* new_object) 
-		: _reader(reader)
-		, _name(name)
-		, _old_object(reader->_current_object)
-		, _old_object_name(reader->_current_object_name)
-		, _new_object(new_object) {
-		
-		reader->_current_object = _new_object;
-		reader->_current_object_name = name;
-
-		#ifndef SOLAR__JSON_ARCHIVE_READER_NO_ALERT_UNUSED_VALUES
-		_new_object->set_should_track_used_values();
-		#endif
-
-	}
-
-	json_archive_reader::temp_swap_current_object::~temp_swap_current_object() {
-		_reader->_current_object = _old_object;
-		_reader->_current_object_name = _old_object_name;
-
-		#ifndef SOLAR__JSON_ARCHIVE_READER_NO_ALERT_UNUSED_VALUES
-		_new_object->raise_error_for_unused_values(_name);
-		#endif
 	}
 
 }

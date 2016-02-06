@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\solar\archiving\archivable.h" />
     <ClInclude Include="..\..\src\solar\archiving\archivable_cloning.h" />
+    <ClInclude Include="..\..\src\solar\archiving\archive_context_stack.h" />
     <ClInclude Include="..\..\src\solar\archiving\archive_int_compression.h" />
     <ClInclude Include="..\..\src\solar\archiving\archive_reader.h" />
     <ClInclude Include="..\..\src\solar\archiving\archive_writer.h" />
@@ -566,6 +567,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\src\solar\archiving\archivable_cloning.cpp" />
+    <ClCompile Include="..\..\src\solar\archiving\archive_context_stack.cpp" />
     <ClCompile Include="..\..\src\solar\archiving\auto_versioned_json_archive_helpers.cpp" />
     <ClCompile Include="..\..\src\solar\archiving\binary_archive_reader.cpp" />
     <ClCompile Include="..\..\src\solar\archiving\binary_archive_writer.cpp" />

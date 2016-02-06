@@ -3,6 +3,7 @@
 #include "archivable.h"
 #include "archive_int_compression.h"
 #include "solar/utility/alert.h"
+#include "solar/utility/unused_parameter.h"
 #include "solar/math/unit_convert.h"
 #include "solar/colors/color.h"
 
@@ -22,7 +23,7 @@ namespace solar {
 		return "bitstream";
 	}
 
-	void bitstream_archive_reader::raise_error(const std::string& error_message) {
+	void bitstream_archive_reader::raise_error(const std::string& error_message) const {
 		ALERT("bitstream_archive_reader error : {}", error_message);
 	}
 
@@ -30,44 +31,37 @@ namespace solar {
 		return bits_to_bytes(_data_bit_pos);
 	}
 
-	void bitstream_archive_reader::read_object(const char*, archivable& value) {
-		value.read_from_archive(*this);
+	void bitstream_archive_reader::read_name(const char* name) {
+		UNUSED_PARAMETER(name);
 	}
 
-	void bitstream_archive_reader::read_objects(const char*, std::function<void(unsigned int)> handle_size_func, std::function<void(archive_reader&, unsigned int)> read_object_func) {
-		unsigned int size = read_atomic_value<unsigned int>();
-		handle_size_func(size);
-		for (unsigned int i = 0; i < size; ++i) {
-			read_object_func(*this, i);
+	void bitstream_archive_reader::read_array(
+		std::function<bool(archive_reader&, unsigned int)> handle_size_func, 
+		std::function<void(archive_reader&, unsigned int)> read_element_func) {
+
+		auto size = read_atomic_value<unsigned int>();
+		if (handle_size_func(*this, size)) {
+			for (unsigned int i = 0; i < size; ++i) {
+				read_element_func(*this, i);
+			}
 		}
 	}
 
-	void bitstream_archive_reader::read_bool(const char*, bool& value) {
+	void bitstream_archive_reader::read_object(std::function<void(archive_reader&)> read_object_func) {
+		read_object_func(*this);
+	}
+
+	void bitstream_archive_reader::read_bool(bool& value) {
 		unsigned char value_as_char = 0;
 		read_bit(&value_as_char);
 		value = (value_as_char == 1) ? true : false;
 	}
 
-	void bitstream_archive_reader::read_uint16(const char*, uint16_t& value) {
+	void bitstream_archive_reader::read_uint16(uint16_t& value) {
 		value = read_atomic_value<uint16_t>();
 	}
 
-	void bitstream_archive_reader::read_uint16s_dynamic(const char*, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, uint16_t)> handle_value_func) {
-		unsigned int size = read_atomic_value<unsigned int>();
-		handle_size_func(size);
-		for (unsigned int i = 0; i < size; ++i) {
-			uint16_t value = read_atomic_value<uint16_t>();
-			handle_value_func(i, value);
-		}
-	}
-
-	void bitstream_archive_reader::read_uint16s_fixed(const char*, unsigned int size, uint16_t* values_begin) {
-		for (unsigned int i = 0; i < size; ++i) {
-			values_begin[i] = read_atomic_value<uint16_t>();
-		}
-	}
-
-	void bitstream_archive_reader::read_int(const char*, int& value, const archive_int_compression& compression) {
+	void bitstream_archive_reader::read_int(int& value, const archive_int_compression& compression) {
 		if (compression._type == archive_int_compression_type::NONE) {
 			value = read_atomic_value<int>();
 		}
@@ -78,9 +72,9 @@ namespace solar {
 		}
 		else if (compression._type == archive_int_compression_type::SOFT_MAX_COUNT) {
 			bool is_within_max_count = false;
-			read_bool(nullptr, is_within_max_count);
+			read_bool(is_within_max_count);
 			if (is_within_max_count) {
-				read_int(nullptr, value, make_archive_int_compression_range(0, compression._max_value));
+				read_int(value, make_archive_int_compression_range(0, compression._max_value));
 			}
 			else {
 				value = read_atomic_value<int>();
@@ -91,60 +85,19 @@ namespace solar {
 		}
 	}
 
-	void bitstream_archive_reader::read_ints_dynamic(const char*, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, int)> handle_value_func) {
-		unsigned int size = read_atomic_value<unsigned int>();
-		handle_size_func(size);
-		for (unsigned int i = 0; i < size; ++i) {
-			int value = read_atomic_value<int>();
-			handle_value_func(i, value);
-		}
-	}
-
-	void bitstream_archive_reader::read_ints_fixed(const char*, unsigned int size, int* values_begin) {
-		for (unsigned int i = 0; i < size; ++i) {
-			values_begin[i] = read_atomic_value<int>();
-		}
-	}
-
-	void bitstream_archive_reader::read_optional_int(const char*, optional<int>& value) {
-		unsigned char bit = 0;
-		read_bit(&bit);
-		if (bit == 1) {
-			value = read_atomic_value<int>();
-		}
-		else {
-			value.clear();
-		}
-	}
-
-	void bitstream_archive_reader::read_int64(const char*, int64_t& value) {
+	void bitstream_archive_reader::read_int64(int64_t& value) {
 		value = read_atomic_value<int64_t>();
 	}
 
-	void bitstream_archive_reader::read_uint(const char*, unsigned int& value) {
+	void bitstream_archive_reader::read_uint(unsigned int& value) {
 		value = read_atomic_value<unsigned int>();
 	}
 
-	void bitstream_archive_reader::read_float(const char*, float& value) {
+	void bitstream_archive_reader::read_float(float& value) {
 		value = read_atomic_value<float>();
 	}
 
-	void bitstream_archive_reader::read_floats_dynamic(const char*, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) {
-		unsigned int size = read_atomic_value<unsigned int>();
-		handle_size_func(size);
-		for (unsigned int i = 0; i < size; ++i) {
-			float value = read_atomic_value<float>();
-			handle_value_func(i, value);
-		}
-	}
-
-	void bitstream_archive_reader::read_floats_fixed(const char*, unsigned int size, float* values_begin) {
-		for (unsigned int i = 0; i < size; ++i) {
-			values_begin[i] = read_atomic_value<float>();
-		}
-	}
-
-	void bitstream_archive_reader::read_string(const char*, std::string& value) {
+	void bitstream_archive_reader::read_string(std::string& value) {
 		uint16_t string_length = read_atomic_value<uint16_t>();
 		value = std::string(string_length, '?');
 		for (uint16_t i = 0; i < string_length; ++i) {
@@ -152,7 +105,7 @@ namespace solar {
 		}
 	}
 
-	void bitstream_archive_reader::read_color(const char*, color& value) {
+	void bitstream_archive_reader::read_color(color& value) {
 		uint32_t argb = read_atomic_value<uint32_t>();
 		value = make_color_from_argb(argb);
 	}

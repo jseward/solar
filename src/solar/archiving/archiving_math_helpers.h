@@ -81,59 +81,61 @@ namespace solar {
 		write_floats(writer, name, value._x, value._y);
 	}
 
-	//NOTE: archiving vec2 arrays is a bit clumsy because reader/writers don't support array of arrays. it would severly
-	//bloat the interface.
-	namespace archiving_vec2_impl {
-		class archivable_vec2 : public vec2, public archivable {
-		public:
-			archivable_vec2() {}
-			archivable_vec2(const vec2& copy) : vec2(copy) {}
-
-			virtual void read_from_archive(archive_reader& reader) override {
-				read_float(reader, "x", _x);
-				read_float(reader, "y", _y);
-			}
-
-			virtual void write_to_archive(archive_writer& writer) const override {
-				write_float(writer, "x", _x);
-				write_float(writer, "y", _y);
-			}
-		};
-	}
-
 	template<typename T> void read_vec2_vector(archive_reader& reader, const char* name, T& values) {
-		read_object_vector(reader, name, values, [](archive_reader& reader) {
-			archiving_vec2_impl::archivable_vec2 v;
-			v.read_from_archive(reader);
-			return static_cast<vec2>(v);
-		});
+		reader.read_name(name);
+		reader.read_array(
+			[&values](archive_reader&, unsigned int size) {
+				values.clear();
+				values.reserve(size);
+				return true;
+			},
+			[&values](archive_reader& reader, unsigned int) {
+				vec2 value;
+				read_floats(reader, nullptr, value._x, value._y);
+				values.push_back(value);
+			});
 	}
 
 	template<typename T> void write_vec2_vector(archive_writer& writer, const char* name, const T& values) {
-		write_object_vector(writer, name, values, [](archive_writer& writer, const vec2& value) {
-			archiving_vec2_impl::archivable_vec2(value).write_to_archive(writer);
-		});
+		writer.write_name(name);
+		writer.write_array(
+			values.size(),
+			[&values](archive_writer& writer, unsigned int index) {
+				const auto& value = values[index];
+				write_floats(writer, nullptr, value._x, value._y);
+			});
 	}
 
 	template<typename T> void read_vec3_no_z_vector(archive_reader& reader, const char* name, T& values) {
-		read_object_vector(reader, name, values, [](archive_reader& reader) {
-			archiving_vec2_impl::archivable_vec2 v;
-			v.read_from_archive(reader);
-			return vec3(v._x, v._y, 0.f);
-		});
+		reader.read_name(name);
+		reader.read_array(
+			[&values](archive_reader&, unsigned int size) {
+				values.clear();
+				values.reserve(size);
+				return true;
+			},
+			[&values](archive_reader& reader, unsigned int) {
+				vec3 value;
+				read_floats(reader, nullptr, value._x, value._y);
+				values.push_back(value);
+			});
 	}
 
 	template<typename T> void write_vec3_no_z_vector(archive_writer& writer, const char* name, const T& values) {
-		write_object_vector(writer, name, values, [](archive_writer& writer, const vec3& value) {
-			ASSERT(value._z == 0.f);
-			archiving_vec2_impl::archivable_vec2(vec2(value._x, value._y)).write_to_archive(writer);
-		});
+		writer.write_name(name);
+		writer.write_array(
+			values.size(),
+			[&values](archive_writer& writer, unsigned int index) {
+				const auto& value = values[index];
+				ASSERT(value._z == 0.f);
+				write_floats(writer, nullptr, value._x, value._y);
+			});
 	}
 
 	inline void read_vec3(archive_reader& reader, const char* name, vec3& value) {
-		float x = 0;
-		float y = 0;
-		float z = 0;
+		float x = 0.f;
+		float y = 0.f;
+		float z = 0.f;
 		read_floats(reader, name, x, y, z);
 		value = vec3(x, y, z);
 	}

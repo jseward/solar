@@ -27,15 +27,18 @@ namespace solar {
 	void brush_set::read_from_archive(archive_reader& reader) {
 		read_string(reader, "texture_pool_name", _texture_pool_name);
 
-		_brushes.clear();
-		reader.read_objects(
-			"brushes", 
-			[&](unsigned int size) {
+		reader.read_name("brushes");
+		reader.read_array(
+			[this](archive_reader&, unsigned int size) {
+				_brushes.clear();
 				_brushes.reserve(size);
+				return true;
 			},
-			[&](archive_reader& object_reader, unsigned int index) {
+			[this](archive_reader& reader, unsigned int index) {
+				
 				auto brush = new solar::brush(_texture_pool_name.c_str());
-				brush->read_from_archive(object_reader);
+				read_object(reader, nullptr, *brush);
+
 				if (brush->get_id().empty()) {
 					reader.raise_error(build_string("brush has no id. {{ index:{} }}", index));
 				}
@@ -52,12 +55,11 @@ namespace solar {
 		write_string(writer, "texture_pool_name", _texture_pool_name);
 
 		auto iter = _brushes.begin();
-		writer.write_objects(
-			"brushes",
+		writer.write_name("brushes");
+		writer.write_array(
 			_brushes.size(),
-			[&](archive_writer& writer, unsigned int index) {
-				UNUSED_PARAMETER(index);
-				iter->second->write_to_archive(writer);
+			[&iter](archive_writer& writer, unsigned int) {
+				write_object(writer, nullptr, *iter->second);
 				iter++;
 			});
 	}

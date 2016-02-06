@@ -17,25 +17,21 @@ namespace solar {
 		virtual ~bitstream_archive_reader();
 
 		virtual std::string get_source_description() const override;
-		virtual void raise_error(const std::string& error_message) override;
+		virtual void raise_error(const std::string& error_message) const override;
 		virtual unsigned int get_read_position() const override;
-		virtual void read_object(const char* name, archivable& value) override;
-		virtual void read_objects(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(archive_reader&, unsigned int)> read_object_func) override;
-		virtual void read_bool(const char* name, bool& value) override;
-		virtual void read_uint16(const char* name, uint16_t& value) override;
-		virtual void read_uint16s_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, uint16_t)> handle_value_func) override;
-		virtual void read_uint16s_fixed(const char* name, unsigned int size, uint16_t* values_begin) override;
-		virtual void read_int(const char* name, int& value, const archive_int_compression& compression) override;
-		virtual void read_ints_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, int)> handle_value_func) override;
-		virtual void read_ints_fixed(const char* name, unsigned int size, int* values_begin) override;
-		virtual void read_optional_int(const char* name, optional<int>& value) override;
-		virtual void read_int64(const char* name, int64_t& value) override;
-		virtual void read_uint(const char* name, unsigned int& value) override;
-		virtual void read_float(const char* name, float& value) override;
-		virtual void read_floats_dynamic(const char* name, std::function<void(unsigned int)> handle_size_func, std::function<void(unsigned int, float)> handle_value_func) override;
-		virtual void read_floats_fixed(const char* name, unsigned int size, float* values_begin) override;
-		virtual void read_string(const char* name, std::string& value) override;
-		virtual void read_color(const char* name, color& value) override;
+		virtual void read_name(const char* name) override;
+		virtual void read_array(
+			std::function<bool(archive_reader&, unsigned int)> handle_size_func, 
+			std::function<void(archive_reader&, unsigned int)> read_element_func) override;
+		virtual void read_object(std::function<void(archive_reader&)> read_object_func) override;
+		virtual void read_bool(bool& value) override;
+		virtual void read_uint16(uint16_t& value) override;
+		virtual void read_int(int& value, const archive_int_compression& compression) override;
+		virtual void read_int64(int64_t& value) override;
+		virtual void read_uint(unsigned int& value) override;
+		virtual void read_float(float& value) override;
+		virtual void read_string(std::string& value) override;
+		virtual void read_color(color& value) override;
 
 	private:
 		bool read_bit(unsigned char* bit);

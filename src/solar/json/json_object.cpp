@@ -49,7 +49,7 @@ namespace solar {
 		_should_track_used_values = true;
 	}
 
-	void json_object::raise_error_for_unused_values(const char* object_name) {
+	void json_object::raise_error_for_unused_values() {
 		ASSERT(_should_track_used_values);
 
 		std::vector<const char*> unused_names;
@@ -60,7 +60,7 @@ namespace solar {
 		}
 
 		if (!unused_names.empty()) {
-			_error_handler(build_string("unused values detected {{ object:{} , values:[ {} ] }}", object_name, join_strings(", ", unused_names)));
+			_error_handler(build_string("unused values detected : [ {} ]", join_strings(", ", unused_names)));
 		}
 	}
 
@@ -80,7 +80,7 @@ namespace solar {
 		return a;
 	}
 
-	bool json_object::get_bool(const char* name) {
+	bool json_object::get_bool(const char* name) const {
 		bool v = false;
 		if (!try_get_bool(v, name)) {
 			_error_handler(build_string("bool not found : {}", name));
@@ -88,7 +88,7 @@ namespace solar {
 		return v;
 	}
 
-	uint16_t json_object::get_uint16(const char* name) {
+	uint16_t json_object::get_uint16(const char* name) const {
 		uint16_t v = 0;
 		if (!try_get_uint16(v, name)) {
 			_error_handler(build_string("uint16 not found : {}", name));
@@ -96,7 +96,7 @@ namespace solar {
 		return v;
 	}
 
-	int json_object::get_int(const char* name) {
+	int json_object::get_int(const char* name) const {
 		int v = 0;
 		if (!try_get_int(v, name)) {
 			_error_handler(build_string("int not found : {}", name));
@@ -104,7 +104,7 @@ namespace solar {
 		return v;
 	}
 
-	unsigned int json_object::get_uint(const char* name) {
+	unsigned int json_object::get_uint(const char* name) const {
 		unsigned int v = 0;
 		if (!try_get_uint(v, name)) {
 			_error_handler(build_string("uint not found : {}", name));
@@ -112,7 +112,7 @@ namespace solar {
 		return v;
 	}
 
-	int64_t json_object::get_int64(const char* name) {
+	int64_t json_object::get_int64(const char* name) const {
 		int64_t v = 0;
 		if (!try_get_int64(v, name)) {
 			_error_handler(build_string("int64 not found : {}", name));
@@ -120,7 +120,7 @@ namespace solar {
 		return v;
 	}
 
-	float json_object::get_float(const char* name) {
+	float json_object::get_float(const char* name) const {
 		float v = 0;
 		if (!try_get_float(v, name)) {
 			_error_handler(build_string("float not found : {}", name));
@@ -128,7 +128,7 @@ namespace solar {
 		return v;
 	}
 
-	std::string json_object::get_string(const char* name) {
+	std::string json_object::get_string(const char* name) const {
 		std::string v;
 		if (!try_get_string(v, name)) {
 			_error_handler(build_string("string not found : {}", name));
@@ -136,7 +136,7 @@ namespace solar {
 		return v;
 	}
 
-	date_time json_object::get_date_time(const char* name) {
+	date_time json_object::get_date_time(const char* name) const {
 		date_time v;
 		if (!try_get_date_time(v, name)) {
 			_error_handler(build_string("date_time not found : {}", name));
@@ -162,7 +162,7 @@ namespace solar {
 		return true;
 	}
 
-	bool json_object::try_get_bool(bool& out, const char* name) {
+	bool json_object::try_get_bool(bool& out, const char* name) const {
 		if (!_value.HasMember(name)) {
 			return false;
 		}
@@ -180,7 +180,7 @@ namespace solar {
 		return true;
 	}
 
-	bool json_object::try_get_uint16(uint16_t& out, const char* name) {
+	bool json_object::try_get_uint16(uint16_t& out, const char* name) const {
 		if (!_value.HasMember(name)) {
 			return false;
 		}
@@ -202,7 +202,7 @@ namespace solar {
 		return true;
 	}
 
-	bool json_object::try_get_int(int& out, const char* name) {
+	bool json_object::try_get_int(int& out, const char* name) const {
 		if (!_value.HasMember(name)) {
 			return false;
 		}
@@ -220,7 +220,7 @@ namespace solar {
 		return true;
 	}
 
-	bool json_object::try_get_uint(unsigned int& out, const char* name) {
+	bool json_object::try_get_uint(unsigned int& out, const char* name) const {
 		if (!_value.HasMember(name)) {
 			return false;
 		}
@@ -238,7 +238,7 @@ namespace solar {
 		return true;
 	}
 
-	bool json_object::try_get_int64(int64_t& out, const char* name) {
+	bool json_object::try_get_int64(int64_t& out, const char* name) const {
 		if (!_value.HasMember(name)) {
 			return false;
 		}
@@ -256,7 +256,7 @@ namespace solar {
 		return true;
 	}
 
-	bool json_object::try_get_float(float& out, const char* name) {
+	bool json_object::try_get_float(float& out, const char* name) const {
 		if (!_value.HasMember(name)) {
 			return false;
 		}
@@ -274,7 +274,7 @@ namespace solar {
 		return true;
 	}
 
-	bool json_object::try_get_string(std::string& out, const char* name) {
+	bool json_object::try_get_string(std::string& out, const char* name) const {
 		if (!_value.HasMember(name)) {
 			return false;
 		}
@@ -292,7 +292,7 @@ namespace solar {
 		return true;
 	}
 
-	bool json_object::try_get_date_time(date_time& out, const char* name) {
+	bool json_object::try_get_date_time(date_time& out, const char* name) const {
 		std::string s;
 		if (!try_get_string(s, name)) {
 			return false;

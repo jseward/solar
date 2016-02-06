@@ -25,7 +25,7 @@ namespace solar {
 
 				_ids.reserve(arr.size());
 				for (unsigned int i = 0; i < arr.size(); ++i) {
-					const char* id = arr.get_string(i);
+					std::string id = arr.get_string(i);
 					if (any(_ids, id)) {
 						ALERT("duplicate resource_id found.\n\nresource_id : {0}\naddress : {1}", id, _address.to_string());
 					}

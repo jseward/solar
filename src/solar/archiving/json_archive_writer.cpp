@@ -31,124 +31,66 @@ namespace solar {
 		_writer.end_object();
 	}
 
-	void json_archive_writer::write_object(const char* name, const archivable& value) {
+	void json_archive_writer::write_name(const char* name) {
 		ASSERT(_is_writing);
-		_writer.begin_object(name);
-		value.write_to_archive(*this);
+		_writer.write_string(name);
+	}
+
+	void json_archive_writer::write_array(unsigned int size, std::function<void(archive_writer&, unsigned int)> write_element_func) {
+		ASSERT(_is_writing);
+		_writer.begin_array();
+		for (unsigned int i = 0; i < size; ++i) {
+			write_element_func(*this, i);
+		}
+		_writer.end_array();
+	}
+
+	void json_archive_writer::write_object(std::function<void(archive_writer&)> write_object_func) {
+		ASSERT(_is_writing);
+		_writer.begin_object();
+		write_object_func(*this);
 		_writer.end_object();
 	}
 
-	void json_archive_writer::write_objects(const char* name, unsigned int size, std::function<void(archive_writer&, unsigned int)> write_object_func) {
+	void json_archive_writer::write_bool(bool value) {
 		ASSERT(_is_writing);
-		_writer.begin_array(name);
-		for (unsigned int i = 0; i < size; ++i) {
-			_writer.begin_object();
-			write_object_func(*this, i);
-			_writer.end_object();
-		}
-		_writer.end_array();
+		_writer.write_bool(value);
 	}
 
-	void json_archive_writer::write_bool(const char* name, bool value) {
+	void json_archive_writer::write_uint16(uint16_t value) {
 		ASSERT(_is_writing);
-		_writer.write_bool(name, value);
+		_writer.write_uint16(value);
 	}
 
-	void json_archive_writer::write_uint16(const char* name, uint16_t value) {
-		ASSERT(_is_writing);
-		_writer.write_uint16(name, value);
-	}
-
-	void json_archive_writer::write_uint16s_dynamic(const char* name, unsigned int size, std::function<uint16_t(unsigned int)> get_value_at_func) {
-		ASSERT(_is_writing);
-		_writer.begin_array(name);
-		for (unsigned int i = 0; i < size; ++i) {
-			_writer.write_uint16(get_value_at_func(i));
-		}
-		_writer.end_array();
-	}
-
-	void json_archive_writer::write_uint16s_fixed(const char* name, unsigned int size, const uint16_t* values_begin) {
-		ASSERT(_is_writing);
-		_writer.begin_array(name);
-		for (unsigned int i = 0; i < size; ++i) {
-			_writer.write_uint16(values_begin[i]);
-		}
-		_writer.end_array();
-	}
-
-	void json_archive_writer::write_int(const char* name, int value, const archive_int_compression& compression) {
+	void json_archive_writer::write_int(int value, const archive_int_compression& compression) {
 		UNUSED_PARAMETER(compression);
 		ASSERT(_is_writing);
-		_writer.write_int(name, value);
+		_writer.write_int(value);
 	}
 
-	void json_archive_writer::write_ints_dynamic(const char* name, unsigned int size, std::function<int(unsigned int)> get_value_at_func) {
+	void json_archive_writer::write_int64(int64_t value) {
 		ASSERT(_is_writing);
-		_writer.begin_array(name);
-		for (unsigned int i = 0; i < size; ++i) {
-			_writer.write_int(get_value_at_func(i));
-		}
-		_writer.end_array();
+		_writer.write_int64(value);
 	}
 
-	void json_archive_writer::write_ints_fixed(const char* name, unsigned int size, const int* values_begin) {
+	void json_archive_writer::write_uint(unsigned int value) {
 		ASSERT(_is_writing);
-		_writer.begin_array(name);
-		for (unsigned int i = 0; i < size; ++i) {
-			_writer.write_int(values_begin[i]);
-		}
-		_writer.end_array();
+		_writer.write_uint(value);
 	}
 
-	void json_archive_writer::write_optional_int(const char* name, const optional<int>& value) {
+	void json_archive_writer::write_float(float value) {
 		ASSERT(_is_writing);
-		if (value.has_value()) {
-			_writer.write_int(name, value.get_value());
-		}
+		_writer.write_float(value);
 	}
 
-	void json_archive_writer::write_int64(const char* name, int64_t value) {
+	void json_archive_writer::write_string(const std::string& value) {
 		ASSERT(_is_writing);
-		_writer.write_int64(name, value);
+		_writer.write_string(value);
 	}
 
-	void json_archive_writer::write_uint(const char* name, unsigned int value) {
+	void json_archive_writer::write_color(const color& value) {
 		ASSERT(_is_writing);
-		_writer.write_uint(name, value);
-	}
-
-	void json_archive_writer::write_float(const char* name, float value) {
-		ASSERT(_is_writing);
-		_writer.write_float(name, value);
-	}
-
-	void json_archive_writer::write_floats_dynamic(const char* name, unsigned int size, std::function<float(unsigned int)> get_value_at_func) {
-		ASSERT(_is_writing);
-		_writer.begin_array(name);
-		for (unsigned int i = 0; i < size; ++i) {
-			_writer.write_float(get_value_at_func(i));
-		}
-		_writer.end_array();
-	}
-
-	void json_archive_writer::write_floats_fixed(const char* name, unsigned int size, const float* values_begin) {
-		ASSERT(_is_writing);
-		_writer.begin_array(name);
-		for (unsigned int i = 0; i < size; ++i) {
-			_writer.write_float(values_begin[i]);
-		}
-		_writer.end_array();
-	}
-
-	void json_archive_writer::write_string(const char* name, const std::string& value) {
-		ASSERT(_is_writing);
-		_writer.write_string(name, value);
-	}
-
-	void json_archive_writer::write_color(const char* name, const color& value) {
-		ASSERT(_is_writing);
-		_writer.write_string(name, value.to_string());
+		_writer.write_string(value.to_string());
 	}
 
 }
