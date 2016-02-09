@@ -12,7 +12,6 @@
 #include "solar_platforms/d3d9/d3d9_prim2d_lines.cpp"
 #include "solar_platforms/d3d9/d3d9_texture_factory.cpp"
 #include "solar_platforms/d3d9/d3d9_texture.cpp"
-#include "solar_platforms/d3d9/d3d9_texture_pool.cpp"
 #include "solar_platforms/d3d9/d3d9_shader_program_factory.cpp"
 #include "solar_platforms/d3d9/d3d9_shader_program.cpp"
 #include "solar_platforms/d3d9/d3d9_mesh.cpp"

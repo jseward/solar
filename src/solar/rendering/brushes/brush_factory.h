@@ -9,17 +9,19 @@
 namespace solar {
 
 	class brush;
+	class texture_factory;
 	class resource_system;
 
 	class brush_factory {
 	private:
+		texture_factory& _texture_factory;
 		resource_system& _resource_system;
 		resource_factory_caching_context _caching_context;
 		std::vector<std::unique_ptr<brush_set>> _brush_sets;
 		std::unique_ptr<brush> _empty_brush;
 
 	public:
-		brush_factory(resource_system& resource_system);
+		brush_factory(texture_factory& texture_factory, resource_system& resource_system);
 
 		void setup();
 		void teardown();

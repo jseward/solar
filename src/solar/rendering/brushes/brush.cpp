@@ -4,8 +4,16 @@
 
 namespace solar {
 
-	brush::brush(const char* texture_pool_name)
-		: _texture_id(texture_pool_name) {
+	brush::brush()
+		: _texture_id() {
+	}
+
+	void brush::create_texture(texture_factory& texture_factory, resource_system& resource_system) {
+		_texture_id.create_texture(texture_factory, resource_system, texture_create_params().set_has_mip_maps(false));
+	}
+
+	void brush::release_texture(texture_factory& texture_factory) {
+		_texture_id.release_texture(texture_factory);
 	}
 
 	bool brush::is_id_empty() const {
@@ -20,8 +28,8 @@ namespace solar {
 		return _stretch_margins;
 	}
 
-	texture& brush::get_texture() const {
-		return _texture_id.get();
+	texture* brush::get_texture() const {
+		return _texture_id.get_texture();
 	}
 
 	const simple_rect_uvs& brush::get_uvs(brush_stretch_region region) const {
@@ -37,7 +45,7 @@ namespace solar {
 			ALERT("brush has zero width or height texel_box : {}", _id);
 		}
 
-		auto texture_size = _texture_id.get().request_size();
+		auto texture_size = _texture_id.request_size();
 		if (
 			_texel_box.get_left() < 0 || 
 			_texel_box.get_top() < 0 ||

@@ -4,12 +4,16 @@
 #include <unordered_map>
 #include <memory>
 #include "font.h"
-#include "solar/resources/resource_system.h"
+#include "solar/resources/resource_factory_caching_context.h"
 
 namespace solar {
 
+	class texture_factory;
+	class resource_system;
+
 	class font_factory {
 	private:
+		texture_factory& _texture_factory;
 		resource_system& _resource_system;
 
 		resource_factory_caching_context _caching_context;
@@ -17,9 +21,9 @@ namespace solar {
 		std::unique_ptr<font> _empty_font;
 
 	public:
-		font_factory(resource_system& resource_system);
+		font_factory(texture_factory& texture_factory, resource_system& resource_system);
 
-		void setup(const char* texture_pool_name);
+		void setup();
 		void teardown();
 
 		const resource_factory_caching_context& get_caching_context() const;

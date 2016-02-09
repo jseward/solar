@@ -16,9 +16,8 @@
 
 namespace solar {
 
-	d3d9_mesh::d3d9_mesh(d3d9_mesh_factory& factory, const mesh_texture_params& texture_params, const resource_address& resource_address)
+	d3d9_mesh::d3d9_mesh(d3d9_mesh_factory& factory, const resource_address& resource_address)
 		: _factory(factory)
-		, _texture_params(texture_params)
 		, _resource_address(resource_address)
 		, _are_rendering_resources_created(false)
 		, _id3dx_mesh(nullptr)
@@ -38,10 +37,6 @@ namespace solar {
 
 	const resource_address& d3d9_mesh::get_resource_address() const {
 		return _resource_address;
-	}
-
-	const mesh_texture_params& d3d9_mesh::get_texture_params() const {
-		return _texture_params;
 	}
 
 	void d3d9_mesh::create_rendering_resources() {
@@ -113,7 +108,7 @@ namespace solar {
 					_materials.reserve(mesh_def._materials.size());
 					for (const auto& material : mesh_def._materials) {
 						_materials.push_back(std::make_unique<d3d9_mesh_material>(
-							_resource_address.get_path(), _texture_params, material));
+							_resource_address.get_path(), material));
 					}
 				}
 			}

@@ -16,6 +16,18 @@ namespace solar {
 		resource_system.read_object_as_json(*this, _address);
 	}
 
+	void brush_set::create_textures(texture_factory& texture_factory, resource_system& resource_system) {
+		for (auto& brush : _brushes) {
+			brush.second->create_texture(texture_factory, resource_system);
+		}
+	}
+
+	void brush_set::release_textures(texture_factory& texture_factory) {
+		for (auto& brush : _brushes) {
+			brush.second->release_texture(texture_factory);
+		}
+	}
+
 	brush* brush_set::get_brush_if_exists(const std::string& id) {
 		auto iter = _brushes.find(id);
 		if (iter != _brushes.end()) {
@@ -25,8 +37,6 @@ namespace solar {
 	}
 
 	void brush_set::read_from_archive(archive_reader& reader) {
-		read_string(reader, "texture_pool_name", _texture_pool_name);
-
 		reader.read_name("brushes");
 		reader.read_array(
 			[this](archive_reader&, unsigned int size) {
@@ -36,7 +46,7 @@ namespace solar {
 			},
 			[this](archive_reader& reader, unsigned int index) {
 				
-				auto brush = new solar::brush(_texture_pool_name.c_str());
+				auto brush = new solar::brush();
 				read_object(reader, nullptr, *brush);
 
 				if (brush->get_id().empty()) {
@@ -52,8 +62,6 @@ namespace solar {
 	}
 	
 	void brush_set::write_to_archive(archive_writer& writer) const {
-		write_string(writer, "texture_pool_name", _texture_pool_name);
-
 		auto iter = _brushes.begin();
 		writer.write_name("brushes");
 		writer.write_array(

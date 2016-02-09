@@ -843,9 +843,6 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_texture_factory.h">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_texture_pool.h">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_user_settings.h">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClInclude>
@@ -1097,9 +1094,6 @@
     </ClInclude>
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_mesh_material.h">
       <Filter>src\solar_platforms\d3d9</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_texture_params.h">
-      <Filter>src\solar\rendering\meshes</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_renderer.h">
       <Filter>src\solar\rendering\meshes</Filter>
@@ -1506,6 +1500,12 @@
     <ClInclude Include="..\..\src\solar\archiving\archive_context_stack.h">
       <Filter>src\solar\archiving</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\solar\utility\ref_countable.h">
+      <Filter>src\solar\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\solar\rendering\textures\texture_create_params.h">
+      <Filter>src\solar\rendering\textures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\bulkbuild\_bulkbuild_solar_core.cpp">
@@ -1752,9 +1752,6 @@
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_texture_factory.cpp">
-      <Filter>src\solar_platforms\d3d9</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_texture_pool.cpp">
       <Filter>src\solar_platforms\d3d9</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_user_settings.cpp">

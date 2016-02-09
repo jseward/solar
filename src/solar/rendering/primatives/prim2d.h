@@ -28,7 +28,7 @@ namespace solar {
 		virtual void begin_rendering(const rect& viewport_area, shader_program& program, render_state_block* rs_block) = 0;
 		virtual void end_rendering() = 0;
 		virtual void set_shader_program(shader_program& program) = 0;
-		virtual void set_texture(texture& texture) = 0;
+		virtual void set_texture(texture* texture) = 0;
 		virtual void render_rect(const vec2& top_left, const vec2& top_right, const vec2& bottom_right, const vec2& bottom_left, const color& color, const simple_rect_uvs& uvs) = 0;
 		virtual void render_triangle(const vec2& p0, const uv& uv0, const vec2& p1, const uv& uv1, const vec2& p2, const uv& uv2, const color& color) = 0;
 

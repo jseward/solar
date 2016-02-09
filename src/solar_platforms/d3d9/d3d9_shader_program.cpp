@@ -144,11 +144,13 @@ namespace solar {
 		return false;
 	}
 
-	bool d3d9_shader_program::set_texture(const char* name, texture& texture) {
+	bool d3d9_shader_program::set_texture(const char* name, texture* texture) {
 		D3DXHANDLE handle = get_param_to_change(name);
 		if (handle != nullptr) {
-			D3D9_VERIFY(_ID3DXEffect->SetTexture(handle, static_cast<d3d9_texture&>(texture).request_IDirect3DTexture9()));
-			_has_changes_to_commit = true;
+			if (texture != nullptr) {
+				D3D9_VERIFY(_ID3DXEffect->SetTexture(handle, static_cast<d3d9_texture*>(texture)->request_IDirect3DTexture9()));
+				_has_changes_to_commit = true;
+			}
 			return true;
 		}
 		return false;

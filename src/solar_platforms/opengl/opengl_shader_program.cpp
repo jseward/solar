@@ -82,7 +82,7 @@ namespace solar {
 		return false;
 	}
 
-	bool opengl_shader_program::set_texture(const char* name, texture& texture) {
+	bool opengl_shader_program::set_texture(const char* name, texture* texture) {
 		//todo
 		UNUSED_PARAMETER(name);
 		UNUSED_PARAMETER(texture);

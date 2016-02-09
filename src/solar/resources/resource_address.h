@@ -24,10 +24,18 @@ namespace solar {
 		const std::string& get_path() const;
 		std::string get_file_extension() const;
 		std::string to_string() const;
+		std::size_t get_hash() const;
 
 	public:
 		friend resource_address make_resource_address_with_file_system_provider(bool is_file, const std::string& path);
 		friend std::ostream& operator<<(std::ostream& os, const resource_address& that);
+	};
+
+	class resource_address_hasher {
+	public:
+		std::size_t operator()(const resource_address& address) const {
+			return address.get_hash();
+		}
 	};
 
 }

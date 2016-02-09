@@ -10,10 +10,9 @@ namespace solar {
 	class bm_font_reader {
 	private:
 		stream& _stream;
-		const char* _texture_pool_name;
 
 	public:
-		bm_font_reader(stream& stream, const char* texture_pool_name);
+		bm_font_reader(stream& stream);
 
 		void read_font(font& font);
 

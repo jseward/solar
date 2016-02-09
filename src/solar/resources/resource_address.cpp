@@ -64,4 +64,11 @@ namespace solar {
 		return os << that.to_string();
 	}
 
+	std::size_t resource_address::get_hash() const {
+		return
+			(std::hash<bool>()(_is_file)) ^
+			(std::hash<resource_provider_type>()(_provider_type) << 1) ^
+			(std::hash<std::string>()(_path) << 2);
+	}
+
 }

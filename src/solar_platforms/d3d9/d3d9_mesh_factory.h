@@ -30,7 +30,7 @@ namespace solar {
 		void setup();
 		void teardown();
 
-		virtual mesh* get_mesh(const mesh_texture_params& texture_params, const std::string& id, const std::string& id_source_description) override;
+		virtual mesh* get_mesh(const std::string& id, const std::string& id_source_description) override;
 		virtual const resource_factory_caching_context& get_caching_context() const override;
 
 		d3d9_context& get_d3d9_context();

@@ -126,7 +126,7 @@ namespace solar {
 		ASSERT(false);
 	}
 
-	void opengl_prim2d::set_texture(texture& texture) {
+	void opengl_prim2d::set_texture(texture* texture) {
 		//todo
 		UNUSED_PARAMETER(texture);
 		ASSERT(false);

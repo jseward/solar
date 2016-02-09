@@ -22,13 +22,11 @@ namespace solar {
 		, _setting_registry(_win32_file_system, _file_change_watcher) {
 
 		shader_program_id::set_factory(&_opengl_shader_program_factory);
-		texture_id::set_factory(&_opengl_texture_factory);
 		mesh_id::set_factory(&_opengl_mesh_factory);
 	}
 
 	win32_opengl_engine::~win32_opengl_engine() {
 		shader_program_id::set_factory(nullptr);
-		texture_id::set_factory(nullptr);
 		mesh_id::set_factory(nullptr);
 	}
 

@@ -1,15 +1,16 @@
 #pragma once
 
-#include "solar/resources/resource_factory_caching_context.h"
+#include "solar/resources/resource_address.h"
+
 #include "texture.h"
+#include "texture_create_params.h"
 
 namespace solar {
 
 	class texture_factory {
 	public:
-		virtual void add_texture_pool(const char* texture_pool_name, unsigned int max_size_in_bytes, bool should_create_mip_maps) = 0;
-		virtual texture* get_texture(const char* texture_pool_name, const std::string& id, const std::string& id_source_description) = 0;
-		virtual const resource_factory_caching_context& get_caching_context() const = 0;
+		virtual texture* create_texture(const resource_address& address, const texture_create_params& params) = 0;
+		virtual void release_texture(texture* texture) = 0;
 	};
 
 }

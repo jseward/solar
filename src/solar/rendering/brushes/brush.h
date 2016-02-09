@@ -22,12 +22,15 @@ namespace solar {
 		mutable enum_array<simple_rect_uvs, brush_stretch_region> _cached_uvs;
 
 	public:
-		brush(const char* texture_pool_name);
+		brush();
+
+		void create_texture(texture_factory& texture_factory, resource_system& resource_system);
+		void release_texture(texture_factory& texture_factory);
 
 		bool is_id_empty() const;
 		const std::string& get_id() const;
 		const brush_stretch_margins& get_stretch_margins() const;
-		texture& get_texture() const;
+		texture* get_texture() const;
 		const simple_rect_uvs& get_uvs(brush_stretch_region region) const;
 
 	public:

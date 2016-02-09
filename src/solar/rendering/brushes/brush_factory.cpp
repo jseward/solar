@@ -8,8 +8,9 @@
 
 namespace solar {
 
-	brush_factory::brush_factory(resource_system& resource_system) 
-		: _resource_system(resource_system) {
+	brush_factory::brush_factory(texture_factory& texture_factory, resource_system& resource_system) 
+		: _texture_factory(texture_factory)
+		, _resource_system(resource_system) {
 	}
 
 	void brush_factory::setup() {
@@ -27,12 +28,20 @@ namespace solar {
 
 		for (auto& brush_set : _brush_sets) {
 			brush_set->load(_resource_system);
+			brush_set->create_textures(_texture_factory, _resource_system);
 		}
 
 		_caching_context.increment();
 	}
 
 	void brush_factory::teardown() {
+		for (auto& brush_set : _brush_sets) {
+			brush_set->release_textures(_texture_factory);
+		}
+
+		_brush_sets.clear();
+
+		_caching_context.increment();
 	}
 
 	const resource_factory_caching_context& brush_factory::get_caching_context() const {
@@ -52,7 +61,7 @@ namespace solar {
 		}
 
 		if (_empty_brush == nullptr) {
-			_empty_brush = std::make_unique<brush>("");
+			_empty_brush = std::make_unique<brush>();
 		}
 		return _empty_brush.get();
 	}

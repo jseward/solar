@@ -15,7 +15,7 @@ namespace solar {
 		virtual bool set_float(const char* name, float value) = 0;
 		virtual bool set_float_array(const char* name, const float* values, unsigned int count) = 0;
 		virtual bool set_mat44(const char* name, const mat44& value) = 0;
-		virtual bool set_texture(const char* name, texture& texture) = 0;
+		virtual bool set_texture(const char* name, texture* texture) = 0;
 		virtual bool set_platform_texture(const char* name, void* texture) = 0;
 	};
 

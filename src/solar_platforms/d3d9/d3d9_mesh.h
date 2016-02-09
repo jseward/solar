@@ -2,7 +2,6 @@
 
 #include <memory>
 #include "solar/rendering/meshes/mesh.h"
-#include "solar/rendering/meshes/mesh_texture_params.h"
 #include "solar/resources/resource_address.h"
 #include "d3d9_headers.h"
 #include "d3d9_mesh_material.h"
@@ -20,7 +19,6 @@ namespace solar {
 
 	private:
 		d3d9_mesh_factory& _factory;
-		mesh_texture_params _texture_params;
 		resource_address _resource_address;
 		bool _are_rendering_resources_created;
 
@@ -33,11 +31,10 @@ namespace solar {
 		std::vector<std::unique_ptr<d3d9_mesh_material>> _materials;
 
 	public:
-		d3d9_mesh(d3d9_mesh_factory& factory, const mesh_texture_params& texture_params, const resource_address& resource_address);
+		d3d9_mesh(d3d9_mesh_factory& factory, const resource_address& resource_address);
 		virtual ~d3d9_mesh();
 
 		const resource_address& get_resource_address() const;
-		const mesh_texture_params& get_texture_params() const;
 
 		virtual void create_rendering_resources() override;
 		virtual void release_rendering_resources() override;

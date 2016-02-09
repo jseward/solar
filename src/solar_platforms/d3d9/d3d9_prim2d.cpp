@@ -107,7 +107,7 @@ namespace solar {
 			_shader_program->stop();
 			_shader_program = &shader_program;
 			if (_texture != nullptr) {
-				_shader_program->set_texture(shader_param_names::TEXTURE, *_texture);
+				_shader_program->set_texture(shader_param_names::TEXTURE, _texture);
 			}
 			else {
 				_shader_program->set_platform_texture(shader_param_names::TEXTURE, _white_texture.get());
@@ -116,13 +116,13 @@ namespace solar {
 		}
 	}
 
-	void d3d9_prim2d::set_texture(texture& texture) {
+	void d3d9_prim2d::set_texture(texture* texture) {
 		ASSERT(_is_rendering);
-		if (_texture != &texture) {
+		if (_texture != texture) {
 			flush_all();
 			_shader_program->set_texture(shader_param_names::TEXTURE, texture);
 			_shader_program->commit_param_changes();
-			_texture = &texture;
+			_texture = texture;
 		}
 	}
 

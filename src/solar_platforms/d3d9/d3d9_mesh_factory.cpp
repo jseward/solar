@@ -40,19 +40,16 @@ namespace solar {
 		_caching_context.increment();
 	}
 
-	mesh* d3d9_mesh_factory::get_mesh(const mesh_texture_params& texture_params, const std::string& id, const std::string& id_source_description) {
+	mesh* d3d9_mesh_factory::get_mesh(const std::string& id, const std::string& id_source_description) {
 		ASSERT(_is_setup);
 
 		auto iter = _meshs.find(id);
 		if (iter != _meshs.end()) {
-			if (iter->second->get_texture_params() != texture_params) {
-				ALERT("d3d9_mesh is being requested with different texture_params.\n\nmesh_id: '{}'\nrequested: '{}'\ncached: '{}'", id, texture_params, iter->second->get_texture_params());
-			}
 			return iter->second.get();
 		}
 
 		auto address = _resource_system.resolve_address_to_file("mesh", "meshes", RESOLVE_ADDRESS_MESH_EXTENSIONS, id.c_str(), id_source_description.c_str());
-		d3d9_mesh* new_mesh = new d3d9_mesh(*this, texture_params, address);
+		d3d9_mesh* new_mesh = new d3d9_mesh(*this, address);
 		_meshs[id] = std::unique_ptr<d3d9_mesh>(new_mesh);
 
 		return new_mesh;

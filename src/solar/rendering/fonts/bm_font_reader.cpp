@@ -8,9 +8,8 @@
 
 namespace solar {
 	
-	bm_font_reader::bm_font_reader(stream& stream, const char* texture_pool_name)
-		: _stream(stream) 
-		, _texture_pool_name(texture_pool_name) {
+	bm_font_reader::bm_font_reader(stream& stream)
+		: _stream(stream) {
 	}
 
 	void bm_font_reader::read_font(font& font) {
@@ -129,8 +128,8 @@ namespace solar {
 			const char* page_name = &data->pageNames[page_name_pos];
 			page_name_pos += get_string_length(page_name) + 1;
 			
-			texture_id page_texture_id(_texture_pool_name);
-			page_texture_id.set_id(get_file_name_no_path_no_extension(page_name), _stream.get_description());
+			texture_id page_texture_id;
+			page_texture_id.set_id(get_file_name_no_path_no_extension(page_name).c_str(), _stream.get_description().c_str());
 			font._page_texture_ids.push_back(page_texture_id);
 		}
 	}

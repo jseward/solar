@@ -17,13 +17,25 @@ namespace solar {
 		return _address;
 	}
 
-	void font::load(resource_system& resource_system, const char* texture_pool_name) {
+	void font::load(resource_system& resource_system) {
 		auto stream = resource_system.open_stream_to_read(_address);
 		if (stream != nullptr) {
-			bm_font_reader reader(*stream, texture_pool_name);
+			bm_font_reader reader(*stream);
 			reader.read_font(*this);
 			update_page_texture_pixel_size();
 			resource_system.close_stream(stream);
+		}
+	}
+
+	void font::create_textures(texture_factory& texture_factory, resource_system& resource_system) {
+		for (auto& page_texture_id : _page_texture_ids) {
+			page_texture_id.create_texture(texture_factory, resource_system, texture_create_params().set_has_mip_maps(false));
+		}
+	}
+
+	void font::release_textures(texture_factory& texture_factory) {
+		for (auto& page_texture_id : _page_texture_ids) {
+			page_texture_id.release_texture(texture_factory);
 		}
 	}
 
@@ -92,8 +104,8 @@ namespace solar {
 		return nullptr;
 	}
 
-	texture& font::get_page_texture(int page) const {
-		return _page_texture_ids[page].get();
+	texture* font::get_page_texture(int page) const {
+		return _page_texture_ids[page].get_texture();
 	}
 
 	sizef font::get_page_texture_pixel_size() const {

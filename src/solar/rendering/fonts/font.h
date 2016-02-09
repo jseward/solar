@@ -32,7 +32,9 @@ namespace solar {
 
 		const resource_address& get_address() const;
 
-		void load(resource_system& resource_system, const char* texture_pool_name);
+		void load(resource_system& resource_system);
+		void create_textures(texture_factory& texture_factory, resource_system& resource_system);
+		void release_textures(texture_factory& texture_factory);
 
 		float get_scale(float font_size) const;
 		float get_line_height(float font_size) const;
@@ -41,7 +43,7 @@ namespace solar {
 		float get_text_width(float font_size, const wchar_t* text, unsigned int begin_index, unsigned int end_index) const;
 		float get_kerning_pair_offset(float font_size, wchar_t a, wchar_t b) const;
 		const font_glyph* find_best_glyph(wchar_t c) const;
-		texture& get_page_texture(int page) const;
+		texture* get_page_texture(int page) const;
 		sizef get_page_texture_pixel_size() const;
 
 	private:

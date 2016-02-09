@@ -132,7 +132,6 @@
     <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_id.h" />
     <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_material.h" />
     <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_renderer.h" />
-    <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_texture_params.h" />
     <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_triangle.h" />
     <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_vertex.h" />
     <ClInclude Include="..\..\src\solar\rendering\meshes\mesh_vertex_bone_weight.h" />
@@ -151,6 +150,7 @@
     <ClInclude Include="..\..\src\solar\rendering\shaders\shader_program_id.h" />
     <ClInclude Include="..\..\src\solar\rendering\textures\simple_rect_uvs.h" />
     <ClInclude Include="..\..\src\solar\rendering\textures\texture.h" />
+    <ClInclude Include="..\..\src\solar\rendering\textures\texture_create_params.h" />
     <ClInclude Include="..\..\src\solar\rendering\textures\uv.h" />
     <ClInclude Include="..\..\src\solar\rendering\textures\texture_factory.h" />
     <ClInclude Include="..\..\src\solar\rendering\textures\texture_id.h" />
@@ -205,6 +205,7 @@
     <ClInclude Include="..\..\src\solar\utility\memory_pool.h" />
     <ClInclude Include="..\..\src\solar\utility\optional.h" />
     <ClInclude Include="..\..\src\solar\utility\property.h" />
+    <ClInclude Include="..\..\src\solar\utility\ref_countable.h" />
     <ClInclude Include="..\..\src\solar\utility\trace.h" />
     <ClInclude Include="..\..\src\solar\utility\type_convert.h" />
     <ClInclude Include="..\..\src\solar\utility\unused_parameter.h" />
@@ -406,7 +407,6 @@
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_surface_helpers.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_texture.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_texture_factory.h" />
-    <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_texture_pool.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_user_settings.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_verify.h" />
     <ClInclude Include="..\..\src\solar_platforms\d3d9\d3d9_vertex_declaration.h" />
@@ -752,7 +752,6 @@
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_string_convert.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_texture.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_texture_factory.cpp" />
-    <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_texture_pool.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_user_settings.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\d3d9_window_type.cpp" />
     <ClCompile Include="..\..\src\solar_platforms\d3d9\shaders\font_dropshadow_embedded_code.cpp" />

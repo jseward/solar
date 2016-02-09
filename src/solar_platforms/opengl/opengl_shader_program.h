@@ -32,7 +32,7 @@ namespace solar {
 		virtual bool set_float(const char* name, float value) override;
 		virtual bool set_float_array(const char* name, const float* values, unsigned int count) override;
 		virtual bool set_mat44(const char* name, const mat44& value) override;
-		virtual bool set_texture(const char* name, texture& texture) override;
+		virtual bool set_texture(const char* name, texture* texture) override;
 		virtual bool set_platform_texture(const char* name, void* texture) override;
 	};
 	
