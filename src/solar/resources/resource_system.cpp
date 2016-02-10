@@ -134,6 +134,13 @@ namespace solar {
 		ASSERT(dir_address.is_directory());
 		ASSERT(dir_address.get_provider_type() == resource_provider_type::FILE_SYSTEM);
 
+		if (is_string_empty(extensions)) {
+			auto file_path = make_file_path(dir_address.get_path(), id);
+			if (_file_system.does_file_exist(file_path)) {
+				return make_resource_address_with_file_system_provider(true, file_path);
+			}
+		}
+
 		for (auto& ext : split_string(extensions, ";")) {
 			auto file_name = std::string(id) + ext;
 			auto file_path = make_file_path(dir_address.get_path(), file_name);
