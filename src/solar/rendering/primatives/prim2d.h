@@ -6,7 +6,6 @@
 #include "solar/math/vec2.h"
 #include "solar/colors/color.h"
 #include "solar/rendering/textures/simple_rect_uvs.h"
-#include "prim2d_world_projection_buffer.h"
 
 namespace solar {
 
@@ -19,9 +18,6 @@ namespace solar {
 	class prim2d {
 	private:
 		const unsigned int DEFAULT_CIRCLE_SEGMENT_COUNT = 16;
-
-	private:
-		prim2d_world_projection_buffer _world_projection_buffer;
 
 	public:
 		virtual void begin_rendering(const rect& viewport_area) = 0;
@@ -42,12 +38,6 @@ namespace solar {
 		void render_circle(const vec2& center, float radius, const color& color, float begin_rad, float end_rad);
 		void render_circle(const vec2& center, float radius, const color& color, float begin_rad, float end_rad, unsigned int segment_count);
 		void render_polygon(const vec2* points, unsigned int point_count, const color& color);
-
-		void render_world_polygon(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count, const color& color);
-		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color);
-		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad);
-		void render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad, unsigned int segment_count);
-		void render_world_triangle(const viewport& viewport, const camera& camera, const vec3& p0, const uv& uv0, const vec3& p1, const uv& uv1, const vec3& p2, const uv& uv2, const color& color);
 	};
 
 }

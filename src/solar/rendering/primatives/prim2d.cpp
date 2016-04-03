@@ -109,47 +109,4 @@ namespace solar {
 		}
 	}
 
-	void prim2d::render_world_polygon(const viewport& viewport, const camera& camera, const vec3* points, unsigned int point_count, const color& color) {
-		auto screen_points = _world_projection_buffer.project_points(viewport, camera, points, point_count);
-		if (!screen_points.empty()) {
-			render_polygon(screen_points.data(), screen_points.size(), color);
-		}
-	}
-
-	void prim2d::render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color) {
-		render_world_circle(viewport, camera, center, radius, color, 0.f, TWO_PI, DEFAULT_CIRCLE_SEGMENT_COUNT);
-	}
-
-	void prim2d::render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad) {
-		render_world_circle(viewport, camera, center, radius, color, begin_rad, end_rad, DEFAULT_CIRCLE_SEGMENT_COUNT);
-	}
-
-	void prim2d::render_world_circle(const viewport& viewport, const camera& camera, const vec3& center, float radius, const color& color, float begin_rad, float end_rad, unsigned int segment_count) {
-		vec3 radius_marker = center + (camera.get_basis().get_rotation().get_up() * radius);
-
-		vec2 screen_center;
-		vec2 screen_radius_marker;
-		if (
-			viewport.try_project(screen_center, camera.get_view_projection_transform(), center) &&
-			viewport.try_project(screen_radius_marker, camera.get_view_projection_transform(), radius_marker)) {
-
-			const float screen_radius = get_distance(screen_center, screen_radius_marker);
-			render_circle(screen_center, screen_radius, color, begin_rad, end_rad, segment_count);
-		}
-	}
-
-	void prim2d::render_world_triangle(const viewport& viewport, const camera& camera, const vec3& p0, const uv& uv0, const vec3& p1, const uv& uv1, const vec3& p2, const uv& uv2, const color& color) {
-		vec2 screen_p0;
-		vec2 screen_p1;
-		vec2 screen_p2;
-
-		if (
-			viewport.try_project(screen_p0, camera.get_view_projection_transform(), p0) &&
-			viewport.try_project(screen_p1, camera.get_view_projection_transform(), p1) &&
-			viewport.try_project(screen_p2, camera.get_view_projection_transform(), p2)) {
-
-			render_triangle(screen_p0, uv0, screen_p1, uv1, screen_p2, uv2, color);
-		}
-	}
-
 }

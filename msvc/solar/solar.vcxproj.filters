@@ -1203,9 +1203,6 @@
     <ClInclude Include="..\..\src\solar\windows\window_dragging_state.h">
       <Filter>src\solar\windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\solar\rendering\primatives\prim2d_world_projection_buffer.h">
-      <Filter>src\solar\rendering\primatives</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\solar\settings\float_setting.h">
       <Filter>src\solar\settings</Filter>
     </ClInclude>
@@ -2044,9 +2041,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\solar\windows\window_dragging_state.cpp">
       <Filter>src\solar\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\solar\rendering\primatives\prim2d_world_projection_buffer.cpp">
-      <Filter>src\solar\rendering\primatives</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\solar\settings\float_setting.cpp">
       <Filter>src\solar\settings</Filter>
